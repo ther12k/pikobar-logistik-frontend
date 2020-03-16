@@ -2,7 +2,8 @@
 
 export default {
   route: {
-    dashboard: 'Dashboard'
+    dashboard: 'Dashboard',
+    laporan_title: 'Reports'
   },
   label: {
     username: 'Username',
@@ -34,7 +35,7 @@ export default {
     select_district: 'Select District/City',
     select_sub_district: 'Select Sub District',
     select_village: 'Select Village',
-    must_be_filled: 'Must be filled',
+    must_be_filled: 'Must be filled'
   },
   success: {
     login_success: 'Login Success',

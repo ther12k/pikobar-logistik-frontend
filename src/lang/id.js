@@ -2,7 +2,9 @@
 
 export default {
   route: {
-    dashboard: 'Beranda'
+    dashboard: 'Beranda',
+    laporan_title: 'Laporan'
+
   },
   label: {
     username: 'Username',
@@ -32,7 +34,7 @@ export default {
     must_be_filled: 'Harus Diisi',
     light_mode: 'Light Mode',
     dark_mode: 'Dark Mode',
-    summary: 'Ringkasan',
+    summary: 'Ringkasan'
   },
   success: {
     login_success: 'Login Berhasil',
