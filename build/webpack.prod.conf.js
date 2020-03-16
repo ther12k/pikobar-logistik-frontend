@@ -34,9 +34,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new Dotenv({
-      path: path.resolve(__dirname,'.env')
-    }),
+    new Dotenv(),
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
