@@ -1,5 +1,9 @@
 <template>
-  <h1>s</h1>
+  <v-card>
+    <v-row>
+      <search />
+    </v-row>
+  </v-card>
 </template>
 
 <script>
