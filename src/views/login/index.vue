@@ -1,0 +1,100 @@
+<template>
+  <div class="login">
+    <div class="column-left">
+      <div class="logo-js" />
+      <div class="icon-bottom" />
+      <div class="pic-login" />
+    </div>
+    <div class="column-right">
+      <v-row>
+        <div class="logo-js">
+          <div class="logo-js-right" />
+        </div>
+        <div class="icon" />
+      </v-row>
+      <v-row>
+        <v-col class="title-login">
+          <h1 class="title-1"> {{ $t('label.login_title') }}
+          </h1>
+          <h1 class="title-2"> {{ $t('label.report_covid') }}
+          </h1>
+        </v-col>
+      </v-row>
+      <v-card-text class="formLogin">
+        <v-form
+          id="login-form"
+          ref="form"
+          v-model="valid"
+          lazy-validation
+        >
+          <v-text-field
+            id="username"
+            v-model="loginForm.username"
+            :rules="usernameRules"
+            :label="$t('label.username')"
+            name="username"
+            append-icon="person"
+            type="text"
+            required
+          />
+          <v-text-field
+            v-model="loginForm.password"
+            :rules="passwordRules"
+            :append-icon="typePassword ? 'visibility' : 'visibility_off'"
+            :type="typePassword ? 'password' : 'text'"
+            :label="$t('label.password')"
+            name="password"
+            @click:append="() => (typePassword = !typePassword)"
+            @keyup.enter.native="handleLogin"
+          />
+        </v-form>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn id="loginBottom" @click="handleLogin">{{ $t('label.login') }}</v-btn>
+        </v-card-actions>
+      </v-card-text>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Login',
+  components: { },
+  data() {
+    return {
+      valid: true,
+      typePassword: String,
+      loading: false,
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      usernameRules: [
+        v => !!v || this.$t('errors.username_must_be_filled')
+      ],
+      passwordRules: [
+        v => !!v || this.$t('errors.password_must_be_filled'),
+        v => (v && v.length >= 5) || this.$t('errors.password_must_be_more_than_characters')
+      ]
+    }
+  },
+  methods: {
+    handleLogin() {
+      if (this.$refs.form.validate()) {
+        this.loading = true
+        this.$store.dispatch('user/login', this.loginForm)
+          .then(() => {
+            this.$store.dispatch('toast/successToast', this.$t('success.login_success'))
+            this.$router.push({ path: '/' })
+            this.loading = false
+          })
+          .catch(() => {
+            this.loading = false
+            this.$refs.form.reset()
+          })
+      }
+    }
+  }
+}
+</script>

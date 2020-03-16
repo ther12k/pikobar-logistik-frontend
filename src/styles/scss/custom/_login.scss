@@ -1,0 +1,142 @@
+/*========== Login Scss ==========*/
+.column-left {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: #FAFAFA;
+}
+
+.column-right {
+  width: 50%;
+  height: 100%;
+  float: right;
+}
+
+.logo-js {
+  background-image: url('/static/login/logo.svg');
+  position: absolute;
+  width: 260px;
+  height: 60px;
+  left: 32px;
+  top: 32px;
+  .logo-js-right {
+    float: left;
+    display: none;
+  }
+}
+
+.pic-login {
+  background-image: url('/static/login/pic-login.svg');
+  position: absolute;
+  width: 457px;
+  height: 378px;
+  left: 131px;
+  top: 30%;
+}
+
+.icon {
+  background-image: url('/static/login/square-top.svg');
+  position: absolute;
+  width: 248px;
+  height: 248px;
+  right: 32px;
+  top: 32px;
+  float: right;
+}
+
+.icon-bottom {
+  background-image: url('/static/login/square-bottom.svg');
+  position: absolute;
+  width: 248px;
+  height: 248px;
+  left: 32px;
+  bottom: 32px;
+}
+
+.title-login {
+  z-index: 1;
+  margin-top: 189px;
+  margin-left: 20%;
+  font-style: normal;
+  .title-1 {
+    font-weight: normal;
+  }
+  .title-2 {
+    font-weight: bold;
+    color: #009D57;
+  }
+}
+
+.formLogin {
+  margin-left: 139px;
+  width: 442px;
+  #loginBottom {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 4px;
+    width: 100%;
+    height: 45px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #FFFFFF;
+    background: #27AE60;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 320px) {
+  .column-left {
+    display: none;
+  }
+  .column-right {
+    width: 100%;
+    height: 100%;
+    .icon {
+      display: none;
+    }
+    .title-login {
+      text-align: center;
+      margin-left: 0%;
+      margin-top: 120px;
+      .title-1 {
+        font-size: 20px;
+      }
+      .title-2 {
+        font-size: 20px;
+      }
+    }
+    .formLogin {
+      margin-left: 10%;
+      margin-right: 10%;
+      width: 80%;
+    }
+  }
+}
+
+@media (max-width: 588px) and (min-width: 320px) {
+  .column-left {
+    display: none;
+  }
+  .column-right {
+    width: 100%;
+    height: 100%;
+    .icon {
+      display: none;
+    }
+    .title-login {
+      text-align: center;
+      margin-top: 120px;
+      margin-left: 0%;
+      .title-1 {
+        font-size: 20px;
+      }
+      .title-2 {
+        font-size: 20px;
+      }
+    }
+    .formLogin {
+      margin-left: 10%;
+      margin-right: 10%;
+      width: 80%;
+    }
+  }
+}
