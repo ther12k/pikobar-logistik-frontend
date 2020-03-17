@@ -42,11 +42,9 @@ export default {
       type: Boolean,
       default: false
     },
-    villageArray: {
-      type: Array,
-      default: function() {
-        return []
-      }
+    village: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -54,8 +52,7 @@ export default {
       districtCode: '',
       subDistrictCode: '',
       districtCity: '',
-      subDistrict: '',
-      village: ''
+      subDistrict: ''
     }
   },
   watch: {

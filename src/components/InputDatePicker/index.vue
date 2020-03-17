@@ -10,10 +10,9 @@
     <template v-slot:activator="{ on }">
       <v-text-field
         v-model="setDate"
-        :label="label"
-        prepend-icon="event"
-        style="padding-bottom: 20px;"
-        hide-details
+        append-icon="event"
+        style="padding-bottom: 12px;"
+        solo-inverted
         readonly
         v-on="on"
       />

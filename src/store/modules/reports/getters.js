@@ -1,4 +1,7 @@
 export default {
+  listPasien: (state, getters) => {
+    return state.listPasien
+  },
   detailPasien: (state, getters) => {
     return state.detailPasien
   },

@@ -314,3 +314,22 @@ hr {
 .background-none {
   background-image: none !important;
 }
+
+.theme--light.v-text-field--solo-inverted.v-input--is-focused > .v-input__control > .v-input__slot input {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.theme--light.v-text-field--solo-inverted > .v-input__control > .v-input__slot {
+  background: #FFFFFF;
+}
+
+.theme--light.v-text-field--solo-inverted.v-input--is-focused > .v-input__control > .v-input__slot {
+  background: #FFFFFF;
+}
+
+.v-date-picker-table {
+  .v-btn:not(.v-btn--round).v-size--default {
+    min-width: 0px !important;
+  }
+}
+

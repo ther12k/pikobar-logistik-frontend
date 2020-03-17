@@ -28,6 +28,16 @@ const surveyRouter = {
         icon: 'library_books',
         roles: ['admin']
       }
+    },
+    {
+      path: 'stepper',
+      component: () => import('@/views/laporan/formStepper'),
+      hidden: true,
+      meta: {
+        title: 'laporan_create',
+        icon: 'library_books',
+        roles: ['admin']
+      }
     }
   ]
 }

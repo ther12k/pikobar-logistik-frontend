@@ -13,8 +13,8 @@
         menu-props="auto"
         item-value="kecamatan_kode"
         item-text="kecamatan_nama"
-        prepend-icon="map"
         single-line
+        solo
         autocomplete
         @change="onSelectSubDistrict"
       />

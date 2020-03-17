@@ -10,11 +10,10 @@
         :label="$t('label.select_village')"
         :error-messages="errors"
         :disabled="disable"
-        :return-object="true"
         menu-props="auto"
-        prepend-icon="map"
         item-text="desa_nama"
         single-line
+        solo
         autocomplete
         @change="onSelectVillage"
       />

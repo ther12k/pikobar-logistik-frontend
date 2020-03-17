@@ -31,5 +31,16 @@ export default {
         reject(e)
       }
     })
+  },
+  getListHospotal({ commit }) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchList('/api/areas/hospital', 'GET')
+        commit('SET_HOSPITAL_CITY', response.data)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
   }
 }

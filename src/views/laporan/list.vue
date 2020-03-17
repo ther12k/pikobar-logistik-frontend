@@ -233,7 +233,7 @@ export default {
   },
   methods: {
     handleCreate() {
-      this.$router.push('/laporan/create')
+      this.$router.push('/laporan/stepper')
     },
     handleSearch() {
       console.log('ok')

@@ -12,8 +12,8 @@
         :disabled="disabledSelect"
         item-value="kota_kode"
         item-text="kota_nama"
-        prepend-icon="map"
         single-line
+        solo
         autocomplete
         @change="onSelectDistrict"
       />

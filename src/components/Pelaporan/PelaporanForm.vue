@@ -16,6 +16,36 @@
               >
                 <ValidationProvider
                   v-slot="{ errors }"
+                >
+                  <v-text-field
+                    :error-messages="errors"
+                    v-model="formPasien.identity_case"
+                    label="Identity Case"
+                    placeholder="Tuliskan Identity Case"
+                  />
+                </ValidationProvider>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                >
+                  <v-text-field
+                    :error-messages="errors"
+                    v-model="formPasien.national_identity_number"
+                    label="National Identity Case"
+                    placeholder="Tuliskan National Identity Case"
+                  />
+                </ValidationProvider>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                >
+                  <v-text-field
+                    v-model="formPasien.related_identity_number"
+                    :error-messages="errors"
+                    label="Related Identity Number"
+                    placeholder="Tuliskan Related Identity Number"
+                  />
+                </ValidationProvider>
+                <ValidationProvider
+                  v-slot="{ errors }"
                   rules="required|isHtml"
                 >
                   <v-text-field
@@ -26,24 +56,18 @@
                     required
                   />
                 </ValidationProvider>
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  rules="required|isHtml"
-                >
-                  <v-text-field
-                    v-model="formPasien.identity_number"
-                    :error-messages="errors"
-                    label="NIK Pasien"
-                    placeholder="NIK Pasien"
-                    required
-                  />
-                </ValidationProvider>
                 <input-date-picker
                   :date-value="formPasien.birth_date"
                   :format-date="formatDate"
                   label="Tanggal Lahir"
                   @changeDate="formPasien.birth_date = $event"
                 />
+                <ValidationProvider v-slot="{ errors }">
+                  <v-text-field
+                    v-model="formPasien.phone_number"
+                    label="Nomor Telepone"
+                  />
+                </ValidationProvider>
                 <ValidationProvider v-slot="{ errors }">
                   <v-text-field
                     v-model="formPasien.age"
@@ -62,25 +86,43 @@
                   </v-radio-group>
                 </ValidationProvider>
                 <ValidationProvider v-slot="{ errors }">
+                  <v-text-field
+                    v-model="formPasien.occupation"
+                    label="Pekerjaan"
+                  />
+                </ValidationProvider>
+                <ValidationProvider v-slot="{ errors }">
                   <v-label>Jenis Kelamin</v-label>
                   <v-radio-group
                     v-model="formPasien.gender"
                     row
                   >
-                    <v-radio label="Pria" value="1" />
-                    <v-radio label="Wanita" value="2" />
+                    <v-radio label="Laki-Laki" value="L" />
+                    <v-radio label="Perempuan" value="P" />
                   </v-radio-group>
                 </ValidationProvider>
-                <v-label>Domisili</v-label>
+                <v-label>Alamat</v-label>
                 <address-region
                   :village-array="formPasien.address_village_code"
                   :disabled-address="false"
                   :required-address="false"
                 />
                 <ValidationProvider v-slot="{ errors }">
-                  <v-select
+                  <v-textarea
+                    v-model="formPasien.address_street"
+                    label="Alamat Lengkap"
+                  />
+                </ValidationProvider>
+                <ValidationProvider v-slot="{ errors }">
+                  <v-autocomplete
                     v-model="formPasien.current_location"
+                    :items="hospitalList"
+                    :error-messages="errors"
                     label="Lokasi Pengawasan"
+                    menu-props="auto"
+                    item-text="name"
+                    single-line
+                    autocomplete
                   />
                 </ValidationProvider>
                 <ValidationProvider v-slot="{ errors }">
@@ -177,9 +219,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('laporan', [
+    ...mapGetters('reports', [
       'formPasien'
+    ]),
+    ...mapGetters('region', [
+      'hospitalList'
     ])
+  },
+  async mounted() {
+    this.$store.dispatch('region/getListHospotal')
   },
   methods: {
     handleBack() {
@@ -190,6 +238,8 @@ export default {
       if (!valid) {
         return
       }
+      console.log(this.formPasien)
+      this.$store.dispatch('reports/createReportCase', this.formPasien)
       console.log(this.formPasien)
       // this.$router.push('/laporan/index')
     }
