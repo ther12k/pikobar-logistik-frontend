@@ -30,7 +30,6 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    ENV: JSON.stringify(require(path.join(__dirname, "src", "config", env))),
     new webpack.DefinePlugin({
       'process.env': path.join(__dirname, 'env')
     }),
