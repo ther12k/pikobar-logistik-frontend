@@ -29,6 +29,14 @@
               @changeDate="formPasien.birth_date = $event"
             />
             <ValidationProvider v-slot="{ errors }">
+              <v-label>Usia</v-label>
+              <v-text-field
+                v-model="formPasien.age"
+                solo-inverted
+                type="number"
+              />
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }">
               <v-label>Pekerjaan</v-label>
               <v-text-field
                 v-model="formPasien.occupation"

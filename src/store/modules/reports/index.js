@@ -5,6 +5,7 @@ import getters from './getters'
 const state = {
   detailPasien: null,
   listPasien: null,
+  totalList: 0,
   formPasien: {
     id_case: '',
     national_identity_number: '',

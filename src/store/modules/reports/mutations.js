@@ -2,6 +2,9 @@ export default {
   SET_LIST_PASIEN: (state, data) => {
     state.listPasien = data
   },
+  SET_TOTAL_LIST_PASIEN: (state, data) => {
+    state.totalList = data
+  },
   SET_DETAIL_PASIEN: (state, data) => {
     state.detailPasien = data
   },
@@ -16,10 +19,12 @@ export default {
     state.formPasien.age = ''
     state.formPasien.gender = ''
     state.formPasien.address_street = ''
-    // state.formPasien.address_province_code = ''
-    // state.formPasien.address_city_code = ''
-    // state.formPasien.address_district_code = ''
-    // state.formPasien.address_village_code = ''
+    state.formPasien.address_city_code = ''
+    state.formPasien.address_district_name = ''
+    state.formPasien.address_district_code = ''
+    state.formPasien.address_subdistrict_name = ''
+    state.formPasien.address_village_code = ''
+    state.formPasien.address_village_name = ''
     state.formPasien.nationality_type = ''
     state.formPasien.nationality_country = ''
     state.formPasien.current_location_address = ''

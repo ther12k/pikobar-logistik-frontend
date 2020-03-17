@@ -37,8 +37,10 @@ export default {
       default: false
     },
     districtCity: {
-      type: String,
-      default: ''
+      type: Object,
+      default: function() {
+        return []
+      }
     },
     required: {
       type: Boolean,

@@ -167,10 +167,10 @@
       </v-row>
     </v-card>
     <pagination
-      :total="1"
+      :total="totalList "
       :page="listQuery.page"
       :limit="listQuery.limit"
-      :on-next="handleSearch"
+      :on-next="onNext"
     />
   </div>
 </template>
@@ -190,11 +190,24 @@ export default {
   },
   computed: {
     ...mapGetters('reports', [
-      'listPasien'
+      'listPasien',
+      'totalList'
     ]),
     ...mapGetters('user', [
       'roles'
     ])
+  },
+  watch: {
+    'listQuery.search': {
+      handler: function(value) {
+        if (value.length >= 3) {
+          this.handleSearch()
+        } else if (value.length === 0) {
+          this.handleSearch()
+        }
+      },
+      immediate: true
+    }
   },
   async mounted() {
     await this.$store.dispatch('reports/listReportCase')
@@ -203,11 +216,16 @@ export default {
     handleCreate() {
       this.$router.push('/laporan/stepper')
     },
-    handleSearch() {
-      console.log('ok')
+    async handleSearch() {
+      this.listQuery.page = 1
+      await this.$store.dispatch('reports/listReportCase', this.listQuery)
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
+    },
+    async onNext(value) {
+      this.listQuery.page = value
+      await this.$store.dispatch('reports/listReportCase', this.listQuery)
     }
   }
 }

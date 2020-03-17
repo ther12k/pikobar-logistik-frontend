@@ -13,8 +13,8 @@
         :required="requiredAddress"
         :sub-district="subDistrict"
         :update-sub-district.sync="subDistrict"
-        :code-district="districtCity"
-        :district-code.sync="districtCity"
+        :code-district="districtCity.kota_kode"
+        :district-code.sync="districtCity.kota_kode"
         :on-select-sub-district="onSelectSubDistrict"
       />
       <select-area-village
@@ -22,8 +22,8 @@
         :required="requiredAddress"
         :village="village"
         :update-village.sync="village"
-        :code-sub-district="subDistrict"
-        :sub-district-code.sync="subDistrict"
+        :code-sub-district="subDistrict.kecamatan_kode"
+        :sub-district-code.sync="subDistrict.kecamatan_kode"
         :on-select-village="onSelectVillage"
       />
     </v-row>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'AddressRegion',
   props: {
@@ -69,31 +70,40 @@ export default {
   },
   data() {
     return {
-      districtCity: '',
-      subDistrict: '',
-      village: ''
-    }
-  },
-  watch: {
-    districtCity: async function(value) {
-      if (value.kota_kode) {
-        this.districtCity = value.kota_kode
+      districtCity: {
+        kota_kode: this.districtCode,
+        kota_nama: this.districtName
+      },
+      subDistrict: {
+        kecamatan_kode: this.subDistrictCode,
+        kecamatan_nama: this.subDistrictName
+      },
+      village: {
+        desa_kode: this.villageCode,
+        desa_nama: this.villageName
       }
     }
   },
+  // watch: {
+  //   districtCity: async function(value) {
+  //     if (value.kota_kode) {
+  //       this.districtCity = value.kota_kode
+  //     }
+  //   }
+  // },
   methods: {
     async onSelectDistrict(value) {
-      this.districtCity = value.kota_kode
+      this.districtCity = value
       this.$emit('update:codeDistrict', value.kota_kode)
       this.$emit('update:nameDistrict', value.kota_nama)
     },
     async onSelectSubDistrict(value) {
-      this.subDistrict = value.kecamatan_kode
+      this.subDistrict = value
       this.$emit('update:codeSubDistrict', value.kecamatan_kode)
       this.$emit('update:nameSubDistrict', value.kecamatan_nama)
     },
     async onSelectVillage(value) {
-      this.village = value.desa_nama
+      this.village = value
       this.$emit('update:codeVillage', value.desa_kode)
       this.$emit('update:nameVillage', value.desa_nama)
     }

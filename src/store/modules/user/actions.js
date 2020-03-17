@@ -22,12 +22,10 @@ export default {
     return new Promise((resolve, reject) => {
       fetchPostUpdate('/api/users/info', 'GET').then((response) => {
         const { role } = response.data
-        console.log(role)
         const data = {
           roles: [role]
         }
         const { roles } = data
-        console.log(roles)
         commit('SET_ROLES', roles)
         resolve(roles)
       }).catch((error) => {

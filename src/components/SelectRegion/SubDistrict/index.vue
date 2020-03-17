@@ -37,8 +37,10 @@ export default {
       default: false
     },
     subDistrict: {
-      type: String,
-      default: ''
+      type: Object,
+      default: function() {
+        return []
+      }
     },
     required: {
       type: Boolean,
@@ -81,6 +83,10 @@ export default {
   async created() {
     if (this.disabledSelect) {
       this.disable = true
+    } else if (this.codeDistrict) {
+      const response = await this.$store.dispatch('region/getListSubDistrict', this.codeDistrict)
+      this.listSubDistrict = response.data
+      this.disable = false
     }
   }
 }

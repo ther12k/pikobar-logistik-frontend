@@ -36,8 +36,8 @@ export default {
       default: false
     },
     village: {
-      type: String,
-      default: ''
+      type: Object,
+      default: null
     },
     required: {
       type: Boolean,
