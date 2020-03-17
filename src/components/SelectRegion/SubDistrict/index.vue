@@ -1,29 +1,25 @@
 <template>
-  <v-container fluid>
-    <v-row align="center">
-      <v-col cols="8">
-        <ValidationProvider
-          v-slot="{ errors }"
-          :rules="required ? 'required': ''"
-        >
-          <v-autocomplete
-            v-model="nameSubDistrict"
-            :items="listSubDistrict"
-            :label="$t('label.select_sub_district')"
-            :error-messages="errors"
-            :disabled="disable"
-            menu-props="auto"
-            item-value="kecamatan_kode"
-            item-text="kecamatan_nama"
-            prepend-icon="map"
-            single-line
-            autocomplete
-            @change="onSelectSubDistrict"
-          />
-        </ValidationProvider>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-col cols="12" sm="4" md="4">
+    <ValidationProvider
+      v-slot="{ errors }"
+      :rules="required ? 'required': ''"
+    >
+      <v-autocomplete
+        v-model="nameSubDistrict"
+        :items="listSubDistrict"
+        :label="$t('label.select_sub_district')"
+        :error-messages="errors"
+        :disabled="disable"
+        menu-props="auto"
+        item-value="kecamatan_kode"
+        item-text="kecamatan_nama"
+        prepend-icon="map"
+        single-line
+        autocomplete
+        @change="onSelectSubDistrict"
+      />
+    </ValidationProvider>
+  </v-col>
 </template>
 
 <script>

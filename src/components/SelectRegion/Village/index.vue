@@ -1,29 +1,25 @@
 <template>
-  <v-container fluid>
-    <v-row align="center">
-      <v-col cols="8">
-        <ValidationProvider
-          v-slot="{ errors }"
-          :rules="required ? 'required': ''"
-        >
-          <v-autocomplete
-            v-model="nameVillage"
-            :items="listVillage"
-            :label="$t('label.select_village')"
-            :error-messages="errors"
-            :disabled="disable"
-            :return-object="true"
-            menu-props="auto"
-            prepend-icon="map"
-            item-text="desa_nama"
-            single-line
-            autocomplete
-            @change="onSelectVillage"
-          />
-        </ValidationProvider>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-col cols="12" sm="4" md="4">
+    <ValidationProvider
+      v-slot="{ errors }"
+      :rules="required ? 'required': ''"
+    >
+      <v-autocomplete
+        v-model="nameVillage"
+        :items="listVillage"
+        :label="$t('label.select_village')"
+        :error-messages="errors"
+        :disabled="disable"
+        :return-object="true"
+        menu-props="auto"
+        prepend-icon="map"
+        item-text="desa_nama"
+        single-line
+        autocomplete
+        @change="onSelectVillage"
+      />
+    </ValidationProvider>
+  </v-col>
 </template>
 
 <script>

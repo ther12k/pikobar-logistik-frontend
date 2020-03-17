@@ -1,28 +1,24 @@
 <template>
-  <v-container fluid>
-    <v-row align="center">
-      <v-col cols="8">
-        <ValidationProvider
-          v-slot="{ errors }"
-          :rules="required ? 'required': ''"
-        >
-          <v-autocomplete
-            v-model="nameDistrictCity"
-            :items="listDistrictCity"
-            :label="$t('label.select_district')"
-            :error-messages="errors"
-            :disabled="disabledSelect"
-            item-value="kota_kode"
-            item-text="kota_nama"
-            prepend-icon="map"
-            single-line
-            autocomplete
-            @change="onSelectDistrict"
-          />
-        </ValidationProvider>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-col cols="12" sm="4" md="4">
+    <ValidationProvider
+      v-slot="{ errors }"
+      :rules="required ? 'required': ''"
+    >
+      <v-autocomplete
+        v-model="nameDistrictCity"
+        :items="listDistrictCity"
+        :label="$t('label.select_district')"
+        :error-messages="errors"
+        :disabled="disabledSelect"
+        item-value="kota_kode"
+        item-text="kota_nama"
+        prepend-icon="map"
+        single-line
+        autocomplete
+        @change="onSelectDistrict"
+      />
+    </ValidationProvider>
+  </v-col>
 </template>
 
 <script>

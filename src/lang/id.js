@@ -3,8 +3,8 @@
 export default {
   route: {
     dashboard: 'Beranda',
-    laporan_title: 'Laporan'
-
+    laporan_title: 'Laporan',
+    laporan_create: 'Buat Laporan'
   },
   label: {
     username: 'Username',

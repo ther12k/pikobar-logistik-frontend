@@ -1,5 +1,5 @@
 <template>
-  <v-row v-if="total < 0" justify="space-between">
+  <v-row v-if="total > 0" justify="space-between">
     <v-col cols="2">
       <v-select
         :items="pageSizes"

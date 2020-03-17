@@ -4,6 +4,7 @@ import user from './modules/user'
 import permission from './modules/permission'
 import toast from './modules/toast'
 import region from './modules/region'
+import laporan from './modules/laporan'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   modules: {
     permission,
+    laporan,
     region,
     toast,
     user

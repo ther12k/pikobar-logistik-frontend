@@ -12,6 +12,7 @@
         v-model="setDate"
         :label="label"
         prepend-icon="event"
+        style="padding-bottom: 20px;"
         hide-details
         readonly
         v-on="on"

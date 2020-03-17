@@ -16,8 +16,16 @@ const surveyRouter = {
       meta: {
         title: 'laporan_title',
         icon: 'library_books',
-        noCache: true,
-        affix: true,
+        roles: ['admin']
+      }
+    },
+    {
+      path: 'create',
+      component: () => import('@/views/laporan/form'),
+      hidden: true,
+      meta: {
+        title: 'laporan_create',
+        icon: 'library_books',
         roles: ['admin']
       }
     }
