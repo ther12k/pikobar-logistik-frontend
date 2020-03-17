@@ -140,7 +140,11 @@ export default {
     }
   },
   methods: {
-    onNext() {
+    async onNext() {
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      }
       EventBus.$emit('nextSurveySteps', this.steps)
     }
   }

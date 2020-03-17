@@ -106,15 +106,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in desserts" :key="item.name">
+                <tr v-for="(item, index) in listPasien" :key="item.name">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.name }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.name }}</td>
-                  <td><status :status="item.status" /> </td>
+                  <td>{{ item.age }}</td>
+                  <td>{{ item.nationality }}</td>
+                  <td>
+                    <div v-if="item.gender =='P'">
+                      Perempuan
+                    </div>
+                    <div v-else>
+                      Laki-Laki
+                    </div>
+                  </td>
+                  <td>{{ item.current_location_address }}</td>
+                  <td>{{ item.address_district_name }}</td>
+                  <td><status :status="item.last_status" /> </td>
                   <td>
                     <v-card-actions>
                       <v-menu
@@ -159,15 +166,16 @@
       </v-row>
     </v-card>
     <pagination
-      :total="10"
-      :page="1"
-      :limit="10"
+      :total="1"
+      :page="listQuery.page"
+      :limit="listQuery.limit"
       :on-next="handleSearch"
     />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'LaporanList',
   data() {
@@ -176,60 +184,16 @@ export default {
         page: 1,
         limit: 10,
         search: ''
-      },
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          status: 'ODP'
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          status: 'ODP'
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          status: 'PDP'
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          status: 'Positif'
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          status: 'Positif'
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          status: 'PDP'
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          status: 'PDP'
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          status: 'PDP'
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          status: 'PDP'
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          status: 'PDP'
-        }
-      ]
+      }
     }
+  },
+  computed: {
+    ...mapGetters('reports', [
+      'listPasien'
+    ])
+  },
+  async mounted() {
+    await this.$store.dispatch('reports/listReportCase')
   },
   methods: {
     handleCreate() {
