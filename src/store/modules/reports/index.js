@@ -26,15 +26,19 @@ const state = {
     address_village_name: '',
     nationality_type: '',
     nationality_country: '',
-    current_location_address: '',
     occupation: '',
     status: '',
     stage: 0,
     final_result: 0,
     history_tracing: true,
     history_notes: '',
-    current_location: '',
-    current_hospital_id: ''
+    current_location_type: '0',
+    current_hospital_id: '',
+    current_location_address: '',
+    current_location_province: '',
+    current_location_district: '',
+    current_location_subdistrict: '',
+    current_location_village: ''
   }
 }
 

@@ -107,7 +107,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listPasien" :key="item.name">
+                <tr v-for="(item, index) in listPasien" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
@@ -213,8 +213,9 @@ export default {
     await this.$store.dispatch('reports/listReportCase')
   },
   methods: {
-    handleCreate() {
-      this.$router.push('/laporan/stepper')
+    async handleCreate() {
+      await this.$store.dispatch('reports/resetFormPasien')
+      await this.$router.push('/laporan/stepper')
     },
     async handleSearch() {
       this.listQuery.page = 1

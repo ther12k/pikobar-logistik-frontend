@@ -56,7 +56,7 @@
             <ValidationProvider v-slot="{ errors }">
               <v-label>Kewarganegaraan</v-label>
               <v-radio-group
-                v-model="formPasien.nationality_type"
+                v-model="formPasien.nationality"
                 row
               >
                 <v-radio label="WNI" value="WNI" />
@@ -72,7 +72,7 @@
             <ValidationProvider
               v-slot="{ errors }"
             >
-              <v-label>No Kasus</v-label>
+              <v-label>ID Kasus</v-label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.id_case"

@@ -65,19 +65,51 @@
                 v-model="formPasien.current_location_type"
                 :error-messages="errors"
                 row
+                @change="handleChange"
               >
                 <v-radio label="Rumah" value="0" />
                 <v-radio label="Rumah Sakit" value="1" />
               </v-radio-group>
             </ValidationProvider>
+            <div v-if="formPasien.current_location_type === '0'">
+              <v-label>Alamat</v-label>
+              <address-region
+                :district-name="formPasien.current_location_district"
+                :name-district.sync="formPasien.current_location_district"
+                :subdistrict-name="formPasien.current_location_subdistrict"
+                :name-sub-district.sync="formPasien.current_location_subdistrict"
+                :village-name="formPasien.current_location_village"
+                :name-village.sync="formPasien.current_location_village"
+                :disabled-address="false"
+                :required-address="false"
+              />
+            </div>
             <ValidationProvider
               v-slot="{ errors }"
+              v-if="formPasien.current_location_type === '0'"
             >
-              <v-label>Rumah Sakit</v-label>
+              <v-label>Alamat Lengkap Rumah</v-label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.current_location_address"
                 solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.current_location_type === '1'"
+            >
+              <v-autocomplete
+                v-model="formPasien.current_hospital_id"
+                :items="hospitalList"
+                :error-messages="errors"
+                label="Lokasi Rumah Sakit"
+                menu-props="auto"
+                item-text="name"
+                item-value="name"
+                single-line
+                solo
+                autocomplete
               />
             </ValidationProvider>
           </v-col>
@@ -113,6 +145,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { mapGetters } from 'vuex'
 export default {
   name: 'FormInformationHistory',
   components: {
@@ -129,6 +162,14 @@ export default {
       default: null
     }
   },
+  computed: {
+    ...mapGetters('region', [
+      'hospitalList'
+    ])
+  },
+  async mounted() {
+    await this.$store.dispatch('region/getListHospotal')
+  },
   methods: {
     backStep() {
       EventBus.$emit('backSurveySteps', this.steps)
@@ -143,6 +184,16 @@ export default {
         await this.$store.dispatch('reports/resetFormPasien')
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/laporan/index')
+      }
+    },
+    handleChange(value) {
+      if (value === '0') {
+        this.formPasien.current_hospital_id = ''
+      } else {
+        this.formPasien.current_location_address = ''
+        this.formPasien.current_location_district = ''
+        this.formPasien.current_location_subdistrict = ''
+        this.formPasien.current_location_village = ''
       }
     }
   }
