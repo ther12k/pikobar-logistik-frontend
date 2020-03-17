@@ -9,7 +9,7 @@
       {{ status }}
     </v-chip>
     <v-chip
-      v-if="status === 'Positif'"
+      v-if="status === 'POSITIF'"
       class="ma-2"
       color="#EB5757"
       outlined

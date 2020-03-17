@@ -10,6 +10,7 @@
         :label="$t('label.select_district')"
         :error-messages="errors"
         :disabled="disabledSelect"
+        :return-object="true"
         item-value="kota_kode"
         item-text="kota_nama"
         single-line

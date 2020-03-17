@@ -10,6 +10,7 @@
         :label="$t('label.select_village')"
         :error-messages="errors"
         :disabled="disable"
+        :return-object="true"
         menu-props="auto"
         item-text="desa_nama"
         single-line

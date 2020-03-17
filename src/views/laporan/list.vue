@@ -12,6 +12,7 @@
           <v-col cols="auto">
             <v-card-text>
               <v-btn
+                v-if="roles[0] === 'dinkeskota'"
                 id="addsurvey"
                 class="bottom-add-survey"
                 depressed
@@ -190,6 +191,9 @@ export default {
   computed: {
     ...mapGetters('reports', [
       'listPasien'
+    ]),
+    ...mapGetters('user', [
+      'roles'
     ])
   },
   async mounted() {

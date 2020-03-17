@@ -20,14 +20,19 @@ export default {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      const data = {
-        roles: ['admin']
-      }
-      const { roles } = data
-
-      commit('SET_ROLES', roles)
-
-      resolve(roles)
+      fetchPostUpdate('/api/users/info', 'GET').then((response) => {
+        const { role } = response.data
+        console.log(role)
+        const data = {
+          roles: [role]
+        }
+        const { roles } = data
+        console.log(roles)
+        commit('SET_ROLES', roles)
+        resolve(roles)
+      }).catch((error) => {
+        reject(error)
+      })
     })
   },
 

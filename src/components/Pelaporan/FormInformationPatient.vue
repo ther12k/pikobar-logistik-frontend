@@ -13,8 +13,9 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
+              rules="required|isHtml"
             >
-              <v-label>Nama Pasien</v-label>
+              <v-label class="label-answer required">Nama Pasien</v-label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.name"
@@ -79,7 +80,18 @@
             </ValidationProvider>
             <v-label>Alamat</v-label>
             <address-region
-              :village-array="formPasien.address_village_code"
+              :district-code="formPasien.address_district_code"
+              :district-name="formPasien.address_district_name"
+              :code-district.sync="formPasien.address_district_code"
+              :name-district.sync="formPasien.address_district_name"
+              :subdistrict-code="formPasien.address_subdistrict_code"
+              :subdistrict-name="formPasien.address_subdistrict_name"
+              :code-sub-district.sync="formPasien.address_subdistrict_code"
+              :name-sub-district.sync="formPasien.address_subdistrict_name"
+              :village-code="formPasien.address_village_code"
+              :village-name="formPasien.address_village_name"
+              :code-village.sync="formPasien.address_village_code"
+              :name-village.sync="formPasien.address_village_name"
               :disabled-address="false"
               :required-address="false"
             />

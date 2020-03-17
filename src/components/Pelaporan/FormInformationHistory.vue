@@ -20,7 +20,7 @@
               >
                 <v-radio label="ODP" value="ODP" />
                 <v-radio label="PDP" value="PDP" />
-                <v-radio label="Positif" value="Positif" />
+                <v-radio label="POSITIF" value="POSITIF" />
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">

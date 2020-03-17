@@ -10,6 +10,7 @@
         :label="$t('label.select_sub_district')"
         :error-messages="errors"
         :disabled="disable"
+        :return-object="true"
         menu-props="auto"
         item-value="kecamatan_kode"
         item-text="kecamatan_nama"
