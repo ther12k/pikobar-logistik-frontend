@@ -138,13 +138,12 @@ export default {
       if (!valid) {
         return
       }
-      console.log(this.formPasien)
-      // const response = await this.$store.dispatch('reports/createReportCase', this.formPasien)
-      // if (response) {
-      //   await this.$store.dispatch('reports/resetFormPasien')
-      //   await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-      //   this.$router.push('/laporan/index')
-      // }
+      const response = await this.$store.dispatch('reports/createReportCase', this.formPasien)
+      if (response) {
+        await this.$store.dispatch('reports/resetFormPasien')
+        await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+        this.$router.push('/laporan/index')
+      }
     }
   }
 }
