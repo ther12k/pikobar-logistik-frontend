@@ -10,7 +10,7 @@
     >
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
-          <v-label>ID Kasus</v-label>
+          <v-card-text>ID Kasus</v-card-text>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -23,7 +23,7 @@
       </v-row>
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
-          <v-label>ID Kasus Pusat</v-label>
+          <v-card-text>ID Kasus Pusat</v-card-text>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -48,7 +48,7 @@
               <div v-else>
                 <v-row class="row-detail">
                   <v-col class="row-detail-label" cols="3">
-                    <v-label>Kwarganegaraan</v-label>
+                    <v-card-text>Kwarganegaraan</v-card-text>
                   </v-col>
                   <v-col auto>
                     <v-text-field
@@ -61,7 +61,7 @@
                 </v-row>
                 <v-row class="row-detail">
                   <v-col class="row-detail-label" cols="3">
-                    <v-label>Tanggal Lahir</v-label>
+                    <v-card-text>Tanggal Lahir</v-card-text>
                   </v-col>
                   <v-col auto>
                     <v-text-field
@@ -74,7 +74,7 @@
                 </v-row>
                 <v-row class="row-detail">
                   <v-col class="row-detail-label" cols="3">
-                    <v-label>Jenis Kelamin</v-label>
+                    <v-card-text>Jenis Kelamin</v-card-text>
                   </v-col>
                   <v-col auto>
                     <v-text-field
@@ -87,7 +87,7 @@
                 </v-row>
                 <v-row class="row-detail">
                   <v-col class="row-detail-label" cols="3">
-                    <v-label>Nomor Telepon</v-label>
+                    <v-card-text>Nomor Telepon</v-card-text>
                   </v-col>
                   <v-col auto>
                     <v-text-field
@@ -100,7 +100,7 @@
                 </v-row>
                 <v-row class="row-detail">
                   <v-col class="row-detail-label" cols="3">
-                    <v-label>Alamat</v-label>
+                    <v-card-text>Alamat</v-card-text>
                   </v-col>
                   <v-col auto>
                     <v-text-field
@@ -113,7 +113,7 @@
                 </v-row>
                 <v-row class="row-detail">
                   <v-col class="row-detail-label" cols="3">
-                    <v-label>Pekerjaan</v-label>
+                    <v-card-text>Pekerjaan</v-card-text>
                   </v-col>
                   <v-col auto>
                     <v-text-field
