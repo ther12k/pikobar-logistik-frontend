@@ -5,8 +5,8 @@
         <v-row justify="space-between">
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
-              <div>Total data Pasien : 1116</div>
-              <div>Tambahkan data pasien baru dengan menekan tombol Tambah Pasien</div>
+              <div>Total data Kasus : 1116</div>
+              <div>Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
             </v-card-text>
           </v-col>
           <v-col cols="auto">
@@ -19,7 +19,7 @@
                 @click="handleCreate"
               >
                 <v-icon left>add_circle_outline</v-icon>
-                Tambah Pasien
+                Tambah Kasus
               </v-btn>
             </v-card-text>
           </v-col>
@@ -77,7 +77,7 @@
         <v-col>
           <v-card-text>
             <div style="font-size: 1.5rem;">
-              Data Pasien
+              Data Kasus
             </div>
           </v-card-text>
         </v-col>
@@ -143,15 +143,12 @@
                           </v-btn>
                         </template>
                         <v-card>
-                          <v-list-item>
-                            <img src="/static/icon-survey-results.svg" style="padding-right: 1rem;"> Approve
-                          </v-list-item>
                           <v-list-item @click="handleDetail(item._id)">
-                            <img src="/static/update-it-survey.svg" style="padding-right: 1rem;"> Detail Pasien
+                            <img src="/static/update-it-survey.svg" style="padding-right: 1rem;"> Detail Kasus
                           </v-list-item>
                           <v-divider style="margin:0 !important;"/>
                           <v-list-item style="color: #EB5757 !important;">
-                            <img src="/static/icon-delete.svg" style="padding-right: 1rem;"> Hapus Pasien
+                            <img src="/static/icon-delete.svg" style="padding-right: 1rem;"> Hapus Kasus
                           </v-list-item>
                         </v-card>
                       </v-menu>

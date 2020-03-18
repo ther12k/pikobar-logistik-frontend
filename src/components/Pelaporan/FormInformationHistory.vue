@@ -14,7 +14,7 @@
             <ValidationProvider v-slot="{ errors }">
               <v-label>Status</v-label>
               <v-radio-group
-                v-model="formPasien.status"
+                v-model="formPasien.last_status"
                 :error-messages="errors"
                 row
               >

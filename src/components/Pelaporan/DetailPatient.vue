@@ -2,7 +2,7 @@
   <div>
     <v-card-text>
       <div style="font-size: 1.5rem;">
-        Detail Pasien
+        Detail Kasus
       </div>
     </v-card-text>
     <v-card

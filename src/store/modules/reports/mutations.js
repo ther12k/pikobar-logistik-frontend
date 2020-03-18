@@ -28,7 +28,7 @@ export default {
     state.formPasien.nationality_type = ''
     state.formPasien.nationality_country = ''
     state.formPasien.occupation = ''
-    state.formPasien.status = ''
+    state.formPasien.last_status = ''
     state.formPasien.stage = 0
     state.formPasien.final_result = 0
     state.formPasien.history_tracing = true

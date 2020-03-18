@@ -27,7 +27,7 @@ const state = {
     nationality_type: '',
     nationality_country: '',
     occupation: '',
-    status: '',
+    last_status: '',
     stage: 0,
     final_result: 0,
     history_tracing: true,
