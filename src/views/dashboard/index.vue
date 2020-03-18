@@ -1,8 +1,7 @@
 <template>
   <v-container fluid grid-list-xl py-0>
-    <v-row>
-      <div> Dashboard </div>
-    </v-row>
+    <address-region />
+    <card-data />
   </v-container>
 </template>
 
