@@ -42,7 +42,7 @@ const state = {
   },
   formRiwayatPasien: {
     case: '',
-    last_status: '',
+    status: '',
     stage: '',
     diagnosis: [],
     history_tracing: [],

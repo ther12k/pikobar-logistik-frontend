@@ -5,7 +5,7 @@
         <v-row justify="space-between">
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
-              <div>Total data Kasus : 1116</div>
+              <div>Total data Kasus : {{ totalReport }}</div>
               <div>Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
             </v-card-text>
           </v-col>
@@ -36,7 +36,7 @@
             <v-list-item-content>
               <v-list-item-title>Orang Dalam Pemantauan</v-list-item-title>
               <v-list-item-subtitle>Orang yang mengalami gejala demam dan memiliki  <br> riwayat perjalanan ke negara terjangkit.<br>&nbsp;</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">1004 Orang</v-list-item-title>
+              <v-list-item-title class="headline mb-1">{{ totalODP }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -50,7 +50,7 @@
             <v-list-item-content>
               <v-list-item-title>Pasien Dalam Pengawasan</v-list-item-title>
               <v-list-item-subtitle>Orang yang sudah menunjukan gejala demam, batuk, <br> pilek dan sesak nafas memiliki riwayat <br> perjalanan ke negara terjangkit.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">101 Orang</v-list-item-title>
+              <v-list-item-title class="headline mb-1">{{ totalPDP }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -64,7 +64,7 @@
             <v-list-item-content>
               <v-list-item-title>POSITIF</v-list-item-title>
               <v-list-item-subtitle>Orang yang sudah menunjukan gejala corona <br> dan juga diduga kuat sudah melakukan kontak <br> dengan pasien positif Covid-19.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">11 Orang</v-list-item-title>
+              <v-list-item-title class="headline mb-1">{{ totalPositif }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -167,6 +167,10 @@ export default {
   name: 'LaporanList',
   data() {
     return {
+      totalODP: 0,
+      totalPDP: 0,
+      totalPositif: 0,
+      totalReport: 0,
       listQuery: {
         address_district_code: '',
         page: 1,
@@ -201,6 +205,11 @@ export default {
   async mounted() {
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
+    const response = await this.$store.dispatch('reports/countReportCase')
+    this.totalODP = response.data.ODP
+    this.totalPDP = response.data.PDP
+    this.totalPositif = response.data.POSITIF
+    this.totalReport = this.totalODP + this.totalPDP + this.totalPositif
   },
   methods: {
     async handleCreate() {

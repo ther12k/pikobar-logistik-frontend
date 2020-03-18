@@ -28,7 +28,7 @@
                       >
                         <v-label>Status</v-label>
                         <v-radio-group
-                          v-model="formRiwayatPasien.last_status"
+                          v-model="formRiwayatPasien.status"
                           :error-messages="errors"
                           row
                         >
@@ -259,7 +259,7 @@ export default {
       if (!valid) {
         return
       }
-
+      await this.$store.dispatch('reports/createHistoryCase', this.formRiwayatPasien)
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
       await this.$router.push('/laporan/index')
     }

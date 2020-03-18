@@ -42,7 +42,7 @@ export default {
   },
   RESET_RIWAYAT_FORM_PASIEN: (state) => {
     state.formRiwayatPasien.case = ''
-    state.formRiwayatPasien.last_status = ''
+    state.formRiwayatPasien.status = ''
     state.formRiwayatPasien.stage = ''
     state.formRiwayatPasien.diagnosis = []
     state.formRiwayatPasien.history_tracing = []

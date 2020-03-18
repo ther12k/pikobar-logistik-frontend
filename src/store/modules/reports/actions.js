@@ -43,6 +43,16 @@ export default {
       }
     })
   },
+  createHistoryCase({ commit }, data) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchPostUpdate('/api/history_cases', 'POST', data)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
   resetFormPasien({ commit }) {
     commit('RESET_FORM_PASIEN')
   },
