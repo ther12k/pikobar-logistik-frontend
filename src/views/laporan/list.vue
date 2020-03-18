@@ -96,7 +96,6 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-left">Nama</th>
                   <th class="text-left">Usia</th>
                   <th class="text-left">Warganegara</th>
                   <th class="text-left">Jenis Kelamin</th>
@@ -109,7 +108,6 @@
               <tbody>
                 <tr v-for="(item, index) in listPasien" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
                   <td>{{ item.nationality }}</td>
                   <td>
