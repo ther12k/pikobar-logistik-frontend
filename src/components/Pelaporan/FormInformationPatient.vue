@@ -15,7 +15,7 @@
               v-slot="{ errors }"
               rules="required|isHtml"
             >
-              <v-label class="label-answer required">Nama Pasien*</v-label>
+              <v-label>Nama Pasien</v-label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.name"

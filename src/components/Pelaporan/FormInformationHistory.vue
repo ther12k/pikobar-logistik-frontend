@@ -17,7 +17,7 @@
             >
               <v-label>Status</v-label>
               <v-radio-group
-                v-model="formPasien.last_status "
+                v-model="formPasien.status"
                 :error-messages="errors"
                 row
               >

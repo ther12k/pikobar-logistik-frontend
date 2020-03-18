@@ -27,7 +27,7 @@ const state = {
     nationality_type: '',
     nationality_country: '',
     occupation: '',
-    last_status: '',
+    status: '',
     stage: 0,
     final_result: 0,
     diagnosis: [],
