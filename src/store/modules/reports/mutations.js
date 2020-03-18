@@ -33,7 +33,6 @@ export default {
     state.formPasien.final_result = 0
     state.formPasien.history_tracing = true
     state.formPasien.history_notes = ''
-    state.formPasien.current_hospital_id = ''
     state.formPasien.current_location_type = '0'
     state.formPasien.current_location_address = ''
     state.formPasien.current_location_province = ''

@@ -33,7 +33,6 @@ const state = {
     history_tracing: true,
     history_notes: '',
     current_location_type: '0',
-    current_hospital_id: '',
     current_location_address: '',
     current_location_province: '',
     current_location_district: '',

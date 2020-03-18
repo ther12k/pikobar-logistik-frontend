@@ -100,7 +100,7 @@
               v-if="formPasien.current_location_type === '1'"
             >
               <v-autocomplete
-                v-model="formPasien.current_hospital_id"
+                v-model="formPasien.current_location_address"
                 :items="hospitalList"
                 :error-messages="errors"
                 label="Lokasi Rumah Sakit"
@@ -188,7 +188,7 @@ export default {
     },
     handleChange(value) {
       if (value === '0') {
-        this.formPasien.current_hospital_id = ''
+        this.formPasien.current_location_address = ''
       } else {
         this.formPasien.current_location_address = ''
         this.formPasien.current_location_district = ''
