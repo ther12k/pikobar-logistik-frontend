@@ -84,13 +84,6 @@ export default {
       }
     }
   },
-  // watch: {
-  //   districtCity: async function(value) {
-  //     if (value.kota_kode) {
-  //       this.districtCity = value.kota_kode
-  //     }
-  //   }
-  // },
   methods: {
     async onSelectDistrict(value) {
       this.districtCity = value

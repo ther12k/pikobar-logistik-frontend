@@ -11,10 +11,13 @@
             md="6"
             sm="12"
           >
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>Status</v-label>
               <v-radio-group
-                v-model="formPasien.last_status"
+                v-model="formPasien.last_status "
                 :error-messages="errors"
                 row
               >
@@ -23,7 +26,10 @@
                 <v-radio label="POSITIF" value="POSITIF" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>State</v-label>
               <v-radio-group
                 v-model="formPasien.stage"
@@ -59,7 +65,19 @@
                 <v-radio label="Lain-lain" value="Lain-lain" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.history_tracing === 'Lain-lain'"
+            >
+              <v-text-field
+                v-model="formPasien.history_notes"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>Dirawat</v-label>
               <v-radio-group
                 v-model="formPasien.current_location_type"

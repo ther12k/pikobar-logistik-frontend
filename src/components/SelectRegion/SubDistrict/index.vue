@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" sm="4" md="4">
+  <v-col cols="12" md="4" sm="4">
     <ValidationProvider
       v-slot="{ errors }"
       :rules="required ? 'required': ''"
@@ -58,17 +58,8 @@ export default {
   data() {
     return {
       disable: true,
-      listSubDistrict: []
-    }
-  },
-  computed: {
-    nameSubDistrict: {
-      get() {
-        return this.subDistrict
-      },
-      set(val) {
-        this.$emit('update:updateSubDistrict', val)
-      }
+      listSubDistrict: [],
+      nameSubDistrict: ''
     }
   },
   watch: {
@@ -81,6 +72,9 @@ export default {
     }
   },
   async created() {
+    if (this.subDistrict.kecamatan_code) {
+      this.nameSubDistrict = this.subDistrict
+    }
     if (this.disabledSelect) {
       this.disable = true
     } else if (this.codeDistrict) {

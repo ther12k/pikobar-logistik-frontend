@@ -43,20 +43,28 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>Jenis Kelamin</v-label>
               <v-radio-group
                 v-model="formPasien.gender"
+                :error-messages="errors"
                 row
               >
                 <v-radio label="Laki-Laki" value="L" />
                 <v-radio label="Perempuan" value="P" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>Kewarganegaraan</v-label>
               <v-radio-group
                 v-model="formPasien.nationality"
+                :error-messages="errors"
                 row
               >
                 <v-radio label="WNI" value="WNI" />
@@ -71,6 +79,7 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
+              rules="required|isHtml"
             >
               <v-label>ID Kasus</v-label>
               <v-text-field
@@ -80,10 +89,11 @@
               />
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">
-              <v-label>Nomor Telepone</v-label>
+              <v-label>Nomor Telepon</v-label>
               <v-text-field
                 v-model="formPasien.phone_number"
                 solo-inverted
+                type="number"
               />
             </ValidationProvider>
             <v-label>Alamat</v-label>
@@ -101,7 +111,7 @@
               :code-village.sync="formPasien.address_village_code"
               :name-village.sync="formPasien.address_village_name"
               :disabled-address="false"
-              :required-address="false"
+              :required-address="true"
             />
             <ValidationProvider v-slot="{ errors }">
               <v-label>Alamat Lengkap</v-label>
@@ -156,7 +166,12 @@ export default {
   },
   data() {
     return {
-      formatDate: 'YYYY-MM-DD'
+      formatDate: 'MM/DD/YYYY'
+    }
+  },
+  watch: {
+    'formPasien.birth_date': function(value) {
+      this.formPasien.age = this.getAge(value)
     }
   },
   methods: {
@@ -164,8 +179,21 @@ export default {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
+      } else if (this.formPasien.birth_date.length < 1) {
+        await this.$store.dispatch('toast/errorToast', 'Tanggal lahir harap diisi')
+        return
       }
       EventBus.$emit('nextSurveySteps', this.steps)
+    },
+    getAge(DOB) {
+      const today = new Date()
+      const birthDate = new Date(DOB)
+      let age = today.getFullYear() - birthDate.getFullYear()
+      const m = today.getMonth() - birthDate.getMonth()
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age = age - 1
+      }
+      return age
     }
   }
 }
