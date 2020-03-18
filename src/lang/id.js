@@ -4,7 +4,8 @@ export default {
   route: {
     dashboard: 'Beranda',
     laporan_title: 'Laporan',
-    laporan_create: 'Buat Laporan'
+    laporan_create: 'Buat Laporan Pasien',
+    laporan_detail: 'Detail Laporan Pasien'
   },
   label: {
     username: 'Username',

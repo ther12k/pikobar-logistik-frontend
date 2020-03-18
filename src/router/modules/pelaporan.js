@@ -38,6 +38,16 @@ const surveyRouter = {
         icon: 'library_books',
         roles: ['admin', 'dinkesprov', 'dinkeskota']
       }
+    },
+    {
+      path: 'detail/:id',
+      component: () => import('@/views/laporan/detail'),
+      hidden: true,
+      meta: {
+        title: 'laporan_detail',
+        icon: 'library_books',
+        roles: ['admin', 'dinkesprov', 'dinkeskota']
+      }
     }
   ]
 }

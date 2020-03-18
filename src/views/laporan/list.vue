@@ -5,7 +5,7 @@
         <v-row justify="space-between">
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
-              <div>Total data Pasien : </div>
+              <div>Total data Pasien : 1116</div>
               <div>Tambahkan data pasien baru dengan menekan tombol Tambah Pasien</div>
             </v-card-text>
           </v-col>
@@ -36,7 +36,7 @@
             <v-list-item-content>
               <v-list-item-title>Orang Dalam Pemantauan</v-list-item-title>
               <v-list-item-subtitle>Orang yang mengalami gejala demam dan memiliki  <br> riwayat perjalanan ke negara terjangkit.<br>&nbsp;</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">1 Orang</v-list-item-title>
+              <v-list-item-title class="headline mb-1">1004 Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -50,7 +50,7 @@
             <v-list-item-content>
               <v-list-item-title>Pasien Dalam Pengawasan</v-list-item-title>
               <v-list-item-subtitle>Orang yang sudah menunjukan gejala demam, batuk, <br> pilek dan sesak nafas memiliki riwayat <br> perjalanan ke negara terjangkit.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">1 Orang</v-list-item-title>
+              <v-list-item-title class="headline mb-1">101 Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -64,7 +64,7 @@
             <v-list-item-content>
               <v-list-item-title>POSITIF</v-list-item-title>
               <v-list-item-subtitle>Orang yang sudah menunjukan gejala corona <br> dan juga diduga kuat sudah melakukan kontak <br> dengan pasien positif Covid-19.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">1 Orang</v-list-item-title>
+              <v-list-item-title class="headline mb-1">11 Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -148,7 +148,7 @@
                           <v-list-item>
                             <img src="/static/icon-survey-results.svg" style="padding-right: 1rem;"> Approve
                           </v-list-item>
-                          <v-list-item>
+                          <v-list-item @click="handleDetail(item._id)">
                             <img src="/static/update-it-survey.svg" style="padding-right: 1rem;"> Detail Pasien
                           </v-list-item>
                           <v-divider style="margin:0 !important;"/>
@@ -216,6 +216,9 @@ export default {
     async handleCreate() {
       await this.$store.dispatch('reports/resetFormPasien')
       await this.$router.push('/laporan/stepper')
+    },
+    async handleDetail(id) {
+      await this.$router.push(`/laporan/detail/${id}`)
     },
     async handleSearch() {
       this.listQuery.page = 1
