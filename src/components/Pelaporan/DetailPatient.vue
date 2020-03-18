@@ -152,7 +152,6 @@ export default {
   },
   async mounted() {
     const response = await this.$store.dispatch('reports/detailReportCase', this.idData)
-    console.log(response)
     this.detailData = await response.data
     if (this.detailData) {
       this.birthDate = await formatDatetime(this.detailData.birth_date, 'DD-MM-YYYY')
