@@ -1,4 +1,4 @@
-import { fetchList, fetchPostUpdate } from '@/api'
+import { fetchList, fetchDetail, fetchPostUpdate } from '@/api'
 
 export default {
   listReportCase({ commit }, params) {
@@ -17,6 +17,16 @@ export default {
     return new Promise(async(resolve, reject) => {
       try {
         const response = await fetchPostUpdate('/api/cases', 'POST', data)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
+  detailReportCase({ commit }, id) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchDetail('/api/cases', 'GET', id)
         resolve(response)
       } catch (e) {
         reject(e)
