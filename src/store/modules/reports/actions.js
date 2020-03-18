@@ -1,4 +1,4 @@
-import { fetchList, fetchPostUpdate } from '@/api'
+import { fetchList, fetchDetail, fetchPostUpdate } from '@/api'
 
 export default {
   listReportCase({ commit }, params) {
@@ -23,7 +23,30 @@ export default {
       }
     })
   },
+  detailReportCase({ commit }, id) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchDetail('/api/cases', 'GET', id)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
+  countReportCase({ commit }) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchList('/api/cases-summary', 'GET')
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
   resetFormPasien({ commit }) {
     commit('RESET_FORM_PASIEN')
+  },
+  resetRiwayatFormPasien({ commit }) {
+    commit('RESET_RIWAYAT_FORM_PASIEN')
   }
 }

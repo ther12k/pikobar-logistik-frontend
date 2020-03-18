@@ -10,5 +10,8 @@ export default {
   },
   formPasien: (state, getters) => {
     return state.formPasien
+  },
+  formRiwayatPasien: (state, getters) => {
+    return state.formRiwayatPasien
   }
 }

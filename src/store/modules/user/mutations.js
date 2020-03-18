@@ -4,5 +4,8 @@ export default {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_DISTRICT: (state, district) => {
+    state.district_user = district
   }
 }

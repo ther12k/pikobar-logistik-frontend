@@ -5,8 +5,8 @@
         <v-row justify="space-between">
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
-              <div>Total data Pasien : 1116</div>
-              <div>Tambahkan data pasien baru dengan menekan tombol Tambah Pasien</div>
+              <div>Total data Kasus : 1116</div>
+              <div>Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
             </v-card-text>
           </v-col>
           <v-col cols="auto">
@@ -19,7 +19,7 @@
                 @click="handleCreate"
               >
                 <v-icon left>add_circle_outline</v-icon>
-                Tambah Pasien
+                Tambah Kasus
               </v-btn>
             </v-card-text>
           </v-col>
@@ -77,7 +77,7 @@
         <v-col>
           <v-card-text>
             <div style="font-size: 1.5rem;">
-              Data Pasien
+              Data Kasus
             </div>
           </v-card-text>
         </v-col>
@@ -96,20 +96,18 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-left">Nama</th>
                   <th class="text-left">Usia</th>
                   <th class="text-left">Warganegara</th>
                   <th class="text-left">Jenis Kelamin</th>
                   <th class="text-left">Lokasi Pengawasan</th>
                   <th class="text-left">Dinkes Kota/Kab</th>
-                  <th class="text-left">Diagnosa</th>
-                  <th class="text-left" />
+                  <th class="text-left">Status</th>
+                  <th class="text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(item, index) in listPasien" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
                   <td>{{ item.nationality }}</td>
                   <td>
@@ -125,38 +123,26 @@
                   <td><status :status="item.last_status" /> </td>
                   <td>
                     <v-card-actions>
-                      <v-menu
-                        :close-on-content-click="false"
-                        :nudge-width="200"
-                        :nudge-left="220"
-                        :nudge-top="40"
-                        offset-y
+                      <v-btn
+                        class="ma-2"
+                        tile
+                        large
+                        color="grey"
+                        icon
+                        @click="handleDetail(item._id)"
                       >
-                        <template v-slot:activator="{ on }">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            large
-                            color="grey"
-                            icon
-                            v-on="on"
-                          >
-                            <v-icon>more_horiz</v-icon>
-                          </v-btn>
-                        </template>
-                        <v-card>
-                          <v-list-item>
-                            <img src="/static/icon-survey-results.svg" style="padding-right: 1rem;"> Approve
-                          </v-list-item>
-                          <v-list-item @click="handleDetail(item._id)">
-                            <img src="/static/update-it-survey.svg" style="padding-right: 1rem;"> Detail Pasien
-                          </v-list-item>
-                          <v-divider style="margin:0 !important;"/>
-                          <v-list-item style="color: #EB5757 !important;">
-                            <img src="/static/icon-delete.svg" style="padding-right: 1rem;"> Hapus Pasien
-                          </v-list-item>
-                        </v-card>
-                      </v-menu>
+                        <v-icon>mdi-eye</v-icon>
+                      </v-btn>
+                      <v-btn
+                        class="ma-2"
+                        tile
+                        large
+                        color="grey"
+                        icon
+                        @click="handleEdit(item._id)"
+                      >
+                        <v-icon>mdi-account-edit</v-icon>
+                      </v-btn>
                     </v-card-actions>
                   </td>
                 </tr>
@@ -182,10 +168,12 @@ export default {
   data() {
     return {
       listQuery: {
+        address_district_code: '',
         page: 1,
         limit: 10,
         search: ''
-      }
+      },
+      countingReports: null
     }
   },
   computed: {
@@ -194,7 +182,8 @@ export default {
       'totalList'
     ]),
     ...mapGetters('user', [
-      'roles'
+      'roles',
+      'district_user'
     ])
   },
   watch: {
@@ -210,7 +199,8 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('reports/listReportCase')
+    this.listQuery.address_district_code = this.district_user
+    await this.$store.dispatch('reports/listReportCase', this.listQuery)
   },
   methods: {
     async handleCreate() {
@@ -219,6 +209,9 @@ export default {
     },
     async handleDetail(id) {
       await this.$router.push(`/laporan/detail/${id}`)
+    },
+    async handleEdit(id) {
+      await this.$router.push(`/laporan/edit/${id}`)
     },
     async handleSearch() {
       this.listQuery.page = 1

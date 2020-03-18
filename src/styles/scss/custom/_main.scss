@@ -240,8 +240,8 @@
 
 .material-checkbox-custom > input:checked + span::before,
 .material-checkbox-custom > input:indeterminate + span::before {
-  border-color: rgb(33, 150, 243);
-  background-color: rgb(33, 150, 243);
+  border-color: #27AE60;
+  background-color: #27AE60;
 }
 
 .material-checkbox-custom > input:checked + span::after,

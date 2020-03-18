@@ -28,17 +28,29 @@ export default {
     state.formPasien.nationality_type = ''
     state.formPasien.nationality_country = ''
     state.formPasien.occupation = ''
-    state.formPasien.status = ''
+    state.formPasien.last_status = ''
     state.formPasien.stage = 0
     state.formPasien.final_result = 0
-    state.formPasien.history_tracing = true
+    state.formPasien.history_tracing = []
     state.formPasien.history_notes = ''
-    state.formPasien.current_hospital_id = ''
-    state.formPasien.current_location_type = '0'
+    state.formPasien.current_location_type = 'RUMAH'
     state.formPasien.current_location_address = ''
     state.formPasien.current_location_province = ''
     state.formPasien.current_location_district = ''
     state.formPasien.current_location_subdistrict = ''
     state.formPasien.current_location_village = ''
+  },
+  RESET_RIWAYAT_FORM_PASIEN: (state) => {
+    state.formRiwayatPasien.case = ''
+    state.formRiwayatPasien.last_status = ''
+    state.formRiwayatPasien.stage = ''
+    state.formRiwayatPasien.diagnosis = []
+    state.formRiwayatPasien.history_tracing = []
+    state.formRiwayatPasien.history_notes = ''
+    state.formRiwayatPasien.current_location_type = 'RUMAH'
+    state.formRiwayatPasien.current_location_address = ''
+    state.formRiwayatPasien.current_location_district = ''
+    state.formRiwayatPasien.current_location_subdistrict = ''
+    state.formRiwayatPasien.current_location_village = ''
   }
 }

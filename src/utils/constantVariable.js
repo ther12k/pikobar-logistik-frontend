@@ -15,3 +15,34 @@ export function baseUrl() {
   }
   return url
 }
+
+export const optionGejala = [
+  {
+    value: 'Suhu tubuh >37,5',
+    text: 'Suhu tubuh >37,5'
+  },
+  {
+    value: 'Batuk',
+    text: 'Batuk'
+  },
+  {
+    value: 'Flu',
+    text: 'Flu'
+  },
+  {
+    value: 'Demam',
+    text: 'Demam'
+  },
+  {
+    value: 'Sakit tenggorokan',
+    text: 'Sakit tenggorokan'
+  },
+  {
+    value: 'Sakit kepala',
+    text: 'Sakit kepala'
+  },
+  {
+    value: 'Lainnya',
+    text: 'Lainnya'
+  }
+]

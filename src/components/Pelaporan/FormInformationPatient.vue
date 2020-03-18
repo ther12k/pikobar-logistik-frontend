@@ -15,7 +15,7 @@
               v-slot="{ errors }"
               rules="required|isHtml"
             >
-              <v-label class="label-answer required">Nama Pasien</v-label>
+              <v-label class="label-answer required">Nama Pasien*</v-label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.name"
@@ -28,9 +28,13 @@
               :format-date="formatDate"
               @changeDate="formPasien.birth_date = $event"
             />
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Usia</v-label>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|isHtml"
+            >
+              <v-label>Usia*</v-label>
               <v-text-field
+                :error-messages="errors"
                 v-model="formPasien.age"
                 solo-inverted
                 type="number"
@@ -43,20 +47,28 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Jenis Kelamin</v-label>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label>Jenis Kelamin*</v-label>
               <v-radio-group
                 v-model="formPasien.gender"
+                :error-messages="errors"
                 row
               >
                 <v-radio label="Laki-Laki" value="L" />
                 <v-radio label="Perempuan" value="P" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Kewarganegaraan</v-label>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label>Kewarganegaraan*</v-label>
               <v-radio-group
                 v-model="formPasien.nationality"
+                :error-messages="errors"
                 row
               >
                 <v-radio label="WNI" value="WNI" />
@@ -72,21 +84,22 @@
             <ValidationProvider
               v-slot="{ errors }"
             >
-              <v-label>ID Kasus</v-label>
+              <v-label>ID Kasus Pusat</v-label>
               <v-text-field
                 :error-messages="errors"
-                v-model="formPasien.id_case"
+                v-model="formPasien.id_case_national"
                 solo-inverted
               />
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">
-              <v-label>Nomor Telepone</v-label>
+              <v-label>Nomor Telepon</v-label>
               <v-text-field
                 v-model="formPasien.phone_number"
                 solo-inverted
+                type="number"
               />
             </ValidationProvider>
-            <v-label>Alamat</v-label>
+            <v-label>Alamat*</v-label>
             <address-region
               :district-code="formPasien.address_district_code"
               :district-name="formPasien.address_district_name"
@@ -101,7 +114,7 @@
               :code-village.sync="formPasien.address_village_code"
               :name-village.sync="formPasien.address_village_name"
               :disabled-address="false"
-              :required-address="false"
+              :required-address="true"
             />
             <ValidationProvider v-slot="{ errors }">
               <v-label>Alamat Lengkap</v-label>
@@ -156,7 +169,12 @@ export default {
   },
   data() {
     return {
-      formatDate: 'YYYY-MM-DD'
+      formatDate: 'MM/DD/YYYY'
+    }
+  },
+  watch: {
+    'formPasien.birth_date': function(value) {
+      this.formPasien.age = this.getAge(value)
     }
   },
   methods: {
@@ -166,6 +184,16 @@ export default {
         return
       }
       EventBus.$emit('nextSurveySteps', this.steps)
+    },
+    getAge(DOB) {
+      const today = new Date()
+      const birthDate = new Date(DOB)
+      let age = today.getFullYear() - birthDate.getFullYear()
+      const m = today.getMonth() - birthDate.getMonth()
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age = age - 1
+      }
+      return age
     }
   }
 }

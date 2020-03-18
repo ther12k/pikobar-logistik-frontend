@@ -4,5 +4,8 @@ export default {
   },
   token: (state, getters) => {
     return state.token
+  },
+  district_user: (state, getters) => {
+    return state.district_user
   }
 }

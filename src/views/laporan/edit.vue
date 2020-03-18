@@ -1,11 +1,15 @@
 <template>
-  <detail-patient
+  <edit-pelaporan-form
     :id-data="this.$route.params.id"
   />
 </template>
 
 <script>
 export default {
-  name: 'Detail'
+  name: 'Edit'
 }
 </script>
+
+<style scoped>
+
+</style>

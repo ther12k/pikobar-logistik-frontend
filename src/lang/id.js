@@ -4,8 +4,9 @@ export default {
   route: {
     dashboard: 'Beranda',
     laporan_title: 'Laporan',
-    laporan_create: 'Buat Laporan Pasien',
-    laporan_detail: 'Detail Laporan Pasien'
+    laporan_create: 'Buat Laporan Kasus',
+    laporan_detail: 'Detail Laporan Kasus',
+    laporan_edit: 'Ubah Laporan Kasus'
   },
   label: {
     username: 'Username',
@@ -29,9 +30,9 @@ export default {
     sort_by: 'Urutkan Berdasarkan',
     target: 'Capaian / Target',
     address: 'Alamat',
-    select_district: 'Pilih Kabupaten/Kota',
-    select_sub_district: 'Pilih Kecamatan',
-    select_village: 'Pilih Desa',
+    select_district: 'Kota/Kab.',
+    select_sub_district: 'Kec.',
+    select_village: 'Desa/Kel.',
     must_be_filled: 'Harus Diisi',
     light_mode: 'Light Mode',
     dark_mode: 'Dark Mode',

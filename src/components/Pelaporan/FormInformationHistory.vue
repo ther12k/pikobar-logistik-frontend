@@ -11,10 +11,13 @@
             md="6"
             sm="12"
           >
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>Status</v-label>
               <v-radio-group
-                v-model="formPasien.status"
+                v-model="formPasien.last_status "
                 :error-messages="errors"
                 row
               >
@@ -23,7 +26,10 @@
                 <v-radio label="POSITIF" value="POSITIF" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>State</v-label>
               <v-radio-group
                 v-model="formPasien.stage"
@@ -34,12 +40,23 @@
                 <v-radio label="Selesai" value="1" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Gejala</v-label>
-              <v-textarea
-                v-model="formPasien.symptoms"
-                solo
-              />
+            <ValidationProvider v-slot="{ errors }" rules="required|atLeastOne">
+              <v-label>Gejala*</v-label>
+              <div v-for="(item, index) in optionGejala" :key="index">
+                <label class="material-checkbox-custom">
+                  <input
+                    :value="item.value"
+                    v-model="formPasien.diagnosis"
+                    type="checkbox"
+                  >
+                  <span v-if="errors.length" class="error--text">{{ item.text }}</span>
+                  <span v-else>{{ item.text }}</span>
+                </label>
+              </div>
+              <span
+                v-if="errors.length"
+                class="v-messages error--text"
+              >{{ errors[0] }}</span>
             </ValidationProvider>
           </v-col>
           <v-col
@@ -49,17 +66,30 @@
           >
             <ValidationProvider v-slot="{ errors }">
               <v-label>Riwayat</v-label>
-              <v-radio-group
+              <v-checkbox
                 v-model="formPasien.history_tracing"
-                :error-messages="errors"
-                column
-              >
-                <v-radio label="Dari Luar Negeri" value="Dari Luar Negeri" />
-                <v-radio label="Kontak Dengan Pasien Positif" value="Kontak Dengan Pasien Positif" />
-                <v-radio label="Lain-lain" value="Lain-lain" />
-              </v-radio-group>
+                label="Dari Luar Negeri"
+                value="Dari Luar Negeri"
+              />
+              <v-checkbox
+                v-model="formPasien.history_tracing"
+                label="Kontak Dengan Pasien Positif"
+                value="Kontak Dengan Pasien Positif"
+              />
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-text-field
+                v-model="formPasien.history_notes"
+                placeholder="Masukkan Riwayat Lainnya Jika Ada"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-label>Dirawat</v-label>
               <v-radio-group
                 v-model="formPasien.current_location_type"
@@ -67,11 +97,11 @@
                 row
                 @change="handleChange"
               >
-                <v-radio label="Rumah" value="0" />
-                <v-radio label="Rumah Sakit" value="1" />
+                <v-radio label="Rumah" value="RUMAH" />
+                <v-radio label="Rumah Sakit" value="RS" />
               </v-radio-group>
             </ValidationProvider>
-            <div v-if="formPasien.current_location_type === '0'">
+            <div v-if="formPasien.current_location_type === 'RUMAH'">
               <v-label>Alamat</v-label>
               <address-region
                 :district-name="formPasien.current_location_district"
@@ -86,7 +116,7 @@
             </div>
             <ValidationProvider
               v-slot="{ errors }"
-              v-if="formPasien.current_location_type === '0'"
+              v-if="formPasien.current_location_type === 'RUMAH'"
             >
               <v-label>Alamat Lengkap Rumah</v-label>
               <v-text-field
@@ -97,10 +127,10 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              v-if="formPasien.current_location_type === '1'"
+              v-if="formPasien.current_location_type === 'RS'"
             >
               <v-autocomplete
-                v-model="formPasien.current_hospital_id"
+                v-model="formPasien.current_location_address"
                 :items="hospitalList"
                 :error-messages="errors"
                 label="Lokasi Rumah Sakit"
@@ -145,6 +175,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { optionGejala } from '@/utils/constantVariable'
 import { mapGetters } from 'vuex'
 export default {
   name: 'FormInformationHistory',
@@ -160,6 +191,11 @@ export default {
     formPasien: {
       type: Object,
       default: null
+    }
+  },
+  data() {
+    return {
+      optionGejala: optionGejala
     }
   },
   computed: {
@@ -187,8 +223,8 @@ export default {
       }
     },
     handleChange(value) {
-      if (value === '0') {
-        this.formPasien.current_hospital_id = ''
+      if (value === 'RUMAH') {
+        this.formPasien.current_location_address = ''
       } else {
         this.formPasien.current_location_address = ''
         this.formPasien.current_location_district = ''
