@@ -89,10 +89,7 @@ export default {
   async mounted() {
     const data = await this.$store.dispatch('reports/countReportCase')
     this.patien = await data.data
-    console.log(this.patien)
-    for (var key in this.patien) {
-      this.patien.TOTAL += this.patien[key]
-    }
+    this.patien.TOTAL = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
   }
 }
 </script>

@@ -118,9 +118,9 @@
                       Laki-Laki
                     </div>
                   </td>
-                  <td>{{ item.current_location_address }}</td>
+                  <td>{{ item.last_history.current_location_address }}</td>
                   <td>{{ item.address_district_name }}</td>
-                  <td><status :status="item.last_status" /> </td>
+                  <td><status :status="item.last_history.status" /> </td>
                   <td>
                     <v-card-actions>
                       <v-btn
@@ -203,6 +203,7 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.listPasien)
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
     const response = await this.$store.dispatch('reports/countReportCase')
