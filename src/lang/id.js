@@ -5,7 +5,8 @@ export default {
     dashboard: 'Beranda',
     laporan_title: 'Laporan',
     laporan_create: 'Buat Laporan Kasus',
-    laporan_detail: 'Detail Laporan Kasus'
+    laporan_detail: 'Detail Laporan Kasus',
+    laporan_edit: 'Ubah Laporan Kasus'
   },
   label: {
     username: 'Username',

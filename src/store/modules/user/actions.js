@@ -21,12 +21,13 @@ export default {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       fetchPostUpdate('/api/users/info', 'GET').then((response) => {
-        const { role } = response.data
+        const { role, code_district_city } = response.data
         const data = {
           roles: [role]
         }
         const { roles } = data
         commit('SET_ROLES', roles)
+        commit('SET_DISTRICT', code_district_city)
         resolve(roles)
       }).catch((error) => {
         reject(error)
@@ -39,6 +40,7 @@ export default {
     return new Promise((resolve, reject) => {
       commit('SET_TOKEN', '')
       commit('SET_ROLES', [])
+      commit('SET_DISTRICT', [])
       removeToken()
       resetRouter()
 

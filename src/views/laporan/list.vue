@@ -101,8 +101,8 @@
                   <th class="text-left">Jenis Kelamin</th>
                   <th class="text-left">Lokasi Pengawasan</th>
                   <th class="text-left">Dinkes Kota/Kab</th>
-                  <th class="text-left">Diagnosa</th>
-                  <th class="text-left" />
+                  <th class="text-left">Status</th>
+                  <th class="text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -123,35 +123,26 @@
                   <td><status :status="item.last_status" /> </td>
                   <td>
                     <v-card-actions>
-                      <v-menu
-                        :close-on-content-click="false"
-                        :nudge-width="200"
-                        :nudge-left="220"
-                        :nudge-top="40"
-                        offset-y
+                      <v-btn
+                        class="ma-2"
+                        tile
+                        large
+                        color="grey"
+                        icon
+                        @click="handleDetail(item._id)"
                       >
-                        <template v-slot:activator="{ on }">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            large
-                            color="grey"
-                            icon
-                            v-on="on"
-                          >
-                            <v-icon>more_horiz</v-icon>
-                          </v-btn>
-                        </template>
-                        <v-card>
-                          <v-list-item @click="handleDetail(item._id)">
-                            <img src="/static/update-it-survey.svg" style="padding-right: 1rem;"> Detail Kasus
-                          </v-list-item>
-                          <v-divider style="margin:0 !important;"/>
-                          <v-list-item style="color: #EB5757 !important;">
-                            <img src="/static/icon-delete.svg" style="padding-right: 1rem;"> Hapus Kasus
-                          </v-list-item>
-                        </v-card>
-                      </v-menu>
+                        <v-icon>mdi-eye</v-icon>
+                      </v-btn>
+                      <v-btn
+                        class="ma-2"
+                        tile
+                        large
+                        color="grey"
+                        icon
+                        @click="handleEdit(item._id)"
+                      >
+                        <v-icon>mdi-account-edit</v-icon>
+                      </v-btn>
                     </v-card-actions>
                   </td>
                 </tr>
@@ -177,10 +168,12 @@ export default {
   data() {
     return {
       listQuery: {
+        address_district_code: '',
         page: 1,
         limit: 10,
         search: ''
-      }
+      },
+      countingReports: null
     }
   },
   computed: {
@@ -189,7 +182,8 @@ export default {
       'totalList'
     ]),
     ...mapGetters('user', [
-      'roles'
+      'roles',
+      'district_user'
     ])
   },
   watch: {
@@ -205,7 +199,8 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('reports/listReportCase')
+    this.listQuery.address_district_code = this.district_user
+    await this.$store.dispatch('reports/listReportCase', this.listQuery)
   },
   methods: {
     async handleCreate() {
@@ -214,6 +209,9 @@ export default {
     },
     async handleDetail(id) {
       await this.$router.push(`/laporan/detail/${id}`)
+    },
+    async handleEdit(id) {
+      await this.$router.push(`/laporan/edit/${id}`)
     },
     async handleSearch() {
       this.listQuery.page = 1

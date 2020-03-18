@@ -15,7 +15,7 @@
               v-slot="{ errors }"
               rules="required|isHtml"
             >
-              <v-label class="label-answer required">Nama Pasien</v-label>
+              <v-label class="label-answer required">Nama Pasien*</v-label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.name"
@@ -28,9 +28,13 @@
               :format-date="formatDate"
               @changeDate="formPasien.birth_date = $event"
             />
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Usia</v-label>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|isHtml"
+            >
+              <v-label>Usia*</v-label>
               <v-text-field
+                :error-messages="errors"
                 v-model="formPasien.age"
                 solo-inverted
                 type="number"
@@ -47,7 +51,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>Jenis Kelamin</v-label>
+              <v-label>Jenis Kelamin*</v-label>
               <v-radio-group
                 v-model="formPasien.gender"
                 :error-messages="errors"
@@ -61,7 +65,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>Kewarganegaraan</v-label>
+              <v-label>Kewarganegaraan*</v-label>
               <v-radio-group
                 v-model="formPasien.nationality"
                 :error-messages="errors"
@@ -79,12 +83,11 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|isHtml"
             >
-              <v-label>ID Kasus</v-label>
+              <v-label>ID Kasus Pusat</v-label>
               <v-text-field
                 :error-messages="errors"
-                v-model="formPasien.id_case"
+                v-model="formPasien.id_case_national"
                 solo-inverted
               />
             </ValidationProvider>
@@ -96,7 +99,7 @@
                 type="number"
               />
             </ValidationProvider>
-            <v-label>Alamat</v-label>
+            <v-label>Alamat*</v-label>
             <address-region
               :district-code="formPasien.address_district_code"
               :district-name="formPasien.address_district_name"
@@ -178,9 +181,6 @@ export default {
     async onNext() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
-        return
-      } else if (this.formPasien.birth_date.length < 1) {
-        await this.$store.dispatch('toast/errorToast', 'Tanggal lahir harap diisi')
         return
       }
       EventBus.$emit('nextSurveySteps', this.steps)

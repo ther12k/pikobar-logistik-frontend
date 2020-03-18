@@ -48,6 +48,16 @@ const surveyRouter = {
         icon: 'library_books',
         roles: ['admin', 'dinkesprov', 'dinkeskota']
       }
+    },
+    {
+      path: 'edit/:id',
+      component: () => import('@/views/laporan/edit'),
+      hidden: true,
+      meta: {
+        title: 'laporan_edit',
+        icon: 'library_books',
+        roles: ['admin', 'dinkesprov', 'dinkeskota']
+      }
     }
   ]
 }
