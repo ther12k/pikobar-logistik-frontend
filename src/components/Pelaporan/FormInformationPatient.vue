@@ -169,6 +169,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { mapGetters } from 'vuex'
 export default {
   name: 'FormInformationPatient',
   components: {
@@ -194,9 +195,25 @@ export default {
       formatDate: 'MM/DD/YYYY'
     }
   },
+  computed: {
+    ...mapGetters('user', [
+      'district_user'
+    ]),
+    ...mapGetters('region', [
+      'listDistrictCity'
+    ])
+  },
   watch: {
     'formPasien.birth_date': function(value) {
       this.formPasien.age = this.getAge(value)
+    }
+  },
+  async mounted() {
+    const index = await this.listDistrictCity.map(function(data) {
+      return data.kota_kode
+    }).indexOf(this.district_user)
+    if (this.listDistrictCity[index]) {
+      this.formPasien.address_district_name = this.listDistrictCity[index].kota_nama
     }
   },
   methods: {
