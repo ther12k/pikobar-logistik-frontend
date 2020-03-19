@@ -9,20 +9,6 @@
               <div v-if="roles[0] === 'dinkeskota'">Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
             </v-card-text>
           </v-col>
-          <v-col cols="auto">
-            <v-card-text>
-              <v-btn
-                v-if="roles[0] === 'dinkeskota'"
-                id="addsurvey"
-                class="bottom-add-survey"
-                depressed
-                @click="handleCreate"
-              >
-                <v-icon left>add_circle_outline</v-icon>
-                Tambah Kasus
-              </v-btn>
-            </v-card-text>
-          </v-col>
         </v-row>
       </v-container>
     </v-card>
@@ -226,10 +212,6 @@ export default {
     this.totalReport = this.totalODP + this.totalPDP + this.totalPositif
   },
   methods: {
-    async handleCreate() {
-      await this.$store.dispatch('reports/resetFormPasien')
-      await this.$router.push('/laporan/stepper')
-    },
     async handleDetail(id) {
       await this.$router.push(`/laporan/detail/${id}`)
     },

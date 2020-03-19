@@ -21,13 +21,14 @@ export default {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       fetchPostUpdate('/api/users/info', 'GET').then((response) => {
-        const { role, code_district_city } = response.data
+        const { role, fullname, code_district_city } = response.data
         const data = {
           roles: [role]
         }
         const { roles } = data
         commit('SET_ROLES', roles)
         commit('SET_DISTRICT', code_district_city)
+        commit('SET_FULLNAME', fullname)
         resolve(roles)
       }).catch((error) => {
         reject(error)

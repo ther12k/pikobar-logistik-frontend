@@ -7,5 +7,8 @@ export default {
   },
   district_user: (state, getters) => {
     return state.district_user
+  },
+  fullname: (state, getters) => {
+    return state.fullname
   }
 }
