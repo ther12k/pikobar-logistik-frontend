@@ -54,7 +54,7 @@
                 <v-radio label="Meninggal" value="2" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" rules="required|atLeastOne">
+            <ValidationProvider v-slot="{ errors }">
               <label class="required">Gejala</label>
               <div v-for="(item, index) in optionGejala" :key="index">
                 <label class="material-checkbox-custom">
@@ -125,7 +125,7 @@
                 :village-code="formPasien.current_location_village_code"
                 :code-village.sync="formPasien.current_location_village_code"
                 :disabled-address="false"
-                :required-address="false"
+                :required-address="true"
               />
             </div>
             <ValidationProvider

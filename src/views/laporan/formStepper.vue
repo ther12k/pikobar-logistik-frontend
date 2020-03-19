@@ -67,10 +67,15 @@ export default {
   computed: {
     ...mapGetters('reports', [
       'formPasien'
+    ]),
+    ...mapGetters('user', [
+      'district_user'
     ])
   },
   async created() {
     // on steps change
+    console.log(this.district_user)
+    this.formPasien.address_district_code = this.district_user
     EventBus.$on('nextSurveySteps', (value) => {
       this.e1 = value + 1
     })
