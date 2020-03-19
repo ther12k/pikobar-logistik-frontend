@@ -189,6 +189,7 @@
                     <tr>
                       <th class="text-left">#</th>
                       <th class="text-left">STATUS</th>
+                      <th class="text-left">TAHAPAN</th>
                       <th class="text-left">LOKASI SAAT INI</th>
                       <th class="text-left">TANGGAL DIUPDATE</th>
                     </tr>
@@ -197,6 +198,14 @@
                     <tr v-for="(item, index) in listHistoryCase" :key="item.index">
                       <td>{{ getTableRowNumbering(index) }}</td>
                       <td><status :status="item.status" /></td>
+                      <td>
+                        <div v-if="item.stage === '0'">
+                          Proses
+                        </div>
+                        <div v-else>
+                          Selesai
+                        </div>
+                      </td>
                       <td>{{ item.current_location_type }}</td>
                       <td>{{ formatDatetime(item.last_changed, "DD MMMM YYYY") }}</td>
                     </tr>
@@ -248,7 +257,7 @@ export default {
     await this.$store.dispatch('region/getListHospotal')
     const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
-    this.formRiwayatPasien.case = detail.data.id_case
+    this.formRiwayatPasien.case = detail.data._id
     this.listHistoryCase = response.data
   },
   methods: {

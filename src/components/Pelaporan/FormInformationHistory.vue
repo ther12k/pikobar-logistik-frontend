@@ -90,7 +90,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <label class="required">Dirawat</label>
+              <label class="required">Lokasi Saat Ini</label>
               <v-radio-group
                 v-model="formPasien.current_location_type"
                 :error-messages="errors"

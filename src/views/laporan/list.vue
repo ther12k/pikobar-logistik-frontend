@@ -102,7 +102,7 @@
                   <th class="text-left">Lokasi Pengawasan</th>
                   <th class="text-left">Dinkes Kota/Kab</th>
                   <th class="text-left">Status</th>
-                  <th class="text-left">Actions</th>
+                  <th class="text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
