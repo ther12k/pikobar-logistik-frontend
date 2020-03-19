@@ -13,8 +13,32 @@ export default {
     state.formPasien = data
   },
   RESET_FORM_PASIEN: (state) => {
-    console.log(state)
     state.formPasien.name = ''
+    state.formPasien.birth_date = ''
+    state.formPasien.age = ''
+    state.formPasien.occupation = ''
+    state.formPasien.gender = ''
+    state.formPasien.nationality = ''
+    state.formPasien.id_case_national = ''
+    state.formPasien.id_case_related = ''
+    state.formPasien.phone_number = ''
+    state.formPasien.address_street = ''
+    state.formPasien.address_district_code = ''
+    state.formPasien.address_district_name = ''
+    state.formPasien.address_subdistrict_code = ''
+    state.formPasien.address_subdistrict_name = ''
+    state.formPasien.address_village_code = ''
+    state.formPasien.address_village_name = ''
+    state.formRiwayatPasien.status = ''
+    state.formRiwayatPasien.stage = ''
+    state.formRiwayatPasien.diagnosis = []
+    state.formRiwayatPasien.history_tracing = []
+    state.formRiwayatPasien.history_notes = ''
+    state.formRiwayatPasien.current_location_type = 'RUMAH'
+    state.formRiwayatPasien.current_location_address = ''
+    state.formRiwayatPasien.current_location_district = ''
+    state.formRiwayatPasien.current_location_subdistrict = ''
+    state.formRiwayatPasien.current_location_village = ''
   },
   RESET_RIWAYAT_FORM_PASIEN: (state) => {
     state.formRiwayatPasien.case = ''

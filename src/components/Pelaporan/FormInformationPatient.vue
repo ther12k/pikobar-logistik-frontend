@@ -15,7 +15,7 @@
               v-slot="{ errors }"
               rules="required|isHtml"
             >
-              <v-label>Nama Pasien</v-label>
+              <label class="required">Nama Pasien</label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.name"
@@ -32,7 +32,7 @@
               v-slot="{ errors }"
               rules="required|isHtml"
             >
-              <v-label>Usia*</v-label>
+              <label class="required">Usia</label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.age"
@@ -51,7 +51,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>Jenis Kelamin*</v-label>
+              <label class="required">Jenis Kelamin</label>
               <v-radio-group
                 v-model="formPasien.gender"
                 :error-messages="errors"
@@ -65,7 +65,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>Kewarganegaraan*</v-label>
+              <label class="required">Kewarganegaraan</label>
               <v-radio-group
                 v-model="formPasien.nationality"
                 :error-messages="errors"
@@ -91,6 +91,16 @@
                 solo-inverted
               />
             </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-label>ID Kasus Terkait</v-label>
+              <v-text-field
+                :error-messages="errors"
+                v-model="formPasien.id_case_related"
+                solo-inverted
+              />
+            </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">
               <v-label>Nomor Telepon</v-label>
               <v-text-field
@@ -99,7 +109,7 @@
                 type="number"
               />
             </ValidationProvider>
-            <v-label>Alamat*</v-label>
+            <label class="required">Alamat</label>
             <address-region
               :district-code="formPasien.address_district_code"
               :district-name="formPasien.address_district_name"

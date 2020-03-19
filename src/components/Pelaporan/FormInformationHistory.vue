@@ -15,7 +15,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>Status</v-label>
+              <label class="required">Status</label>
               <v-radio-group
                 v-model="formPasien.status"
                 :error-messages="errors"
@@ -30,7 +30,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>State</v-label>
+              <label class="required">State</label>
               <v-radio-group
                 v-model="formPasien.stage"
                 :error-messages="errors"
@@ -41,7 +41,7 @@
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" rules="required|atLeastOne">
-              <v-label>Gejala*</v-label>
+              <label class="required">Gejala</label>
               <div v-for="(item, index) in optionGejala" :key="index">
                 <label class="material-checkbox-custom">
                   <input
@@ -90,7 +90,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>Dirawat</v-label>
+              <label class="required">Dirawat</label>
               <v-radio-group
                 v-model="formPasien.current_location_type"
                 :error-messages="errors"
