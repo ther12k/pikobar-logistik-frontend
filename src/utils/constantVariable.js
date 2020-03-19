@@ -18,8 +18,8 @@ export function baseUrl() {
 
 export const optionGejala = [
   {
-    value: 'Suhu tubuh >37,5',
-    text: 'Suhu tubuh >37,5'
+    value: 'Suhu tubuh > 38,5',
+    text: 'Suhu tubuh > 38,5'
   },
   {
     value: 'Batuk',
