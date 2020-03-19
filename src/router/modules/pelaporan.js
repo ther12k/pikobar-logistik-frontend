@@ -26,7 +26,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
-        roles: ['admin', 'dinkesprov', 'dinkeskota']
+        roles: ['admin', 'dinkeskota']
       }
     },
     {
@@ -36,7 +36,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
-        roles: ['admin', 'dinkesprov', 'dinkeskota']
+        roles: ['admin', 'dinkeskota']
       }
     },
     {

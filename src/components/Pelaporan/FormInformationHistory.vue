@@ -55,7 +55,7 @@
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">
-              <label class="required">Gejala</label>
+              <label>Gejala</label>
               <div v-for="(item, index) in optionGejala" :key="index">
                 <label class="material-checkbox-custom">
                   <input
