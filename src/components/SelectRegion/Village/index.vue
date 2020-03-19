@@ -69,7 +69,9 @@ export default {
     }
   },
   async created() {
-    this.nameVillage = this.village
+    if (this.village.desa_kode) {
+      this.nameVillage = this.village
+    }
     if (this.disabledSelect) {
       this.disable = true
     } else if (this.codeSubDistrict) {

@@ -72,7 +72,9 @@ export default {
     }
   },
   async created() {
-    this.nameSubDistrict = this.subDistrict
+    if (this.subDistrict.kecamatan_kode) {
+      this.nameSubDistrict = this.subDistrict
+    }
     if (this.disabledSelect) {
       this.disable = true
     } else if (this.codeDistrict) {
