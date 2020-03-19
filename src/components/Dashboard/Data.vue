@@ -88,11 +88,21 @@ export default {
       TOTAL: 0
     }
   }),
-  ...mapGetters('user', [
-    'district_user'
-  ]),
+  computed: {
+    ...mapGetters('user', [
+      'roles',
+      'district_user'
+    ])
+  },
   async mounted() {
-    const data = await this.$store.dispatch('reports/countReportCase', { address_district_code: this.district_user })
+    let params
+    if (this.roles[0] === 'dinkeskota') {
+      params = {
+        address_district_code: this.district_user
+      }
+    }
+    console.log(params)
+    const data = await this.$store.dispatch('reports/countReportCase', params)
     this.patien = await data.data
     this.patien.TOTAL = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
   }
