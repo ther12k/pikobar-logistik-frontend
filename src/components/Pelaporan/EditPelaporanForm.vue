@@ -5,6 +5,168 @@
     >
       <v-row>
         <v-expansion-panels
+          multiple
+        >
+          <v-expansion-panel>
+            <v-expansion-panel-header>Update Detail Kasus</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <ValidationObserver v-slot="{ validate, reset }" ref="observer">
+                <v-form
+                  ref="form"
+                  lazy-validation
+                >
+                  <v-row>
+                    <v-col
+                      cols="6"
+                      md="6"
+                      sm="12"
+                    >
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required|isHtml"
+                      >
+                        <label class="required">Nama Pasien</label>
+                        <v-text-field
+                          :error-messages="errors"
+                          v-model="formPasien.name"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <v-label>Tanggal Lahir</v-label>
+                      <input-date-picker
+                        :date-value="formPasien.birth_date"
+                        :format-date="formatDate"
+                        @changeDate="formPasien.birth_date = $event"
+                      />
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required|isHtml"
+                      >
+                        <label class="required">Usia</label>
+                        <v-text-field
+                          :error-messages="errors"
+                          v-model="formPasien.age"
+                          solo-inverted
+                          type="number"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider v-slot="{ errors }">
+                        <v-label>Pekerjaan</v-label>
+                        <v-text-field
+                          v-model="formPasien.occupation"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required"
+                      >
+                        <label class="required">Jenis Kelamin</label>
+                        <v-radio-group
+                          v-model="formPasien.gender"
+                          :error-messages="errors"
+                          row
+                        >
+                          <v-radio label="Laki-Laki" value="L" />
+                          <v-radio label="Perempuan" value="P" />
+                        </v-radio-group>
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required"
+                      >
+                        <label class="required">Kewarganegaraan</label>
+                        <v-radio-group
+                          v-model="formPasien.nationality"
+                          :error-messages="errors"
+                          row
+                        >
+                          <v-radio label="WNI" value="WNI" />
+                          <v-radio label="WNA" value="WNA" />
+                        </v-radio-group>
+                      </ValidationProvider>
+                    </v-col>
+                    <v-col
+                      cols="6"
+                      md="6"
+                      sm="12"
+                    >
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                      >
+                        <v-label>ID Kasus Pusat</v-label>
+                        <v-text-field
+                          :error-messages="errors"
+                          v-model="formPasien.id_case_national"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                      >
+                        <v-label>ID Kasus Terkait</v-label>
+                        <v-text-field
+                          :error-messages="errors"
+                          v-model="formPasien.id_case_related"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider v-slot="{ errors }">
+                        <v-label>Nomor Telepon</v-label>
+                        <v-text-field
+                          v-model="formPasien.phone_number"
+                          solo-inverted
+                          type="number"
+                        />
+                      </ValidationProvider>
+                      <label class="required">Alamat</label>
+                      <address-region
+                        :district-code="formPasien.address_district_code"
+                        :district-name="formPasien.address_district_name"
+                        :code-district.sync="formPasien.address_district_code"
+                        :name-district.sync="formPasien.address_district_name"
+                        :subdistrict-code="formPasien.address_subdistrict_code"
+                        :subdistrict-name="formPasien.address_subdistrict_name"
+                        :code-sub-district.sync="formPasien.address_subdistrict_code"
+                        :name-sub-district.sync="formPasien.address_subdistrict_name"
+                        :village-code="formPasien.address_village_code"
+                        :village-name="formPasien.address_village_name"
+                        :code-village.sync="formPasien.address_village_code"
+                        :name-village.sync="formPasien.address_village_name"
+                        :disabled-address="false"
+                        :required-address="true"
+                      />
+                      <ValidationProvider v-slot="{ errors }">
+                        <v-label>Alamat Lengkap</v-label>
+                        <v-textarea
+                          v-model="formPasien.address_street"
+                          solo
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+                  <v-container fluid>
+                    <v-row class="survey-bottom-form">
+                      <v-col>
+                        <v-btn
+                          color="success"
+                          bottom
+                          style="float: right;"
+                          @click="handleSaveCase"
+                        >
+                          Simpan
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-form>
+              </ValidationObserver>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-row>
+      <v-row>
+        <v-expansion-panels
           v-model="panelRiwayat"
           multiple
         >
@@ -162,7 +324,7 @@
                           color="success"
                           bottom
                           style="float: right;"
-                          @click="handleSave"
+                          @click="handleSaveHistory"
                         >
                           Simpan
                         </v-btn>
@@ -239,6 +401,7 @@ export default {
   },
   data() {
     return {
+      formatDate: 'MM/DD/YYYY',
       panelRiwayat: [0],
       panelListRiwayat: [0],
       optionGejala: optionGejala,
@@ -247,6 +410,7 @@ export default {
   },
   computed: {
     ...mapGetters('reports', [
+      'formPasien',
       'formRiwayatPasien'
     ]),
     ...mapGetters('region', [
@@ -258,7 +422,10 @@ export default {
     const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.formRiwayatPasien.case = detail.data._id
+    console.log(detail)
+    Object.assign(this.formPasien, detail.data)
     this.listHistoryCase = response.data
+    console.log(this.formPasien)
   },
   methods: {
     formatDatetime,
@@ -272,7 +439,16 @@ export default {
         this.formRiwayatPasien.current_location_village_code = ''
       }
     },
-    async handleSave() {
+    async handleSaveCase() {
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      }
+      await this.$store.dispatch('reports/createHistoryCase', this.formPasien)
+      await this.$store.dispatch('reports/resetRiwayatFormPasien')
+      await this.$router.push('/laporan/index')
+    },
+    async handleSaveHistory() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
