@@ -96,20 +96,19 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-left">Usia</th>
-                  <th class="text-left">Warganegara</th>
-                  <th class="text-left">Jenis Kelamin</th>
-                  <th class="text-left">Lokasi Pengawasan</th>
-                  <th class="text-left">Dinkes Kota/Kab</th>
-                  <th class="text-left">Status</th>
-                  <th class="text-center">Actions</th>
+                  <th class="text-left">KODE KASUS</th>
+                  <th class="text-left">USIA</th>
+                  <th class="text-left">JENIS KELAMIN</th>
+                  <th class="text-left">LOKASI SAAT INI</th>
+                  <th class="text-left">STATUS</th>
+                  <th class="text-center">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(item, index) in listPasien" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
+                  <td>{{ item.id_case }}</td>
                   <td>{{ item.age }}</td>
-                  <td>{{ item.nationality }}</td>
                   <td>
                     <div v-if="item.gender =='P'">
                       Perempuan
@@ -119,7 +118,6 @@
                     </div>
                   </td>
                   <td>{{ item.last_history.current_location_address }}</td>
-                  <td>{{ item.address_district_name }}</td>
                   <td><status :status="item.last_history.status" /> </td>
                   <td>
                     <v-card-actions>
