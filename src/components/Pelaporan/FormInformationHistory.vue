@@ -15,7 +15,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <label class="required">Status</label>
+              <label class="required">Hasil Pemeriksaan Awal</label>
               <v-radio-group
                 v-model="formPasien.status"
                 :error-messages="errors"
@@ -30,7 +30,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <label class="required">State</label>
+              <label class="required">Proses Pemeriksaan</label>
               <v-radio-group
                 v-model="formPasien.stage"
                 :error-messages="errors"
@@ -38,6 +38,20 @@
               >
                 <v-radio label="Proses" value="0" />
                 <v-radio label="Selesai" value="1" />
+              </v-radio-group>
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <label>Hasil Pemeriksaan Akhir</label>
+              <v-radio-group
+                v-model="formPasien.result"
+                :error-messages="errors"
+                row
+              >
+                <v-radio label="Negatif" value="0" />
+                <v-radio label="Sembuh" value="1" />
+                <v-radio label="Meninggal" value="2" />
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" rules="required|atLeastOne">
