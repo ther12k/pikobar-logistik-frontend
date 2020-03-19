@@ -82,12 +82,12 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-center">KODE KASUS</th>
-                  <th class="text-center">USIA</th>
-                  <th class="text-center">JENIS KELAMIN</th>
-                  <th class="text-center">LOKASI SAAT INI</th>
-                  <th class="text-center">STATUS</th>
-                  <th class="text-center">ACTIONS</th>
+                  <th class="text-left">KODE KASUS</th>
+                  <th class="text-left">USIA</th>
+                  <th class="text-left">JENIS KELAMIN</th>
+                  <th class="text-left">LOKASI SAAT INI</th>
+                  <th class="text-left">STATUS</th>
+                  <th class="text-left">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
