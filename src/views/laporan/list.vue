@@ -203,7 +203,6 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.listPasien)
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
     const response = await this.$store.dispatch('reports/countReportCase')

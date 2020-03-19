@@ -70,7 +70,6 @@ export default {
     ])
   },
   async created() {
-    await this.$store.dispatch('reports/resetFormPasien')
     // on steps change
     EventBus.$on('nextSurveySteps', (value) => {
       this.e1 = value + 1

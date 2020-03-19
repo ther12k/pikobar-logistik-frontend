@@ -43,6 +43,16 @@ export default {
       }
     })
   },
+  listHistoryCase({ commit }, id) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchList(`/api/cases/${id}/history`, 'GET', id)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
   createHistoryCase({ commit }, data) {
     return new Promise(async(resolve, reject) => {
       try {

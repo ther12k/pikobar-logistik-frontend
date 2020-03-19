@@ -183,22 +183,26 @@
           <v-expansion-panel>
             <v-expansion-panel-header>List Riwayat Kasus</v-expansion-panel-header>
             <v-expansion-panel-content>
-              <!--              <v-simple-table fixed-header height="500px">-->
-              <!--                <template v-slot:default>-->
-              <!--                  <thead>-->
-              <!--                    <tr>-->
-              <!--                      <th class="text-left">#</th>-->
-              <!--                      <th class="text-left">Usia</th>-->
-              <!--                    </tr>-->
-              <!--                  </thead>-->
-              <!--                  <tbody>-->
-              <!--                    <tr v-for="(item, index) in listPasien" :key="item.index">-->
-              <!--                      <td>{{ getTableRowNumbering(index) }}</td>-->
-              <!--                      <td>{{ item.age }}</td>-->
-              <!--                    </tr>-->
-              <!--                  </tbody>-->
-              <!--                </template>-->
-              <!--              </v-simple-table>-->
+              <v-simple-table fixed-header height="500px">
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">#</th>
+                      <th class="text-left">STATUS</th>
+                      <th class="text-left">LOKASI SAAT INI</th>
+                      <th class="text-left">TANGGAL DIUPDATE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in listHistoryCase" :key="item.index">
+                      <td>{{ getTableRowNumbering(index) }}</td>
+                      <td><status :status="item.status" /></td>
+                      <td>{{ item.current_location_type }}</td>
+                      <td>{{ formatDatetime(item.last_changed, "DD MMMM YYYY") }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -210,6 +214,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import { optionGejala } from '@/utils/constantVariable'
+import { formatDatetime } from '@/utils/parseDatetime'
 import { mapGetters } from 'vuex'
 export default {
   name: 'EditPelaporanForm',
@@ -227,7 +232,8 @@ export default {
     return {
       panelRiwayat: [0],
       panelListRiwayat: [0],
-      optionGejala: optionGejala
+      optionGejala: optionGejala,
+      listHistoryCase: null
     }
   },
   computed: {
@@ -241,9 +247,12 @@ export default {
   async mounted() {
     await this.$store.dispatch('region/getListHospotal')
     const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
+    const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.formRiwayatPasien.case = detail.data.id_case
+    this.listHistoryCase = response.data
   },
   methods: {
+    formatDatetime,
     handleChange(value) {
       if (value === 'RUMAH') {
         this.formRiwayatPasien.current_location_address = ''
@@ -262,6 +271,9 @@ export default {
       await this.$store.dispatch('reports/createHistoryCase', this.formRiwayatPasien)
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
       await this.$router.push('/laporan/index')
+    },
+    getTableRowNumbering(index) {
+      return (index + 1)
     }
   }
 }
