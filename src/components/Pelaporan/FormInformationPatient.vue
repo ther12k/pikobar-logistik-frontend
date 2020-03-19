@@ -70,10 +70,22 @@
                 v-model="formPasien.nationality"
                 :error-messages="errors"
                 row
+                @change="handleChangeNationality"
               >
                 <v-radio label="WNI" value="WNI" />
                 <v-radio label="WNA" value="WNA" />
               </v-radio-group>
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.nationality === 'WNA'"
+            >
+              <v-text-field
+                v-model="formPasien.nationality_name"
+                :error-messages="errors"
+                placeholder="Negara Asal"
+                solo-inverted
+              />
             </ValidationProvider>
           </v-col>
           <v-col
@@ -204,6 +216,11 @@ export default {
         age = age - 1
       }
       return age
+    },
+    handleChangeNationality(value) {
+      if (value === 'WNI') {
+        this.formPasien.nationality_name = ''
+      }
     }
   }
 }

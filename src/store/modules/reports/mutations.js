@@ -19,6 +19,7 @@ export default {
     state.formPasien.occupation = ''
     state.formPasien.gender = ''
     state.formPasien.nationality = ''
+    state.formPasien.nationality_name = ''
     state.formPasien.id_case_national = ''
     state.formPasien.id_case_related = ''
     state.formPasien.phone_number = ''

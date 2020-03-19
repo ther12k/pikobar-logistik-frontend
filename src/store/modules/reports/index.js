@@ -26,6 +26,7 @@ function initialState() {
       address_village_code: '',
       address_village_name: '',
       nationality: '',
+      nationality_name: '',
       occupation: '',
       status: '',
       stage: 0,

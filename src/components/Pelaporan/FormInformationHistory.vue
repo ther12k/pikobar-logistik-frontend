@@ -95,7 +95,7 @@
                 v-model="formPasien.current_location_type"
                 :error-messages="errors"
                 row
-                @change="handleChange"
+                @change="handleChangeLocationNow"
               >
                 <v-radio label="Rumah" value="RUMAH" />
                 <v-radio label="Rumah Sakit" value="RS" />
@@ -223,7 +223,7 @@ export default {
         await this.$refs.form.reset()
       }
     },
-    handleChange(value) {
+    handleChangeLocationNow(value) {
       if (value === 'RUMAH') {
         this.formPasien.current_location_address = ''
       } else {
