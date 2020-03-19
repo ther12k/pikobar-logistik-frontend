@@ -106,7 +106,7 @@
               <address-region
                 :district-code="formPasien.current_location_district_code"
                 :code-district.sync="formPasien.current_location_district_code"
-                :subdistrict-code="formPasien.current_location_subdistrict_code"
+                :sub-district-code="formPasien.current_location_subdistrict_code"
                 :code-subdistrict.sync="formPasien.current_location_subdistrict_code"
                 :village-code="formPasien.current_location_village_code"
                 :code-village.sync="formPasien.current_location_village_code"
@@ -220,6 +220,7 @@ export default {
         await this.$store.dispatch('reports/resetFormPasien')
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/laporan/index')
+        await this.$refs.form.reset()
       }
     },
     handleChange(value) {

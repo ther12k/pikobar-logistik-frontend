@@ -72,7 +72,7 @@ export default {
     return {
       districtCity: {
         kota_kode: this.districtCode,
-        kota_nama: this.districtName
+        kota_nama: this.districtCode
       },
       subDistrict: {
         kecamatan_kode: this.subDistrictCode,

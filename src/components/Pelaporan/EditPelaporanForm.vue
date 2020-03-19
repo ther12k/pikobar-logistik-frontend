@@ -125,8 +125,8 @@
                         :district-name="formPasien.address_district_name"
                         :code-district.sync="formPasien.address_district_code"
                         :name-district.sync="formPasien.address_district_name"
-                        :subdistrict-code="formPasien.address_subdistrict_code"
-                        :subdistrict-name="formPasien.address_subdistrict_name"
+                        :sub-district-code="formPasien.address_subdistrict_code"
+                        :sub-district-name="formPasien.address_subdistrict_name"
                         :code-sub-district.sync="formPasien.address_subdistrict_code"
                         :name-sub-district.sync="formPasien.address_subdistrict_name"
                         :village-code="formPasien.address_village_code"
@@ -405,7 +405,8 @@ export default {
       panelRiwayat: [0],
       panelListRiwayat: [0],
       optionGejala: optionGejala,
-      listHistoryCase: null
+      listHistoryCase: null,
+      arrayRegion: null
     }
   },
   computed: {
@@ -417,15 +418,13 @@ export default {
       'hospitalList'
     ])
   },
-  async mounted() {
+  async created() {
     await this.$store.dispatch('region/getListHospotal')
     const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.formRiwayatPasien.case = detail.data._id
-    console.log(detail)
     Object.assign(this.formPasien, detail.data)
     this.listHistoryCase = response.data
-    console.log(this.formPasien)
   },
   methods: {
     formatDatetime,

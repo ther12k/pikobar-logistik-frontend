@@ -72,9 +72,7 @@ export default {
     }
   },
   async created() {
-    if (this.subDistrict.kecamatan_code) {
-      this.nameSubDistrict = this.subDistrict
-    }
+    this.nameSubDistrict = this.subDistrict
     if (this.disabledSelect) {
       this.disable = true
     } else if (this.codeDistrict) {
