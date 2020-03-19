@@ -6,7 +6,7 @@
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
               <div>Total data Kasus : {{ totalReport }}</div>
-              <div>Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
+              <div v-if="roles[0] === 'dinkeskota'">Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
             </v-card-text>
           </v-col>
           <v-col cols="auto">
@@ -121,26 +121,38 @@
                   <td><status :status="item.last_history.status" /> </td>
                   <td>
                     <v-card-actions>
-                      <v-btn
-                        class="ma-2"
-                        tile
-                        large
-                        color="grey"
-                        icon
-                        @click="handleDetail(item._id)"
-                      >
-                        <v-icon>mdi-eye</v-icon>
-                      </v-btn>
-                      <v-btn
-                        class="ma-2"
-                        tile
-                        large
-                        color="grey"
-                        icon
-                        @click="handleEdit(item._id)"
-                      >
-                        <v-icon>mdi-account-edit</v-icon>
-                      </v-btn>
+                      <v-tooltip top>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            large
+                            color="grey"
+                            icon
+                            v-on="on"
+                            @click="handleDetail(item._id)"
+                          >
+                            <v-icon>mdi-eye</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Detail Kasus</span>
+                      </v-tooltip>
+                      <v-tooltip top>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            class="ma-2"
+                            tile
+                            large
+                            color="grey"
+                            icon
+                            v-on="on"
+                            @click="handleEdit(item._id)"
+                          >
+                            <v-icon>mdi-account-edit</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Update Riwayat</span>
+                      </v-tooltip>
                     </v-card-actions>
                   </td>
                 </tr>

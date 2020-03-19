@@ -101,7 +101,6 @@ export default {
         address_district_code: this.district_user
       }
     }
-    console.log(params)
     const data = await this.$store.dispatch('reports/countReportCase', params)
     this.patien = await data.data
     this.patien.TOTAL = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
