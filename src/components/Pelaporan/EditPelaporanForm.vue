@@ -115,12 +115,12 @@
                       <div v-if="formRiwayatPasien.current_location_type === 'RUMAH'">
                         <v-label>Alamat</v-label>
                         <address-region
-                          :district-name="formRiwayatPasien.current_location_district"
-                          :name-district.sync="formRiwayatPasien.current_location_district"
-                          :subdistrict-name="formRiwayatPasien.current_location_subdistrict"
-                          :name-sub-district.sync="formRiwayatPasien.current_location_subdistrict"
-                          :village-name="formRiwayatPasien.current_location_village"
-                          :name-village.sync="formRiwayatPasien.current_location_village"
+                          :district-code="formRiwayatPasien.current_location_district_code"
+                          :code-district.sync="formRiwayatPasien.current_location_district_code"
+                          :subdistrict-code="formRiwayatPasien.current_location_subdistrict_code"
+                          :code-subdistrict.sync="formRiwayatPasien.current_location_subdistrict_code"
+                          :village-code="formRiwayatPasien.current_location_village_code"
+                          :code-village.sync="formRiwayatPasien.current_location_village_code"
                           :disabled-address="false"
                           :required-address="false"
                         />
@@ -206,7 +206,7 @@
                           Selesai
                         </div>
                       </td>
-                      <td>{{ item.current_location_type }}</td>
+                      <td>{{ item.current_location_address }}</td>
                       <td>{{ formatDatetime(item.last_changed, "DD MMMM YYYY") }}</td>
                     </tr>
                   </tbody>
@@ -267,9 +267,9 @@ export default {
         this.formRiwayatPasien.current_location_address = ''
       } else {
         this.formRiwayatPasien.current_location_address = ''
-        this.formRiwayatPasien.current_location_district = ''
-        this.formRiwayatPasien.current_location_subdistrict = ''
-        this.formRiwayatPasien.current_location_village = ''
+        this.formRiwayatPasien.current_location_district_code = ''
+        this.formRiwayatPasien.current_location_subdistrict_code = ''
+        this.formRiwayatPasien.current_location_village_code = ''
       }
     },
     async handleSave() {

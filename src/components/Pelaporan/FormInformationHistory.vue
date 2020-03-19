@@ -104,12 +104,12 @@
             <div v-if="formPasien.current_location_type === 'RUMAH'">
               <v-label>Alamat</v-label>
               <address-region
-                :district-name="formPasien.current_location_district"
-                :name-district.sync="formPasien.current_location_district"
-                :subdistrict-name="formPasien.current_location_subdistrict"
-                :name-sub-district.sync="formPasien.current_location_subdistrict"
-                :village-name="formPasien.current_location_village"
-                :name-village.sync="formPasien.current_location_village"
+                :district-code="formPasien.current_location_district_code"
+                :code-district.sync="formPasien.current_location_district_code"
+                :subdistrict-code="formPasien.current_location_subdistrict_code"
+                :code-subdistrict.sync="formPasien.current_location_subdistrict_code"
+                :village-code="formPasien.current_location_village_code"
+                :code-village.sync="formPasien.current_location_village_code"
                 :disabled-address="false"
                 :required-address="false"
               />

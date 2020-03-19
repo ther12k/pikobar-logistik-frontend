@@ -35,10 +35,9 @@ function initialState() {
       history_notes: '',
       current_location_type: 'RUMAH',
       current_location_address: '',
-      current_location_province: '',
-      current_location_district: '',
-      current_location_subdistrict: '',
-      current_location_village: ''
+      current_location_district_code: '',
+      current_location_subdistrict_code: '',
+      current_location_village_code: ''
     },
     formRiwayatPasien: {
       case: '',
@@ -49,9 +48,9 @@ function initialState() {
       history_notes: '',
       current_location_type: 'RUMAH',
       current_location_address: '',
-      current_location_district: '',
-      current_location_subdistrict: '',
-      current_location_village: ''
+      current_location_district_code: '',
+      current_location_subdistrict_code: '',
+      current_location_village_code: ''
     }
   }
 }

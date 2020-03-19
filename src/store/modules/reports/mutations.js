@@ -36,9 +36,9 @@ export default {
     state.formRiwayatPasien.history_notes = ''
     state.formRiwayatPasien.current_location_type = 'RUMAH'
     state.formRiwayatPasien.current_location_address = ''
-    state.formRiwayatPasien.current_location_district = ''
-    state.formRiwayatPasien.current_location_subdistrict = ''
-    state.formRiwayatPasien.current_location_village = ''
+    state.formRiwayatPasien.current_location_district_code = ''
+    state.formRiwayatPasien.current_location_subdistrict_code = ''
+    state.formRiwayatPasien.current_location_village_code = ''
   },
   RESET_RIWAYAT_FORM_PASIEN: (state) => {
     state.formRiwayatPasien.case = ''
@@ -49,8 +49,8 @@ export default {
     state.formRiwayatPasien.history_notes = ''
     state.formRiwayatPasien.current_location_type = 'RUMAH'
     state.formRiwayatPasien.current_location_address = ''
-    state.formRiwayatPasien.current_location_district = ''
-    state.formRiwayatPasien.current_location_subdistrict = ''
-    state.formRiwayatPasien.current_location_village = ''
+    state.formRiwayatPasien.current_location_district_code = ''
+    state.formRiwayatPasien.current_location_subdistrict_code = ''
+    state.formRiwayatPasien.current_location_village_code = ''
   }
 }
