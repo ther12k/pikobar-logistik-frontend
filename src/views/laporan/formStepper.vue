@@ -80,8 +80,8 @@ export default {
     const index = await this.listDistrictCity.map(function(data) {
       return data.kota_kode
     }).indexOf(this.district_user)
-    this.formPasien.address_district_code = this.district_user
-    this.formPasien.address_district_name = this.listDistrictCity[index].kota_nama
+    this.formPasien.address_district_code = await this.district_user
+    this.formPasien.address_district_name = await this.listDistrictCity[index].kota_nama
     EventBus.$on('nextSurveySteps', (value) => {
       this.e1 = value + 1
     })

@@ -121,7 +121,7 @@
                 type="number"
               />
             </ValidationProvider>
-            <label>Alamat</label>
+            <label class="required">Alamat</label>
             <address-region
               :district-code="formPasien.address_district_code"
               :district-name="formPasien.address_district_name"
