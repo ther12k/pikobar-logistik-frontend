@@ -33,10 +33,10 @@ export default {
       }
     })
   },
-  countReportCase({ commit }) {
+  countReportCase({ commit }, params) {
     return new Promise(async(resolve, reject) => {
       try {
-        const response = await fetchList('/api/cases-summary', 'GET')
+        const response = await fetchList('/api/cases-summary', 'GET', params)
         resolve(response)
       } catch (e) {
         reject(e)

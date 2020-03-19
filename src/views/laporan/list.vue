@@ -171,6 +171,9 @@ export default {
       totalPDP: 0,
       totalPositif: 0,
       totalReport: 0,
+      queryReportCase: {
+        address_district_code: ''
+      },
       listQuery: {
         address_district_code: '',
         page: 1,
@@ -204,8 +207,9 @@ export default {
   },
   async mounted() {
     this.listQuery.address_district_code = this.district_user
+    this.queryReportCase.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
-    const response = await this.$store.dispatch('reports/countReportCase')
+    const response = await this.$store.dispatch('reports/countReportCase', this.queryReportCase)
     this.totalODP = response.data.ODP
     this.totalPDP = response.data.PDP
     this.totalPositif = response.data.POSITIF
