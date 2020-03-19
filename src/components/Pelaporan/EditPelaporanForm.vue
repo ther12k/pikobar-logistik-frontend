@@ -227,8 +227,8 @@
                           <v-radio label="Meninggal" value="2" />
                         </v-radio-group>
                       </ValidationProvider>
-                      <ValidationProvider v-slot="{ errors }" rules="required|atLeastOne">
-                        <v-label>Gejala*</v-label>
+                      <ValidationProvider v-slot="{ errors }">
+                        <v-label>Gejala</v-label>
                         <div v-for="(item, index) in optionGejala" :key="index">
                           <label class="material-checkbox-custom">
                             <input
