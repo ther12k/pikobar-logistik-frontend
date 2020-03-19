@@ -58,6 +58,9 @@ service.interceptors.response.use(
       case ResponseRequest.UNAUTHORIZED:
         store.dispatch('toast/errorToast', error.response.data.message)
         break
+      case ResponseRequest.UNPROCESSABLE:
+        store.dispatch('toast/errorToast', error.response.data.message)
+        break
       default:
         store.dispatch('toast/errorToast', error.message)
     }
