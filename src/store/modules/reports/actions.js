@@ -23,6 +23,18 @@ export default {
       }
     })
   },
+  updateReportCase({ commit }, data) {
+    const id_case = data.id
+    delete data['id']
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchPostUpdate(`/api/cases/${id_case}`, 'PUT', data.data)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
   detailReportCase({ commit }, id) {
     return new Promise(async(resolve, reject) => {
       try {

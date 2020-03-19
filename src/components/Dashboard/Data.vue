@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'CardData',
   data: () => ({
@@ -86,8 +88,11 @@ export default {
       TOTAL: 0
     }
   }),
+  ...mapGetters('user', [
+    'district_user'
+  ]),
   async mounted() {
-    const data = await this.$store.dispatch('reports/countReportCase')
+    const data = await this.$store.dispatch('reports/countReportCase', { address_district_code: this.district_user })
     this.patien = await data.data
     this.patien.TOTAL = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
   }

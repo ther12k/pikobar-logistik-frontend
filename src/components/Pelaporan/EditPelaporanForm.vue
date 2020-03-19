@@ -152,9 +152,9 @@
                           color="success"
                           bottom
                           style="float: right;"
-                          @click="handleSaveCase"
+                          @click="handleUpdateCase"
                         >
-                          Simpan
+                          Update Kasus
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -326,7 +326,7 @@
                           style="float: right;"
                           @click="handleSaveHistory"
                         >
-                          Simpan
+                          Update Riwayat
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -438,12 +438,16 @@ export default {
         this.formRiwayatPasien.current_location_village_code = ''
       }
     },
-    async handleSaveCase() {
+    async handleUpdateCase() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
       }
-      await this.$store.dispatch('reports/createHistoryCase', this.formPasien)
+      const updateCase = {
+        id: this.formRiwayatPasien.case,
+        data: this.formPasien
+      }
+      await this.$store.dispatch('reports/updateReportCase', updateCase)
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
       await this.$router.push('/laporan/index')
     },
