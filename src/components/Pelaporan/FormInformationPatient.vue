@@ -22,7 +22,7 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <v-label>Tanggal Lahir</v-label>
+            <label class="required">Tanggal Lahir</label>
             <input-date-picker
               :date-value="formPasien.birth_date"
               :format-date="formatDate"
