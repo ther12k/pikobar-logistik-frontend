@@ -197,6 +197,7 @@ export default {
   },
   computed: {
     ...mapGetters('user', [
+      'fullname',
       'district_user'
     ]),
     ...mapGetters('region', [
@@ -209,12 +210,13 @@ export default {
     }
   },
   async mounted() {
-    const index = await this.listDistrictCity.map(function(data) {
-      return data.kota_kode
-    }).indexOf(this.district_user)
-    if (this.listDistrictCity[index]) {
-      this.formPasien.address_district_name = this.listDistrictCity[index].kota_nama
-    }
+    this.formPasien.address_district_name = this.fullname
+    // const index = await this.listDistrictCity.map(function(data) {
+    //   return data.kota_kode
+    // }).indexOf(this.district_user)
+    // if (this.listDistrictCity[index]) {
+    //   this.formPasien.address_district_name = this.listDistrictCity[index].kota_nama
+    // }
   },
   methods: {
     async onNext() {
