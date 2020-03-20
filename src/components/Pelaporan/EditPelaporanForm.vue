@@ -438,6 +438,13 @@ export default {
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.formRiwayatPasien.case = detail.data._id
     Object.assign(this.formPasien, detail.data)
+    if (this.formPasien._id) {
+      delete this.formPasien['_id']
+      delete this.formPasien['author']
+      delete this.formPasien['createdAt']
+      delete this.formPasien['updatedAt']
+      delete this.formPasien['last_history']
+    }
     this.listHistoryCase = response.data
   },
   methods: {
