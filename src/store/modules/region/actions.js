@@ -12,6 +12,16 @@ export default {
       }
     })
   },
+  getDetailDistrict({ commit }, codeDistrict) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchList(`/api/areas/district-city?kota_kode=${codeDistrict}`, 'GET')
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
   getListSubDistrict({ commit }, codeDistrict) {
     return new Promise(async(resolve, reject) => {
       try {

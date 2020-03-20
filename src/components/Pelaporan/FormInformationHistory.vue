@@ -7,7 +7,7 @@
       >
         <v-row>
           <v-col
-            cols="6"
+            cols="12"
             md="6"
             sm="12"
           >
@@ -74,7 +74,7 @@
             </ValidationProvider>
           </v-col>
           <v-col
-            cols="6"
+            cols="12"
             md="6"
             sm="12"
           >

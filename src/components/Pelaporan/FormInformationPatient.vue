@@ -7,7 +7,7 @@
       >
         <v-row>
           <v-col
-            cols="6"
+            cols="12"
             md="6"
             sm="12"
           >
@@ -89,7 +89,7 @@
             </ValidationProvider>
           </v-col>
           <v-col
-            cols="6"
+            cols="12"
             md="6"
             sm="12"
           >
@@ -210,13 +210,10 @@ export default {
     }
   },
   async mounted() {
-    this.formPasien.address_district_name = this.fullname
-    // const index = await this.listDistrictCity.map(function(data) {
-    //   return data.kota_kode
-    // }).indexOf(this.district_user)
-    // if (this.listDistrictCity[index]) {
-    //   this.formPasien.address_district_name = this.listDistrictCity[index].kota_nama
-    // }
+    const responseDetails = await this.$store.dispatch('region/getDetailDistrict', this.district_user)
+    if (responseDetails.data[0]) {
+      this.formPasien.address_district_name = responseDetails.data[0].kota_nama
+    }
   },
   methods: {
     async onNext() {

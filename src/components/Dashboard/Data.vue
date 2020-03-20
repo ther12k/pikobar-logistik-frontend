@@ -5,7 +5,12 @@
   >
     <v-container>
       <v-row>
-        <v-col cols="3" width="25%">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             color="info"
             dark
@@ -22,7 +27,12 @@
 
           </v-card>
         </v-col>
-        <v-col cols="3" width="25%">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             color="purple"
             dark
@@ -38,7 +48,12 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="3" width="25%">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             color="warning"
             dark
@@ -54,7 +69,12 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="3" width="25%">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             color="pink"
             dark
