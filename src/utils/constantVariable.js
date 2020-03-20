@@ -34,12 +34,40 @@ export const optionGejala = [
     text: 'Demam'
   },
   {
-    value: 'Sakit tenggorokan',
-    text: 'Sakit tenggorokan'
+    value: 'Sakit Tenggorokan',
+    text: 'Sakit Tenggorokan'
   },
   {
-    value: 'Sakit kepala',
-    text: 'Sakit kepala'
+    value: 'Sakit Kepala',
+    text: 'Sakit Kepala'
+  },
+  {
+    value: 'Sesak Napas',
+    text: 'Sesak Napas'
+  },
+  {
+    value: 'Menggigil',
+    text: 'Menggigil'
+  },
+  {
+    value: 'Lemah (malaise)',
+    text: 'Lemah (malaise)'
+  },
+  {
+    value: 'Nyeri Otot',
+    text: 'Nyeri Otot'
+  },
+  {
+    value: 'Mual atau muntah',
+    text: 'Mual atau muntah'
+  },
+  {
+    value: 'Nyeri Abdomen',
+    text: 'Nyeri Abdomen'
+  },
+  {
+    value: 'Diare',
+    text: 'Diare'
   },
   {
     value: 'Lainnya',
