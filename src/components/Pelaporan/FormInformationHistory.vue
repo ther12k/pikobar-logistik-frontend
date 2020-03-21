@@ -54,52 +54,6 @@
                 <v-radio label="Meninggal" value="2" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
-              <label>Gejala</label>
-              <div v-for="(item, index) in optionGejala" :key="index">
-                <label class="material-checkbox-custom">
-                  <input
-                    :value="item.value"
-                    v-model="formPasien.diagnosis"
-                    type="checkbox"
-                  >
-                  <span v-if="errors.length" class="error--text">{{ item.text }}</span>
-                  <span v-else>{{ item.text }}</span>
-                </label>
-              </div>
-              <span
-                v-if="errors.length"
-                class="v-messages error--text"
-              >{{ errors[0] }}</span>
-            </ValidationProvider>
-          </v-col>
-          <v-col
-            cols="12"
-            md="6"
-            sm="12"
-          >
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Riwayat</v-label>
-              <v-checkbox
-                v-model="formPasien.history_tracing"
-                label="Dari Luar Negeri"
-                value="Dari Luar Negeri"
-              />
-              <v-checkbox
-                v-model="formPasien.history_tracing"
-                label="Kontak Dengan Pasien Positif"
-                value="Kontak Dengan Pasien Positif"
-              />
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-            >
-              <v-text-field
-                v-model="formPasien.history_notes"
-                placeholder="Masukkan Riwayat Lainnya Jika Ada"
-                solo-inverted
-              />
-            </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
               rules="required"
@@ -116,7 +70,6 @@
               </v-radio-group>
             </ValidationProvider>
             <div v-if="formPasien.current_location_type === 'RUMAH'">
-              <v-label>Alamat</v-label>
               <address-region
                 :district-code="formPasien.current_location_district_code"
                 :code-district.sync="formPasien.current_location_district_code"
@@ -132,7 +85,7 @@
               v-slot="{ errors }"
               v-if="formPasien.current_location_type === 'RUMAH'"
             >
-              <v-label>Alamat Lengkap Rumah</v-label>
+              <v-label>Alamat Lengkap lokasi saat ini</v-label>
               <v-text-field
                 :error-messages="errors"
                 v-model="formPasien.current_location_address"
@@ -154,6 +107,139 @@
                 single-line
                 solo
                 autocomplete
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-label>Sumber Pelaporan</v-label>
+              <v-text-field
+                :error-messages="errors"
+                v-model="formPasien.report_source"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }">
+              <v-label>Catatan Tambahan</v-label>
+              <v-textarea
+                v-model="formPasien.other_notes"
+                solo
+              />
+            </ValidationProvider>
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+            sm="12"
+          >
+            <ValidationProvider v-slot="{ errors }">
+              <v-label>Riwayat</v-label>
+              <v-checkbox
+                v-model="formPasien.is_went_abroad"
+                label="Dari Luar Negeri"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.is_went_abroad === true"
+              rules="required"
+            >
+              <v-text-field
+                v-model="formPasien.visited_country"
+                :error-messages="errors"
+                placeholder="Negara Yang Dikunjungi"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-checkbox
+                v-model="formPasien.is_went_other_city"
+                label="Perjalanan ke luar kota"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.is_went_other_city === true"
+              rules="required"
+            >
+              <v-text-field
+                v-model="formPasien.visited_city"
+                :error-messages="errors"
+                placeholder="Kota Yang Dikunjungi"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }">
+              <v-checkbox
+                v-model="formPasien.is_contact_with_positive"
+                label="Kontak Dengan Pasien Positif"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-text-field
+                v-model="formPasien.history_notes"
+                placeholder="Masukkan Riwayat Lainnya Jika Ada"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <label>Tanggal Gejala</label>
+            <v-row align="center">
+              <v-col cols="4">
+                <v-select
+                  :items="yearList"
+                  menu-props="auto"
+                  label="Tahun"
+                  solo
+                />
+              </v-col>
+              <v-col cols="4">
+                <v-select
+                  :items="listMonthName"
+                  menu-props="auto"
+                  item-value="value"
+                  item-text="text"
+                  label="Bulan"
+                  solo
+                />
+              </v-col>
+              <v-col cols="4">
+                <v-select
+                  :items="dayList"
+                  menu-props="auto"
+                  label="Tanggal"
+                  solo
+                />
+              </v-col>
+            </v-row>
+            <ValidationProvider v-slot="{ errors }">
+              <label>Gejala</label>
+              <div v-for="(item, index) in optionGejala" :key="index">
+                <label class="material-checkbox-custom">
+                  <input
+                    :value="item.value"
+                    v-model="formPasien.diagnosis"
+                    type="checkbox"
+                  >
+                  <span v-if="errors.length" class="error--text">{{ item.text }}</span>
+                  <span v-else>{{ item.text }}</span>
+                </label>
+              </div>
+              <span
+                v-if="errors.length"
+                class="v-messages error--text"
+              >{{ errors[0] }}</span>
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-text-field
+                v-model="formPasien.history_notes"
+                placeholder="Sebutkan gelaja lainnya (jika ada)"
+                solo-inverted
               />
             </ValidationProvider>
           </v-col>
@@ -189,7 +275,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
-import { optionGejala } from '@/utils/constantVariable'
+import { optionGejala, listYear, listMonthName, listDays } from '@/utils/constantVariable'
 import { mapGetters } from 'vuex'
 export default {
   name: 'FormInformationHistory',
@@ -209,7 +295,11 @@ export default {
   },
   data() {
     return {
-      optionGejala: optionGejala
+      optionGejala: optionGejala,
+      formatDate: 'MM/DD/YYYY',
+      yearList: null,
+      listMonthName: listMonthName,
+      dayList: null
     }
   },
   computed: {
@@ -218,9 +308,13 @@ export default {
     ])
   },
   async mounted() {
+    this.yearList = this.listYear()
+    this.dayList = this.listDays()
     await this.$store.dispatch('region/getListHospotal')
   },
   methods: {
+    listYear,
+    listDays,
     backStep() {
       EventBus.$emit('backSurveySteps', this.steps)
     },

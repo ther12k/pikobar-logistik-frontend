@@ -31,14 +31,22 @@ function initialState() {
       status: '',
       stage: 0,
       final_result: 0,
+      report_source: '',
       diagnosis: [],
       history_tracing: [],
+      is_went_abroad: false,
+      visited_country: '',
+      return_date: '',
+      is_went_other_city: false,
+      visited_city: '',
+      is_contact_with_positive: false,
       history_notes: '',
-      current_location_type: 'RUMAH',
+      current_location_type: '',
       current_location_address: '',
       current_location_district_code: '',
       current_location_subdistrict_code: '',
-      current_location_village_code: ''
+      current_location_village_code: '',
+      other_notes: ''
     },
     formRiwayatPasien: {
       case: '',
@@ -47,11 +55,13 @@ function initialState() {
       diagnosis: [],
       history_tracing: [],
       history_notes: '',
-      current_location_type: 'RUMAH',
+      report_source: '',
+      current_location_type: '',
       current_location_address: '',
       current_location_district_code: '',
       current_location_subdistrict_code: '',
-      current_location_village_code: ''
+      current_location_village_code: '',
+      other_notes: ''
     }
   }
 }

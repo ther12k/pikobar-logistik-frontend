@@ -13,10 +13,10 @@
             :editable="editable"
           >
             <template v-if="n == 1">
-              Informasi Umum Pasien
+              Detail Profil Kasus
             </template>
             <template v-else-if="n == 2">
-              Informasi Rekam Pasien
+              Riwayat Kasus
             </template>
           </v-stepper-step>
 

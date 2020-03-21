@@ -16,6 +16,24 @@ export function baseUrl() {
   return url
 }
 
+export function listYear() {
+  var currentYear = new Date().getFullYear()
+  const list = []
+  for (var y = 0; y < 80; y++) {
+    list.push(currentYear)
+    currentYear--
+  }
+  return list
+}
+
+export function listDays() {
+  const listDay = []
+  for (let d = 1; d <= 32; d++) {
+    listDay.push(d)
+  }
+  return listDay
+}
+
 export const optionGejala = [
   {
     value: 'Suhu tubuh > 38,5',
@@ -72,5 +90,56 @@ export const optionGejala = [
   {
     value: 'Lainnya',
     text: 'Lainnya'
+  }
+]
+
+export const listMonthName = [
+  {
+    value: 1,
+    text: 'Januari'
+  },
+  {
+    value: 2,
+    text: 'Februari'
+  },
+  {
+    value: 3,
+    text: 'Maret'
+  },
+  {
+    value: 4,
+    text: 'April'
+  },
+  {
+    value: 5,
+    text: 'Mei'
+  },
+  {
+    value: 6,
+    text: 'Juni'
+  },
+  {
+    value: 7,
+    text: 'Juli'
+  },
+  {
+    value: 8,
+    text: 'Augustus'
+  },
+  {
+    value: 9,
+    text: 'September'
+  },
+  {
+    value: 10,
+    text: 'Oktober'
+  },
+  {
+    value: 11,
+    text: 'November'
+  },
+  {
+    value: 12,
+    text: 'Desember'
   }
 ]

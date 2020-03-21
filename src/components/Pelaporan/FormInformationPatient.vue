@@ -43,9 +43,13 @@
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">
               <v-label>Pekerjaan</v-label>
-              <v-text-field
+              <v-select
                 v-model="formPasien.occupation"
-                solo-inverted
+                :items="occupationList"
+                item-value="title"
+                item-text="title"
+                menu-props="auto"
+                solo
               />
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">
@@ -99,11 +103,34 @@
               />
             </ValidationProvider>
             <label>Tanggal Lahir</label>
-            <input-date-picker
-              :date-value="formPasien.birth_date"
-              :format-date="formatDate"
-              @changeDate="formPasien.birth_date = $event"
-            />
+            <v-row align="center">
+              <v-col cols="4">
+                <v-select
+                  :items="yearList"
+                  menu-props="auto"
+                  label="Tahun"
+                  solo
+                />
+              </v-col>
+              <v-col cols="4">
+                <v-select
+                  :items="listMonthName"
+                  menu-props="auto"
+                  item-value="value"
+                  item-text="text"
+                  label="Bulan"
+                  solo
+                />
+              </v-col>
+              <v-col cols="4">
+                <v-select
+                  :items="dayList"
+                  menu-props="auto"
+                  label="Tanggal"
+                  solo
+                />
+              </v-col>
+            </v-row>
             <ValidationProvider
               v-slot="{ errors }"
               rules="required|isHtml"
@@ -158,9 +185,10 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label class="required">Nomor Telepon</v-label>
+              <label class="required">Nomor Telepon</label>
               <v-text-field
                 v-model="formPasien.phone_number"
+                :error-messages="errors"
                 solo-inverted
                 type="number"
               />
@@ -189,6 +217,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { listYear, listMonthName, listDays } from '@/utils/constantVariable'
 import { mapGetters } from 'vuex'
 export default {
   name: 'FormInformationPatient',
@@ -212,7 +241,10 @@ export default {
   },
   data() {
     return {
-      formatDate: 'MM/DD/YYYY'
+      formatDate: 'MM/DD/YYYY',
+      yearList: null,
+      listMonthName: listMonthName,
+      dayList: null
     }
   },
   computed: {
@@ -222,6 +254,9 @@ export default {
     ]),
     ...mapGetters('region', [
       'listDistrictCity'
+    ]),
+    ...mapGetters('occupation', [
+      'occupationList'
     ])
   },
   watch: {
@@ -230,12 +265,17 @@ export default {
     }
   },
   async mounted() {
+    this.yearList = this.listYear()
+    this.dayList = this.listDays()
+    await this.$store.dispatch('occupation/getListOccuption')
     const responseDetails = await this.$store.dispatch('region/getDetailDistrict', this.district_user)
     if (responseDetails.data[0]) {
       this.formPasien.address_district_name = responseDetails.data[0].kota_nama
     }
   },
   methods: {
+    listYear,
+    listDays,
     async onNext() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
