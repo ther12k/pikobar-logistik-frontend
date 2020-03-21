@@ -255,7 +255,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
-import { optionGejala, listYear, listMonthName, listDays } from '@/utils/constantVariable'
+import { optionGejala } from '@/utils/constantVariable'
 import { mapGetters } from 'vuex'
 export default {
   name: 'FormInformationHistory',
@@ -276,11 +276,7 @@ export default {
   data() {
     return {
       optionGejala: optionGejala,
-      formatDate: 'YYYY/MM/DD',
-      otherDiagnosis: '',
-      yearList: null,
-      listMonthName: listMonthName,
-      dayList: null
+      formatDate: 'YYYY/MM/DD'
     }
   },
   computed: {
@@ -289,13 +285,9 @@ export default {
     ])
   },
   async mounted() {
-    this.yearList = this.listYear()
-    this.dayList = this.listDays()
     await this.$store.dispatch('region/getListHospotal')
   },
   methods: {
-    listYear,
-    listDays,
     backStep() {
       EventBus.$emit('backSurveySteps', this.steps)
     },

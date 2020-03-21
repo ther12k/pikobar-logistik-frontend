@@ -45,6 +45,16 @@ export default {
       }
     })
   },
+  detailHistoryCase({ commit }, id) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchList(`/api/cases/${id}/last-history`, 'GET')
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
   countReportCase({ commit }, params) {
     return new Promise(async(resolve, reject) => {
       try {
@@ -58,7 +68,7 @@ export default {
   listHistoryCase({ commit }, id) {
     return new Promise(async(resolve, reject) => {
       try {
-        const response = await fetchList(`/api/cases/${id}/history`, 'GET', id)
+        const response = await fetchList(`/api/cases/${id}/history`, 'GET')
         resolve(response)
       } catch (e) {
         reject(e)

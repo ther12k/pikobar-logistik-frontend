@@ -86,7 +86,7 @@
                   <th class="text-left">STATUS</th>
                   <th class="text-left">TAHAPAN</th>
                   <th class="text-left">HASIL</th>
-                  <th class="text-left">ACTIONS</th>
+                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
@@ -123,40 +123,38 @@
                       Meninggal
                     </div>
                   </td>
-                  <td>
+                  <td v-if="roles[0] === 'dinkeskota'">
                     <v-card-actions>
-                      <v-tooltip top>
+                      <v-menu
+                        :close-on-content-click="false"
+                        :nudge-width="100"
+                        :nudge-left="220"
+                        :nudge-top="40"
+                        offset-y
+                      >
                         <template v-slot:activator="{ on }">
                           <v-btn
-                            class="ma-2"
+                            class="ma-1"
+                            color="success"
                             tile
-                            large
-                            color="grey"
-                            icon
+                            outlined
                             v-on="on"
-                            @click="handleDetail(item._id)"
                           >
-                            <v-icon>mdi-eye</v-icon>
+                            Pilih Aksi <v-icon style="font-size: 2rem;" right>mdi-menu-down</v-icon>
                           </v-btn>
                         </template>
-                        <span>Detail Kasus</span>
-                      </v-tooltip>
-                      <v-tooltip top>
-                        <template v-slot:activator="{ on }">
-                          <v-btn
-                            class="ma-2"
-                            tile
-                            large
-                            color="grey"
-                            icon
-                            v-on="on"
-                            @click="handleEdit(item._id)"
-                          >
-                            <v-icon>mdi-account-edit</v-icon>
-                          </v-btn>
-                        </template>
-                        <span>Update Riwayat</span>
-                      </v-tooltip>
+                        <v-card>
+                          <v-list-item @click="handleDetail(item._id)">
+                            Lihat Detail
+                          </v-list-item>
+                          <v-list-item @click="handleEditCase(item._id)">
+                            Update Kasus
+                          </v-list-item>
+                          <v-list-item @click="handleEditHistoryCase(item._id)">
+                            Update Riwayat Kasus
+                          </v-list-item>
+                        </v-card>
+                      </v-menu>
                     </v-card-actions>
                   </td>
                 </tr>
@@ -233,8 +231,11 @@ export default {
     async handleDetail(id) {
       await this.$router.push(`/laporan/detail/${id}`)
     },
-    async handleEdit(id) {
-      await this.$router.push(`/laporan/edit/${id}`)
+    async handleEditCase(id) {
+      await this.$router.push(`/laporan/edit-case/${id}`)
+    },
+    async handleEditHistoryCase(id) {
+      await this.$router.push(`/laporan/edit-history-case/${id}`)
     },
     async handleSearch() {
       this.listQuery.page = 1

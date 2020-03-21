@@ -1,5 +1,5 @@
 <template>
-  <edit-pelaporan-form
+  <edit-history-case-form
     :id-data="this.$route.params.id"
   />
 </template>
@@ -9,7 +9,3 @@ export default {
   name: 'Edit'
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,0 +1,395 @@
+<template>
+  <div>
+    <v-card
+      outlined
+    >
+      <v-row>
+        <v-expansion-panels
+          v-model="panelRiwayat"
+          multiple
+        >
+          <v-expansion-panel>
+            <v-expansion-panel-header>Update Riwayat Kasus</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <ValidationObserver v-slot="{ validate, reset }" ref="observer">
+                <v-form
+                  ref="form"
+                  lazy-validation
+                >
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      md="6"
+                      sm="12"
+                    >
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required"
+                      >
+                        <label class="required">Hasil Pemeriksaan Awal</label>
+                        <v-radio-group
+                          v-model="formRiwayatPasien.status"
+                          :error-messages="errors"
+                          row
+                        >
+                          <v-radio label="ODP" value="ODP" />
+                          <v-radio label="PDP" value="PDP" />
+                          <v-radio label="POSITIF" value="POSITIF" />
+                        </v-radio-group>
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required"
+                      >
+                        <label class="required">Proses Pemeriksaan</label>
+                        <v-radio-group
+                          v-model="formRiwayatPasien.stage"
+                          :error-messages="errors"
+                          row
+                        >
+                          <v-radio label="Proses" value="0" />
+                          <v-radio label="Selesai" value="1" />
+                        </v-radio-group>
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                      >
+                        <label>Hasil Pemeriksaan Akhir</label>
+                        <v-radio-group
+                          v-model="formRiwayatPasien.result"
+                          :error-messages="errors"
+                          row
+                        >
+                          <v-radio label="Negatif" value="0" />
+                          <v-radio label="Sembuh" value="1" />
+                          <v-radio label="Meninggal" value="2" />
+                        </v-radio-group>
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required"
+                      >
+                        <label class="required">Lokasi Saat Ini</label>
+                        <v-radio-group
+                          v-model="formRiwayatPasien.current_location_type"
+                          :error-messages="errors"
+                          row
+                          @change="handleChangeLocationNow"
+                        >
+                          <v-radio label="Rumah" value="RUMAH" />
+                          <v-radio label="Rumah Sakit" value="RS" />
+                        </v-radio-group>
+                      </ValidationProvider>
+                      <div v-if="formRiwayatPasien.current_location_type === 'RUMAH'">
+                        <address-region
+                          :district-code="formRiwayatPasien.current_location_district_code"
+                          :code-district.sync="formRiwayatPasien.current_location_district_code"
+                          :sub-district-code="formRiwayatPasien.current_location_subdistrict_code"
+                          :code-subdistrict.sync="formRiwayatPasien.current_location_subdistrict_code"
+                          :village-code="formRiwayatPasien.current_location_village_code"
+                          :code-village.sync="formRiwayatPasien.current_location_village_code"
+                          :disabled-address="false"
+                          :required-address="true"
+                        />
+                      </div>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        v-if="formRiwayatPasien.current_location_type === 'RUMAH'"
+                      >
+                        <v-label>Alamat Lengkap lokasi saat ini</v-label>
+                        <v-text-field
+                          :error-messages="errors"
+                          v-model="formRiwayatPasien.current_location_address"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        v-if="formRiwayatPasien.current_location_type === 'RS'"
+                        rules="required"
+                      >
+                        <v-autocomplete
+                          v-model="formRiwayatPasien.current_location_address"
+                          :items="hospitalList"
+                          :error-messages="errors"
+                          :return-object="true"
+                          label="Lokasi Rumah Sakit"
+                          menu-props="auto"
+                          item-text="name"
+                          item-value="name"
+                          single-line
+                          solo
+                          autocomplete
+                          @change="onSelectHospital"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                      >
+                        <v-label>Sumber Pelaporan</v-label>
+                        <v-text-field
+                          :error-messages="errors"
+                          v-model="formRiwayatPasien.report_source"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider v-slot="{ errors }">
+                        <v-label>Catatan Tambahan</v-label>
+                        <v-textarea
+                          v-model="formRiwayatPasien.other_notes"
+                          solo
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="6"
+                      sm="12"
+                    >
+                      <ValidationProvider v-slot="{ errors }">
+                        <v-label>Riwayat</v-label>
+                        <v-checkbox
+                          v-model="formRiwayatPasien.is_went_abroad"
+                          label="Dari Luar Negeri"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        v-if="formRiwayatPasien.is_went_abroad === true"
+                        rules="required"
+                      >
+                        <v-text-field
+                          v-model="formRiwayatPasien.visited_country"
+                          :error-messages="errors"
+                          placeholder="Negara Yang Dikunjungi"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                      >
+                        <v-checkbox
+                          v-model="formRiwayatPasien.is_went_other_city"
+                          label="Perjalanan ke luar kota"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        v-if="formRiwayatPasien.is_went_other_city === true"
+                        rules="required"
+                      >
+                        <v-text-field
+                          v-model="formRiwayatPasien.visited_city"
+                          :error-messages="errors"
+                          placeholder="Kota Yang Dikunjungi"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider v-slot="{ errors }">
+                        <v-checkbox
+                          v-model="formRiwayatPasien.is_contact_with_positive"
+                          label="Kontak Dengan Pasien Positif"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                      >
+                        <v-text-field
+                          v-model="formRiwayatPasien.history_notes"
+                          placeholder="Masukkan Riwayat Lainnya Jika Ada"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <label>Tanggal Gejala</label>
+                      <select-datetime
+                        :datetime="formRiwayatPasien.first_symptom_date"
+                        :date-time.sync="formRiwayatPasien.first_symptom_date"
+                        :formate-date="formatDate"
+                      />
+                      <ValidationProvider v-slot="{ errors }">
+                        <label>Gejala</label>
+                        <div v-for="(item, index) in optionGejala" :key="index">
+                          <label class="material-checkbox-custom">
+                            <input
+                              :value="item.value"
+                              v-model="formRiwayatPasien.diagnosis"
+                              type="checkbox"
+                            >
+                            <span v-if="errors.length" class="error--text">{{ item.text }}</span>
+                            <span v-else>{{ item.text }}</span>
+                          </label>
+                        </div>
+                        <span
+                          v-if="errors.length"
+                          class="v-messages error--text"
+                        >{{ errors[0] }}</span>
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                      >
+                        <v-text-field
+                          v-model="formRiwayatPasien.diagnosis_other"
+                          placeholder="Sebutkan gelaja lainnya (jika ada)"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+                  <v-container fluid>
+                    <v-row class="survey-bottom-form">
+                      <v-col>
+                        <v-btn
+                          color="success"
+                          bottom
+                          style="float: right;"
+                          @click="handleSaveHistory"
+                        >
+                          Update Riwayat
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-form>
+              </ValidationObserver>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-row>
+      <v-row>
+        <v-expansion-panels
+          v-model="panelListRiwayat"
+          multiple
+        >
+          <v-expansion-panel>
+            <v-expansion-panel-header>List Riwayat Kasus</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-simple-table fixed-header height="500px">
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">#</th>
+                      <th class="text-left">STATUS</th>
+                      <th class="text-left">TAHAPAN</th>
+                      <th class="text-left">LOKASI SAAT INI</th>
+                      <th class="text-left">TANGGAL DIUPDATE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in listHistoryCase" :key="item.index">
+                      <td>{{ getTableRowNumbering(index) }}</td>
+                      <td><status :status="item.status" /></td>
+                      <td>
+                        <div v-if="item.stage === '0'">
+                          Proses
+                        </div>
+                        <div v-else>
+                          Selesai
+                        </div>
+                      </td>
+                      <td>{{ item.current_location_address }}</td>
+                      <td>{{ formatDatetime(item.last_changed, "DD MMMM YYYY") }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-row>
+    </v-card>
+  </div>
+</template>
+
+<script>
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import { optionGejala } from '@/utils/constantVariable'
+import { formatDatetime } from '@/utils/parseDatetime'
+import { mapGetters } from 'vuex'
+export default {
+  name: 'EditHistoryCaseForm',
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  },
+  props: {
+    idData: {
+      type: String,
+      default: null
+    }
+  },
+  data() {
+    return {
+      formatDate: 'MM/DD/YYYY',
+      panelRiwayat: [0],
+      panelListRiwayat: [0],
+      optionGejala: optionGejala,
+      listHistoryCase: null,
+      arrayRegion: null
+    }
+  },
+  computed: {
+    ...mapGetters('reports', [
+      'formRiwayatPasien'
+    ]),
+    ...mapGetters('region', [
+      'hospitalList'
+    ])
+  },
+  async created() {
+    await this.$store.dispatch('region/getListHospital')
+    const detail = await this.$store.dispatch('reports/detailHistoryCase', this.idData)
+    const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
+    this.formRiwayatPasien.case = detail.data[0].case
+    Object.assign(this.formRiwayatPasien, detail.data[0])
+    this.formRiwayatPasien.first_symptom_date = this.formatDatetime(detail.data[0].first_symptom_date, this.formatDate)
+    this.listHistoryCase = response.data
+  },
+  methods: {
+    formatDatetime,
+    handleChange(value) {
+      if (value === 'RUMAH') {
+        this.formRiwayatPasien.current_location_address = ''
+      } else {
+        this.formRiwayatPasien.current_location_address = ''
+        this.formRiwayatPasien.current_location_district_code = ''
+        this.formRiwayatPasien.current_location_subdistrict_code = ''
+        this.formRiwayatPasien.current_location_village_code = ''
+      }
+    },
+    async handleSaveHistory() {
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      }
+      const response = await this.$store.dispatch('reports/createHistoryCase', this.formRiwayatPasien)
+      if (response) {
+        await this.$store.dispatch('toast/successToast', 'Data Riwayat Kasus Berhasil Di Perbaharui')
+        await this.$store.dispatch('reports/resetRiwayatFormPasien')
+        await this.$router.push('/laporan/index')
+      }
+    },
+    getTableRowNumbering(index) {
+      return (index + 1)
+    },
+    onSelectHospital(value) {
+      this.formRiwayatPasien.current_hospital_id = value._id
+      this.formRiwayatPasien.current_location_address = value.name
+    },
+    handleChangeLocationNow(value) {
+      if (value === 'RUMAH') {
+        this.formRiwayatPasien.current_location_address = ''
+      } else {
+        this.formRiwayatPasien.current_hospital_id = ''
+        this.formRiwayatPasien.current_location_address = ''
+        this.formRiwayatPasien.current_location_district = ''
+        this.formRiwayatPasien.current_location_subdistrict = ''
+        this.formRiwayatPasien.current_location_village = ''
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

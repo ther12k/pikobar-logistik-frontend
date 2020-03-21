@@ -42,7 +42,7 @@ export default {
       }
     })
   },
-  getListHospotal({ commit }) {
+  getListHospital({ commit }) {
     return new Promise(async(resolve, reject) => {
       try {
         const response = await fetchList('/api/areas/hospital', 'GET')

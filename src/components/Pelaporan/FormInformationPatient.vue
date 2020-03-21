@@ -194,7 +194,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
-import { listYear, listMonthName, listDays } from '@/utils/constantVariable'
+import { getAge } from '@/utils/constantVariable'
 import { mapGetters } from 'vuex'
 export default {
   name: 'FormInformationPatient',
@@ -219,10 +219,7 @@ export default {
   data() {
     return {
       formatDate: 'YYYY/MM/DD',
-      date: '',
-      yearList: null,
-      listMonthName: listMonthName,
-      dayList: null
+      date: ''
     }
   },
   computed: {
@@ -243,8 +240,6 @@ export default {
     }
   },
   async mounted() {
-    this.yearList = this.listYear()
-    this.dayList = this.listDays()
     await this.$store.dispatch('occupation/getListOccuption')
     const responseDetails = await this.$store.dispatch('region/getDetailDistrict', this.district_user)
     if (responseDetails.data[0]) {
@@ -252,24 +247,13 @@ export default {
     }
   },
   methods: {
-    listYear,
-    listDays,
+    getAge,
     async onNext() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
       }
       EventBus.$emit('nextSurveySteps', this.steps)
-    },
-    getAge(DOB) {
-      const today = new Date()
-      const birthDate = new Date(DOB)
-      let age = today.getFullYear() - birthDate.getFullYear()
-      const m = today.getMonth() - birthDate.getMonth()
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age = age - 1
-      }
-      return age
     },
     handleChangeNationality(value) {
       if (value === 'WNI') {
