@@ -28,7 +28,7 @@ export function listYear() {
 
 export function listDays() {
   const listDay = []
-  for (let d = 1; d <= 32; d++) {
+  for (let d = 1; d <= 31; d++) {
     listDay.push(d)
   }
   return listDay
@@ -36,8 +36,12 @@ export function listDays() {
 
 export const optionGejala = [
   {
-    value: 'Suhu tubuh > 38,5',
-    text: 'Suhu tubuh > 38,5'
+    value: 'Suhu tubuh >= 38 °C',
+    text: 'Suhu tubuh >= 38 °C'
+  },
+  {
+    value: 'Suhu tubuh < 38 °C',
+    text: 'Suhu tubuh < 38 °C'
   },
   {
     value: 'Batuk',
@@ -86,10 +90,6 @@ export const optionGejala = [
   {
     value: 'Diare',
     text: 'Diare'
-  },
-  {
-    value: 'Lainnya',
-    text: 'Lainnya'
   }
 ]
 

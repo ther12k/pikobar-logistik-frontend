@@ -34,6 +34,8 @@ function initialState() {
       final_result: '',
       report_source: '',
       diagnosis: [],
+      diagnosis_other: '',
+      first_symptom_date: '',
       history_tracing: [],
       is_went_abroad: false,
       visited_country: '',

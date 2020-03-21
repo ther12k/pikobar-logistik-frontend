@@ -103,34 +103,11 @@
               />
             </ValidationProvider>
             <label>Tanggal Lahir</label>
-            <v-row align="center">
-              <v-col cols="4">
-                <v-select
-                  :items="yearList"
-                  menu-props="auto"
-                  label="Tahun"
-                  solo
-                />
-              </v-col>
-              <v-col cols="4">
-                <v-select
-                  :items="listMonthName"
-                  menu-props="auto"
-                  item-value="value"
-                  item-text="text"
-                  label="Bulan"
-                  solo
-                />
-              </v-col>
-              <v-col cols="4">
-                <v-select
-                  :items="dayList"
-                  menu-props="auto"
-                  label="Tanggal"
-                  solo
-                />
-              </v-col>
-            </v-row>
+            <select-datetime
+              :datetime="formPasien.birth_date"
+              :date-time.sync="formPasien.birth_date"
+              :formate-date="formatDate"
+            />
             <ValidationProvider
               v-slot="{ errors }"
               rules="required|isHtml"
@@ -241,7 +218,8 @@ export default {
   },
   data() {
     return {
-      formatDate: 'MM/DD/YYYY',
+      formatDate: 'YYYY/MM/DD',
+      date: '',
       yearList: null,
       listMonthName: listMonthName,
       dayList: null

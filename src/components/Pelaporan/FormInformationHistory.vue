@@ -190,34 +190,11 @@
               />
             </ValidationProvider>
             <label>Tanggal Gejala</label>
-            <v-row align="center">
-              <v-col cols="4">
-                <v-select
-                  :items="yearList"
-                  menu-props="auto"
-                  label="Tahun"
-                  solo
-                />
-              </v-col>
-              <v-col cols="4">
-                <v-select
-                  :items="listMonthName"
-                  menu-props="auto"
-                  item-value="value"
-                  item-text="text"
-                  label="Bulan"
-                  solo
-                />
-              </v-col>
-              <v-col cols="4">
-                <v-select
-                  :items="dayList"
-                  menu-props="auto"
-                  label="Tanggal"
-                  solo
-                />
-              </v-col>
-            </v-row>
+            <select-datetime
+              :datetime="formPasien.first_symptom_date"
+              :date-time.sync="formPasien.first_symptom_date"
+              :formate-date="formatDate"
+            />
             <ValidationProvider v-slot="{ errors }">
               <label>Gejala</label>
               <div v-for="(item, index) in optionGejala" :key="index">
@@ -240,7 +217,7 @@
               v-slot="{ errors }"
             >
               <v-text-field
-                v-model="otherDiagnosis"
+                v-model="formPasien.diagnosis_other"
                 placeholder="Sebutkan gelaja lainnya (jika ada)"
                 solo-inverted
               />
@@ -299,7 +276,7 @@ export default {
   data() {
     return {
       optionGejala: optionGejala,
-      formatDate: 'MM/DD/YYYY',
+      formatDate: 'YYYY/MM/DD',
       otherDiagnosis: '',
       yearList: null,
       listMonthName: listMonthName,
