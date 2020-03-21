@@ -23,6 +23,7 @@ export default {
     state.formPasien.id_case_national = ''
     state.formPasien.id_case_related = ''
     state.formPasien.phone_number = ''
+    state.formPasien.office_address = ''
     state.formPasien.address_street = ''
     state.formPasien.address_district_code = ''
     state.formPasien.address_district_name = ''
@@ -35,7 +36,7 @@ export default {
     state.formRiwayatPasien.diagnosis = []
     state.formRiwayatPasien.history_tracing = []
     state.formRiwayatPasien.history_notes = ''
-    state.formRiwayatPasien.current_location_type = 'RUMAH'
+    state.formRiwayatPasien.current_location_type = ''
     state.formRiwayatPasien.current_location_address = ''
     state.formRiwayatPasien.current_location_district_code = ''
     state.formRiwayatPasien.current_location_subdistrict_code = ''
@@ -48,7 +49,7 @@ export default {
     state.formRiwayatPasien.diagnosis = []
     state.formRiwayatPasien.history_tracing = []
     state.formRiwayatPasien.history_notes = ''
-    state.formRiwayatPasien.current_location_type = 'RUMAH'
+    state.formRiwayatPasien.current_location_type = ''
     state.formRiwayatPasien.current_location_address = ''
     state.formRiwayatPasien.current_location_district_code = ''
     state.formRiwayatPasien.current_location_subdistrict_code = ''

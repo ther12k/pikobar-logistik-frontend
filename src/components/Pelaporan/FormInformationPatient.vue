@@ -55,7 +55,7 @@
             <ValidationProvider v-slot="{ errors }">
               <v-label>Alamat Kantor</v-label>
               <v-textarea
-                v-model="formPasien.address_street"
+                v-model="formPasien.office_address"
                 solo
               />
             </ValidationProvider>

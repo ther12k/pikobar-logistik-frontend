@@ -95,11 +95,13 @@
             <ValidationProvider
               v-slot="{ errors }"
               v-if="formPasien.current_location_type === 'RS'"
+              rules="required"
             >
               <v-autocomplete
                 v-model="formPasien.current_location_address"
                 :items="hospitalList"
                 :error-messages="errors"
+                :return-object="true"
                 label="Lokasi Rumah Sakit"
                 menu-props="auto"
                 item-text="name"
@@ -107,6 +109,7 @@
                 single-line
                 solo
                 autocomplete
+                @change="onSelectHospital"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -237,7 +240,7 @@
               v-slot="{ errors }"
             >
               <v-text-field
-                v-model="formPasien.history_notes"
+                v-model="otherDiagnosis"
                 placeholder="Sebutkan gelaja lainnya (jika ada)"
                 solo-inverted
               />
@@ -297,6 +300,7 @@ export default {
     return {
       optionGejala: optionGejala,
       formatDate: 'MM/DD/YYYY',
+      otherDiagnosis: '',
       yearList: null,
       listMonthName: listMonthName,
       dayList: null
@@ -323,6 +327,9 @@ export default {
       if (!valid) {
         return
       }
+      if (this.otherDiagnosis.length > 0) {
+        this.formPasien.diagnosis.push(this.otherDiagnosis)
+      }
       const response = await this.$store.dispatch('reports/createReportCase', this.formPasien)
       if (response) {
         await this.$store.dispatch('reports/resetFormPasien')
@@ -331,10 +338,15 @@ export default {
         await this.$refs.form.reset()
       }
     },
+    onSelectHospital(value) {
+      this.formPasien.current_hospital_id = value._id
+      this.formPasien.current_location_address = value.name
+    },
     handleChangeLocationNow(value) {
       if (value === 'RUMAH') {
         this.formPasien.current_location_address = ''
       } else {
+        this.formPasien.current_hospital_id = ''
         this.formPasien.current_location_address = ''
         this.formPasien.current_location_district = ''
         this.formPasien.current_location_subdistrict = ''
