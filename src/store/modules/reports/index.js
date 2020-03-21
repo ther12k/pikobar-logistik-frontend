@@ -5,7 +5,7 @@ import getters from './getters'
 function initialState() {
   return {
     detailPasien: null,
-    listPasien: null,
+    listKasus: null,
     totalList: 0,
     formPasien: {
       id_case: '',
@@ -58,7 +58,7 @@ function initialState() {
 
 const state = {
   detailPasien: initialState().detailPasien,
-  listPasien: initialState().listPasien,
+  listKasus: initialState().listKasus,
   totalList: initialState().totalList,
   formPasien: initialState().formPasien,
   formRiwayatPasien: initialState().formRiwayatPasien

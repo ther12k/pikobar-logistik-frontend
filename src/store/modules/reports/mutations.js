@@ -1,7 +1,7 @@
 
 export default {
   SET_LIST_PASIEN: (state, data) => {
-    state.listPasien = data
+    state.listKasus = data
   },
   SET_TOTAL_LIST_PASIEN: (state, data) => {
     state.totalList = data

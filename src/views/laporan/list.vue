@@ -18,11 +18,10 @@
           class="mx-auto"
           outlined
         >
-          <v-list-item two-line>
+          <v-list-item two-line style="background: #D2EAFF">
             <v-list-item-content>
-              <v-list-item-title>Orang Dalam Pemantauan</v-list-item-title>
-              <v-list-item-subtitle>Orang yang mengalami gejala demam dan memiliki  <br> riwayat perjalanan ke negara terjangkit.<br>&nbsp;</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">{{ totalODP }} Orang</v-list-item-title>
+              <v-list-item-title style="color: #2F80ED;">Orang Dalam Pemantauan</v-list-item-title>
+              <v-list-item-title class="headline mb-1" style="color: #2F80ED;padding-top: 2rem;">{{ totalODP }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -32,11 +31,10 @@
           class="mx-auto"
           outlined
         >
-          <v-list-item two-line>
+          <v-list-item two-line style="background: #FEF9EC">
             <v-list-item-content>
-              <v-list-item-title>Pasien Dalam Pengawasan</v-list-item-title>
-              <v-list-item-subtitle>Orang yang sudah menunjukan gejala demam, batuk, <br> pilek dan sesak nafas memiliki riwayat <br> perjalanan ke negara terjangkit.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">{{ totalPDP }} Orang</v-list-item-title>
+              <v-list-item-title style="color: #F2994A;">Pasien Dalam Pengawasan</v-list-item-title>
+              <v-list-item-title class="headline mb-1" style="color: #F2994A;padding-top: 2rem;">{{ totalPDP }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -46,11 +44,10 @@
           class="mx-auto"
           outlined
         >
-          <v-list-item two-line>
+          <v-list-item two-line style="background: #FDEDED">
             <v-list-item-content>
-              <v-list-item-title>POSITIF</v-list-item-title>
-              <v-list-item-subtitle>Orang yang sudah menunjukan gejala corona <br> dan juga diduga kuat sudah melakukan kontak <br> dengan pasien positif Covid-19.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">{{ totalPositif }} Orang</v-list-item-title>
+              <v-list-item-title style="color: #EB5757;">POSITIF</v-list-item-title>
+              <v-list-item-title class="headline mb-1" style="color: #EB5757;padding-top: 2rem;">{{ totalPositif }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -83,17 +80,20 @@
                 <tr>
                   <th class="text-left">#</th>
                   <th class="text-left">KODE KASUS</th>
+                  <th class="text-left">NAMA</th>
                   <th class="text-left">USIA</th>
                   <th class="text-left">JENIS KELAMIN</th>
-                  <th class="text-left">LOKASI SAAT INI</th>
                   <th class="text-left">STATUS</th>
+                  <th class="text-left">TAHAPAN</th>
+                  <th class="text-left">HASIL</th>
                   <th class="text-left">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listPasien" :key="item.index">
+                <tr v-for="(item, index) in listKasus" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.id_case }}</td>
+                  <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
                   <td>
                     <div v-if="item.gender =='P'">
@@ -103,8 +103,26 @@
                       Laki-Laki
                     </div>
                   </td>
-                  <td>{{ item.last_history.current_location_address }}</td>
                   <td><status :status="item.last_history.status" /> </td>
+                  <td>
+                    <div v-if=" item.last_history.stage =='0'">
+                      Proses
+                    </div>
+                    <div v-else>
+                      Selesai
+                    </div>
+                  </td>
+                  <td>
+                    <div v-if=" item.last_history.final_result =='0'">
+                      Negatif
+                    </div>
+                    <div v-else-if=" item.last_history.final_result =='1'">
+                      Sembuh
+                    </div>
+                    <div v-else>
+                      Meninggal
+                    </div>
+                  </td>
                   <td>
                     <v-card-actions>
                       <v-tooltip top>
@@ -181,7 +199,7 @@ export default {
   },
   computed: {
     ...mapGetters('reports', [
-      'listPasien',
+      'listKasus',
       'totalList'
     ]),
     ...mapGetters('user', [

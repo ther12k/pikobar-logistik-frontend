@@ -13,31 +13,32 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|isHtml"
             >
-              <label class="required">Nama Pasien</label>
+              <label>ID Kasus</label>
               <v-text-field
-                :error-messages="errors"
-                v-model="formPasien.name"
+                placeholder="ID Kasus akan generate dari system secara otomatis"
+                disabled
                 solo-inverted
               />
             </ValidationProvider>
-            <label>Tanggal Lahir</label>
-            <input-date-picker
-              :date-value="formPasien.birth_date"
-              :format-date="formatDate"
-              @changeDate="formPasien.birth_date = $event"
-            />
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|isHtml"
             >
-              <label class="required">Usia</label>
+              <v-label>ID Kasus Pusat</v-label>
               <v-text-field
                 :error-messages="errors"
-                v-model="formPasien.age"
+                v-model="formPasien.id_case_national"
                 solo-inverted
-                type="number"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-label>ID Kasus Terkait</v-label>
+              <v-text-field
+                :error-messages="errors"
+                v-model="formPasien.id_case_related"
+                solo-inverted
               />
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }">
@@ -47,19 +48,12 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-            >
-              <label class="required">Jenis Kelamin</label>
-              <v-radio-group
-                v-model="formPasien.gender"
-                :error-messages="errors"
-                row
-              >
-                <v-radio label="Laki-Laki" value="L" />
-                <v-radio label="Perempuan" value="P" />
-              </v-radio-group>
+            <ValidationProvider v-slot="{ errors }">
+              <v-label>Alamat Kantor</v-label>
+              <v-textarea
+                v-model="formPasien.address_street"
+                solo
+              />
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
@@ -95,33 +89,48 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
+              rules="required|isHtml"
             >
-              <v-label>ID Kasus Pusat</v-label>
+              <label class="required">Nama Pasien</label>
               <v-text-field
                 :error-messages="errors"
-                v-model="formPasien.id_case_national"
+                v-model="formPasien.name"
                 solo-inverted
               />
             </ValidationProvider>
+            <label>Tanggal Lahir</label>
+            <input-date-picker
+              :date-value="formPasien.birth_date"
+              :format-date="formatDate"
+              @changeDate="formPasien.birth_date = $event"
+            />
             <ValidationProvider
               v-slot="{ errors }"
+              rules="required|isHtml"
             >
-              <v-label>ID Kasus Terkait</v-label>
+              <label class="required">Usia</label>
               <v-text-field
                 :error-messages="errors"
-                v-model="formPasien.id_case_related"
-                solo-inverted
-              />
-            </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Nomor Telepon</v-label>
-              <v-text-field
-                v-model="formPasien.phone_number"
+                v-model="formPasien.age"
                 solo-inverted
                 type="number"
               />
             </ValidationProvider>
-            <label class="required">Alamat</label>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <label class="required">Jenis Kelamin</label>
+              <v-radio-group
+                v-model="formPasien.gender"
+                :error-messages="errors"
+                row
+              >
+                <v-radio label="Laki-Laki" value="L" />
+                <v-radio label="Perempuan" value="P" />
+              </v-radio-group>
+            </ValidationProvider>
+            <label class="required">Alamat Tempat Tinggal</label>
             <address-region
               :district-code="formPasien.address_district_code"
               :district-name="formPasien.address_district_name"
@@ -139,10 +148,21 @@
               :required-address="true"
             />
             <ValidationProvider v-slot="{ errors }">
-              <v-label>Alamat Lengkap</v-label>
+              <v-label>Alamat Lengkap Tempat Tinggal</v-label>
               <v-textarea
                 v-model="formPasien.address_street"
                 solo
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label class="required">Nomor Telepon</v-label>
+              <v-text-field
+                v-model="formPasien.phone_number"
+                solo-inverted
+                type="number"
               />
             </ValidationProvider>
           </v-col>
