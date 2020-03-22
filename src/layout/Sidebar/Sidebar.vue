@@ -21,6 +21,14 @@
           :key="route.path"
           :item="route"
         />
+        <v-list-item @click="handleHelp">
+          <v-list-item-icon>
+            <v-icon>mdi-help-box</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Bantuan</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list-item-group>
     </v-list>
   </div>
@@ -48,6 +56,9 @@ export default {
     async handleCreate() {
       await this.$store.dispatch('reports/resetFormPasien')
       await this.$router.push('/laporan/stepper')
+    },
+    handleHelp() {
+      window.open('https://bit.ly/panduan_laporcovid19', '_blank')
     }
   }
 }

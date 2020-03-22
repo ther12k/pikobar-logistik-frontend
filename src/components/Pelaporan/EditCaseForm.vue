@@ -283,7 +283,9 @@ export default {
   },
   watch: {
     'formPasien.birth_date': function(value) {
-      this.formPasien.age = this.getAge(value)
+      if ((value !== null) && (value !== 'Invalid date')) {
+        this.formPasien.age = this.getAge(value)
+      }
     }
   },
   async created() {
@@ -292,7 +294,9 @@ export default {
     const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
     Object.assign(this.formPasien, detail.data)
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
-    this.formPasien.birth_date = await this.formatDatetime(detail.data.birth_date, this.formatDate)
+    if (detail.data.birth_date) {
+      this.formPasien.birth_date = await this.formatDatetime(detail.data.birth_date, this.formatDate)
+    }
     if (this.formPasien._id) {
       delete this.formPasien['_id']
       delete this.formPasien['author']
@@ -314,12 +318,10 @@ export default {
         id: this.idData,
         data: this.formPasien
       }
-      const response = await this.$store.dispatch('reports/updateReportCase', updateCase)
-      if (response) {
-        await this.$store.dispatch('toast/successToast', 'Data Kasus Berhasil Di Rubah')
-        await this.$store.dispatch('reports/resetRiwayatFormPasien')
-        await this.$router.push('/laporan/index')
-      }
+      await this.$store.dispatch('reports/updateReportCase', updateCase)
+      await this.$store.dispatch('toast/successToast', 'Data Kasus Berhasil Di Rubah')
+      await this.$store.dispatch('reports/resetRiwayatFormPasien')
+      await this.$router.push('/laporan/index')
     },
     handleChangeNationality(value) {
       if (value === 'WNI') {

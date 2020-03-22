@@ -6,7 +6,8 @@ export default {
     laporan_title: 'Reports Case',
     laporan_create: 'Create Case Report',
     laporan_detail: 'Detail Case Report',
-    laporan_edit: 'Edit Case Report'
+    laporan_edit: 'Edit Case Report',
+    help: 'Help'
   },
   label: {
     username: 'Username',

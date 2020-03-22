@@ -342,6 +342,10 @@ export default {
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.formRiwayatPasien.case = detail.data[0].case
     this.formRiwayatPasien.first_symptom_date = await this.formatDatetime(detail.data[0].first_symptom_date, this.formatDate)
+    if (this.formRiwayatPasien.case) {
+      delete this.formRiwayatPasien['createdAt']
+      delete this.formRiwayatPasien['updatedAt']
+    }
     this.listHistoryCase = response.data
   },
   methods: {
@@ -361,12 +365,10 @@ export default {
       if (!valid) {
         return
       }
-      const response = await this.$store.dispatch('reports/createHistoryCase', this.formRiwayatPasien)
-      if (response) {
-        await this.$store.dispatch('toast/successToast', 'Data Riwayat Kasus Berhasil Di Perbaharui')
-        await this.$store.dispatch('reports/resetRiwayatFormPasien')
-        await this.$router.push('/laporan/index')
-      }
+      await this.$store.dispatch('reports/createHistoryCase', this.formRiwayatPasien)
+      await this.$store.dispatch('toast/successToast', 'Data Riwayat Kasus Berhasil Di Perbaharui')
+      await this.$store.dispatch('reports/resetRiwayatFormPasien')
+      await this.$router.push('/laporan/index')
     },
     getTableRowNumbering(index) {
       return (index + 1)
