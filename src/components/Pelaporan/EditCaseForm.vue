@@ -290,9 +290,9 @@ export default {
     await this.$store.dispatch('occupation/getListOccuption')
     await this.$store.dispatch('region/getListHospital')
     const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
-    const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     Object.assign(this.formPasien, detail.data)
-    this.formPasien.birth_date = this.formatDatetime(detail.data.birth_date, this.formatDate)
+    const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
+    this.formPasien.birth_date = await this.formatDatetime(detail.data.birth_date, this.formatDate)
     if (this.formPasien._id) {
       delete this.formPasien['_id']
       delete this.formPasien['author']

@@ -319,7 +319,7 @@ export default {
   },
   data() {
     return {
-      formatDate: 'MM/DD/YYYY',
+      formatDate: 'YYYY/MM/DD',
       panelRiwayat: [0],
       panelListRiwayat: [0],
       optionGejala: optionGejala,
@@ -338,10 +338,10 @@ export default {
   async created() {
     await this.$store.dispatch('region/getListHospital')
     const detail = await this.$store.dispatch('reports/detailHistoryCase', this.idData)
+    Object.assign(this.formRiwayatPasien, detail.data[0])
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.formRiwayatPasien.case = detail.data[0].case
-    Object.assign(this.formRiwayatPasien, detail.data[0])
-    this.formRiwayatPasien.first_symptom_date = this.formatDatetime(detail.data[0].first_symptom_date, this.formatDate)
+    this.formRiwayatPasien.first_symptom_date = await this.formatDatetime(detail.data[0].first_symptom_date, this.formatDate)
     this.listHistoryCase = response.data
   },
   methods: {
