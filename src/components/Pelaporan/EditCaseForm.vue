@@ -283,7 +283,6 @@ export default {
   },
   watch: {
     'formPasien.birth_date': function(value) {
-      console.log(value)
       this.formPasien.age = this.getAge(value)
     }
   },

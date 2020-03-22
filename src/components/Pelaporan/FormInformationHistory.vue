@@ -285,7 +285,7 @@ export default {
     ])
   },
   async mounted() {
-    await this.$store.dispatch('region/getListHospotal')
+    await this.$store.dispatch('region/getListHospital')
   },
   methods: {
     backStep() {
@@ -295,9 +295,6 @@ export default {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
-      }
-      if (this.otherDiagnosis.length > 0) {
-        this.formPasien.diagnosis.push(this.otherDiagnosis)
       }
       const response = await this.$store.dispatch('reports/createReportCase', this.formPasien)
       if (response) {
