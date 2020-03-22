@@ -85,7 +85,7 @@
                           :district-code="formRiwayatPasien.current_location_district_code"
                           :code-district.sync="formRiwayatPasien.current_location_district_code"
                           :sub-district-code="formRiwayatPasien.current_location_subdistrict_code"
-                          :code-subdistrict.sync="formRiwayatPasien.current_location_subdistrict_code"
+                          :code-sub-district.sync="formRiwayatPasien.current_location_subdistrict_code"
                           :village-code="formRiwayatPasien.current_location_village_code"
                           :code-village.sync="formRiwayatPasien.current_location_village_code"
                           :disabled-address="false"
@@ -270,6 +270,7 @@
                       <th class="text-left">#</th>
                       <th class="text-left">STATUS</th>
                       <th class="text-left">TAHAPAN</th>
+                      <th class="text-left">HASIL</th>
                       <th class="text-left">LOKASI SAAT INI</th>
                       <th class="text-left">TANGGAL DIUPDATE</th>
                     </tr>
@@ -284,6 +285,20 @@
                         </div>
                         <div v-else>
                           Selesai
+                        </div>
+                      </td>
+                      <td>
+                        <div v-if=" item.final_result =='0'">
+                          Negatif
+                        </div>
+                        <div v-else-if=" item.final_result =='1'">
+                          Sembuh
+                        </div>
+                        <div v-else-if=" item.final_result =='2'">
+                          Meninggal
+                        </div>
+                        <div v-else>
+                          -
                         </div>
                       </td>
                       <td>{{ item.current_location_address }}</td>
@@ -335,13 +350,17 @@ export default {
       'hospitalList'
     ])
   },
-  async created() {
-    await this.$store.dispatch('region/getListHospital')
+  async beforeMount() {
     const detail = await this.$store.dispatch('reports/detailHistoryCase', this.idData)
-    Object.assign(this.formRiwayatPasien, detail.data[0])
+    await this.$store.dispatch('region/getListHospital')
+    await Object.assign(this.formRiwayatPasien, detail)
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
-    this.formRiwayatPasien.case = detail.data[0].case
-    this.formRiwayatPasien.first_symptom_date = await this.formatDatetime(detail.data[0].first_symptom_date, this.formatDate)
+    this.formRiwayatPasien.case = detail.case
+    if ((detail.first_symptom_date !== null) && (detail.first_symptom_date !== 'Invalid date')) {
+      this.formRiwayatPasien.first_symptom_date = await this.formatDatetime(detail.first_symptom_date, this.formatDate)
+    } else {
+      this.formRiwayatPasien.first_symptom_date = ''
+    }
     if (this.formRiwayatPasien.case) {
       delete this.formRiwayatPasien['createdAt']
       delete this.formRiwayatPasien['updatedAt']
@@ -350,16 +369,6 @@ export default {
   },
   methods: {
     formatDatetime,
-    handleChange(value) {
-      if (value === 'RUMAH') {
-        this.formRiwayatPasien.current_location_address = ''
-      } else {
-        this.formRiwayatPasien.current_location_address = ''
-        this.formRiwayatPasien.current_location_district_code = ''
-        this.formRiwayatPasien.current_location_subdistrict_code = ''
-        this.formRiwayatPasien.current_location_village_code = ''
-      }
-    },
     async handleSaveHistory() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
@@ -383,9 +392,9 @@ export default {
       } else {
         this.formRiwayatPasien.current_hospital_id = ''
         this.formRiwayatPasien.current_location_address = ''
-        this.formRiwayatPasien.current_location_district = ''
-        this.formRiwayatPasien.current_location_subdistrict = ''
-        this.formRiwayatPasien.current_location_village = ''
+        this.formRiwayatPasien.current_location_district_code = ''
+        this.formRiwayatPasien.current_location_subdistrict_code = ''
+        this.formRiwayatPasien.current_location_village_code = ''
       }
     }
   }

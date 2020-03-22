@@ -49,7 +49,7 @@ export default {
     return new Promise(async(resolve, reject) => {
       try {
         const response = await fetchList(`/api/cases/${id}/last-history`, 'GET')
-        resolve(response)
+        resolve(response.data[0])
       } catch (e) {
         reject(e)
       }

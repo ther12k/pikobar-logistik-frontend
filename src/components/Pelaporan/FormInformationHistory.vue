@@ -74,7 +74,7 @@
                 :district-code="formPasien.current_location_district_code"
                 :code-district.sync="formPasien.current_location_district_code"
                 :sub-district-code="formPasien.current_location_subdistrict_code"
-                :code-subdistrict.sync="formPasien.current_location_subdistrict_code"
+                :code-sub-district.sync="formPasien.current_location_subdistrict_code"
                 :village-code="formPasien.current_location_village_code"
                 :code-village.sync="formPasien.current_location_village_code"
                 :disabled-address="false"

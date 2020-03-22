@@ -1,7 +1,7 @@
 <template>
   <div class="SelectDatetime">
     <v-row align="center">
-      <v-col cols="4">
+      <v-col cols="12" md="4" sm="4">
         <v-select
           v-model="year"
           :items="yearList"
@@ -11,7 +11,7 @@
           @change="onSelectYear"
         />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="12" md="4" sm="4">
         <v-select
           v-model="month"
           :items="listMonthName"
@@ -23,7 +23,7 @@
           @change="onSelectMonth"
         />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="12" md="4" sm="4">
         <v-select
           v-model="days"
           :items="dayList"

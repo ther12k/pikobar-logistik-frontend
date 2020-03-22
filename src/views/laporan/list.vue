@@ -119,8 +119,11 @@
                     <div v-else-if=" item.last_history.final_result =='1'">
                       Sembuh
                     </div>
-                    <div v-else>
+                    <div v-else-if=" item.last_history.final_result =='2'">
                       Meninggal
+                    </div>
+                    <div v-else>
+                      -
                     </div>
                   </td>
                   <td v-if="roles[0] === 'dinkeskota'">

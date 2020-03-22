@@ -218,6 +218,7 @@
                       <th class="text-left">#</th>
                       <th class="text-left">STATUS</th>
                       <th class="text-left">TAHAPAN</th>
+                      <th class="text-left">HASIL</th>
                       <th class="text-left">LOKASI SAAT INI</th>
                       <th class="text-left">TANGGAL DIUPDATE</th>
                     </tr>
@@ -232,6 +233,20 @@
                         </div>
                         <div v-else>
                           Selesai
+                        </div>
+                      </td>
+                      <td>
+                        <div v-if=" item.final_result =='0'">
+                          Negatif
+                        </div>
+                        <div v-else-if=" item.final_result =='1'">
+                          Sembuh
+                        </div>
+                        <div v-else-if=" item.final_result =='2'">
+                          Meninggal
+                        </div>
+                        <div v-else>
+                          -
                         </div>
                       </td>
                       <td>{{ item.current_location_address }}</td>
@@ -283,19 +298,21 @@ export default {
   },
   watch: {
     'formPasien.birth_date': function(value) {
-      if ((value !== null) && (value !== 'Invalid date')) {
+      if ((value !== '') && (value !== null) && (value !== 'Invalid date')) {
         this.formPasien.age = this.getAge(value)
       }
     }
   },
-  async created() {
+  async beforeMount() {
+    const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
+    await Object.assign(this.formPasien, detail.data)
     await this.$store.dispatch('occupation/getListOccuption')
     await this.$store.dispatch('region/getListHospital')
-    const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
-    Object.assign(this.formPasien, detail.data)
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     if (detail.data.birth_date) {
       this.formPasien.birth_date = await this.formatDatetime(detail.data.birth_date, this.formatDate)
+    } else {
+      this.formPasien.birth_date = ''
     }
     if (this.formPasien._id) {
       delete this.formPasien['_id']
