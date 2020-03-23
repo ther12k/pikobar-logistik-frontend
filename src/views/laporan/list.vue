@@ -151,10 +151,10 @@
                             Lihat Detail
                           </v-list-item>
                           <v-list-item @click="handleEditCase(item._id)">
-                            Update Kasus
+                            Update Profil
                           </v-list-item>
                           <v-list-item @click="handleEditHistoryCase(item._id)">
-                            Update Riwayat Kasus
+                            Update Riwayat
                           </v-list-item>
                         </v-card>
                       </v-menu>

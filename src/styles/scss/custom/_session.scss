@@ -13,11 +13,11 @@
     top: 0;
 }
 .session-banner {
-  background-image: url("/static/img/login-signup.png");
+  background-image: url("/src/static/img/login-signup.png");
   @extend .bg-sc;
 }
 .lock-screen-wrapper {
-  background-image: url("/static/img/lock-bg.png");
+  background-image: url("/src/static/img/lock-bg.png");
   @extend .bg-sc;
 }
 .lock-screen-block {

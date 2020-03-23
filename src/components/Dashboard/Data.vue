@@ -33,7 +33,7 @@
           >
             <v-card-title class="headline text-center d-block mx-auto">POSITIF</v-card-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-card-subtitle class="text-center display-2	mb-4">{{ patien.TOTAL }}</v-card-subtitle>
 
@@ -50,7 +50,7 @@
           >
             <v-card-title class="headline text-center d-block mx-auto">SEMBUH</v-card-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-card-subtitle class="text-center display-2 mb-4">{{ patien.ODP }}</v-card-subtitle>
 
@@ -67,7 +67,7 @@
           >
             <v-card-title class="headline text-center d-block mx-auto">MENINGGAL</v-card-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-card-subtitle class="text-center display-2 mb-4">{{ patien.PDP }}</v-card-subtitle>
 
@@ -83,7 +83,6 @@
             outlined
           >
             <v-card-title class="headline text-center d-block mx-auto">ODP</v-card-title>
-
             <v-row>
               <v-col cols="4">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>

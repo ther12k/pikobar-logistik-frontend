@@ -3,10 +3,10 @@
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <v-list-item v-if="onlyOneChild.meta" :to="resolvePath(item.path)">
         <v-list-item-icon>
-          <v-icon v-text="onlyOneChild.meta.icon"/>
+          <v-icon v-text="onlyOneChild.meta.icon" />
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title v-text="generateTitle(onlyOneChild.meta.title)"/>
+          <v-list-item-title v-text="generateTitle(onlyOneChild.meta.title)" />
         </v-list-item-content>
       </v-list-item>
     </template>

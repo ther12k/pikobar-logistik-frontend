@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <ValidationObserver v-slot="{ validate, reset }" ref="observer">
+    <ValidationObserver ref="observer">
       <v-form
         ref="form"
         lazy-validation
@@ -82,19 +82,19 @@
               />
             </div>
             <ValidationProvider
-              v-slot="{ errors }"
               v-if="formPasien.current_location_type === 'RUMAH'"
+              v-slot="{ errors }"
             >
               <v-label>Alamat Lengkap lokasi saat ini</v-label>
               <v-text-field
-                :error-messages="errors"
                 v-model="formPasien.current_location_address"
+                :error-messages="errors"
                 solo-inverted
               />
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
               v-if="formPasien.current_location_type === 'RS'"
+              v-slot="{ errors }"
               rules="required"
             >
               <v-autocomplete
@@ -117,12 +117,12 @@
             >
               <v-label>Sumber Pelaporan</v-label>
               <v-text-field
-                :error-messages="errors"
                 v-model="formPasien.report_source"
+                :error-messages="errors"
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider>
               <v-label>Catatan Tambahan</v-label>
               <v-textarea
                 v-model="formPasien.other_notes"
@@ -135,7 +135,7 @@
             md="6"
             sm="12"
           >
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider>
               <v-label>Riwayat</v-label>
               <v-checkbox
                 v-model="formPasien.is_went_abroad"
@@ -143,8 +143,8 @@
               />
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
               v-if="formPasien.is_went_abroad === true"
+              v-slot="{ errors }"
               rules="required"
             >
               <v-text-field
@@ -154,17 +154,15 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-            >
+            <ValidationProvider>
               <v-checkbox
                 v-model="formPasien.is_went_other_city"
                 label="Perjalanan ke luar kota"
               />
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
               v-if="formPasien.is_went_other_city === true"
+              v-slot="{ errors }"
               rules="required"
             >
               <v-text-field
@@ -174,15 +172,13 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider>
               <v-checkbox
                 v-model="formPasien.is_contact_with_positive"
                 label="Kontak Dengan Pasien Positif"
               />
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-            >
+            <ValidationProvider>
               <v-text-field
                 v-model="formPasien.history_notes"
                 placeholder="Masukkan Riwayat Lainnya Jika Ada"
@@ -200,8 +196,8 @@
               <div v-for="(item, index) in optionGejala" :key="index">
                 <label class="material-checkbox-custom">
                   <input
-                    :value="item.value"
                     v-model="formPasien.diagnosis"
+                    :value="item.value"
                     type="checkbox"
                   >
                   <span v-if="errors.length" class="error--text">{{ item.text }}</span>
@@ -213,9 +209,7 @@
                 class="v-messages error--text"
               >{{ errors[0] }}</span>
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-            >
+            <ValidationProvider>
               <v-text-field
                 v-model="formPasien.diagnosis_other"
                 placeholder="Sebutkan gelaja lainnya (jika ada)"

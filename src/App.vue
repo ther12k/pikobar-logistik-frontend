@@ -7,13 +7,13 @@
       <!-- Loader -->
       <div class="spinwrap">
         <div class="spinner">
-          <div class="cube1"/>
-          <div class="cube2"/>
+          <div class="cube1" />
+          <div class="cube2" />
         </div>
       </div>
     </template>
     <template v-else>
-      <router-view/>
+      <router-view />
     </template>
   </v-app>
 </template>

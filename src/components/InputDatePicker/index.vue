@@ -1,8 +1,8 @@
 <template>
   <v-menu
     ref="open"
-    :close-on-content-click="false"
     v-model="openDatepicker"
+    :close-on-content-click="false"
     min-width="290px"
     transition="scale-transition"
     offset-y

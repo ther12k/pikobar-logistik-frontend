@@ -66,7 +66,7 @@ export default {
   mounted() {
     this.yearList = this.listYear()
     this.dayList = this.listDays()
-    if (this.datetime.length > 0) {
+    if (this.datetime !== null && this.datetime.length > 0) {
       const date = this.datetime.split('/')
       this.year = parseInt(date[0])
       this.month = parseInt(date[1])

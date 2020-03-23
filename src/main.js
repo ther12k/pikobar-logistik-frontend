@@ -12,7 +12,7 @@ import FlagIcon from 'vue-flag-icon'
 
 moment.locale('id')
 
-import vuetify from '@/utils/vuetify'
+import vuetify from './plugins/vuetify'
 Vue.config.performance = process.env.NODE_ENV === 'development'
 
 import App from './App'

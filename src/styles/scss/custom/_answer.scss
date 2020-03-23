@@ -1,6 +1,6 @@
 /*=========== Answer Form ============*/
 .answer-background {
-  background: #27AE60 url('/static/doodle.svg');
+  background: #27AE60 url('/src/static/doodle.svg');
   background-repeat: repeat;
   height: 330px;
   margin-top: 1%;
@@ -23,7 +23,7 @@
   }
 }
 .icon-jabarsurvey {
-  background-image: url('/static/icon-name-jabarsurvey.svg');
+  background-image: url('/src/static/icon-name-jabarsurvey.svg');
   height: 50px;
 }
 .content-answer {
@@ -39,7 +39,7 @@
 }
 
 .icon-update-it-survey {
-  background-image: url("/static/update-it-survey.svg");
+  background-image: url("/src/static/update-it-survey.svg");
   height: 50px;
 }
 

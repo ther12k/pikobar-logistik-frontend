@@ -1,94 +1,74 @@
 import { fetchList, fetchDetail, fetchPostUpdate } from '@/api'
 
 export default {
-  listReportCase({ commit }, params) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchList('/api/cases', 'GET', params)
-        commit('SET_TOTAL_LIST_PASIEN', response.data._meta.totalPages)
-        commit('SET_LIST_PASIEN', response.data.cases)
-        resolve(response)
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async listReportCase({ commit }, params) {
+    const response = await fetchList('/api/cases', 'GET', params)
+    commit('SET_TOTAL_LIST_PASIEN', response.data._meta.totalPages)
+    commit('SET_LIST_PASIEN', response.data.cases)
+    return response
   },
-  createReportCase({ commit }, data) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchPostUpdate('/api/cases', 'POST', data)
-        resolve(response)
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async createReportCase({ commit }, data) {
+    try {
+      const response = await fetchPostUpdate('/api/cases', 'POST', data)
+      return response
+    } catch (e) {
+      return e
+    }
   },
-  updateReportCase({ commit }, data) {
-    const id_case = data.id
-    delete data['id']
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchPostUpdate(`/api/cases/${id_case}`, 'PUT', data.data)
-        resolve(response)
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async updateReportCase({ commit }, data) {
+    const id_case = await data.id
+    await delete data['id']
+    try {
+      const response = await fetchPostUpdate(`/api/cases/${id_case}`, 'PUT', data.data)
+      return response
+    } catch (e) {
+      return e
+    }
   },
-  detailReportCase({ commit }, id) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchDetail('/api/cases', 'GET', id)
-        resolve(response)
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async detailReportCase({ commit }, id) {
+    try {
+      const response = await fetchDetail('/api/cases', 'GET', id)
+      return response
+    } catch (e) {
+      return e
+    }
   },
-  detailHistoryCase({ commit }, id) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchList(`/api/cases/${id}/last-history`, 'GET')
-        resolve(response.data[0])
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async detailHistoryCase({ commit }, id) {
+    try {
+      const response = await fetchList(`/api/cases/${id}/last-history`, 'GET')
+      return response.data[0]
+    } catch (e) {
+      return e
+    }
   },
-  countReportCase({ commit }, params) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchList('/api/cases-summary', 'GET', params)
-        resolve(response)
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async countReportCase({ commit }, params) {
+    try {
+      const response = await fetchList('/api/cases-summary', 'GET', params)
+      return response
+    } catch (e) {
+      return e
+    }
   },
-  listHistoryCase({ commit }, id) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchList(`/api/cases/${id}/history`, 'GET')
-        resolve(response)
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async listHistoryCase({ commit }, id) {
+    try {
+      const response = await fetchList(`/api/cases/${id}/history`, 'GET')
+      return response
+    } catch (e) {
+      return e
+    }
   },
-  createHistoryCase({ commit }, data) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const response = await fetchPostUpdate('/api/history_cases', 'POST', data)
-        resolve(response)
-      } catch (e) {
-        reject(e)
-      }
-    })
+  async createHistoryCase({ commit }, data) {
+    try {
+      const response = await fetchPostUpdate('/api/history_cases', 'POST', data)
+      return response
+    } catch (e) {
+      return e
+    }
   },
-  resetFormPasien({ commit }) {
+  async resetFormPasien({ commit }) {
     commit('RESET_FORM_PASIEN')
   },
-  resetRiwayatFormPasien({ commit }) {
+  async resetRiwayatFormPasien({ commit }) {
     commit('RESET_RIWAYAT_FORM_PASIEN')
   }
 }

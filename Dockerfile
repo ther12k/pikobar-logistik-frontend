@@ -6,7 +6,6 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copy all files to app folder
-COPY .babelrc .
 COPY package*.json ./
 RUN npm install --progress=false
 COPY . /app

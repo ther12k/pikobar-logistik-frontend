@@ -10,16 +10,9 @@
     >
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
-          <v-card-text>Nama Kasus</v-card-text>
+          <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">ID Kasus</v-card-text>
         </v-col>
-        <v-col auto>
-          <v-text-field
-            v-model="detailData.name"
-            disabled
-            hide-details
-            solo-inverted
-          />
-        </v-col>
+        <v-col auto />
       </v-row>
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
@@ -54,6 +47,25 @@
         <v-col auto>
           <v-text-field
             v-model="detailData.id_case_national"
+            disabled
+            hide-details
+            solo-inverted
+          />
+        </v-col>
+      </v-row>
+      <v-row class="row-detail">
+        <v-col class="row-detail-label" cols="3">
+          <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">Identitas</v-card-text>
+        </v-col>
+        <v-col auto />
+      </v-row>
+      <v-row class="row-detail">
+        <v-col class="row-detail-label" cols="3">
+          <v-card-text>Nama Kasus</v-card-text>
+        </v-col>
+        <v-col auto>
+          <v-text-field
+            v-model="detailData.name"
             disabled
             hide-details
             solo-inverted
@@ -101,6 +113,19 @@
       </v-row>
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
+          <v-card-text>Alamat</v-card-text>
+        </v-col>
+        <v-col auto>
+          <v-textarea
+            v-model="detailAddres"
+            disabled
+            hide-details
+            solo-inverted
+          />
+        </v-col>
+      </v-row>
+      <v-row class="row-detail">
+        <v-col class="row-detail-label" cols="3">
           <v-card-text>Nomor Telepon</v-card-text>
         </v-col>
         <v-col auto>
@@ -113,17 +138,44 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
+        <v-row>
+          <v-col class="row-detail-label" cols="6">
+            <v-row>
+              <v-col>
+                <v-card-text>Kewarganegaraan</v-card-text>
+              </v-col>
+              <v-col auto>
+                <v-text-field
+                  v-model="detailData.nationality"
+                  disabled
+                  hide-details
+                  solo-inverted
+                />
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col class="row-detail-label" cols="6">
+            <v-row v-if="detailData.nationality === 'WNA'">
+              <v-col>
+                <v-card-text>Negara</v-card-text>
+              </v-col>
+              <v-col auto>
+                <v-text-field
+                  v-model="detailData.nationality_name"
+                  disabled
+                  hide-details
+                  solo-inverted
+                />
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-row>
+      <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
-          <v-card-text>Alamat</v-card-text>
+          <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">Pekerjaan</v-card-text>
         </v-col>
-        <v-col auto>
-          <v-text-field
-            v-model="detailData.address_street"
-            disabled
-            hide-details
-            solo-inverted
-          />
-        </v-col>
+        <v-col auto />
       </v-row>
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
@@ -138,12 +190,88 @@
           />
         </v-col>
       </v-row>
+      <v-row class="row-detail">
+        <v-col class="row-detail-label" cols="3">
+          <v-card-text>Alamat Kantor</v-card-text>
+        </v-col>
+        <v-col auto>
+          <v-textarea
+            v-model="detailData.office_address"
+            disabled
+            hide-details
+            solo-inverted
+          />
+        </v-col>
+      </v-row>
+    </v-card>
+    <v-card
+      style="margin-top: 2rem;"
+      outlined
+    >
+      <v-row>
+        <v-expansion-panels
+          v-model="panelListRiwayat"
+          multiple
+        >
+          <v-expansion-panel>
+            <v-expansion-panel-header>List Riwayat Kasus</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-simple-table fixed-header height="500px">
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">#</th>
+                      <th class="text-left">STATUS</th>
+                      <th class="text-left">TAHAPAN</th>
+                      <th class="text-left">HASIL</th>
+                      <th class="text-left">LOKASI SAAT INI</th>
+                      <th class="text-left">TANGGAL DIUPDATE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in listHistoryCase" :key="item.index">
+                      <td>{{ getTableRowNumbering(index) }}</td>
+                      <td><status :status="item.status" /></td>
+                      <td>
+                        <div v-if="item.stage === '0'">
+                          Proses
+                        </div>
+                        <div v-else>
+                          Selesai
+                        </div>
+                      </td>
+                      <td>
+                        <div v-if=" item.final_result =='0'">
+                          Negatif
+                        </div>
+                        <div v-else-if=" item.final_result =='1'">
+                          Sembuh
+                        </div>
+                        <div v-else-if=" item.final_result =='2'">
+                          Meninggal
+                        </div>
+                        <div v-else>
+                          -
+                        </div>
+                      </td>
+                      <td>{{ item.current_location_address }}</td>
+                      <td>{{ formatDatetime(item.last_changed, "DD MMMM YYYY") }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-row>
     </v-card>
   </div>
 </template>
 
 <script>
 import { formatDatetime } from '@/utils/parseDatetime'
+import { completeAddress } from '@/utils/utilsFunction'
+
 export default {
   name: 'DetailPatient',
   props: {
@@ -154,21 +282,38 @@ export default {
   },
   data() {
     return {
+      listHistoryCase: null,
+      panelListRiwayat: [0],
       birthDate: '',
       detailGender: '',
-      detailData: ''
+      detailData: '',
+      detailAddres: ''
     }
   },
   async mounted() {
     const response = await this.$store.dispatch('reports/detailReportCase', this.idData)
+    const responseHistory = await this.$store.dispatch('reports/listHistoryCase', this.idData)
+    this.listHistoryCase = responseHistory.data
     this.detailData = await response.data
     if (this.detailData) {
-      this.birthDate = await formatDatetime(this.detailData.birth_date, 'DD-MM-YYYY')
+      if (this.detailData.birth_date) {
+        this.birthDate = await formatDatetime(this.detailData.birth_date, 'DD-MM-YYYY')
+      }
       this.detailGender = await this.detailData.gender === 'L' ? 'Laki-Laki' : 'Perempuan'
+      this.detailAddres = this.completeAddress(
+        this.detailData.address_district_name,
+        this.detailData.address_subdistrict_name,
+        this.detailData.address_village_name,
+        this.detailData.address_street
+      )
     }
   },
   methods: {
-    formatDatetime
+    formatDatetime,
+    completeAddress,
+    getTableRowNumbering(index) {
+      return (index + 1)
+    }
   }
 }
 </script>
