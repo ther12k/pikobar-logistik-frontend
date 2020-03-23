@@ -24,6 +24,7 @@ export default {
     ])
   },
   async beforeMount() {
+    await this.$store.dispatch('region/getListHospital')
     await this.$store.dispatch('reports/resetRiwayatFormPasien')
     this.detail = await this.$store.dispatch('reports/detailHistoryCase', this.$route.params.id)
     await Object.assign(this.formRiwayatPasien, this.detail)
