@@ -3,7 +3,6 @@ import store from '@/store'
 import { ResponseRequest } from '@/utils/constantVariable'
 import { getToken } from '@/utils/cookies'
 
-console.log('cek netfly', process.env)
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
 const method = isSecure ? 'https' : 'http'
 let url
@@ -12,7 +11,7 @@ if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 
 } else {
   url = `${method}://${process.env.VUE_APP_URL}`
 }
-
+console.log(url)
 // create an axios instance
 const service = axios.create({
   baseURL: url, // api base_url
