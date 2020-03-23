@@ -12,7 +12,7 @@
             outlined>
             <v-row>
               <v-col cols="4">
-								<p class="subtitle-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</p>
+                <p class="subtitle-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</p>
               </v-col>
               <v-col cols="8">
                 <v-list-item-title class="headline mb-1">0</v-list-item-title>
@@ -24,7 +24,7 @@
       <v-row>
         <v-col cols="4">
           <v-card
-						color="#EF9A9A"
+            color="#EF9A9A"
           >
             <v-card-title class="headline text-center d-block mx-auto">POSITIF</v-card-title>
 
