@@ -303,24 +303,10 @@ export default {
       }
     }
   },
-  async beforeMount() {
-    const detail = await this.$store.dispatch('reports/detailReportCase', this.idData)
-    await Object.assign(this.formPasien, detail.data)
+  async mounted() {
     await this.$store.dispatch('occupation/getListOccuption')
     await this.$store.dispatch('region/getListHospital')
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
-    if (detail.data.birth_date) {
-      this.formPasien.birth_date = await this.formatDatetime(detail.data.birth_date, this.formatDate)
-    } else {
-      this.formPasien.birth_date = ''
-    }
-    if (this.formPasien._id) {
-      delete this.formPasien['_id']
-      delete this.formPasien['author']
-      delete this.formPasien['createdAt']
-      delete this.formPasien['updatedAt']
-      delete this.formPasien['last_history']
-    }
     this.listHistoryCase = response.data
   },
   methods: {

@@ -350,21 +350,9 @@ export default {
       'hospitalList'
     ])
   },
-  async beforeMount() {
-    const detail = await this.$store.dispatch('reports/detailHistoryCase', this.idData)
+  async mounted() {
     await this.$store.dispatch('region/getListHospital')
-    await Object.assign(this.formRiwayatPasien, detail)
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
-    this.formRiwayatPasien.case = detail.case
-    if ((detail.first_symptom_date !== null) && (detail.first_symptom_date !== 'Invalid date')) {
-      this.formRiwayatPasien.first_symptom_date = await this.formatDatetime(detail.first_symptom_date, this.formatDate)
-    } else {
-      this.formRiwayatPasien.first_symptom_date = ''
-    }
-    if (this.formRiwayatPasien.case) {
-      delete this.formRiwayatPasien['createdAt']
-      delete this.formRiwayatPasien['updatedAt']
-    }
     this.listHistoryCase = response.data
   },
   methods: {
