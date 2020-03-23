@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- App Header -->
-    <app-header/>
+    <app-header />
     <!-- App Main Content -->
     <v-content>
       <!-- Breadcrumbs -->
@@ -17,7 +17,7 @@
       </div>
     </v-content>
     <!-- App Back To Top -->
-    <vm-back-top style="bottom: 10px;"/>
+    <vm-back-top style="bottom: 10px;" />
   </div>
 </template>
 

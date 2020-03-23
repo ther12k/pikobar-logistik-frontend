@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <ValidationObserver v-slot="{ validate, reset }" ref="observer">
+    <ValidationObserver ref="observer">
       <v-form
         ref="form"
         lazy-validation
@@ -11,9 +11,7 @@
             md="6"
             sm="12"
           >
-            <ValidationProvider
-              v-slot="{ errors }"
-            >
+            <ValidationProvider>
               <label>ID Kasus</label>
               <v-text-field
                 placeholder="ID Kasus akan generate dari system secara otomatis"
@@ -26,8 +24,8 @@
             >
               <v-label>ID Kasus Pusat</v-label>
               <v-text-field
-                :error-messages="errors"
                 v-model="formPasien.id_case_national"
+                :error-messages="errors"
                 solo-inverted
               />
             </ValidationProvider>
@@ -36,12 +34,12 @@
             >
               <v-label>ID Kasus Terkait</v-label>
               <v-text-field
-                :error-messages="errors"
                 v-model="formPasien.id_case_related"
+                :error-messages="errors"
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider>
               <v-label>Pekerjaan</v-label>
               <v-select
                 v-model="formPasien.occupation"
@@ -52,7 +50,7 @@
                 solo
               />
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider>
               <v-label>Alamat Kantor</v-label>
               <v-textarea
                 v-model="formPasien.office_address"
@@ -75,8 +73,8 @@
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
               v-if="formPasien.nationality === 'WNA'"
+              v-slot="{ errors }"
             >
               <v-text-field
                 v-model="formPasien.nationality_name"
@@ -97,8 +95,8 @@
             >
               <label class="required">Nama Pasien</label>
               <v-text-field
-                :error-messages="errors"
                 v-model="formPasien.name"
+                :error-messages="errors"
                 solo-inverted
               />
             </ValidationProvider>
@@ -114,8 +112,8 @@
             >
               <label class="required">Usia</label>
               <v-text-field
-                :error-messages="errors"
                 v-model="formPasien.age"
+                :error-messages="errors"
                 solo-inverted
                 type="number"
               />
@@ -151,7 +149,7 @@
               :disabled-address="false"
               :required-address="true"
             />
-            <ValidationProvider v-slot="{ errors }">
+            <ValidationProvider>
               <v-label>Alamat Lengkap Tempat Tinggal</v-label>
               <v-textarea
                 v-model="formPasien.address_street"

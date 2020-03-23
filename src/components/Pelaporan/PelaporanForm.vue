@@ -9,7 +9,7 @@
             cols="12"
             style="padding: 2rem;"
           >
-            <ValidationObserver v-slot="{ validate, reset }" ref="observer">
+            <ValidationObserver ref="observer">
               <v-form
                 ref="form"
                 lazy-validation
@@ -18,8 +18,8 @@
                   v-slot="{ errors }"
                 >
                   <v-text-field
-                    :error-messages="errors"
                     v-model="formPasien.identity_case"
+                    :error-messages="errors"
                     label="Identity Case"
                     placeholder="Tuliskan Identity Case"
                   />
@@ -28,8 +28,8 @@
                   v-slot="{ errors }"
                 >
                   <v-text-field
-                    :error-messages="errors"
                     v-model="formPasien.national_identity_number"
+                    :error-messages="errors"
                     label="National Identity Case"
                     placeholder="Tuliskan National Identity Case"
                   />
@@ -49,8 +49,8 @@
                   rules="required|isHtml"
                 >
                   <v-text-field
-                    :error-messages="errors"
                     v-model="formPasien.name"
+                    :error-messages="errors"
                     label="Nama Pasien"
                     placeholder="Tuliskan Nama Pasien"
                     required
@@ -62,20 +62,20 @@
                   label="Tanggal Lahir"
                   @changeDate="formPasien.birth_date = $event"
                 />
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <v-text-field
                     v-model="formPasien.phone_number"
                     label="Nomor Telepone"
                   />
                 </ValidationProvider>
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <v-text-field
                     v-model="formPasien.age"
                     label="Usia Pasien"
                     type="number"
                   />
                 </ValidationProvider>
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <v-label>Kewarganegaraan</v-label>
                   <v-radio-group
                     v-model="formPasien.nationality_type"
@@ -85,13 +85,13 @@
                     <v-radio label="WNA" value="WNA" />
                   </v-radio-group>
                 </ValidationProvider>
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <v-text-field
                     v-model="formPasien.occupation"
                     label="Pekerjaan"
                   />
                 </ValidationProvider>
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <v-label>Jenis Kelamin</v-label>
                   <v-radio-group
                     v-model="formPasien.gender"
@@ -107,7 +107,7 @@
                   :disabled-address="false"
                   :required-address="false"
                 />
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <v-textarea
                     v-model="formPasien.address_street"
                     label="Alamat Lengkap"
@@ -125,7 +125,7 @@
                     autocomplete
                   />
                 </ValidationProvider>
-                <ValidationProvider v-slot="{ errors }">
+                <ValidationProvider>
                   <v-select
                     v-model="formPasien.current_hospital_id"
                     label="Dinkes Kota/Kab"

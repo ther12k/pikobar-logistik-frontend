@@ -17,7 +17,7 @@
           >
             <v-card-title class="headline text-center">Total Pasien</v-card-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-card-subtitle class="text-center display-3	">{{ patien.TOTAL }}</v-card-subtitle>
 
@@ -39,7 +39,7 @@
           >
             <v-card-title class="headline text-center">ODP</v-card-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-card-subtitle class="text-center display-3">{{ patien.ODP }}</v-card-subtitle>
 
@@ -60,7 +60,7 @@
           >
             <v-card-title class="headline text-center">PDP</v-card-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-card-subtitle class="text-center display-3">{{ patien.PDP }}</v-card-subtitle>
 
@@ -81,7 +81,7 @@
           >
             <v-card-title class="headline text-center">Positif</v-card-title>
 
-            <v-spacer/>
+            <v-spacer />
 
             <v-card-subtitle class="text-center display-3">{{ patien.POSITIF }}</v-card-subtitle>
 

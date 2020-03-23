@@ -20,7 +20,7 @@
       <div class="title-app">
         <img
           height="50"
-          src="static/login/logo.svg"
+          src="../../static/login/logo.svg"
         >
       </div>
       <v-app-bar-nav-icon

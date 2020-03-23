@@ -7,7 +7,7 @@
     >
       <v-card>
         <div class="justify-center dialog-img-delete">
-          <img src="static/image-delete-dialog.svg">
+          <img src="src/static/image-delete-dialog.svg">
         </div>
         <v-card-title
           class="dialog-delete-title"

@@ -1,8 +1,8 @@
 <template>
   <v-snackbar
+    v-model="isShow"
     :color="color"
     :top="top"
-    v-model="isShow"
     dark
   >
     <v-icon
