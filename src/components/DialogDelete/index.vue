@@ -3,11 +3,11 @@
     <v-dialog
       v-model="dialogDelete"
       persistent
-      max-width="340px"
+      max-width="450px"
     >
       <v-card>
         <div class="justify-center dialog-img-delete">
-          <img src="src/static/image-delete-dialog.svg">
+          <img src="../../static/image-delete-dialog.svg">
         </div>
         <v-card-title
           class="dialog-delete-title"
@@ -58,7 +58,7 @@ export default {
       default: null
     },
     dataDeleted: {
-      type: Object,
+      type: String,
       default: null
     }
   },
@@ -80,8 +80,8 @@ export default {
       await this.$store.dispatch('toast/successToast', this.$t('success.data_success_delete'))
       if (this.storePathResetList) {
         await this.$store.dispatch(this.storePathResetList)
-        await this.$store.dispatch(this.storePathGetList)
       }
+      await this.$store.dispatch(this.storePathGetList)
     }
   }
 }
