@@ -5,6 +5,7 @@
         v-model="pageSize"
         :items="pageSizes"
         filled
+        solo
         label="Baris"
         @change="changePageSize"
       />
@@ -14,7 +15,6 @@
         <v-pagination
           v-model="currentPage"
           :length="total"
-          circle
           @input="onNext"
         />
       </div>
@@ -41,7 +41,7 @@ export default {
     pageSizes: {
       type: Array,
       default() {
-        return [5, 10, 20, 30]
+        return [10, 20, 30]
       }
     },
     onNext: {
@@ -55,7 +55,7 @@ export default {
         return this.page
       },
       set(val) {
-        this.$emit('update:pageUpdate', val)
+        this.$emit('update:page', val)
       }
     },
     pageSize: {
