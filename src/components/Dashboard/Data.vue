@@ -14,7 +14,8 @@
         >
           <v-card
             class="mx-auto"
-            outlined>
+            outlined
+          >
             <v-row>
               <v-col cols="4">
                 <p class="subtitle-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</p>
