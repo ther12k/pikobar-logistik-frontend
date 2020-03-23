@@ -12,7 +12,6 @@ selenium-debug.log
 .idea
 .vscode
 .env
-yarn.lock
 *.suo
 *.ntvs*
 *.njsproj
