@@ -66,31 +66,31 @@ export default {
   async mounted() {
     this.yearList = await this.listYear()
     this.dayList = await this.listDays()
-    const date = await this.datetime.split('/')
-    this.year = parseInt(date[0])
-    this.month = parseInt(date[1])
-    this.days = parseInt(date[2])
+    this.date = await this.datetime.split('/')
+    this.year = parseInt(this.date[0])
+    this.month = parseInt(this.date[1])
+    this.days = parseInt(this.date[2])
   },
   methods: {
     listYear,
     listDays,
     onSelectYear(value) {
-      this.date[0] = value
       if (this.date.length >= 3) {
+        this.date[0] = value
         this.finalDate = `${this.date[0]}/${this.date[1]}/${this.date[2]}`
         this.$emit('update:dateTime', this.finalDate)
       }
     },
     onSelectMonth(value) {
-      this.date[1] = value
       if (this.date.length >= 3) {
+        this.date[1] = value
         this.finalDate = `${this.date[0]}/${this.date[1]}/${this.date[2]}`
         this.$emit('update:dateTime', this.finalDate)
       }
     },
     onSelectDate(value) {
-      this.date[2] = value
       if (this.date.length >= 3) {
+        this.date[2] = value
         this.finalDate = `${this.date[0]}/${this.date[1]}/${this.date[2]}`
         this.$emit('update:dateTime', this.finalDate)
       }
