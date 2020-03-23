@@ -4,6 +4,7 @@
     class=""
   >
     <v-container>
+      <p class="title">Rekap Kasus Dinas Kesehatan Kota Cimahi</p>
       <v-row>
         <v-col
           cols="12"
@@ -12,18 +13,29 @@
           width="25%"
         >
           <v-card
-            color="info"
-            dark
+            class="mx-auto"
+            outlined>
+            <v-row>
+              <v-col cols="4">
+                <p class="subtitle-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</p>
+              </v-col>
+              <v-col cols="8">
+                <v-list-item-title class="headline mb-1">0</v-list-item-title>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="4">
+          <v-card
+            color="#EF9A9A"
           >
-            <v-card-title class="headline text-center">Total Pasien</v-card-title>
+            <v-card-title class="headline text-center d-block mx-auto">POSITIF</v-card-title>
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-3	">{{ patien.TOTAL }}</v-card-subtitle>
-
-            <v-card-actions>
-              <v-btn text>Lihat Detail</v-btn>
-            </v-card-actions>
+            <v-card-subtitle class="text-center display-2	mb-4">{{ patien.TOTAL }}</v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -34,18 +46,14 @@
           width="25%"
         >
           <v-card
-            color="purple"
-            dark
+            color="#BBDEFB"
           >
-            <v-card-title class="headline text-center">ODP</v-card-title>
+            <v-card-title class="headline text-center d-block mx-auto">SEMBUH</v-card-title>
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-3">{{ patien.ODP }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2 mb-4">{{ patien.ODP }}</v-card-subtitle>
 
-            <v-card-actions>
-              <v-btn text>Lihat Detail</v-btn>
-            </v-card-actions>
           </v-card>
         </v-col>
         <v-col
@@ -55,18 +63,14 @@
           width="25%"
         >
           <v-card
-            color="warning"
-            dark
+            color="#FFCC80"
           >
-            <v-card-title class="headline text-center">PDP</v-card-title>
+            <v-card-title class="headline text-center d-block mx-auto">MENINGGAL</v-card-title>
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-3">{{ patien.PDP }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2 mb-4">{{ patien.PDP }}</v-card-subtitle>
 
-            <v-card-actions>
-              <v-btn text>Lihat Detail</v-btn>
-            </v-card-actions>
           </v-card>
         </v-col>
         <v-col
@@ -76,18 +80,53 @@
           width="25%"
         >
           <v-card
-            color="pink"
-            dark
+            outlined
           >
-            <v-card-title class="headline text-center">Positif</v-card-title>
+            <v-card-title class="headline text-center d-block mx-auto">ODP</v-card-title>
+            <v-row>
+              <v-col cols="4">
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
-            <v-spacer />
+                <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
+              </v-col>
+              <v-col cols="4">
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
-            <v-card-subtitle class="text-center display-3">{{ patien.POSITIF }}</v-card-subtitle>
+                <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
+              </v-col>
+              <v-col cols="4">
+                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
 
-            <v-card-actions>
-              <v-btn text>Lihat Detail</v-btn>
-            </v-card-actions>
+                <v-card-subtitle class="text-center mb-4 pt-4">Total ODP</v-card-subtitle>
+              </v-col>
+            </v-row>
+
+          </v-card>
+        </v-col>
+        <v-col cols="6">
+          <v-card
+            outlined
+          >
+            <v-card-title class="headline text-center d-block mx-auto">PDP</v-card-title>
+
+            <v-row>
+              <v-col cols="4">
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
+
+                <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
+              </v-col>
+              <v-col cols="4">
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
+
+                <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
+              </v-col>
+              <v-col cols="4">
+                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
+
+                <v-card-subtitle class="text-center mb-4 pt-4">Total PDP</v-card-subtitle>
+              </v-col>
+            </v-row>
+
           </v-card>
         </v-col>
       </v-row>
