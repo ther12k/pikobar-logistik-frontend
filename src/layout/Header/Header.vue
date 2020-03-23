@@ -34,7 +34,8 @@
       <!--        inset-->
       <!--        class="dark-mode"-->
       <!--        style="padding-top: 1.4rem;"-->
-      <!--        @change="emitDarkMode">-->
+      <!--        @change="emitDarkMode"-->
+      <!--      >-->
       <!--        <template #prepend>-->
       <!--          <v-label style="font-size: 14px !important; min-width: 5rem !important;">{{ $t('label.dark_mode') }}</v-label>-->
       <!--        </template>-->

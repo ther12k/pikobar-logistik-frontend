@@ -14,7 +14,7 @@ function initialState() {
       name: '',
       birth_date: '',
       age: '',
-      gender: '',
+      gender: null,
       phone_number: null,
       address_street: '',
       address_province_code: '35',

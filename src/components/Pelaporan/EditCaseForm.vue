@@ -9,7 +9,7 @@
           multiple
         >
           <v-expansion-panel>
-            <v-expansion-panel-header>Update Detail Kasus</v-expansion-panel-header>
+            <v-expansion-panel-header>Update Data Profil Pasien</v-expansion-panel-header>
             <v-expansion-panel-content>
               <ValidationObserver ref="observer">
                 <v-form
