@@ -3,6 +3,7 @@ import store from '@/store'
 import { ResponseRequest } from '@/utils/constantVariable'
 import { getToken } from '@/utils/cookies'
 
+console.log('cek netfly', process.env)
 const isSecure = String(process.env.VUE_APP_SECURE) === 'true'
 const method = isSecure ? 'https' : 'http'
 let url
