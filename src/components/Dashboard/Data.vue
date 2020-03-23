@@ -31,7 +31,7 @@
 
             <v-spacer/>
 
-            <v-card-subtitle class="text-center display-3	mb-4">{{ patien.TOTAL }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2	mb-4">{{ patien.TOTAL }}</v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -44,7 +44,7 @@
 
             <v-spacer/>
 
-            <v-card-subtitle class="text-center display-3 mb-4">{{ patien.ODP }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2 mb-4">{{ patien.ODP }}</v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -57,7 +57,7 @@
 
             <v-spacer/>
 
-            <v-card-subtitle class="text-center display-3 mb-4">{{ patien.PDP }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2 mb-4">{{ patien.PDP }}</v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -71,12 +71,12 @@
 
             <v-row>
               <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4">Proses Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4">Selesai Pemantauan</v-card-subtitle>
               </v-col>
@@ -97,12 +97,12 @@
 
             <v-row>
               <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4">Proses Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
+                <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4">Selesai Pemantauan</v-card-subtitle>
               </v-col>
@@ -134,7 +134,6 @@ export default {
   async mounted() {
     const data = await this.$store.dispatch('reports/countReportCase')
     this.patien = await data.data
-    console.log(this.patien)
     for (var key in this.patien) {
       this.patien.TOTAL += this.patien[key]
     }
