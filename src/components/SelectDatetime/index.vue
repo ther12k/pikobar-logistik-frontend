@@ -63,15 +63,13 @@ export default {
       dayList: null
     }
   },
-  mounted() {
-    this.yearList = this.listYear()
-    this.dayList = this.listDays()
-    if (this.datetime !== null && this.datetime.length > 0) {
-      const date = this.datetime.split('/')
-      this.year = parseInt(date[0])
-      this.month = parseInt(date[1])
-      this.days = parseInt(date[2])
-    }
+  async mounted() {
+    this.yearList = await this.listYear()
+    this.dayList = await this.listDays()
+    const date = await this.datetime.split('/')
+    this.year = parseInt(date[0])
+    this.month = parseInt(date[1])
+    this.days = parseInt(date[2])
   },
   methods: {
     listYear,
