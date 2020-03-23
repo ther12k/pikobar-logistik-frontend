@@ -4,7 +4,7 @@
     class=""
   >
     <v-container>
-      <p>Rekap Kasus Dinas Kesehatan Kota Cimahi</p>
+      <p class="title">Rekap Kasus Dinas Kesehatan Kota Cimahi</p>
       <v-row>
         <v-col cols="12">
           <v-card
@@ -12,7 +12,7 @@
             outlined>
             <v-row>
               <v-col cols="4">
-                <v-list-item-title class="headline mb-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</v-list-item-title>
+								<p class="subtitle-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</p>
               </v-col>
               <v-col cols="8">
                 <v-list-item-title class="headline mb-1">0</v-list-item-title>
@@ -24,8 +24,7 @@
       <v-row>
         <v-col cols="4">
           <v-card
-            color="pink"
-            dark
+						color="#EF9A9A"
           >
             <v-card-title class="headline text-center d-block mx-auto">POSITIF</v-card-title>
 
@@ -37,8 +36,7 @@
         </v-col>
         <v-col cols="4">
           <v-card
-            color="blue"
-            dark
+            color="#BBDEFB"
           >
             <v-card-title class="headline text-center d-block mx-auto">SEMBUH</v-card-title>
 
@@ -50,8 +48,7 @@
         </v-col>
         <v-col cols="4">
           <v-card
-            color="warning"
-            dark
+            color="#FFCC80"
           >
             <v-card-title class="headline text-center d-block mx-auto">MENINGGAL</v-card-title>
 
@@ -73,17 +70,17 @@
               <v-col cols="4">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
-                <v-card-subtitle class="text-center mb-4">Proses Pemantauan</v-card-subtitle>
+                <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
-                <v-card-subtitle class="text-center mb-4">Selesai Pemantauan</v-card-subtitle>
+                <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
                 <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
 
-                <v-card-subtitle class="text-center mb-4 pt-3">Total ODP</v-card-subtitle>
+                <v-card-subtitle class="text-center mb-4 pt-4">Total ODP</v-card-subtitle>
               </v-col>
             </v-row>
 
@@ -99,12 +96,12 @@
               <v-col cols="4">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
-                <v-card-subtitle class="text-center mb-4">Proses Pemantauan</v-card-subtitle>
+                <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
-                <v-card-subtitle class="text-center mb-4">Selesai Pemantauan</v-card-subtitle>
+                <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
                 <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
