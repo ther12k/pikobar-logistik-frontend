@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <v-card class="d-block pa-1 mx-auto header-survey-list">
@@ -169,8 +170,8 @@
     </v-card>
     <pagination
       :total="totalList "
-      :page="listQuery.page"
-      :limit="listQuery.limit"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
       :on-next="onNext"
     />
   </div>
@@ -212,8 +213,10 @@ export default {
     'listQuery.search': {
       handler: function(value) {
         if (value.length >= 3) {
+          this.listQuery.page = 1
           this.handleSearch()
         } else if (value.length === 0) {
+          this.listQuery.page = 1
           this.handleSearch()
         }
       },
@@ -241,20 +244,14 @@ export default {
       await this.$router.push(`/laporan/edit-history-case/${id}`)
     },
     async handleSearch() {
-      this.listQuery.page = 1
       await this.$store.dispatch('reports/listReportCase', this.listQuery)
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
     },
-    async onNext(value) {
-      this.listQuery.page = value
+    async onNext() {
       await this.$store.dispatch('reports/listReportCase', this.listQuery)
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
