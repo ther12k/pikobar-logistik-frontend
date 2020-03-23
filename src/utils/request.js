@@ -11,7 +11,7 @@ if (process.env.VUE_APP_PORT !== undefined && process.env.VUE_APP_PORT.length > 
 } else {
   url = `${method}://${process.env.VUE_APP_URL}`
 }
-
+console.log(url)
 // create an axios instance
 const service = axios.create({
   baseURL: url, // api base_url
