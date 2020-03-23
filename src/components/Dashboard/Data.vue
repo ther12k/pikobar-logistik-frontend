@@ -7,20 +7,19 @@
       <p class="title">Rekap Kasus Dinas Kesehatan Kota Cimahi</p>
       <v-row>
         <v-col
-          cols="12"
-          md="3"
-          sm="6"
-          width="25%"
+          lg="12"
+          md="12"
+          sm="12"
         >
           <v-card
             class="mx-auto"
             outlined
           >
             <v-row>
-              <v-col cols="4">
+              <v-col lg="4" md="6" sm="6">
                 <p class="subtitle-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</p>
               </v-col>
-              <v-col cols="8">
+              <v-col lg="8" md="6" sm="6">
                 <v-list-item-title class="headline mb-1">0</v-list-item-title>
               </v-col>
             </v-row>
@@ -28,7 +27,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" md="4" sm="6">
           <v-card
             color="#EF9A9A"
           >
@@ -42,9 +41,8 @@
         </v-col>
         <v-col
           cols="12"
-          md="3"
+          md="4"
           sm="6"
-          width="25%"
         >
           <v-card
             color="#BBDEFB"
@@ -59,9 +57,8 @@
         </v-col>
         <v-col
           cols="12"
-          md="3"
+          md="4"
           sm="6"
-          width="25%"
         >
           <v-card
             color="#FFCC80"
@@ -74,11 +71,12 @@
 
           </v-card>
         </v-col>
+      </v-row>
+      <v-row>
         <v-col
           cols="12"
-          md="3"
+          md="6"
           sm="6"
-          width="25%"
         >
           <v-card
             outlined
@@ -104,7 +102,7 @@
 
           </v-card>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" md="6" sm="6">
           <v-card
             outlined
           >
