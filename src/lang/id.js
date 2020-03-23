@@ -37,7 +37,8 @@ export default {
     must_be_filled: 'Harus Diisi',
     light_mode: 'Light Mode',
     dark_mode: 'Dark Mode',
-    summary: 'Ringkasan'
+    summary: 'Ringkasan',
+    delete_dialog: 'Apakah Anda yakin akan menghapus data ini?'
   },
   success: {
     login_success: 'Login Berhasil',
