@@ -4,7 +4,7 @@
     class=""
   >
     <v-container>
-      <p class="title">Rekap Kasus Dinas Kesehatan Kota Cimahi</p>
+      <p class="title">Rekap Kasus {{ fullname }}</p>
       <v-row>
         <v-col
           lg="12"
@@ -17,10 +17,10 @@
           >
             <v-row>
               <v-col lg="4" md="6" sm="6">
-                <p class="subtitle-1 pl-4">Jumlah kasus terdata Dinas Kesehatan Kota Cimahi</p>
+                <p class="subtitle-1 pl-4">Jumlah kasus terdata {{ fullname }}</p>
               </v-col>
               <v-col lg="8" md="6" sm="6">
-                <v-list-item-title class="headline mb-1">0</v-list-item-title>
+                <v-list-item-title class="headline mb-1">{{ patien.TOTAL }}</v-list-item-title>
               </v-col>
             </v-row>
           </v-card>
@@ -35,7 +35,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-2	mb-4">{{ patien.TOTAL }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2	mb-4">{{ patien.POSITIF }}</v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -51,7 +51,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-2 mb-4">{{ patien.ODP }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2 mb-4">-</v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -67,7 +67,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-2 mb-4">{{ patien.PDP }}</v-card-subtitle>
+            <v-card-subtitle class="text-center display-2 mb-4">-</v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -94,7 +94,7 @@
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
+                <v-card-title class="headline text-center d-block mx-auto">{{ patien.ODP }}</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-4">Total ODP</v-card-subtitle>
               </v-col>
@@ -120,7 +120,7 @@
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
               </v-col>
               <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">X</v-card-title>
+                <v-card-title class="headline text-center d-block mx-auto">{{ patien.PDP }}</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-4">Total PDP</v-card-subtitle>
               </v-col>
@@ -149,6 +149,7 @@ export default {
   computed: {
     ...mapGetters('user', [
       'roles',
+      'fullname',
       'district_user'
     ])
   },
