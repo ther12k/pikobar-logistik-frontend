@@ -26,7 +26,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
-        roles: ['admin', 'dinkesprov', 'dinkeskota']
+        roles: ['admin', 'dinkeskota']
       }
     },
     {
@@ -36,7 +36,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
-        roles: ['admin', 'dinkesprov', 'dinkeskota']
+        roles: ['admin', 'dinkeskota']
       }
     },
     {
@@ -46,17 +46,27 @@ const surveyRouter = {
       meta: {
         title: 'laporan_detail',
         icon: 'library_books',
-        roles: ['admin', 'dinkesprov', 'dinkeskota']
+        roles: ['admin', 'dinkeskota']
       }
     },
     {
-      path: 'edit/:id',
-      component: () => import('@/views/laporan/edit'),
+      path: 'edit-case/:id',
+      component: () => import('@/views/laporan/editCase'),
       hidden: true,
       meta: {
         title: 'laporan_edit',
         icon: 'library_books',
-        roles: ['admin', 'dinkesprov', 'dinkeskota']
+        roles: ['admin', 'dinkeskota']
+      }
+    },
+    {
+      path: 'edit-history-case/:id',
+      component: () => import('@/views/laporan/editHistoryCase'),
+      hidden: true,
+      meta: {
+        title: 'laporan_edit',
+        icon: 'library_books',
+        roles: ['admin', 'dinkeskota']
       }
     }
   ]

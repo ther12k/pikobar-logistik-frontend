@@ -2,11 +2,12 @@
 
 export default {
   route: {
-    dashboard: 'Beranda',
-    laporan_title: 'Laporan',
+    dashboard: 'Dashboard',
+    laporan_title: 'Laporan Kasus',
     laporan_create: 'Buat Laporan Kasus',
     laporan_detail: 'Detail Laporan Kasus',
-    laporan_edit: 'Ubah Laporan Kasus'
+    laporan_edit: 'Ubah Laporan Kasus',
+    help: 'Bantuan'
   },
   label: {
     username: 'Username',

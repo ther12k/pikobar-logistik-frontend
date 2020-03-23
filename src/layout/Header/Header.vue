@@ -18,35 +18,29 @@
       app
     >
       <div class="title-app">
-        <img src="static/login/logo.svg">
+        <img
+          height="50"
+          src="static/login/logo.svg"
+        >
       </div>
       <v-app-bar-nav-icon
         v-if="primaryDrawer.type !== 'permanent'"
         @click.stop="primaryDrawer.model = !primaryDrawer.model"
       />
       <v-spacer />
-      <v-switch
-        id="changeTemplateColor"
-        v-model="$vuetify.theme.dark"
-        inset
-        class="dark-mode"
-        style="padding-top: 1.4rem;"
-        @change="emitDarkMode">
-        <template #prepend>
-          <v-label style="font-size: 14px !important; min-width: 5rem !important;">{{ $t('label.dark_mode') }}</v-label>
-        </template>
-      </v-switch>
+      <!--      <v-switch-->
+      <!--        id="changeTemplateColor"-->
+      <!--        v-model="$vuetify.theme.dark"-->
+      <!--        inset-->
+      <!--        class="dark-mode"-->
+      <!--        style="padding-top: 1.4rem;"-->
+      <!--        @change="emitDarkMode">-->
+      <!--        <template #prepend>-->
+      <!--          <v-label style="font-size: 14px !important; min-width: 5rem !important;">{{ $t('label.dark_mode') }}</v-label>-->
+      <!--        </template>-->
+      <!--      </v-switch>-->
       <div>
-        <v-btn
-          v-for="entry in languages"
-          id="changeLanguage"
-          :key="entry.title"
-          tile
-          icon
-          @click="changeLanguage(entry.language)"
-        >
-          <flag :iso="entry.flag" :squared="false" />
-        </v-btn>
+        <v-label>{{ fullname }}</v-label>
       </div>
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
@@ -56,15 +50,11 @@
             v-on="on"
           >
             <div class="drop-menu">
-              <img width="30px" height="30px" src="https://cdn.vuetifyjs.com/images/logos/logo.svg" class="rounded-circle">
+              <img width="30px" height="30px" src="https://picsum.photos/200/300?grayscale" class="rounded-circle">
             </div>
           </v-btn>
         </template>
         <v-list>
-          <v-list-item to="/users/user-profile">
-            <v-icon class="mr-3 font-lg text-gray">ti-user</v-icon>
-            <v-list-item-title>View Profile</v-list-item-title>
-          </v-list-item>
           <v-list-item id="logoutBottom" @click.native="logout">
             <v-icon class="mr-3 font-lg text-gray">ti-power-off</v-icon>
             <v-list-item-title>Log Out</v-list-item-title>
@@ -79,6 +69,7 @@
 /* eslint-disable */
 import Sidebar from "../Sidebar/Sidebar.vue"
 import EventBus from "@/utils/eventBus"
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -130,7 +121,9 @@ export default {
     };
   },
   computed: {
-    //
+    ...mapGetters('user', [
+      'fullname'
+    ])
   },
   methods: {
     logout() {

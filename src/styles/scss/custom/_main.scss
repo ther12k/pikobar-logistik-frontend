@@ -162,6 +162,11 @@
     }
   }
 }
+.required::after {
+  content: " *";
+  color: red;
+}
+
 .material-checkbox-custom {
   z-index: 0;
   position: relative;

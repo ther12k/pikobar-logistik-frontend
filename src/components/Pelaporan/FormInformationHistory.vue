@@ -7,7 +7,7 @@
       >
         <v-row>
           <v-col
-            cols="6"
+            cols="12"
             md="6"
             sm="12"
           >
@@ -15,9 +15,9 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>Status</v-label>
+              <label class="required">Hasil Pemeriksaan Awal</label>
               <v-radio-group
-                v-model="formPasien.last_status "
+                v-model="formPasien.status"
                 :error-messages="errors"
                 row
               >
@@ -30,7 +30,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <v-label>State</v-label>
+              <label class="required">Proses Pemeriksaan</label>
               <v-radio-group
                 v-model="formPasien.stage"
                 :error-messages="errors"
@@ -40,8 +40,163 @@
                 <v-radio label="Selesai" value="1" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider v-slot="{ errors }" rules="required|atLeastOne">
-              <v-label>Gejala*</v-label>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <label>Hasil Pemeriksaan Akhir</label>
+              <v-radio-group
+                v-model="formPasien.result"
+                :error-messages="errors"
+                row
+              >
+                <v-radio label="Negatif" value="0" />
+                <v-radio label="Sembuh" value="1" />
+                <v-radio label="Meninggal" value="2" />
+              </v-radio-group>
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <label class="required">Lokasi Saat Ini</label>
+              <v-radio-group
+                v-model="formPasien.current_location_type"
+                :error-messages="errors"
+                row
+                @change="handleChangeLocationNow"
+              >
+                <v-radio label="Rumah" value="RUMAH" />
+                <v-radio label="Rumah Sakit" value="RS" />
+              </v-radio-group>
+            </ValidationProvider>
+            <div v-if="formPasien.current_location_type === 'RUMAH'">
+              <address-region
+                :district-code="formPasien.current_location_district_code"
+                :code-district.sync="formPasien.current_location_district_code"
+                :sub-district-code="formPasien.current_location_subdistrict_code"
+                :code-sub-district.sync="formPasien.current_location_subdistrict_code"
+                :village-code="formPasien.current_location_village_code"
+                :code-village.sync="formPasien.current_location_village_code"
+                :disabled-address="false"
+                :required-address="true"
+              />
+            </div>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.current_location_type === 'RUMAH'"
+            >
+              <v-label>Alamat Lengkap lokasi saat ini</v-label>
+              <v-text-field
+                :error-messages="errors"
+                v-model="formPasien.current_location_address"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.current_location_type === 'RS'"
+              rules="required"
+            >
+              <v-autocomplete
+                v-model="formPasien.current_location_address"
+                :items="hospitalList"
+                :error-messages="errors"
+                :return-object="true"
+                label="Lokasi Rumah Sakit"
+                menu-props="auto"
+                item-text="name"
+                item-value="name"
+                single-line
+                solo
+                autocomplete
+                @change="onSelectHospital"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-label>Sumber Pelaporan</v-label>
+              <v-text-field
+                :error-messages="errors"
+                v-model="formPasien.report_source"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }">
+              <v-label>Catatan Tambahan</v-label>
+              <v-textarea
+                v-model="formPasien.other_notes"
+                solo
+              />
+            </ValidationProvider>
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+            sm="12"
+          >
+            <ValidationProvider v-slot="{ errors }">
+              <v-label>Riwayat</v-label>
+              <v-checkbox
+                v-model="formPasien.is_went_abroad"
+                label="Dari Luar Negeri"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.is_went_abroad === true"
+              rules="required"
+            >
+              <v-text-field
+                v-model="formPasien.visited_country"
+                :error-messages="errors"
+                placeholder="Negara Yang Dikunjungi"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-checkbox
+                v-model="formPasien.is_went_other_city"
+                label="Perjalanan ke luar kota"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              v-if="formPasien.is_went_other_city === true"
+              rules="required"
+            >
+              <v-text-field
+                v-model="formPasien.visited_city"
+                :error-messages="errors"
+                placeholder="Kota Yang Dikunjungi"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <ValidationProvider v-slot="{ errors }">
+              <v-checkbox
+                v-model="formPasien.is_contact_with_positive"
+                label="Kontak Dengan Pasien Positif"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+            >
+              <v-text-field
+                v-model="formPasien.history_notes"
+                placeholder="Masukkan Riwayat Lainnya Jika Ada"
+                solo-inverted
+              />
+            </ValidationProvider>
+            <label>Tanggal Gejala</label>
+            <select-datetime
+              :datetime="formPasien.first_symptom_date"
+              :date-time.sync="formPasien.first_symptom_date"
+              :formate-date="formatDate"
+            />
+            <ValidationProvider v-slot="{ errors }">
+              <label>Gejala</label>
               <div v-for="(item, index) in optionGejala" :key="index">
                 <label class="material-checkbox-custom">
                   <input
@@ -58,88 +213,13 @@
                 class="v-messages error--text"
               >{{ errors[0] }}</span>
             </ValidationProvider>
-          </v-col>
-          <v-col
-            cols="6"
-            md="6"
-            sm="12"
-          >
-            <ValidationProvider v-slot="{ errors }">
-              <v-label>Riwayat</v-label>
-              <v-checkbox
-                v-model="formPasien.history_tracing"
-                label="Dari Luar Negeri"
-                value="Dari Luar Negeri"
-              />
-              <v-checkbox
-                v-model="formPasien.history_tracing"
-                label="Kontak Dengan Pasien Positif"
-                value="Kontak Dengan Pasien Positif"
-              />
-            </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
             >
               <v-text-field
-                v-model="formPasien.history_notes"
-                placeholder="Masukkan Riwayat Lainnya Jika Ada"
+                v-model="formPasien.diagnosis_other"
+                placeholder="Sebutkan gelaja lainnya (jika ada)"
                 solo-inverted
-              />
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-            >
-              <v-label>Dirawat</v-label>
-              <v-radio-group
-                v-model="formPasien.current_location_type"
-                :error-messages="errors"
-                row
-                @change="handleChange"
-              >
-                <v-radio label="Rumah" value="RUMAH" />
-                <v-radio label="Rumah Sakit" value="RS" />
-              </v-radio-group>
-            </ValidationProvider>
-            <div v-if="formPasien.current_location_type === 'RUMAH'">
-              <v-label>Alamat</v-label>
-              <address-region
-                :district-name="formPasien.current_location_district"
-                :name-district.sync="formPasien.current_location_district"
-                :subdistrict-name="formPasien.current_location_subdistrict"
-                :name-sub-district.sync="formPasien.current_location_subdistrict"
-                :village-name="formPasien.current_location_village"
-                :name-village.sync="formPasien.current_location_village"
-                :disabled-address="false"
-                :required-address="false"
-              />
-            </div>
-            <ValidationProvider
-              v-slot="{ errors }"
-              v-if="formPasien.current_location_type === 'RUMAH'"
-            >
-              <v-label>Alamat Lengkap Rumah</v-label>
-              <v-text-field
-                :error-messages="errors"
-                v-model="formPasien.current_location_address"
-                solo-inverted
-              />
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              v-if="formPasien.current_location_type === 'RS'"
-            >
-              <v-autocomplete
-                v-model="formPasien.current_location_address"
-                :items="hospitalList"
-                :error-messages="errors"
-                label="Lokasi Rumah Sakit"
-                menu-props="auto"
-                item-text="name"
-                item-value="name"
-                single-line
-                solo
-                autocomplete
               />
             </ValidationProvider>
           </v-col>
@@ -195,7 +275,8 @@ export default {
   },
   data() {
     return {
-      optionGejala: optionGejala
+      optionGejala: optionGejala,
+      formatDate: 'YYYY/MM/DD'
     }
   },
   computed: {
@@ -204,7 +285,7 @@ export default {
     ])
   },
   async mounted() {
-    await this.$store.dispatch('region/getListHospotal')
+    await this.$store.dispatch('region/getListHospital')
   },
   methods: {
     backStep() {
@@ -215,17 +296,21 @@ export default {
       if (!valid) {
         return
       }
-      const response = await this.$store.dispatch('reports/createReportCase', this.formPasien)
-      if (response) {
-        await this.$store.dispatch('reports/resetFormPasien')
-        await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-        this.$router.push('/laporan/index')
-      }
+      await this.$store.dispatch('reports/createReportCase', this.formPasien)
+      await this.$store.dispatch('reports/resetFormPasien')
+      await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+      this.$router.push('/laporan/index')
+      await this.$refs.form.reset()
     },
-    handleChange(value) {
+    onSelectHospital(value) {
+      this.formPasien.current_hospital_id = value._id
+      this.formPasien.current_location_address = value.name
+    },
+    handleChangeLocationNow(value) {
       if (value === 'RUMAH') {
         this.formPasien.current_location_address = ''
       } else {
+        this.formPasien.current_hospital_id = ''
         this.formPasien.current_location_address = ''
         this.formPasien.current_location_district = ''
         this.formPasien.current_location_subdistrict = ''

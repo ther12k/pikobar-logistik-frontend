@@ -69,11 +69,15 @@ export default {
     }
   },
   async created() {
-    if (this.village.desa_code) {
+    if (this.village.desa_kode) {
       this.nameVillage = this.village
     }
     if (this.disabledSelect) {
       this.disable = true
+    } else if (this.codeSubDistrict) {
+      const response = await this.$store.dispatch('region/getListVillage', this.codeSubDistrict)
+      this.listVillage = response.data
+      this.disable = false
     }
   }
 }

@@ -5,22 +5,8 @@
         <v-row justify="space-between">
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
-              <div>Total data Kasus : 1116</div>
-              <div>Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
-            </v-card-text>
-          </v-col>
-          <v-col cols="auto">
-            <v-card-text>
-              <v-btn
-                v-if="roles[0] === 'dinkeskota'"
-                id="addsurvey"
-                class="bottom-add-survey"
-                depressed
-                @click="handleCreate"
-              >
-                <v-icon left>add_circle_outline</v-icon>
-                Tambah Kasus
-              </v-btn>
+              <div>Total data Kasus : {{ totalReport }}</div>
+              <div v-if="roles[0] === 'dinkeskota'">Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
             </v-card-text>
           </v-col>
         </v-row>
@@ -32,11 +18,10 @@
           class="mx-auto"
           outlined
         >
-          <v-list-item two-line>
+          <v-list-item two-line style="background: #D2EAFF">
             <v-list-item-content>
-              <v-list-item-title>Orang Dalam Pemantauan</v-list-item-title>
-              <v-list-item-subtitle>Orang yang mengalami gejala demam dan memiliki  <br> riwayat perjalanan ke negara terjangkit.<br>&nbsp;</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">1004 Orang</v-list-item-title>
+              <v-list-item-title style="color: #2F80ED;">Orang Dalam Pemantauan</v-list-item-title>
+              <v-list-item-title class="headline mb-1" style="color: #2F80ED;padding-top: 2rem;">{{ totalODP }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -46,11 +31,10 @@
           class="mx-auto"
           outlined
         >
-          <v-list-item two-line>
+          <v-list-item two-line style="background: #FEF9EC">
             <v-list-item-content>
-              <v-list-item-title>Pasien Dalam Pengawasan</v-list-item-title>
-              <v-list-item-subtitle>Orang yang sudah menunjukan gejala demam, batuk, <br> pilek dan sesak nafas memiliki riwayat <br> perjalanan ke negara terjangkit.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">101 Orang</v-list-item-title>
+              <v-list-item-title style="color: #F2994A;">Pasien Dalam Pengawasan</v-list-item-title>
+              <v-list-item-title class="headline mb-1" style="color: #F2994A;padding-top: 2rem;">{{ totalPDP }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -60,11 +44,10 @@
           class="mx-auto"
           outlined
         >
-          <v-list-item two-line>
+          <v-list-item two-line style="background: #FDEDED">
             <v-list-item-content>
-              <v-list-item-title>POSITIF</v-list-item-title>
-              <v-list-item-subtitle>Orang yang sudah menunjukan gejala corona <br> dan juga diduga kuat sudah melakukan kontak <br> dengan pasien positif Covid-19.</v-list-item-subtitle>
-              <v-list-item-title class="headline mb-1">11 Orang</v-list-item-title>
+              <v-list-item-title style="color: #EB5757;">POSITIF</v-list-item-title>
+              <v-list-item-title class="headline mb-1" style="color: #EB5757;padding-top: 2rem;">{{ totalPositif }} Orang</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -96,20 +79,22 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-left">Usia</th>
-                  <th class="text-left">Warganegara</th>
-                  <th class="text-left">Jenis Kelamin</th>
-                  <th class="text-left">Lokasi Pengawasan</th>
-                  <th class="text-left">Dinkes Kota/Kab</th>
-                  <th class="text-left">Status</th>
-                  <th class="text-left">Actions</th>
+                  <th class="text-left">KODE KASUS</th>
+                  <th class="text-left">NAMA</th>
+                  <th class="text-left">USIA</th>
+                  <th class="text-left">JENIS KELAMIN</th>
+                  <th class="text-left">STATUS</th>
+                  <th class="text-left">TAHAPAN</th>
+                  <th class="text-left">HASIL</th>
+                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listPasien" :key="item.index">
+                <tr v-for="(item, index) in listKasus" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
+                  <td>{{ item.id_case }}</td>
+                  <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
-                  <td>{{ item.nationality }}</td>
                   <td>
                     <div v-if="item.gender =='P'">
                       Perempuan
@@ -118,31 +103,61 @@
                       Laki-Laki
                     </div>
                   </td>
-                  <td>{{ item.current_location_address }}</td>
-                  <td>{{ item.address_district_name }}</td>
-                  <td><status :status="item.last_status" /> </td>
+                  <td><status :status="item.last_history.status" /> </td>
                   <td>
+                    <div v-if=" item.last_history.stage =='0'">
+                      Proses
+                    </div>
+                    <div v-else>
+                      Selesai
+                    </div>
+                  </td>
+                  <td>
+                    <div v-if=" item.last_history.final_result =='0'">
+                      Negatif
+                    </div>
+                    <div v-else-if=" item.last_history.final_result =='1'">
+                      Sembuh
+                    </div>
+                    <div v-else-if=" item.last_history.final_result =='2'">
+                      Meninggal
+                    </div>
+                    <div v-else>
+                      -
+                    </div>
+                  </td>
+                  <td v-if="roles[0] === 'dinkeskota'">
                     <v-card-actions>
-                      <v-btn
-                        class="ma-2"
-                        tile
-                        large
-                        color="grey"
-                        icon
-                        @click="handleDetail(item._id)"
+                      <v-menu
+                        :close-on-content-click="false"
+                        :nudge-width="100"
+                        :nudge-left="220"
+                        :nudge-top="40"
+                        offset-y
                       >
-                        <v-icon>mdi-eye</v-icon>
-                      </v-btn>
-                      <v-btn
-                        class="ma-2"
-                        tile
-                        large
-                        color="grey"
-                        icon
-                        @click="handleEdit(item._id)"
-                      >
-                        <v-icon>mdi-account-edit</v-icon>
-                      </v-btn>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            class="ma-1"
+                            color="success"
+                            tile
+                            outlined
+                            v-on="on"
+                          >
+                            Pilih Aksi <v-icon style="font-size: 2rem;" right>mdi-menu-down</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-card>
+                          <v-list-item @click="handleDetail(item._id)">
+                            Lihat Detail
+                          </v-list-item>
+                          <v-list-item @click="handleEditCase(item._id)">
+                            Update Kasus
+                          </v-list-item>
+                          <v-list-item @click="handleEditHistoryCase(item._id)">
+                            Update Riwayat Kasus
+                          </v-list-item>
+                        </v-card>
+                      </v-menu>
                     </v-card-actions>
                   </td>
                 </tr>
@@ -167,6 +182,13 @@ export default {
   name: 'LaporanList',
   data() {
     return {
+      totalODP: 0,
+      totalPDP: 0,
+      totalPositif: 0,
+      totalReport: 0,
+      queryReportCase: {
+        address_district_code: ''
+      },
       listQuery: {
         address_district_code: '',
         page: 1,
@@ -178,7 +200,7 @@ export default {
   },
   computed: {
     ...mapGetters('reports', [
-      'listPasien',
+      'listKasus',
       'totalList'
     ]),
     ...mapGetters('user', [
@@ -200,18 +222,23 @@ export default {
   },
   async mounted() {
     this.listQuery.address_district_code = this.district_user
+    this.queryReportCase.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
+    const response = await this.$store.dispatch('reports/countReportCase', this.queryReportCase)
+    this.totalODP = response.data.ODP
+    this.totalPDP = response.data.PDP
+    this.totalPositif = response.data.POSITIF
+    this.totalReport = this.totalODP + this.totalPDP + this.totalPositif
   },
   methods: {
-    async handleCreate() {
-      await this.$store.dispatch('reports/resetFormPasien')
-      await this.$router.push('/laporan/stepper')
-    },
     async handleDetail(id) {
       await this.$router.push(`/laporan/detail/${id}`)
     },
-    async handleEdit(id) {
-      await this.$router.push(`/laporan/edit/${id}`)
+    async handleEditCase(id) {
+      await this.$router.push(`/laporan/edit-case/${id}`)
+    },
+    async handleEditHistoryCase(id) {
+      await this.$router.push(`/laporan/edit-history-case/${id}`)
     },
     async handleSearch() {
       this.listQuery.page = 1

@@ -61,10 +61,8 @@ export default {
       'listDistrictCity'
     ])
   },
-  async mounted() {
-    if (this.districtCity.kota_code) {
-      this.nameDistrict = this.districtCity
-    }
+  async created() {
+    this.nameDistrict = this.districtCity
     if (!this.disabledSelect) {
       await this.$store.dispatch('region/getListDistrictCity')
     }

@@ -1,6 +1,6 @@
 export default {
-  listPasien: (state, getters) => {
-    return state.listPasien
+  listKasus: (state, getters) => {
+    return state.listKasus
   },
   totalList: (state, getters) => {
     return state.totalList

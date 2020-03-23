@@ -13,10 +13,10 @@
             :editable="editable"
           >
             <template v-if="n == 1">
-              Informasi Umum Pasien
+              Detail Profil Kasus
             </template>
             <template v-else-if="n == 2">
-              Informasi Rekam Pasien
+              Riwayat Kasus
             </template>
           </v-stepper-step>
 
@@ -67,11 +67,14 @@ export default {
   computed: {
     ...mapGetters('reports', [
       'formPasien'
+    ]),
+    ...mapGetters('user', [
+      'district_user'
     ])
   },
   async created() {
-    await this.$store.dispatch('reports/resetFormPasien')
     // on steps change
+    this.formPasien.address_district_code = this.district_user
     EventBus.$on('nextSurveySteps', (value) => {
       this.e1 = value + 1
     })

@@ -23,6 +23,18 @@ export default {
       }
     })
   },
+  updateReportCase({ commit }, data) {
+    const id_case = data.id
+    delete data['id']
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchPostUpdate(`/api/cases/${id_case}`, 'PUT', data.data)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
   detailReportCase({ commit }, id) {
     return new Promise(async(resolve, reject) => {
       try {
@@ -33,10 +45,40 @@ export default {
       }
     })
   },
-  countReportCase({ commit }) {
+  detailHistoryCase({ commit }, id) {
     return new Promise(async(resolve, reject) => {
       try {
-        const response = await fetchList('/api/cases-summary', 'GET')
+        const response = await fetchList(`/api/cases/${id}/last-history`, 'GET')
+        resolve(response.data[0])
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
+  countReportCase({ commit }, params) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchList('/api/cases-summary', 'GET', params)
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
+  listHistoryCase({ commit }, id) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchList(`/api/cases/${id}/history`, 'GET')
+        resolve(response)
+      } catch (e) {
+        reject(e)
+      }
+    })
+  },
+  createHistoryCase({ commit }, data) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const response = await fetchPostUpdate('/api/history_cases', 'POST', data)
         resolve(response)
       } catch (e) {
         reject(e)

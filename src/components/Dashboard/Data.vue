@@ -6,7 +6,12 @@
     <v-container>
       <p class="title">Rekap Kasus Dinas Kesehatan Kota Cimahi</p>
       <v-row>
-        <v-col cols="12">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             class="mx-auto"
             outlined>
@@ -34,7 +39,12 @@
 
           </v-card>
         </v-col>
-        <v-col cols="4">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             color="#BBDEFB"
           >
@@ -46,7 +56,12 @@
 
           </v-card>
         </v-col>
-        <v-col cols="4">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             color="#FFCC80"
           >
@@ -58,9 +73,12 @@
 
           </v-card>
         </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="6">
+        <v-col
+          cols="12"
+          md="3"
+          sm="6"
+          width="25%"
+        >
           <v-card
             outlined
           >
@@ -118,6 +136,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'CardData',
   data: () => ({
@@ -128,12 +148,22 @@ export default {
       TOTAL: 0
     }
   }),
+  computed: {
+    ...mapGetters('user', [
+      'roles',
+      'district_user'
+    ])
+  },
   async mounted() {
-    const data = await this.$store.dispatch('reports/countReportCase')
-    this.patien = await data.data
-    for (var key in this.patien) {
-      this.patien.TOTAL += this.patien[key]
+    let params
+    if (this.roles[0] === 'dinkeskota') {
+      params = {
+        address_district_code: this.district_user
+      }
     }
+    const data = await this.$store.dispatch('reports/countReportCase', params)
+    this.patien = await data.data
+    this.patien.TOTAL = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
   }
 }
 </script>

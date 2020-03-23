@@ -5,6 +5,7 @@ import permission from './modules/permission'
 import toast from './modules/toast'
 import region from './modules/region'
 import reports from './modules/reports'
+import occupation from './modules/occupation'
 
 Vue.use(Vuex)
 
@@ -25,6 +26,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   modules: {
     permission,
+    occupation,
     reports,
     region,
     toast,
