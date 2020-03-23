@@ -345,7 +345,6 @@ export default {
     ])
   },
   async mounted() {
-    await this.$store.dispatch('region/getListHospital')
     const response = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.listHistoryCase = response.data
   },

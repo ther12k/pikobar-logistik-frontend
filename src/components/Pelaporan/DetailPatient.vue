@@ -74,19 +74,6 @@
       </v-row>
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
-          <v-card-text>Kwarganegaraan</v-card-text>
-        </v-col>
-        <v-col auto>
-          <v-text-field
-            v-model="detailData.nationality"
-            disabled
-            hide-details
-            solo-inverted
-          />
-        </v-col>
-      </v-row>
-      <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
           <v-card-text>Tanggal Lahir</v-card-text>
         </v-col>
         <v-col auto>
