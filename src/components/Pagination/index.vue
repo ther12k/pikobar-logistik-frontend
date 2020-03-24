@@ -15,6 +15,7 @@
         <v-pagination
           v-model="currentPage"
           :length="total"
+          :total-visible="6"
           @input="onNext"
         />
       </div>
