@@ -1,6 +1,6 @@
 <template>
   <v-row v-if="total > 0" justify="space-between">
-    <v-col cols="2">
+    <v-col cols="12" md="2" sm="2">
       <v-select
         v-model="pageSize"
         :items="pageSizes"
@@ -11,7 +11,7 @@
       />
     </v-col>
     <v-col cols="auto">
-      <div style="float: right;">
+      <div style="float: right;padding-bottom: 40px;">
         <v-pagination
           v-model="currentPage"
           :length="total"

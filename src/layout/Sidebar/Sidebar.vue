@@ -5,7 +5,7 @@
         style="margin: 2rem;"
       >
         <v-btn
-          v-if="roles[0] === 'dinkeskota'"
+          v-if="roles[0] === 'dinkeskota' || roles[0] === 'faskes'"
           id="addsurvey"
           class="bottom-add-survey"
           depressed

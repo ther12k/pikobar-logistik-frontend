@@ -6,7 +6,7 @@ const surveyRouter = {
   redirect: '/laporan/index',
   meta: {
     icon: 'library_books',
-    roles: ['admin', 'dinkesprov', 'dinkeskota']
+    roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
   },
   active: false,
   children: [
@@ -16,7 +16,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_title',
         icon: 'library_books',
-        roles: ['admin', 'dinkesprov', 'dinkeskota']
+        roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
       }
     },
     {
@@ -26,7 +26,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
-        roles: ['admin', 'dinkeskota']
+        roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
     {
@@ -36,7 +36,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
-        roles: ['admin', 'dinkeskota']
+        roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
     {
@@ -46,7 +46,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_detail',
         icon: 'library_books',
-        roles: ['admin', 'dinkeskota']
+        roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
     {
@@ -56,7 +56,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_edit',
         icon: 'library_books',
-        roles: ['admin', 'dinkeskota']
+        roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
     {
@@ -66,7 +66,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_edit',
         icon: 'library_books',
-        roles: ['admin', 'dinkeskota']
+        roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     }
   ]
