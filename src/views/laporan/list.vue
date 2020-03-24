@@ -75,7 +75,7 @@
       <hr>
       <v-row>
         <v-col auto>
-          <v-simple-table fixed-header height="500px">
+          <v-simple-table>
             <template v-slot:default>
               <thead>
                 <tr>
@@ -87,6 +87,7 @@
                   <th class="text-left">STATUS</th>
                   <th class="text-left">TAHAPAN</th>
                   <th class="text-left">HASIL</th>
+                  <th class="text-left">AUTHOR</th>
                   <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
                 </tr>
               </thead>
@@ -127,6 +128,7 @@
                       -
                     </div>
                   </td>
+                  <td>{{ item.author.fullname }}</td>
                   <td v-if="roles[0] === 'dinkeskota'">
                     <v-card-actions>
                       <v-menu
