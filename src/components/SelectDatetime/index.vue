@@ -5,7 +5,6 @@
         <v-select
           v-model="year"
           :items="yearList"
-          menu-props="auto"
           label="Tahun"
           solo
           @change="onSelectYear"
@@ -15,9 +14,9 @@
         <v-select
           v-model="month"
           :items="listMonthName"
-          menu-props="auto"
           item-value="value"
           item-text="text"
+          :disabled="disabledMonth"
           label="Bulan"
           solo
           @change="onSelectMonth"
@@ -27,7 +26,7 @@
         <v-select
           v-model="days"
           :items="dayList"
-          menu-props="auto"
+          :disabled="disabledDays"
           label="Tanggal"
           solo
           @change="onSelectDate"
@@ -39,6 +38,7 @@
 
 <script>
 import { listYear, listMonthName, listDays } from '@/utils/constantVariable'
+
 export default {
   name: 'SelectDatetime',
   props: {
@@ -60,13 +60,21 @@ export default {
       finalDate: '',
       yearList: null,
       listMonthName: listMonthName,
-      dayList: null
+      dayList: null,
+      disabledMonth: true,
+      disabledDays: true
     }
   },
   async mounted() {
     this.yearList = await this.listYear()
     this.dayList = await this.listDays()
     this.date = await this.datetime.split('/')
+    if (this.date[1]) {
+      this.disabledMonth = false
+    }
+    if (this.date[2]) {
+      this.disabledDays = false
+    }
     this.year = parseInt(this.date[0])
     this.month = parseInt(this.date[1])
     this.days = parseInt(this.date[2])
@@ -75,17 +83,23 @@ export default {
     listYear,
     listDays,
     onSelectYear(value) {
+      this.disabledMonth = false
       if (this.date.length >= 3) {
         this.date[0] = value
         this.finalDate = `${this.date[0]}/${this.date[1]}/${this.date[2]}`
         this.$emit('update:dateTime', this.finalDate)
+      } else {
+        this.date[0] = value
       }
     },
     onSelectMonth(value) {
+      this.disabledDays = false
       if (this.date.length >= 3) {
         this.date[1] = value
         this.finalDate = `${this.date[0]}/${this.date[1]}/${this.date[2]}`
         this.$emit('update:dateTime', this.finalDate)
+      } else {
+        this.date[1] = value
       }
     },
     onSelectDate(value) {
@@ -93,6 +107,12 @@ export default {
         this.date[2] = value
         this.finalDate = `${this.date[0]}/${this.date[1]}/${this.date[2]}`
         this.$emit('update:dateTime', this.finalDate)
+      } else {
+        if (this.date.length >= 2) {
+          this.date[2] = value
+          this.finalDate = `${this.date[0]}/${this.date[1]}/${this.date[2]}`
+          this.$emit('update:dateTime', this.finalDate)
+        }
       }
     }
   }
