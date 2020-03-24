@@ -7,7 +7,7 @@
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
               <div>Total data Kasus : {{ totalReport }}</div>
-              <div v-if="roles[0] === 'dinkeskota'">Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
+              <div v-if="roles[0] === 'dinkeskota' || roles[0] === 'faskes'">Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
             </v-card-text>
           </v-col>
         </v-row>

@@ -84,9 +84,14 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true
         this.$store.dispatch('user/login', this.loginForm)
-          .then(() => {
+          .then((response) => {
+            console.log(response.role)
             this.$store.dispatch('toast/successToast', this.$t('success.login_success'))
-            this.$router.push({ path: '/' })
+            if (response.role !== 'faskes') {
+              this.$router.push({ path: '/' })
+            } else {
+              this.$router.push({ path: '/laporan' })
+            }
             this.loading = false
           })
           .catch(() => {

@@ -10,7 +10,7 @@ export default {
         const { token } = response.data
         commit('SET_TOKEN', token)
         setToken(token)
-        resolve()
+        resolve(response.data)
       }).catch((error) => {
         reject(error)
       })
