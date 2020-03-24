@@ -110,7 +110,7 @@
                 solo-inverted
               />
             </ValidationProvider>
-            <label class="required">Tanggal Lahir</label>
+            <label>Tanggal Lahir</label>
             <select-datetime
               :datetime="formPasien.birth_date"
               :date-time.sync="formPasien.birth_date"
