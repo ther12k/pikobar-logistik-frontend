@@ -91,9 +91,8 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
             >
-              <label class="required">NIK</label>
+              <label>NIK</label>
               <v-text-field
                 v-model="formPasien.nik"
                 :error-messages="errors"
@@ -261,12 +260,8 @@ export default {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
-      } else if (this.formPasien.birth_date.length < 1) {
-        await this.$store.dispatch('toast/errorToast', 'Tanggal Lahir Tidak Boleh Kosong')
-        return
-      } else {
-        EventBus.$emit('nextSurveySteps', this.steps)
       }
+      EventBus.$emit('nextSurveySteps', this.steps)
     },
     handleChangeNationality(value) {
       if (value === 'WNI') {
