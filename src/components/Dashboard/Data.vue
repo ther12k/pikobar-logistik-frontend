@@ -20,7 +20,7 @@
                 <p class="subtitle-1 pl-4">Jumlah kasus terdata {{ fullname }}</p>
               </v-col>
               <v-col lg="8" md="6" sm="6">
-                <v-list-item-title class="headline mb-1">{{ patien.TOTAL }}</v-list-item-title>
+                <v-list-item-title class="display-1 font-weight-bold text--secondary mb-1">{{ total }}</v-list-item-title>
               </v-col>
             </v-row>
           </v-card>
@@ -53,7 +53,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ patien.RECOVER }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4">{{ final.SEMBUH }}<span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -70,7 +70,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ patien.DIED }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ final.MENINGGAL }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -97,7 +97,7 @@
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
               </v-col> -->
               <v-col lg="12" md="12" sm="12">
-                <v-card-title class="display-2 font-weight-bold text-center d-block pt-0 mx-auto">{{ patien.ODP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
+                <v-card-title class="display-1 font-weight-bold text-center d-block pt-0 mx-auto">{{ patien.ODP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
 
                 <v-card-subtitle class="headline font-weight-bold text--secondary text-center pt-4">Total ODP</v-card-subtitle>
               </v-col>
@@ -123,7 +123,7 @@
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
               </v-col> -->
               <v-col lg="12" md="12" sm="12">
-                <v-card-title class="display-2 font-weight-bold text-center d-block pt-0 mx-auto">{{ patien.PDP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
+                <v-card-title class="display-1 font-weight-bold text-center d-block pt-0 mx-auto">{{ patien.PDP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
 
                 <v-card-subtitle class="headline font-weight-bold text--secondary text-center pt-4">Total PDP</v-card-subtitle>
               </v-col>
@@ -146,11 +146,13 @@ export default {
     patien: {
       ODP: 0,
       PDP: 0,
-      POSITIF: 0,
-      TOTAL: 0,
-      RECOVER: 0,
-      DIED: 0
-    }
+      POSITIF: 0
+    },
+    final: {
+      DIED: 0,
+      RECOVER: 0
+    },
+    total: 0
   }),
   computed: {
     ...mapGetters('user', [
@@ -167,8 +169,11 @@ export default {
       }
     }
     const data = await this.$store.dispatch('reports/countReportCase', params)
+    const dataFinal = await this.$store.dispatch('reports/countReportCaseFinal', params)
+
     this.patien = await data.data
-    this.patien.TOTAL = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
+    this.final = await dataFinal.data
+    this.total = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
   }
 }
 </script>
