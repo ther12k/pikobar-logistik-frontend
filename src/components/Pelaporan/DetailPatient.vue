@@ -61,6 +61,19 @@
       </v-row>
       <v-row class="row-detail">
         <v-col class="row-detail-label" cols="3">
+          <v-card-text>NIK</v-card-text>
+        </v-col>
+        <v-col auto>
+          <v-text-field
+            v-model="detailData.nik"
+            disabled
+            hide-details
+            solo-inverted
+          />
+        </v-col>
+      </v-row>
+      <v-row class="row-detail">
+        <v-col class="row-detail-label" cols="3">
           <v-card-text>Nama Kasus</v-card-text>
         </v-col>
         <v-col auto>

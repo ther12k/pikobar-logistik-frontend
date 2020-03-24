@@ -59,12 +59,8 @@ export const optionGejala = [
     text: 'Batuk'
   },
   {
-    value: 'Flu',
-    text: 'Flu'
-  },
-  {
-    value: 'Demam',
-    text: 'Demam'
+    value: 'Pilek',
+    text: 'Pilek'
   },
   {
     value: 'Sakit Tenggorokan',
