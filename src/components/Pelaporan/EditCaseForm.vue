@@ -201,7 +201,7 @@
                           style="float: right;"
                           @click="handleUpdateCase"
                         >
-                          Update Kasus
+                          Update Profil
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -329,7 +329,7 @@ export default {
         data: this.formPasien
       }
       await this.$store.dispatch('reports/updateReportCase', updateCase)
-      await this.$store.dispatch('toast/successToast', 'Data Kasus Berhasil Di Rubah')
+      await this.$store.dispatch('toast/successToast', 'Data Profil Berhasil Di Rubah')
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
       await this.$router.push('/laporan/index')
     },
