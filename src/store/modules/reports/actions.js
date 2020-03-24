@@ -33,6 +33,14 @@ export default {
       return e
     }
   },
+  async deleteReportCase({ commit }, id) {
+    try {
+      const response = await fetchDetail('/api/cases', 'DELETE', id)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
   async detailHistoryCase({ commit }, id) {
     try {
       const response = await fetchList(`/api/cases/${id}/last-history`, 'GET')
