@@ -57,6 +57,14 @@ export default {
       return e
     }
   },
+  async countReportCaseFinal({ commit }, params) {
+    try {
+      const response = await fetchList('/api/cases-summary-final', 'GET', params)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
   async listHistoryCase({ commit }, id) {
     try {
       const response = await fetchList(`/api/cases/${id}/history`, 'GET')

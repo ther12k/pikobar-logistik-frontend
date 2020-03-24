@@ -20,7 +20,7 @@
                 <p class="subtitle-1 pl-4">Jumlah kasus terdata {{ fullname }}</p>
               </v-col>
               <v-col lg="8" md="6" sm="6">
-                <v-list-item-title class="headline mb-1">{{ patien.TOTAL }}</v-list-item-title>
+                <v-list-item-title class="display-1 font-weight-bold text--secondary mb-1">{{ total }}</v-list-item-title>
               </v-col>
             </v-row>
           </v-card>
@@ -29,13 +29,14 @@
       <v-row>
         <v-col cols="12" md="4" sm="6">
           <v-card
-            color="#EF9A9A"
+            color="#fcdfe0"
+            style="border-color:#ffb4b5; border-radius: .5rem"
           >
-            <v-card-title class="headline text-center d-block mx-auto">POSITIF</v-card-title>
+            <v-card-title class="body-1 font-weight-bold text--secondary">POSITIF COVID-19</v-card-title>
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-2	mb-4">{{ patien.POSITIF }}</v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ patien.POSITIF }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -45,13 +46,14 @@
           sm="6"
         >
           <v-card
-            color="#BBDEFB"
+            color="#d3eee3"
+            style="border-color:#91dcbd; border-radius: .5rem"
           >
-            <v-card-title class="headline text-center d-block mx-auto">SEMBUH</v-card-title>
+            <v-card-title class="body-1 font-weight-bold text--secondary">SEMBUH</v-card-title>
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-2 mb-4">-</v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4">{{ final.SEMBUH }}<span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -61,13 +63,14 @@
           sm="6"
         >
           <v-card
-            color="#FFCC80"
+            color="#fbeadf"
+            style="border-color:#fed1b1; border-radius: .5rem"
           >
-            <v-card-title class="headline text-center d-block mx-auto">MENINGGAL</v-card-title>
+            <v-card-title class="body-1 font-weight-bold text--secondary">MENINGGAL</v-card-title>
 
             <v-spacer />
 
-            <v-card-subtitle class="text-center display-2 mb-4">-</v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ final.MENINGGAL }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -81,22 +84,22 @@
           <v-card
             outlined
           >
-            <v-card-title class="headline text-center d-block mx-auto">ODP</v-card-title>
+            <v-card-title class="headline font-weight-bold text--secondary text-center d-block mx-auto">ODP</v-card-title>
             <v-row>
-              <v-col cols="4">
+              <!-- <v-col lg="4" md="4" sm="12">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
               </v-col>
-              <v-col cols="4">
+              <v-col lg="4" md="4" sm="12">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
-              </v-col>
-              <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">{{ patien.ODP }}</v-card-title>
+              </v-col> -->
+              <v-col lg="12" md="12" sm="12">
+                <v-card-title class="display-1 font-weight-bold text-center d-block pt-0 mx-auto">{{ patien.ODP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
 
-                <v-card-subtitle class="text-center mb-4 pt-4">Total ODP</v-card-subtitle>
+                <v-card-subtitle class="headline font-weight-bold text--secondary text-center pt-4">Total ODP</v-card-subtitle>
               </v-col>
             </v-row>
 
@@ -106,23 +109,23 @@
           <v-card
             outlined
           >
-            <v-card-title class="headline text-center d-block mx-auto">PDP</v-card-title>
+            <v-card-title class="headline font-weight-bold text--secondary text-center d-block mx-auto">PDP</v-card-title>
 
             <v-row>
-              <v-col cols="4">
+              <!-- <v-col lg="4" md="4" sm="12">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
               </v-col>
-              <v-col cols="4">
+              <v-col lg="4" md="4" sm="12">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
-              </v-col>
-              <v-col cols="4">
-                <v-card-title class="headline text-center d-block mx-auto">{{ patien.PDP }}</v-card-title>
+              </v-col> -->
+              <v-col lg="12" md="12" sm="12">
+                <v-card-title class="display-1 font-weight-bold text-center d-block pt-0 mx-auto">{{ patien.PDP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
 
-                <v-card-subtitle class="text-center mb-4 pt-4">Total PDP</v-card-subtitle>
+                <v-card-subtitle class="headline font-weight-bold text--secondary text-center pt-4">Total PDP</v-card-subtitle>
               </v-col>
             </v-row>
 
@@ -137,14 +140,19 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  inject: ['theme'],
   name: 'CardData',
   data: () => ({
     patien: {
       ODP: 0,
       PDP: 0,
-      POSITIF: 0,
-      TOTAL: 0
-    }
+      POSITIF: 0
+    },
+    final: {
+      DIED: 0,
+      RECOVER: 0
+    },
+    total: 0
   }),
   computed: {
     ...mapGetters('user', [
@@ -161,8 +169,11 @@ export default {
       }
     }
     const data = await this.$store.dispatch('reports/countReportCase', params)
+    const dataFinal = await this.$store.dispatch('reports/countReportCaseFinal', params)
+
     this.patien = await data.data
-    this.patien.TOTAL = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
+    this.final = await dataFinal.data
+    this.total = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
   }
 }
 </script>
