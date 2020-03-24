@@ -56,6 +56,10 @@
           </v-btn>
         </template>
         <v-list>
+          <v-list-item id="changePassword" @click.native="changePassword">
+            <v-icon class="mr-3 font-lg text-gray">mdi-lock</v-icon>
+            <v-list-item-title>Ganti Password</v-list-item-title>
+          </v-list-item>
           <v-list-item id="logoutBottom" @click.native="logout">
             <v-icon class="mr-3 font-lg text-gray">ti-power-off</v-icon>
             <v-list-item-title>Log Out</v-list-item-title>
@@ -127,6 +131,9 @@ export default {
     ])
   },
   methods: {
+    changePassword() {
+      this.$router.push('/change-password')
+    },
     logout() {
       this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
