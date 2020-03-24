@@ -93,7 +93,7 @@
               <tbody>
                 <tr v-for="(item, index) in listKasus" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.id_case }}</td>
+                  <td>{{ item.id_case.toUpperCase() }}</td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
                   <td>
