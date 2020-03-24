@@ -84,9 +84,9 @@
           <v-card
             outlined
           >
-            <v-card-title class="headline text-center d-block mx-auto">ODP</v-card-title>
+            <v-card-title class="headline font-weight-bold text--secondary text-center d-block mx-auto">ODP</v-card-title>
             <v-row>
-              <v-col lg="4" md="4" sm="12">
+              <!-- <v-col lg="4" md="4" sm="12">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
@@ -95,11 +95,11 @@
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
-              </v-col>
-              <v-col lg="4" md="4" sm="12">
-                <v-card-title class="headline text-center d-block mx-auto">{{ patien.ODP }}</v-card-title>
+              </v-col> -->
+              <v-col lg="12" md="12" sm="12">
+                <v-card-title class="display-2 font-weight-bold text-center d-block mx-auto">{{ patien.ODP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
 
-                <v-card-subtitle class="text-center mb-4 pt-4">Total ODP</v-card-subtitle>
+                <v-card-subtitle class="headline font-weight-bold text--secondary text-center mb-4 pt-4">Total ODP</v-card-subtitle>
               </v-col>
             </v-row>
 
@@ -109,10 +109,10 @@
           <v-card
             outlined
           >
-            <v-card-title class="headline text-center d-block mx-auto">PDP</v-card-title>
+            <v-card-title class="headline font-weight-bold text--secondary text-center d-block mx-auto">PDP</v-card-title>
 
             <v-row>
-              <v-col lg="4" md="4" sm="12">
+              <!-- <v-col lg="4" md="4" sm="12">
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Proses Pemantauan</v-card-subtitle>
@@ -121,11 +121,11 @@
                 <v-card-title class="headline text-center d-block mx-auto">X(x%)</v-card-title>
 
                 <v-card-subtitle class="text-center mb-4 pt-2">Selesai Pemantauan</v-card-subtitle>
-              </v-col>
-              <v-col lg="4" md="4" sm="12">
-                <v-card-title class="headline text-center d-block mx-auto">{{ patien.PDP }}</v-card-title>
+              </v-col> -->
+              <v-col lg="12" md="12" sm="12">
+                <v-card-title class="display-2 font-weight-bold text-center d-block mx-auto">{{ patien.PDP }} <span class="display-1 font-weight-medium text--disabled pl-3">orang</span> </v-card-title>
 
-                <v-card-subtitle class="text-center mb-4 pt-4">Total PDP</v-card-subtitle>
+                <v-card-subtitle class="headline font-weight-bold text--secondary text-center mb-4 pt-4">Total PDP</v-card-subtitle>
               </v-col>
             </v-row>
 
