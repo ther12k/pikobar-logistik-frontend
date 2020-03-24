@@ -3,22 +3,20 @@
     <v-dialog
       v-model="dialogDelete"
       persistent
-      max-width="450px"
+      max-width="340px"
     >
       <v-card>
         <div class="justify-center dialog-img-delete">
           <img src="../../static/image-delete-dialog.svg">
         </div>
-        <v-card-title
-          class="dialog-delete-title"
-        >
+        <v-card-text class="dialog-delete-title font-weight-bold">
           {{ $t('label.delete_dialog') }}
-        </v-card-title>
+        </v-card-text>
         <v-card-actions class="justify-center" style="padding: 2rem">
           <v-btn
             color="grey"
             outlined
-            style="height: 40px;min-width: 140px;"
+            style="height: 40px;min-width: 120px;"
             @click="dialogDelete = false"
           >
             Batal
@@ -26,7 +24,7 @@
           <v-btn
             color="red"
             outlined
-            style="height: 40px;min-width: 140px;"
+            style="height: 40px;min-width: 120px;"
             @click="deleteData"
           >
             Hapus
