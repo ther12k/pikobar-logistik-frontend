@@ -36,6 +36,15 @@ export default {
     })
   },
 
+  async changePasswordUser({ commit }, data) {
+    try {
+      const response = await fetchPostUpdate('/api/users/change-password', 'PUT', data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+
   // user logout
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
