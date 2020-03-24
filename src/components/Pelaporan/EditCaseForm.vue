@@ -102,9 +102,8 @@
                     >
                       <ValidationProvider
                         v-slot="{ errors }"
-                        rules="required"
                       >
-                        <label class="required">NIK</label>
+                        <label>NIK</label>
                         <v-text-field
                           v-model="formPasien.nik"
                           :error-messages="errors"
@@ -201,7 +200,7 @@
                           style="float: right;"
                           @click="handleUpdateCase"
                         >
-                          Update Kasus
+                          Update Profil
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -329,7 +328,7 @@ export default {
         data: this.formPasien
       }
       await this.$store.dispatch('reports/updateReportCase', updateCase)
-      await this.$store.dispatch('toast/successToast', 'Data Kasus Berhasil Di Rubah')
+      await this.$store.dispatch('toast/successToast', 'Data Profil Berhasil Di Rubah')
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
       await this.$router.push('/laporan/index')
     },

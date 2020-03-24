@@ -7,6 +7,7 @@ export default {
     laporan_create: 'Create Case Report',
     laporan_detail: 'Detail Case Report',
     laporan_edit: 'Edit Case Report',
+    change_password: 'Change Password',
     help: 'Help'
   },
   label: {
