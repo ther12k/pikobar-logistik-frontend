@@ -122,17 +122,6 @@
                           solo-inverted
                         />
                       </ValidationProvider>
-                      <ValidationProvider
-                        v-slot="{ errors }"
-                        rules="required|isHtml"
-                      >
-                        <label class="required">Nama Pasien</label>
-                        <v-text-field
-                          v-model="formPasien.name"
-                          :error-messages="errors"
-                          solo-inverted
-                        />
-                      </ValidationProvider>
                       <label>Tanggal Lahir</label>
                       <select-datetime
                         :datetime="formPasien.birth_date"
