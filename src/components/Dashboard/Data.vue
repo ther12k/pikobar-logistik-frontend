@@ -53,7 +53,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> - <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ patien.RECOVER }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -70,7 +70,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> - <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ patien.DIED }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -147,7 +147,9 @@ export default {
       ODP: 0,
       PDP: 0,
       POSITIF: 0,
-      TOTAL: 0
+      TOTAL: 0,
+      RECOVER: 0,
+      DIED: 0
     }
   }),
   computed: {
