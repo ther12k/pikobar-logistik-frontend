@@ -102,6 +102,27 @@
                     >
                       <ValidationProvider
                         v-slot="{ errors }"
+                      >
+                        <label>NIK</label>
+                        <v-text-field
+                          v-model="formPasien.nik"
+                          :error-messages="errors"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required|isHtml"
+                      >
+                        <label class="required">Nama Pasien</label>
+                        <v-text-field
+                          v-model="formPasien.name"
+                          :error-messages="errors"
+                          solo-inverted
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{ errors }"
                         rules="required|isHtml"
                       >
                         <label class="required">Nama Pasien</label>

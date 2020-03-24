@@ -13,6 +13,7 @@ export default {
     state.formPasien = data
   },
   RESET_FORM_PASIEN: (state) => {
+    state.formPasien.nik = ''
     state.formPasien.name = ''
     state.formPasien.birth_date = ''
     state.formPasien.age = ''
