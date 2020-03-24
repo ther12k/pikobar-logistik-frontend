@@ -102,8 +102,9 @@
                     >
                       <ValidationProvider
                         v-slot="{ errors }"
+                        rules="required"
                       >
-                        <label>NIK</label>
+                        <label class="required">NIK</label>
                         <v-text-field
                           v-model="formPasien.nik"
                           :error-messages="errors"
