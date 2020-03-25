@@ -46,7 +46,6 @@ service.interceptors.response.use(
     return res
   },
   async(error) => {
-    console.error(error.response.status)
     const status = await error.response.status
     switch (status) {
       case ResponseRequest.NOTFOUND:

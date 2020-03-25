@@ -85,7 +85,6 @@ export default {
         this.loading = true
         this.$store.dispatch('user/login', this.loginForm)
           .then((response) => {
-            console.log(response.role)
             this.$store.dispatch('toast/successToast', this.$t('success.login_success'))
             if (response.role !== 'faskes') {
               this.$router.push({ path: '/' })
