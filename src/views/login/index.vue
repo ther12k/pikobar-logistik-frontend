@@ -84,12 +84,12 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true
         this.$store.dispatch('user/login', this.loginForm)
-          .then((response) => {
-            this.$store.dispatch('toast/successToast', this.$t('success.login_success'))
+          .then(async(response) => {
+            await this.$store.dispatch('toast/successToast', this.$t('success.login_success'))
             if (response.role !== 'faskes') {
-              this.$router.push({ path: '/' })
+              await this.$router.push({ path: '/' })
             } else {
-              this.$router.push({ path: '/laporan' })
+              await this.$router.push({ path: '/laporan' })
             }
             this.loading = false
           })
