@@ -11,8 +11,8 @@ export default {
     try {
       const response = await fetchPostUpdate('/api/cases', 'POST', data)
       return response
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   },
   async updateReportCase({ commit }, data) {
@@ -21,32 +21,32 @@ export default {
     try {
       const response = await fetchPostUpdate(`/api/cases/${id_case}`, 'PUT', data.data)
       return response
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   },
   async detailReportCase({ commit }, id) {
     try {
       const response = await fetchDetail('/api/cases', 'GET', id)
       return response
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   },
   async deleteReportCase({ commit }, id) {
     try {
       const response = await fetchDetail('/api/cases', 'DELETE', id)
       return response
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   },
   async detailHistoryCase({ commit }, id) {
     try {
       const response = await fetchList(`/api/cases/${id}/last-history`, 'GET')
       return response.data[0]
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   },
   async countReportCase({ commit }, params) {
@@ -61,16 +61,16 @@ export default {
     try {
       const response = await fetchList(`/api/cases/${id}/history`, 'GET')
       return response
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   },
   async createHistoryCase({ commit }, data) {
     try {
       const response = await fetchPostUpdate('/api/history_cases', 'POST', data)
       return response
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   },
   async resetFormPasien({ commit }) {

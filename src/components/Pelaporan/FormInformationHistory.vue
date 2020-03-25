@@ -290,11 +290,13 @@ export default {
       if (!valid) {
         return
       }
-      await this.$store.dispatch('reports/createReportCase', this.formPasien)
-      await this.$store.dispatch('reports/resetFormPasien')
-      await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-      this.$router.push('/laporan/index')
-      await this.$refs.form.reset()
+      const response = await this.$store.dispatch('reports/createReportCase', this.formPasien)
+      if (response.status !== 422) {
+        await this.$store.dispatch('reports/resetFormPasien')
+        await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+        this.$router.push('/laporan/index')
+        await this.$refs.form.reset()
+      }
     },
     onSelectHospital(value) {
       this.formPasien.current_hospital_id = value._id
