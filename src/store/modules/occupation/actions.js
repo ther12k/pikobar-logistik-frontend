@@ -6,8 +6,8 @@ export default {
       const response = await fetchList('/api/occupations', 'GET')
       commit('SET_LIST_OCCUPTION', response.data)
       return response
-    } catch (e) {
-      return e
+    } catch (error) {
+      return error.response
     }
   }
 }

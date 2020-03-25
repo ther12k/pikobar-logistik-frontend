@@ -5,6 +5,7 @@
       :rules="required ? 'required': ''"
     >
       <v-autocomplete
+        v-if="disabledDistrict !== true"
         v-model="nameDistrict"
         :items="listDistrictCity"
         :label="$t('label.select_district')"
@@ -17,6 +18,13 @@
         solo
         autocomplete
         @change="onSelectDistrict"
+      />
+      <v-text-field
+        v-else
+        v-model="nameDistrict"
+        :error-messages="errors"
+        disabled
+        solo-inverted
       />
     </ValidationProvider>
   </v-col>
@@ -33,6 +41,10 @@ export default {
   },
   props: {
     disabledSelect: {
+      type: Boolean,
+      default: false
+    },
+    disabledDistrict: {
       type: Boolean,
       default: false
     },
@@ -62,7 +74,11 @@ export default {
     ])
   },
   async created() {
-    this.nameDistrict = this.districtCity
+    if (this.disabledDistrict) {
+      this.nameDistrict = this.districtCity.kota_nama
+    } else {
+      this.nameDistrict = this.districtCity
+    }
     if (!this.disabledSelect) {
       await this.$store.dispatch('region/getListDistrictCity')
     }

@@ -49,19 +49,20 @@ service.interceptors.response.use(
     const status = await error.response.status
     switch (status) {
       case ResponseRequest.NOTFOUND:
-        store.dispatch('toast/errorToast', error.response.data.message)
+        await store.dispatch('toast/errorToast', error.response.data.message)
         break
       case ResponseRequest.SERVERERROR:
-        store.dispatch('toast/errorToast', error.response.data.message)
+        await store.dispatch('toast/errorToast', error.response.data.message)
         break
       case ResponseRequest.UNAUTHORIZED:
-        store.dispatch('toast/errorToast', error.response.data.message)
+        await store.dispatch('toast/errorToast', error.response.data.message)
         break
       case ResponseRequest.UNPROCESSABLE:
-        store.dispatch('toast/errorToast', error.response.data.message)
+        await store.dispatch('toast/errorToast', error.response.data.message)
         break
       default:
-        store.dispatch('toast/errorToast', error.message)
+        await store.dispatch('toast/errorToast', error.message)
+        break
     }
     return Promise.reject(error)
   }

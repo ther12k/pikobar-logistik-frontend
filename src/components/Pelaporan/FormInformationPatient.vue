@@ -144,6 +144,8 @@
             </ValidationProvider>
             <label class="required">Alamat Tempat Tinggal</label>
             <address-region
+              v-if="formPasien.address_district_name"
+              :disabled-district="true"
               :district-code="formPasien.address_district_code"
               :district-name="formPasien.address_district_name"
               :code-district.sync="formPasien.address_district_code"
@@ -247,7 +249,7 @@ export default {
       this.formPasien.age = this.getAge(value)
     }
   },
-  async mounted() {
+  async beforeMount() {
     await this.$store.dispatch('occupation/getListOccuption')
     const responseDetails = await this.$store.dispatch('region/getDetailDistrict', this.district_user)
     if (responseDetails.data[0]) {

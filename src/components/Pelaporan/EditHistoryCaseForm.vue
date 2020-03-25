@@ -56,7 +56,7 @@
                       >
                         <label>Hasil Pemeriksaan Akhir</label>
                         <v-radio-group
-                          v-model="formRiwayatPasien.result"
+                          v-model="formRiwayatPasien.final_result"
                           :error-messages="errors"
                           row
                         >
