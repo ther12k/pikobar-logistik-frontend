@@ -3,6 +3,7 @@
     <v-row>
       <select-area-district-city
         :disabled-select="disabledAddress"
+        :disabled-district="disabledDistrict"
         :required="requiredAddress"
         :district-city="districtCity"
         :update-district-city.sync="districtCity"
@@ -39,6 +40,10 @@ export default {
       type: Boolean,
       default: false
     },
+    disabledDistrict: {
+      type: Boolean,
+      default: false
+    },
     requiredAddress: {
       type: Boolean,
       default: false
@@ -72,7 +77,7 @@ export default {
     return {
       districtCity: {
         kota_kode: this.districtCode,
-        kota_nama: this.districtCode
+        kota_nama: this.districtName
       },
       subDistrict: {
         kecamatan_kode: this.subDistrictCode,

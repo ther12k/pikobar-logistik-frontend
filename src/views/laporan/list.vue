@@ -105,7 +105,7 @@
                       Laki-Laki
                     </div>
                   </td>
-                  <td><status :status="item.last_history.status" /> </td>
+                  <td><status :status="item.status" /> </td>
                   <td>
                     <div v-if=" item.last_history.stage =='0'">
                       Proses

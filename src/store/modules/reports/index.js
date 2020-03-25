@@ -57,6 +57,7 @@ function initialState() {
       case: '',
       status: '',
       stage: '',
+      final_result: '',
       diagnosis: [],
       diagnosis_other: '',
       history_tracing: [],
