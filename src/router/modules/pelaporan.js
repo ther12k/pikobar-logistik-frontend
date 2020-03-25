@@ -16,6 +16,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_title',
         icon: 'library_books',
+        noCache: true,
         roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
       }
     },
@@ -26,6 +27,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
+        noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
@@ -36,6 +38,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_create',
         icon: 'library_books',
+        noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
@@ -46,6 +49,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_detail',
         icon: 'library_books',
+        noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
@@ -56,6 +60,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_edit',
         icon: 'library_books',
+        noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
@@ -66,6 +71,7 @@ const surveyRouter = {
       meta: {
         title: 'laporan_edit',
         icon: 'library_books',
+        noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     }
