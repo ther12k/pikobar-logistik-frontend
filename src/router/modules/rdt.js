@@ -3,30 +3,28 @@ import Layout from '@/layout'
 const rdtRouter = {
   path: '/rdt',
   component: Layout,
-  redirect: '/rdt/index',
+  redirect: '/rdt',
   meta: {
     title: 'rdt',
-    icon: 'local_activity',
+    icon: 'mdi-book-plus',
     roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
   },
   active: false,
   children: [
     {
-      path: '/index',
-      component: () => import('@/views/laporan/list'),
+      path: '/rdt/odp-list',
+      component: () => import('@/views/rdt/list'),
       meta: {
         title: 'odp',
-        icon: 'local_activity',
         noCache: true,
         roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
       }
     },
     {
-      path: '/stepper',
-      component: () => import('@/views/laporan/formStepper'),
+      path: '/rdt/medical-personel',
+      component: () => import('@/views/rdt/list'),
       meta: {
-        title: 'rdt_create',
-        icon: 'library_books',
+        title: 'medical_personnel',
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }

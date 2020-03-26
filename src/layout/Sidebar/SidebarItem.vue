@@ -20,10 +20,10 @@
         >
           <template v-slot:activator>
             <v-list-item-icon>
-              <v-icon v-text="onlyOneChild.meta.icon" />
+              <v-icon v-text="item.meta.icon" />
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="generateTitle(onlyOneChild.meta.title)" />
+              <v-list-item-title v-text="generateTitle(item.meta.title)" />
             </v-list-item-content>
           </template>
 
