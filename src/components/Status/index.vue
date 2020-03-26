@@ -3,7 +3,7 @@
     <v-chip
       v-if="status === 'ODP'"
       class="ma-2"
-      color="success"
+      color="rgb(82, 143, 196)"
       outlined
     >
       {{ status }}
@@ -19,7 +19,7 @@
     <v-chip
       v-if="status === 'PDP'"
       class="ma-2"
-      color="warning"
+      color="rgb(255, 206, 79)"
       outlined
     >
       {{ status }}
