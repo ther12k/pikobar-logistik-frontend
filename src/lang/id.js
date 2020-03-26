@@ -6,7 +6,7 @@ export default {
     laporan_title: 'Laporan Kasus',
     rdt: 'Daftar RDT',
     odp: 'ODP',
-    rdt_create: 'Buat RDT',
+    medical_personnel: 'Tenaga Kesehatan',
     laporan_create: 'Buat Laporan Kasus',
     laporan_detail: 'Detail Laporan Kasus',
     laporan_edit: 'Ubah Laporan Kasus',

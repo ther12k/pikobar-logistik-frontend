@@ -61,8 +61,8 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   dashboardRouter,
-  Pelaporan,
   rdtRouter,
+  Pelaporan,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
 ]
