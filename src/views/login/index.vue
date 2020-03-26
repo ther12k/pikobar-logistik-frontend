@@ -50,7 +50,13 @@
         </v-form>
         <v-card-actions>
           <v-spacer />
-          <v-btn id="loginBottom" @click="handleLogin">{{ $t('label.login') }}</v-btn>
+          <v-btn
+            id="loginBottom"
+            :loading="loading"
+            @click="handleLogin"
+          >
+            {{ $t('label.login') }}
+          </v-btn>
         </v-card-actions>
       </v-card-text>
     </div>
@@ -85,10 +91,11 @@ export default {
         this.loading = true
         this.$store.dispatch('user/login', this.loginForm)
           .then(async(response) => {
-            await this.$store.dispatch('toast/successToast', this.$t('success.login_success'))
-            if (response.role !== 'faskes') {
+            if ((response.role !== 'faskes') && (this.$store.getters['permission/permission_routes'].length > 0)) {
+              await this.$store.dispatch('toast/successToast', 'Login Berhasil')
               await this.$router.push({ path: '/' })
             } else {
+              await this.$store.dispatch('toast/successToast', 'Login Berhasil')
               await this.$router.push({ path: '/laporan' })
             }
             this.loading = false
