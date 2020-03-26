@@ -9,8 +9,8 @@
         <div class="justify-center dialog-img-delete">
           <img src="../../static/image-delete-dialog.svg">
         </div>
-        <v-card-text class="dialog-delete-title font-weight-bold">
-          {{ $t('label.delete_dialog') }}
+        <v-card-text v-if="dataDeleted" class="dialog-delete-title font-weight-bold">
+          {{ $t('label.delete_dialog') }} <br> <span class="font-weight-black"> {{ dataDeleted.id_case.toUpperCase() +'?' }} </span>
         </v-card-text>
         <v-card-actions class="justify-center" style="padding: 2rem">
           <v-btn
@@ -56,7 +56,11 @@ export default {
       default: null
     },
     dataDeleted: {
-      type: String,
+      type: Object,
+      default: null
+    },
+    listQuery: {
+      type: Object,
       default: null
     }
   },
@@ -72,14 +76,14 @@ export default {
   },
   methods: {
     async deleteData() {
-      await this.$store.dispatch(this.storePathDelete, this.dataDeleted)
+      await this.$store.dispatch(this.storePathDelete, this.dataDeleted._id)
       await this.$emit('update:dialogDelete', false)
       await this.$emit('update:deletedData', {})
       await this.$store.dispatch('toast/successToast', this.$t('success.data_success_delete'))
       if (this.storePathResetList) {
         await this.$store.dispatch(this.storePathResetList)
       }
-      await this.$store.dispatch(this.storePathGetList)
+      await this.$store.dispatch(this.storePathGetList, this.listQuery)
     }
   }
 }

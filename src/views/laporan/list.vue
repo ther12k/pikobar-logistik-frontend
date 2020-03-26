@@ -159,7 +159,7 @@
                           <v-list-item @click="handleEditHistoryCase(item._id)">
                             Update Riwayat
                           </v-list-item>
-                          <v-list-item @click="handleDeleteCase(item._id)">
+                          <v-list-item @click="handleDeleteCase(item)">
                             Hapus Kasus
                           </v-list-item>
                         </v-card>
@@ -186,6 +186,7 @@
       :delete-date.sync="dataDelete"
       :store-path-delete="`reports/deleteReportCase`"
       :store-path-get-list="`reports/listReportCase`"
+      :list-query="listQuery"
     />
   </div>
 </template>
@@ -258,9 +259,9 @@ export default {
     async handleEditHistoryCase(id) {
       await this.$router.push(`/laporan/edit-history-case/${id}`)
     },
-    async handleDeleteCase(id) {
+    async handleDeleteCase(item) {
       this.dialog = true
-      this.dataDelete = await id
+      this.dataDelete = await item
     },
     async handleSearch() {
       await this.$store.dispatch('reports/listReportCase', this.listQuery)
