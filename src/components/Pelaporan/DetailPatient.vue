@@ -15,7 +15,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">ID Kasus</v-card-text>
+          <label style="font-weight: bold;font-size: 20px;line-height: 20px;">ID Kasus</label>
         </v-col>
         <v-col auto />
       </v-row>
@@ -26,11 +26,11 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>ID Kasus</v-card-text>
+          <label>ID Kasus</label>
         </v-col>
         <v-col auto>
           <v-text-field
-            v-model="detailData.id_case"
+            v-model="detailCase"
             disabled
             hide-details
             solo-inverted
@@ -44,7 +44,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>ID Kasus Terkait</v-card-text>
+          <label>ID Kasus Terkait</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -62,7 +62,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>ID Kasus Pusat</v-card-text>
+          <label>ID Kasus Pusat</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -80,7 +80,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">Identitas</v-card-text>
+          <label style="font-weight: bold;font-size: 20px;line-height: 20px;">Identitas</label>
         </v-col>
         <v-col auto />
       </v-row>
@@ -91,7 +91,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>NIK</v-card-text>
+          <label>NIK</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -109,7 +109,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Nama Kasus</v-card-text>
+          <label>Nama Kasus</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -127,7 +127,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Tanggal Lahir</v-card-text>
+          <label>Tanggal Lahir</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -145,7 +145,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Jenis Kelamin</v-card-text>
+          <label>Jenis Kelamin</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -163,7 +163,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Alamat</v-card-text>
+          <label>Alamat</label>
         </v-col>
         <v-col auto>
           <v-textarea
@@ -181,7 +181,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Nomor Telepon</v-card-text>
+          <label>Nomor Telepon</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -193,48 +193,46 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-row>
-          <v-col
-            cols="12"
-            md="6"
-            sm="12"
-            class="row-detail-label"
-          >
-            <v-row>
-              <v-col>
-                <v-card-text>Kewarganegaraan</v-card-text>
-              </v-col>
-              <v-col auto>
-                <v-text-field
-                  v-model="detailData.nationality"
-                  disabled
-                  hide-details
-                  solo-inverted
-                />
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col
-            cols="12"
-            md="6"
-            sm="12"
-            class="row-detail-label"
-          >
-            <v-row v-if="detailData.nationality === 'WNA'">
-              <v-col>
-                <v-card-text>Negara</v-card-text>
-              </v-col>
-              <v-col auto>
-                <v-text-field
-                  v-model="detailData.nationality_name"
-                  disabled
-                  hide-details
-                  solo-inverted
-                />
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
+        <v-col
+          cols="12"
+          md="6"
+          sm="12"
+          class="row-detail-label"
+        >
+          <v-row>
+            <v-col>
+              <label>Kewarganegaraan</label>
+            </v-col>
+            <v-col auto>
+              <v-text-field
+                v-model="detailData.nationality"
+                disabled
+                hide-details
+                solo-inverted
+              />
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col
+          cols="12"
+          md="6"
+          sm="12"
+          class="row-detail-label"
+        >
+          <v-row v-if="detailData.nationality === 'WNA'">
+            <v-col>
+              <label>Negara</label>
+            </v-col>
+            <v-col auto>
+              <v-text-field
+                v-model="detailData.nationality_name"
+                disabled
+                hide-details
+                solo-inverted
+              />
+            </v-col>
+          </v-row>
+        </v-col>
       </v-row>
       <v-row class="row-detail">
         <v-col
@@ -243,7 +241,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">Pekerjaan</v-card-text>
+          <label style="font-weight: bold;font-size: 20px;line-height: 20px;">Pekerjaan</label>
         </v-col>
         <v-col auto />
       </v-row>
@@ -254,7 +252,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Pekerjaan</v-card-text>
+          <label>Pekerjaan</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -272,7 +270,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Alamat Kantor</v-card-text>
+          <label>Alamat Kantor</label>
         </v-col>
         <v-col auto>
           <v-textarea
@@ -366,6 +364,7 @@ export default {
       panelListRiwayat: [0],
       birthDate: '',
       detailGender: '',
+      detailCase: '',
       detailData: '',
       detailAddres: ''
     }
@@ -375,6 +374,7 @@ export default {
     const responseHistory = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.listHistoryCase = responseHistory.data
     this.detailData = await response.data
+    this.detailCase = await response.data.id_case.toUpperCase()
     if (this.detailData) {
       if (this.detailData.birth_date) {
         this.birthDate = await formatDatetime(this.detailData.birth_date, 'DD-MM-YYYY')
