@@ -39,7 +39,7 @@ export default {
     light_mode: 'Light Mode',
     dark_mode: 'Dark Mode',
     summary: 'Ringkasan',
-    delete_dialog: 'Apakah Anda yakin akan menghapus data ini?'
+    delete_dialog: 'Apakah Anda yakin akan menghapus data'
   },
   success: {
     login_success: 'Login Berhasil',
