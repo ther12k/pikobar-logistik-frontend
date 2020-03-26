@@ -20,7 +20,7 @@
         <v-col>
           <v-card-text>
             <div style="font-size: 1.5rem;">
-              Data Kasus
+              Data RDT
             </div>
           </v-card-text>
         </v-col>
@@ -39,19 +39,17 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-left">KODE KASUS</th>
+                  <th class="text-left">KODE RDT</th>
                   <th class="text-left">NAMA</th>
                   <th class="text-left">USIA</th>
                   <th class="text-left">JENIS KELAMIN</th>
-                  <th class="text-left">STATUS</th>
-                  <th class="text-left">TAHAPAN</th>
                   <th class="text-left">HASIL</th>
                   <th class="text-left">AUTHOR</th>
                   <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listKasus" :key="item.index">
+                <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.id_case.toUpperCase() }}</td>
                   <td>{{ item.name }}</td>
@@ -62,29 +60,6 @@
                     </div>
                     <div v-else>
                       Laki-Laki
-                    </div>
-                  </td>
-                  <td><status :status="item.status" /> </td>
-                  <td>
-                    <div v-if=" item.last_history.stage =='0'">
-                      Proses
-                    </div>
-                    <div v-else>
-                      Selesai
-                    </div>
-                  </td>
-                  <td>
-                    <div v-if=" item.last_history.final_result =='0'">
-                      Negatif
-                    </div>
-                    <div v-else-if=" item.last_history.final_result =='1'">
-                      Sembuh
-                    </div>
-                    <div v-else-if=" item.last_history.final_result =='2'">
-                      Meninggal
-                    </div>
-                    <div v-else>
-                      -
                     </div>
                   </td>
                   <td>{{ item.author.fullname }}</td>
@@ -159,11 +134,7 @@ export default {
       totalPDP: 0,
       totalPositif: 0,
       totalReport: 0,
-      queryReportCase: {
-        address_district_code: ''
-      },
       listQuery: {
-        address_district_code: '',
         page: 1,
         limit: 10,
         search: ''
@@ -174,13 +145,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('reports', [
-      'listKasus',
+    ...mapGetters('rdt', [
+      'rdtList',
       'totalList'
     ]),
     ...mapGetters('user', [
-      'roles',
-      'district_user'
+      'roles'
     ])
   },
   watch: {
@@ -198,37 +168,30 @@ export default {
     }
   },
   async mounted() {
-    this.listQuery.address_district_code = this.district_user
-    this.queryReportCase.address_district_code = this.district_user
-    await this.$store.dispatch('reports/listReportCase', this.listQuery)
-    const response = await this.$store.dispatch('reports/countReportCase', this.queryReportCase)
-    this.totalODP = response.data.ODP
-    this.totalPDP = response.data.PDP
-    this.totalPositif = response.data.POSITIF
-    this.totalReport = this.totalODP + this.totalPDP + this.totalPositif
+    await this.$store.dispatch('rdt/getListRDT', this.listQuery)
   },
   methods: {
     async handleDetail(id) {
-      await this.$router.push(`/laporan/detail/${id}`)
+      await this.$router.push(`/rdt/detail/${id}`)
     },
     async handleEditCase(id) {
-      await this.$router.push(`/laporan/edit-case/${id}`)
+      await this.$router.push(`/rdt/edit-case/${id}`)
     },
     async handleEditHistoryCase(id) {
-      await this.$router.push(`/laporan/edit-history-case/${id}`)
+      await this.$router.push(`/rdt/edit-history-case/${id}`)
     },
     async handleDeleteCase(id) {
       this.dialog = true
       this.dataDelete = await id
     },
     async handleSearch() {
-      await this.$store.dispatch('reports/listReportCase', this.listQuery)
+      await this.$store.dispatch('rdt/getListRDT', this.listQuery)
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
     },
     async onNext() {
-      await this.$store.dispatch('reports/listReportCase', this.listQuery)
+      await this.$store.dispatch('rdt/getListRDT', this.listQuery)
     }
   }
 }

@@ -4,8 +4,9 @@ export default {
   route: {
     dashboard: 'Dashboard',
     laporan_title: 'Laporan Kasus',
-    rdt: 'Daftar RDT',
-    odp: 'ODP',
+    rdt: 'RDT',
+    create_rdt: 'Tambah RDT',
+    list_rdt: 'Daftar RDT',
     medical_personnel: 'Tenaga Kesehatan',
     laporan_create: 'Buat Laporan Kasus',
     laporan_detail: 'Detail Laporan Kasus',

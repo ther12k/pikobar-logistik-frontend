@@ -15,7 +15,7 @@ const rdtRouter = {
       path: '/rdt/odp-list',
       component: () => import('@/views/rdt/list'),
       meta: {
-        title: 'odp',
+        title: 'create_rdt',
         noCache: true,
         roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
       }
@@ -24,7 +24,7 @@ const rdtRouter = {
       path: '/rdt/medical-personel',
       component: () => import('@/views/rdt/list'),
       meta: {
-        title: 'medical_personnel',
+        title: 'list_rdt',
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
