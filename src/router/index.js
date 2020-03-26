@@ -9,6 +9,7 @@ import Layout from '@/layout'
 /* Router Modules */
 import dashboardRouter from './modules/dashboard'
 import Pelaporan from './modules/pelaporan'
+import rdtRouter from './modules/rdt'
 
 /**
  * constantRoutes
@@ -61,6 +62,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   dashboardRouter,
   Pelaporan,
+  rdtRouter,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
 ]

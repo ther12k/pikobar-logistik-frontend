@@ -15,21 +15,19 @@
           Tambah Kasus
         </v-btn>
       </div>
-      <v-list-item-group v-model="item" class="sidebar" color="primary">
-        <sidebar-item
-          v-for="route in permission_routes"
-          :key="route.path"
-          :item="route"
-        />
-        <v-list-item @click="handleHelp">
-          <v-list-item-icon>
-            <v-icon>mdi-help-box</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>Bantuan</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-item-group>
+      <sidebar-item
+        v-for="route in permission_routes"
+        :key="route.path"
+        :item="route"
+      />
+      <v-list-item @click="handleHelp">
+        <v-list-item-icon>
+          <v-icon>mdi-help-box</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Bantuan</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </div>
 </template>
