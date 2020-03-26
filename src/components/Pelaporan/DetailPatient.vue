@@ -26,7 +26,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>ID Kasus</v-card-text>
+          <label>ID Kasus</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -44,7 +44,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>ID Kasus Terkait</v-card-text>
+          <label>ID Kasus Terkait</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -62,7 +62,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>ID Kasus Pusat</v-card-text>
+          <label>ID Kasus Pusat</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -91,7 +91,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>NIK</v-card-text>
+          <label>NIK</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -109,7 +109,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Nama Kasus</v-card-text>
+          <label>Nama Kasus</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -127,7 +127,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Tanggal Lahir</v-card-text>
+          <label>Tanggal Lahir</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -145,7 +145,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Jenis Kelamin</v-card-text>
+          <label>Jenis Kelamin</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -163,7 +163,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Alamat</v-card-text>
+          <label>Alamat</label>
         </v-col>
         <v-col auto>
           <v-textarea
@@ -181,7 +181,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Nomor Telepon</v-card-text>
+          <label>Nomor Telepon</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -202,7 +202,7 @@
           >
             <v-row>
               <v-col>
-                <v-card-text>Kewarganegaraan</v-card-text>
+                <label>Kewarganegaraan</label>
               </v-col>
               <v-col auto>
                 <v-text-field
@@ -222,7 +222,7 @@
           >
             <v-row v-if="detailData.nationality === 'WNA'">
               <v-col>
-                <v-card-text>Negara</v-card-text>
+                <label>Negara</label>
               </v-col>
               <v-col auto>
                 <v-text-field
@@ -254,7 +254,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Pekerjaan</v-card-text>
+          <label>Pekerjaan</label>
         </v-col>
         <v-col auto>
           <v-text-field
@@ -272,7 +272,7 @@
           sm="12"
           class="row-detail-label"
         >
-          <v-card-text>Alamat Kantor</v-card-text>
+          <label>Alamat Kantor</label>
         </v-col>
         <v-col auto>
           <v-textarea
