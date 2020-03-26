@@ -9,13 +9,23 @@
       outlined
     >
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">ID Kasus</v-card-text>
         </v-col>
         <v-col auto />
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>ID Kasus</v-card-text>
         </v-col>
         <v-col auto>
@@ -28,7 +38,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>ID Kasus Terkait</v-card-text>
         </v-col>
         <v-col auto>
@@ -41,7 +56,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>ID Kasus Pusat</v-card-text>
         </v-col>
         <v-col auto>
@@ -54,13 +74,23 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">Identitas</v-card-text>
         </v-col>
         <v-col auto />
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>NIK</v-card-text>
         </v-col>
         <v-col auto>
@@ -73,7 +103,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>Nama Kasus</v-card-text>
         </v-col>
         <v-col auto>
@@ -86,7 +121,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>Tanggal Lahir</v-card-text>
         </v-col>
         <v-col auto>
@@ -99,7 +139,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>Jenis Kelamin</v-card-text>
         </v-col>
         <v-col auto>
@@ -112,7 +157,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>Alamat</v-card-text>
         </v-col>
         <v-col auto>
@@ -125,7 +175,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>Nomor Telepon</v-card-text>
         </v-col>
         <v-col auto>
@@ -139,7 +194,12 @@
       </v-row>
       <v-row class="row-detail">
         <v-row>
-          <v-col class="row-detail-label" cols="6">
+          <v-col
+            cols="12"
+            md="6"
+            sm="12"
+            class="row-detail-label"
+          >
             <v-row>
               <v-col>
                 <v-card-text>Kewarganegaraan</v-card-text>
@@ -154,7 +214,12 @@
               </v-col>
             </v-row>
           </v-col>
-          <v-col class="row-detail-label" cols="6">
+          <v-col
+            cols="12"
+            md="6"
+            sm="12"
+            class="row-detail-label"
+          >
             <v-row v-if="detailData.nationality === 'WNA'">
               <v-col>
                 <v-card-text>Negara</v-card-text>
@@ -172,13 +237,23 @@
         </v-row>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text style="font-weight: bold;font-size: 20px;line-height: 20px;">Pekerjaan</v-card-text>
         </v-col>
         <v-col auto />
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>Pekerjaan</v-card-text>
         </v-col>
         <v-col auto>
@@ -191,7 +266,12 @@
         </v-col>
       </v-row>
       <v-row class="row-detail">
-        <v-col class="row-detail-label" cols="3">
+        <v-col
+          cols="12"
+          md="3"
+          sm="12"
+          class="row-detail-label"
+        >
           <v-card-text>Alamat Kantor</v-card-text>
         </v-col>
         <v-col auto>
