@@ -50,7 +50,7 @@
                 <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
-                  <td>{{ item.nama }}</td>
+                  <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
                   <td>
                     <div v-if="item.gender =='P'">
