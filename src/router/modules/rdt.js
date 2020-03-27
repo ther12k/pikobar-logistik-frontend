@@ -28,6 +28,17 @@ const rdtRouter = {
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
+    },
+    {
+      path: 'create',
+      component: () => import('@/views/rapidTest/formRapid'),
+      hidden: true,
+      meta: {
+        title: 'form-rapid',
+        icon: 'library_books',
+        noCache: true,
+        roles: ['superadmin', 'dinkeskota', 'faskes']
+      }
     }
   ]
 }
