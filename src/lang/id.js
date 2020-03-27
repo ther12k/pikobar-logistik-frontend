@@ -4,9 +4,9 @@ export default {
   route: {
     dashboard: 'Dashboard',
     laporan_title: 'Laporan Kasus',
-    rdt: 'RDT',
-    create_rdt: 'Tambah RDT',
-    list_rdt: 'Daftar RDT',
+    rdt: 'Test Covid-19',
+    create_rdt: 'Tambah Peserta',
+    list_rdt: 'List Peserta',
     rdt_detail: 'Detail Peserta',
     rdt_update: 'Update Hasil Peserta',
     medical_personnel: 'Tenaga Kesehatan',
