@@ -49,7 +49,7 @@
               <tbody>
                 <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.id_case.toUpperCase() }}</td>
+                  <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
                   <td>{{ item.nama }}</td>
                   <td>{{ item.age }}</td>
                   <td>
@@ -86,7 +86,10 @@
                             Lihat Detail
                           </v-list-item>
                           <v-list-item @click="handleEditRDT(item._id)">
-                            Update Profil
+                            Update Profil Peserta
+                          </v-list-item>
+                          <v-list-item @click="handleUpdateResults(item._id)">
+                            Update Hasil
                           </v-list-item>
                           <v-list-item @click="handleDeleteRDT(item._id)">
                             Hapus Peserta
@@ -177,6 +180,9 @@ export default {
     async handleDeleteRDT(id) {
       this.dialog = true
       this.dataDelete = await id
+    },
+    async handleUpdateResults(id) {
+      await this.$router.push(`/rdt/update-result/${id}`)
     },
     async handleSearch() {
       await this.$store.dispatch('rdt/getListRDT', this.listQuery)

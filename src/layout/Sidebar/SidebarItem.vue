@@ -5,7 +5,7 @@
       color="primary"
     >
       <div v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-        <v-list-item v-if="onlyOneChild.meta" :to="resolvePath(item.path)">
+        <v-list-item v-if="!onlyOneChild.hidden && onlyOneChild.meta" :to="resolvePath(item.path)">
           <v-list-item-icon>
             <v-icon v-text="onlyOneChild.meta.icon" />
           </v-list-item-icon>
@@ -26,16 +26,11 @@
               <v-list-item-title v-text="generateTitle(item.meta.title)" />
             </v-list-item-content>
           </template>
-
-          <v-list-item
-            v-for="subItem in item.children"
-            :key="generateTitle(subItem.meta.title)"
-            :to="resolvePath(subItem.path)"
-          >
-            <v-list-item-content>
-              <v-list-item-title v-text="generateTitle(subItem.meta.title)" />
-            </v-list-item-content>
-          </v-list-item>
+          <sidebar-item
+            v-for="child in item.children"
+            :key="child.path"
+            :item="child"
+          />
         </v-list-group>
       </div>
     </v-list-item-group>
