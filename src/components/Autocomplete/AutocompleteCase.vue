@@ -9,14 +9,13 @@
       item-text="name"
       single-line
       :disabled="disabledCase"
-      clearable
       color="black"
       solo
       autocomplete
       @change="onSelectCase"
     >
       <template v-slot:selection="data">
-        {{ data.item.name }}
+        {{ data.item.id_case }} - {{ data.item.name }}
       </template>
       <template v-slot:item="data">
         <v-list-item-content>

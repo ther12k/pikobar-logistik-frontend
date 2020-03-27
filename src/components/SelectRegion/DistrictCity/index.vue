@@ -73,6 +73,15 @@ export default {
       'listDistrictCity'
     ])
   },
+  watch: {
+    'districtCity': function(value) {
+      if (value && value.kota_kode) {
+        this.nameDistrict = value
+      } else {
+        this.nameDistrict = ''
+      }
+    }
+  },
   async created() {
     if (this.disabledDistrict) {
       this.nameDistrict = this.districtCity.kota_nama

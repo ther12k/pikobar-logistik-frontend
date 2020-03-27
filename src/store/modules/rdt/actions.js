@@ -19,6 +19,14 @@ export default {
       return error.response
     }
   },
+  async deleteRDT({ commit }, id) {
+    try {
+      const response = await fetchDetail('/api/rdt', 'DELETE', id)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
   async detailParticipant({ commit }, id) {
     try {
       const response = await fetchDetail('/api/rdt', 'GET', id)

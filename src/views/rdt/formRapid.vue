@@ -7,15 +7,23 @@
       >
         <v-row>
           <v-col>
-            <label>Pilih Tipe Sasaran</label>
-            <v-select
-              v-model="formRapid.type_target"
-              :items="items"
-              solo
-            />
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <label class="required">Pilih Tipe Sasaran</label>
+              <v-select
+                v-model="formRapid.type_target"
+                :error-messages="errors"
+                :items="items"
+                solo
+                @change="onChangeType"
+              />
+            </ValidationProvider>
           </v-col>
           <v-col>
             <autocomplete-cases
+              v-if="formRapid.type_target === 'ODP'"
               :on-select-case="onSelectCase"
               :disabled-case="isODP"
             />
@@ -175,15 +183,10 @@ export default {
     }
   },
   watch: {
-    'formRapid.type_target': function(val) {
-      if (val === 'ODP') {
-        this.isODP = false
-      } else {
-        this.isODP = true
-      }
-    },
     'formRapid.birth_date': function(value) {
-      this.formRapid.age = this.getAge(value)
+      if ((value !== '') && (value !== null) && (value !== 'Invalid date')) {
+        this.formRapid.age = this.getAge(value)
+      }
     }
   },
   methods: {
@@ -191,7 +194,28 @@ export default {
     async onSelectCase(value) {
       if (value) {
         const response = await this.$store.dispatch('reports/detailReportCase', value)
-        Object.assign(this.formRapid, await response.data)
+        this.formRapid.address_district_code = await response.data.address_district_code
+        await Object.assign(this.formRapid, response.data)
+      }
+    },
+    async onChangeType(value) {
+      if (value === 'ODP') {
+        this.isODP = false
+      } else {
+        this.isODP = true
+        this.formRapid.nik = null
+        this.formRapid.name = null
+        this.formRapid.birth_date = ''
+        this.formRapid.age = null
+        this.formRapid.gender = null
+        this.formRapid.address_district_code = ''
+        this.formRapid.address_district_name = ''
+        this.formRapid.address_subdistrict_code = ''
+        this.formRapid.address_subdistrict_name = ''
+        this.formRapid.address_village_code = ''
+        this.formRapid.address_village_name = ''
+        this.formRapid.address_street = null
+        this.formRapid.phone_number = null
       }
     },
     async saveData() {
@@ -202,7 +226,7 @@ export default {
       const response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
       if (response.status !== 422) {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-        this.$router.push('/rdt/medical-personel')
+        this.$router.push('/rdt/list')
         await this.$refs.form.reset()
       }
     }

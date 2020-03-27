@@ -13,7 +13,7 @@ const rdtRouter = {
   children: [
     {
       path: '/rdt/create',
-      component: () => import('@/views/rapidTest/formRapid'),
+      component: () => import('@/views/rdt/formRapid'),
       meta: {
         title: 'create_rdt',
         noCache: true,
@@ -21,7 +21,7 @@ const rdtRouter = {
       }
     },
     {
-      path: '/rdt/medical-personel',
+      path: '/rdt/list',
       component: () => import('@/views/rdt/list'),
       meta: {
         title: 'list_rdt',

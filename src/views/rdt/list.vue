@@ -116,8 +116,8 @@
       :data-deleted="dataDelete"
       :dialog-delete.sync="dialog"
       :delete-date.sync="dataDelete"
-      :store-path-delete="`reports/deleteReportCase`"
-      :store-path-get-list="`reports/listReportCase`"
+      :store-path-delete="`rdt/deleteRDT`"
+      :store-path-get-list="`rdt/getListRDT`"
     />
   </div>
 </template>
@@ -179,7 +179,7 @@ export default {
     },
     async handleDeleteRDT(id) {
       this.dialog = true
-      this.dataDelete = await id
+      this.dataDelete = await { _id: id }
     },
     async handleUpdateResults(id) {
       await this.$router.push(`/rdt/update-result/${id}`)
