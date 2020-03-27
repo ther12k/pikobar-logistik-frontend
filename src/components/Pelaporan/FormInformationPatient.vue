@@ -145,7 +145,6 @@
             <label class="required">Alamat Tempat Tinggal</label>
             <address-region
               v-if="formPasien.address_district_name"
-              :disabled-district="true"
               :district-code="formPasien.address_district_code"
               :district-name="formPasien.address_district_name"
               :code-district.sync="formPasien.address_district_code"
