@@ -28,6 +28,26 @@ const rdtRouter = {
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
+    },
+    {
+      path: '/rdt/detail/:id',
+      component: () => import('@/views/rdt/detail'),
+      hidden: true,
+      meta: {
+        title: 'rdt_detail',
+        noCache: true,
+        roles: ['superadmin', 'dinkeskota', 'faskes']
+      }
+    },
+    {
+      path: '/rdt/update-result/:id',
+      component: () => import('@/views/rdt/updateResult'),
+      hidden: true,
+      meta: {
+        title: 'rdt_update',
+        noCache: true,
+        roles: ['superadmin', 'dinkeskota', 'faskes']
+      }
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { fetchList, fetchPostUpdate } from '@/api'
+import { fetchList } from '@/api'
 
 export default {
   async getListRDT({ commit }, params) {
@@ -14,6 +14,14 @@ export default {
   async createRDT({ commit }, data) {
     try {
       const response = await fetchPostUpdate('/api/rdt', 'POST', data)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async detailParticipant({ commit }, id) {
+    try {
+      const response = await fetchDetail('/api/rdt', 'GET', id)
       return response
     } catch (error) {
       return error.response
