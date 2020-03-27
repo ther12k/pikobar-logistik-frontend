@@ -6,7 +6,7 @@
         :disabled-district="disabledDistrict"
         :required="requiredAddress"
         :district-city="districtCity"
-        :update-district-city.sync="districtCity"
+        :city-district.sync="districtCity"
         :on-select-district="onSelectDistrict"
       />
       <select-area-sub-district
@@ -85,6 +85,33 @@ export default {
       },
       village: {
         desa_kode: this.villageCode,
+        desa_nama: this.villageName
+      }
+    }
+  },
+  watch: {
+    'districtCode': function(value) {
+      if (value.length > 0) {
+        this.districtCity = {
+          kota_kode: value,
+          kota_nama: this.districtName
+        }
+      } else {
+        this.districtCity = {
+          kota_kode: null,
+          kota_nama: null
+        }
+      }
+    },
+    'subDistrictCode': function(value) {
+      this.subDistrict = {
+        kecamatan_kode: value,
+        kecamatan_nama: this.subDistrictName
+      }
+    },
+    'villageCode': function(value) {
+      this.village = {
+        desa_kode: value,
         desa_nama: this.villageName
       }
     }

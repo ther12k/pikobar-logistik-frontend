@@ -12,8 +12,8 @@ const rdtRouter = {
   active: false,
   children: [
     {
-      path: '/rdt/odp-list',
-      component: () => import('@/views/rdt/list'),
+      path: '/rdt/create',
+      component: () => import('@/views/rdt/formRapid'),
       meta: {
         title: 'create_rdt',
         noCache: true,
@@ -21,10 +21,30 @@ const rdtRouter = {
       }
     },
     {
-      path: '/rdt/medical-personel',
+      path: '/rdt/list',
       component: () => import('@/views/rdt/list'),
       meta: {
         title: 'list_rdt',
+        noCache: true,
+        roles: ['superadmin', 'dinkeskota', 'faskes']
+      }
+    },
+    {
+      path: '/rdt/detail/:id',
+      component: () => import('@/views/rdt/detail'),
+      hidden: true,
+      meta: {
+        title: 'rdt_detail',
+        noCache: true,
+        roles: ['superadmin', 'dinkeskota', 'faskes']
+      }
+    },
+    {
+      path: '/rdt/update-result/:id',
+      component: () => import('@/views/rdt/updateResult'),
+      hidden: true,
+      meta: {
+        title: 'rdt_update',
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }

@@ -238,10 +238,8 @@ export default {
       if (!valid) {
         return
       }
-      console.log(this.formPasien)
       this.$store.dispatch('reports/createReportCase', this.formPasien)
-      console.log(this.formPasien)
-      // this.$router.push('/laporan/index')
+      this.$router.push('/laporan/index')
     }
   }
 }

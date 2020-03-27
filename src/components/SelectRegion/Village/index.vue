@@ -60,11 +60,20 @@ export default {
     }
   },
   watch: {
+    'village': function(value) {
+      if (value && value.desa_kode) {
+        this.nameVillage = value
+      } else {
+        this.nameVillage = ''
+      }
+    },
     codeSubDistrict: async function(value) {
-      if (value.length > 0) {
+      if (value && value.length > 0) {
         const response = await this.$store.dispatch('region/getListVillage', value)
         this.listVillage = response.data
         this.disable = false
+      } else {
+        this.disable = true
       }
     }
   },

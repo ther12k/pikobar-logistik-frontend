@@ -49,8 +49,8 @@
               <tbody>
                 <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.id_case.toUpperCase() }}</td>
-                  <td>{{ item.nama }}</td>
+                  <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
+                  <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
                   <td>
                     <div v-if="item.gender =='P'">
@@ -85,8 +85,11 @@
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <v-list-item @click="handleEditRDT(item._id)">
-                            Update Profil
+                          <v-list-item v-if="item.final_result.length < 1" @click="handleEditRDT(item._id)">
+                            Update Profil Peserta
+                          </v-list-item>
+                          <v-list-item v-if="item.final_result.length < 1 " @click="handleUpdateResults(item._id)">
+                            Update Hasil
                           </v-list-item>
                           <v-list-item @click="handleDeleteRDT(item._id)">
                             Hapus Peserta
@@ -113,8 +116,8 @@
       :data-deleted="dataDelete"
       :dialog-delete.sync="dialog"
       :delete-date.sync="dataDelete"
-      :store-path-delete="`reports/deleteReportCase`"
-      :store-path-get-list="`reports/listReportCase`"
+      :store-path-delete="`rdt/deleteRDT`"
+      :store-path-get-list="`rdt/getListRDT`"
     />
   </div>
 </template>
@@ -176,7 +179,10 @@ export default {
     },
     async handleDeleteRDT(id) {
       this.dialog = true
-      this.dataDelete = await id
+      this.dataDelete = await { _id: id }
+    },
+    async handleUpdateResults(id) {
+      await this.$router.push(`/rdt/update-result/${id}`)
     },
     async handleSearch() {
       await this.$store.dispatch('rdt/getListRDT', this.listQuery)
