@@ -4,7 +4,9 @@
       :title-detail="title"
       :id-data="this.$route.params.id"
     />
-    <update-result-form />
+    <update-result-form
+      :id-data="this.$route.params.id"
+    />
   </div>
 </template>
 

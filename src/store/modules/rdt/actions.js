@@ -34,5 +34,15 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async updateRDT({ commit }, data) {
+    const id_case = await data.id
+    await delete data['id']
+    try {
+      const response = await fetchPostUpdate(`/api/rdt/${id_case}`, 'PUT', data.data)
+      return response
+    } catch (error) {
+      return error.response
+    }
   }
 }

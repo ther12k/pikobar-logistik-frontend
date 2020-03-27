@@ -44,7 +44,7 @@
               v-slot="{ errors }"
               rules="required|isHtml"
             >
-              <label class="required">Nama Pasien</label>
+              <label class="required">Nama Peserta</label>
               <v-text-field
                 v-model="formRapid.name"
                 :error-messages="errors"
