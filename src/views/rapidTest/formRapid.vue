@@ -3,6 +3,7 @@
     <ValidationObserver ref="observer">
       <v-form
         ref="form"
+        lazy-validation
       >
         <v-row>
           <v-col>
@@ -183,17 +184,18 @@ export default {
     async onSelectCase(value) {
       if (value) {
         const response = await this.$store.dispatch('reports/detailReportCase', value)
-        console.log(response)
         this.formRapid = response.data
       }
     },
     async saveData() {
-      console.log(this.formRapid)
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      }
       const response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
       if (response.status !== 422) {
-        // await this.$store.dispatch('reports/resetFormPasien')
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-        // this.$router.push('/laporan/index')
+        this.$router.push('/rdt/medical-personel')
         await this.$refs.form.reset()
       }
     }
