@@ -43,8 +43,7 @@
                   <th class="text-left">NAMA</th>
                   <th class="text-left">USIA</th>
                   <th class="text-left">JENIS KELAMIN</th>
-                  <th class="text-left">HASIL</th>
-                  <th class="text-left">AUTHOR</th>
+                  <th class="text-left">TANGGAL PENDAFTARAN</th>
                   <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
                 </tr>
               </thead>
@@ -52,7 +51,7 @@
                 <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.id_case.toUpperCase() }}</td>
-                  <td>{{ item.name }}</td>
+                  <td>{{ item.nama }}</td>
                   <td>{{ item.age }}</td>
                   <td>
                     <div v-if="item.gender =='P'">
@@ -62,7 +61,7 @@
                       Laki-Laki
                     </div>
                   </td>
-                  <td>{{ item.author.fullname }}</td>
+                  <td>{{ formatDatetime(item.createdAt, 'DD MMMM YYYY') }}</td>
                   <td v-if="roles[0] === 'dinkeskota'">
                     <v-card-actions>
                       <v-menu
@@ -87,13 +86,10 @@
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <v-list-item @click="handleEditCase(item._id)">
+                          <v-list-item @click="handleEditRDT(item._id)">
                             Update Profil
                           </v-list-item>
-                          <v-list-item @click="handleEditHistoryCase(item._id)">
-                            Update Riwayat
-                          </v-list-item>
-                          <v-list-item @click="handleDeleteCase(item._id)">
+                          <v-list-item @click="handleDeleteRDT(item._id)">
                             Hapus Kasus
                           </v-list-item>
                         </v-card>
@@ -126,6 +122,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { formatDatetime } from '@/utils/parseDatetime'
 export default {
   name: 'RDTList',
   data() {
@@ -171,16 +168,14 @@ export default {
     await this.$store.dispatch('rdt/getListRDT', this.listQuery)
   },
   methods: {
+    formatDatetime,
     async handleDetail(id) {
       await this.$router.push(`/rdt/detail/${id}`)
     },
-    async handleEditCase(id) {
+    async handleEditRDT(id) {
       await this.$router.push(`/rdt/edit-case/${id}`)
     },
-    async handleEditHistoryCase(id) {
-      await this.$router.push(`/rdt/edit-history-case/${id}`)
-    },
-    async handleDeleteCase(id) {
+    async handleDeleteRDT(id) {
       this.dialog = true
       this.dataDelete = await id
     },
