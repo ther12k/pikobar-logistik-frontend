@@ -10,7 +10,13 @@
           <img src="../../static/image-delete-dialog.svg">
         </div>
         <v-card-text v-if="dataDeleted" class="dialog-delete-title font-weight-bold">
-          {{ $t('label.delete_dialog') }} <br> <span class="font-weight-black"> {{ dataDeleted.id_case.toUpperCase() +'?' }} </span>
+          {{ $t('label.delete_dialog') }} <br>
+          <span
+            v-if="dataDeleted.id_case"
+            class="font-weight-black"
+          >
+            {{ dataDeleted.id_case.toUpperCase() +'?' }}
+          </span>
         </v-card-text>
         <v-card-actions class="justify-center" style="padding: 2rem">
           <v-btn

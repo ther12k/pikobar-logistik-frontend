@@ -6,6 +6,7 @@ import toast from './modules/toast'
 import region from './modules/region'
 import reports from './modules/reports'
 import occupation from './modules/occupation'
+import rdt from './modules/rdt'
 
 Vue.use(Vuex)
 
@@ -30,7 +31,8 @@ const store = new Vuex.Store({
     reports,
     region,
     toast,
-    user
+    user,
+    rdt
   }
 })
 

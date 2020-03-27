@@ -1,15 +1,44 @@
 <template>
   <div>
-    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
-      <v-list-item v-if="onlyOneChild.meta" :to="resolvePath(item.path)">
-        <v-list-item-icon>
-          <v-icon v-text="onlyOneChild.meta.icon" />
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title v-text="generateTitle(onlyOneChild.meta.title)" />
-        </v-list-item-content>
-      </v-list-item>
-    </template>
+    <v-list-item-group
+      class="sidebar"
+      color="primary"
+    >
+      <div v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
+        <v-list-item v-if="onlyOneChild.meta" :to="resolvePath(item.path)">
+          <v-list-item-icon>
+            <v-icon v-text="onlyOneChild.meta.icon" />
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title v-text="generateTitle(onlyOneChild.meta.title)" />
+          </v-list-item-content>
+        </v-list-item>
+      </div>
+      <div v-else>
+        <v-list-group
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-item-icon>
+              <v-icon v-text="item.meta.icon" />
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="generateTitle(item.meta.title)" />
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="subItem in item.children"
+            :key="generateTitle(subItem.meta.title)"
+            :to="resolvePath(subItem.path)"
+          >
+            <v-list-item-content>
+              <v-list-item-title v-text="generateTitle(subItem.meta.title)" />
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
+      </div>
+    </v-list-item-group>
   </div>
 </template>
 
