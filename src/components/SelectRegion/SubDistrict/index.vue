@@ -63,11 +63,20 @@ export default {
     }
   },
   watch: {
+    'subDistrict': function(value) {
+      if (value && value.kecamatan_kode) {
+        this.nameSubDistrict = value
+      } else {
+        this.nameSubDistrict = ''
+      }
+    },
     codeDistrict: async function(value) {
-      if (value.length > 0) {
+      if (value && value.length > 0) {
         const response = await this.$store.dispatch('region/getListSubDistrict', value)
         this.listSubDistrict = response.data
         this.disable = false
+      } else {
+        this.disable = true
       }
     }
   },
