@@ -1,6 +1,17 @@
 
 <template>
   <div>
+    <v-card class="d-block pa-1 mx-auto header-survey-list">
+      <v-container>
+        <v-row justify="space-between">
+          <v-col cols="auto">
+            <v-card-text class="header-survey-text">
+              <div>Total Peserta : {{ totalReport }}</div>
+            </v-card-text>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
     <v-card
       outlined
     >
@@ -78,7 +89,7 @@
                             Update Profil
                           </v-list-item>
                           <v-list-item @click="handleDeleteRDT(item._id)">
-                            Hapus Kasus
+                            Hapus Peserta
                           </v-list-item>
                         </v-card>
                       </v-menu>
