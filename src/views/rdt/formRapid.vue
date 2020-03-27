@@ -231,7 +231,11 @@ export default {
       }
       let response
       if (this.$route.params.id) {
-        response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
+        const updateParticipant = {
+          id: this.$route.params.id,
+          data: this.formRapid
+        }
+        response = await this.$store.dispatch('rdt/updateRDT', updateParticipant)
       } else {
         response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
       }
