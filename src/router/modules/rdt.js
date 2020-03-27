@@ -12,8 +12,8 @@ const rdtRouter = {
   active: false,
   children: [
     {
-      path: '/rdt/odp-list',
-      component: () => import('@/views/rdt/list'),
+      path: '/rdt/create',
+      component: () => import('@/views/rapidTest/formRapid'),
       meta: {
         title: 'create_rdt',
         noCache: true,
