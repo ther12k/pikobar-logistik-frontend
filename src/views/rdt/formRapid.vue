@@ -23,7 +23,6 @@
           </v-col>
           <v-col>
             <autocomplete-cases
-              v-if="formRapid.type_target === 'ODP'"
               :on-select-case="onSelectCase"
               :disabled-case="isODP"
             />
@@ -165,6 +164,7 @@ export default {
         'Tenaga kesehatan di zona merah'
       ],
       formRapid: {
+        id_case: '',
         type_target: null,
         nik: null,
         name: null,
@@ -203,6 +203,7 @@ export default {
         this.isODP = false
       } else {
         this.isODP = true
+        this.formRapid.id_case = null
         this.formRapid.nik = null
         this.formRapid.name = null
         this.formRapid.birth_date = ''
