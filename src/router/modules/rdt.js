@@ -12,8 +12,8 @@ const rdtRouter = {
   active: false,
   children: [
     {
-      path: '/rdt/odp-list',
-      component: () => import('@/views/rdt/list'),
+      path: '/rdt/create',
+      component: () => import('@/views/rapidTest/formRapid'),
       meta: {
         title: 'create_rdt',
         noCache: true,
@@ -25,17 +25,6 @@ const rdtRouter = {
       component: () => import('@/views/rdt/list'),
       meta: {
         title: 'list_rdt',
-        noCache: true,
-        roles: ['superadmin', 'dinkeskota', 'faskes']
-      }
-    },
-    {
-      path: 'create',
-      component: () => import('@/views/rapidTest/formRapid'),
-      hidden: true,
-      meta: {
-        title: 'form-rapid',
-        icon: 'library_books',
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
