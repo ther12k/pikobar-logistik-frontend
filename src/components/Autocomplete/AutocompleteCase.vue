@@ -10,6 +10,7 @@
       single-line
       :disabled="disabledCase"
       clearable
+      color="black"
       solo
       autocomplete
       @change="onSelectCase"

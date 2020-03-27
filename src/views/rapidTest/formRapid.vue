@@ -17,6 +17,7 @@
           <v-col>
             <autocomplete-cases
               :on-select-case="onSelectCase"
+              :disabled-case="isODP"
             />
           </v-col>
         </v-row>
@@ -64,22 +65,23 @@
 
           </v-col>
           <v-col cols="6">
-            <!-- <ValidationProvider
+            <ValidationProvider
               v-slot="{ errors }"
               rules="required"
-            > -->
-            <label class="required">Jenis Kelamin</label>
-            <v-radio-group
-              v-model="formRapid.gender"
-              row
             >
-              <v-radio label="Laki-Laki" value="L" />
-              <v-radio label="Perempuan" value="P" />
-            </v-radio-group>
-            <!-- </ValidationProvider> -->
+              <label class="required">Jenis Kelamin</label>
+              <v-radio-group
+                v-model="formRapid.gender"
+                :error-messages="errors"
+                row
+              >
+                <v-radio label="Laki-Laki" value="L" />
+                <v-radio label="Perempuan" value="P" />
+              </v-radio-group>
+            </ValidationProvider>
             <label class="required">Alamat Tempat Tinggal</label>
             <address-region
-
+              v-model="formRapid.address_district_name"
               :district-code="formRapid.address_district_code"
               :district-name="formRapid.address_district_name"
               :code-district.sync="formRapid.address_district_code"
@@ -146,6 +148,7 @@ export default {
   data() {
     return {
       formatDate: 'YYYY/MM/DD',
+      isODP: true,
       items: [
         'ODP',
         'Kluster',
@@ -160,20 +163,24 @@ export default {
         birth_date: '',
         age: null,
         gender: null,
-        address_district_code: null,
-        address_district_name: null,
-        address_subdistrict_code: null,
-        address_subdistrict_name: null,
-        address_village_code: null,
-        address_village_name: null,
+        address_district_code: '',
+        address_district_name: '',
+        address_subdistrict_code: '',
+        address_subdistrict_name: '',
+        address_village_code: '',
+        address_village_name: '',
         address_street: null,
         phone_number: null
       }
     }
   },
   watch: {
-    'formRapid.nik': function(val) {
-
+    'formRapid.type_target': function(val) {
+      if (val === 'ODP') {
+        this.isODP = false
+      } else {
+        this.isODP = true
+      }
     },
     'formRapid.birth_date': function(value) {
       this.formRapid.age = this.getAge(value)
@@ -184,7 +191,7 @@ export default {
     async onSelectCase(value) {
       if (value) {
         const response = await this.$store.dispatch('reports/detailReportCase', value)
-        this.formRapid = response.data
+        Object.assign(this.formRapid, await response.data)
       }
     },
     async saveData() {

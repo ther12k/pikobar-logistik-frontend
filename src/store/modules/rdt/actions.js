@@ -1,4 +1,4 @@
-import { fetchList } from '@/api'
+import { fetchList, fetchPostUpdate, fetchDetail } from '@/api'
 
 export default {
   async getListRDT({ commit }, params) {
