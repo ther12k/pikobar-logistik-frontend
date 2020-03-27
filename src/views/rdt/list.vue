@@ -1,18 +1,6 @@
 
 <template>
   <div>
-    <v-card class="d-block pa-1 mx-auto header-survey-list">
-      <v-container>
-        <v-row justify="space-between">
-          <v-col cols="auto">
-            <v-card-text class="header-survey-text">
-              <div>Total data Kasus : {{ totalReport }}</div>
-              <div v-if="roles[0] === 'dinkeskota' || roles[0] === 'faskes'">Tambahkan data RDT dengan menekan tombol Tambah RDT</div>
-            </v-card-text>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card>
     <v-card
       outlined
     >
