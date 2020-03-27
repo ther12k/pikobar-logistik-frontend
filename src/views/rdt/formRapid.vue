@@ -189,12 +189,17 @@ export default {
       }
     }
   },
+  async mounted() {
+    if (this.$route.params && this.$route.params.id) {
+      const response = await this.$store.dispatch('rdt/detailParticipant', this.$route.params.id)
+      await Object.assign(this.formRapid, response.data)
+    }
+  },
   methods: {
     getAge,
     async onSelectCase(value) {
       if (value) {
         const response = await this.$store.dispatch('reports/detailReportCase', value)
-        this.formRapid.address_district_code = await response.data.address_district_code
         await Object.assign(this.formRapid, response.data)
       }
     },
@@ -224,7 +229,16 @@ export default {
       if (!valid) {
         return
       }
-      const response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
+      let response
+      if (this.$route.params.id) {
+        const updateParticipant = {
+          id: this.$route.params.id,
+          data: this.formRapid
+        }
+        response = await this.$store.dispatch('rdt/updateRDT', updateParticipant)
+      } else {
+        response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
+      }
       if (response.status !== 422) {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/rdt/list')

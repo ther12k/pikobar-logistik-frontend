@@ -30,6 +30,16 @@ const rdtRouter = {
       }
     },
     {
+      path: '/rdt/update/:id',
+      component: () => import('@/views/rdt/formRapid'),
+      hidden: true,
+      meta: {
+        title: 'create_rdt',
+        noCache: true,
+        roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
+      }
+    },
+    {
       path: '/rdt/detail/:id',
       component: () => import('@/views/rdt/detail'),
       hidden: true,
