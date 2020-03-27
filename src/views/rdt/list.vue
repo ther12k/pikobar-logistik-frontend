@@ -39,6 +39,7 @@
                 <tr>
                   <th class="text-left">#</th>
                   <th class="text-left">KODE RDT</th>
+                  <th class="text-left">KODE CASE ODP</th>
                   <th class="text-left">NAMA</th>
                   <th class="text-left">USIA</th>
                   <th class="text-left">JENIS KELAMIN</th>
@@ -49,6 +50,7 @@
               <tbody>
                 <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
+                  <td>{{ item.code_rdt }}</td>
                   <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.age }}</td>
@@ -175,7 +177,7 @@ export default {
       await this.$router.push(`/rdt/detail/${id}`)
     },
     async handleEditRDT(id) {
-      await this.$router.push(`/rdt/edit-case/${id}`)
+      await this.$router.push(`/rdt/update/${id}`)
     },
     async handleDeleteRDT(id) {
       this.dialog = true
