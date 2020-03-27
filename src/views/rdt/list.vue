@@ -86,7 +86,10 @@
                             Lihat Detail
                           </v-list-item>
                           <v-list-item @click="handleEditRDT(item._id)">
-                            Update Profil
+                            Update Profil Peserta
+                          </v-list-item>
+                          <v-list-item @click="handleEditRDT(item._id)">
+                            Update Hasil
                           </v-list-item>
                           <v-list-item @click="handleDeleteRDT(item._id)">
                             Hapus Peserta
