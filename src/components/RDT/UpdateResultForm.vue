@@ -17,11 +17,11 @@
                 <ValidationProvider>
                   <v-label>Hasil Test</v-label>
                   <v-radio-group
-                    v-model="formPasien.gender"
+                    v-model="formRapid.final_result"
                     row
                   >
-                    <v-radio label="Positif" value="L" />
-                    <v-radio label="Negatif" value="P" />
+                    <v-radio label="Positif" value="POSITIF" />
+                    <v-radio label="Negatif" value="NEGATIF" />
                   </v-radio-group>
                 </ValidationProvider>
               </v-form>
@@ -37,7 +37,7 @@
                 style="float: right;"
                 @click="handleSave"
               >
-                Simpan dan Tambah Ke Laporan Kasus
+                Simpan
               </v-btn>
               <v-btn
                 color="grey"
@@ -46,7 +46,7 @@
                 style="float: right;margin-right: 12px;"
                 @click="handleBack"
               >
-                Simpan
+                Kembali
               </v-btn>
             </v-col>
           </v-row>
@@ -58,7 +58,6 @@
 
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import { mapGetters } from 'vuex'
 export default {
   name: 'UpdateResultForm',
   components: {
@@ -69,29 +68,41 @@ export default {
     isEdit: {
       type: Boolean,
       default: false
+    },
+    idData: {
+      type: String,
+      default: null
     }
   },
   data() {
     return {
-      formatDate: 'YYYY-MM-DD'
+      formatDate: 'YYYY-MM-DD',
+      formRapid: {
+        final_result: null
+      }
     }
   },
-  computed: {
-    ...mapGetters('reports', [
-      'formPasien'
-    ])
+  async mounted() {
+    const response = await this.$store.dispatch('rdt/detailParticipant', this.idData)
+    Object.assign(this.formRapid, response.data)
   },
   methods: {
     handleBack() {
-      this.$router.push('/rdt/index')
+      this.$router.push('/rdt/list')
     },
     async handleSave() {
-      // const valid = await this.$refs.observer.validate()
-      // if (!valid) {
-      //   return
-      // }
-      // this.$store.dispatch('reports/createReportCase', this.formPasien)
-      this.$router.push('/rdt/index')
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      }
+
+      const updateFinalRDT = {
+        id: this.idData,
+        data: this.formRapid
+      }
+
+      this.$store.dispatch('rdt/updateRDT', updateFinalRDT)
+      this.$router.push('/rdt/list')
     }
   }
 }

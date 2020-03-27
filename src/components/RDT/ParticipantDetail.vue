@@ -55,7 +55,7 @@
         </v-col>
         <v-col auto>
           <v-text-field
-            v-model="detailData.nama"
+            v-model="detailData.name"
             disabled
             hide-details
             solo-inverted

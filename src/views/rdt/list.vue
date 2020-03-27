@@ -85,10 +85,10 @@
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <v-list-item @click="handleEditRDT(item._id)">
+                          <v-list-item v-if="item.final_result.length < 1" @click="handleEditRDT(item._id)">
                             Update Profil Peserta
                           </v-list-item>
-                          <v-list-item @click="handleUpdateResults(item._id)">
+                          <v-list-item v-if="item.final_result.length < 1 " @click="handleUpdateResults(item._id)">
                             Update Hasil
                           </v-list-item>
                           <v-list-item @click="handleDeleteRDT(item._id)">
