@@ -43,6 +43,11 @@ module.exports = {
       }
     }
   },
+  pwa: {
+    workboxOptions: {
+      skipWaiting: true
+    }
+  },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
