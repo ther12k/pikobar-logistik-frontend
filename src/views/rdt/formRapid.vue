@@ -65,6 +65,7 @@
               <v-text-field
                 v-model="formRapid.age"
                 :error-messages="errors"
+                min="0"
                 solo-inverted
                 type="number"
               />
@@ -113,12 +114,13 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="required|isPhoneNumber"
             >
               <label class="required">Nomor Telepon</label>
               <v-text-field
                 v-model="formRapid.phone_number"
                 :error-messages="errors"
+                placeholder="08xxxxxxxxx"
                 solo-inverted
                 type="number"
               />

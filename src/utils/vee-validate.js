@@ -1,5 +1,5 @@
-import { required, email, max } from 'vee-validate/dist/rules'
-import { isContainHtmlTags } from '@/utils/validate'
+import { required, email, max, numeric } from 'vee-validate/dist/rules'
+import { isContainHtmlTags, isPhoneNumber } from '@/utils/validate'
 import { extend, setInteractionMode } from 'vee-validate'
 import i18n from '@/lang'
 
@@ -14,6 +14,11 @@ extend('max', {
   message: 'This field must be {length} characters or less'
 })
 
+extend('numeric', {
+  ...numeric,
+  message: (_, values) => i18n.t('errors.field_unauthorized_characters', values)
+})
+
 extend('email', {
   ...email,
   message: (_, values) => i18n.t('errors.field_must_be_valid_email', values)
@@ -23,6 +28,13 @@ extend('isHtml', {
   message: (_, values) => i18n.t('errors.field_unauthorized_characters', values),
   validate: value => {
     return !isContainHtmlTags(value)
+  }
+})
+
+extend('isPhoneNumber', {
+  message: (_, values) => i18n.t('errors.field_phone_number_not_valid', values),
+  validate: value => {
+    return isPhoneNumber(value)
   }
 })
 
