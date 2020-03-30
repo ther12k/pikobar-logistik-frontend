@@ -88,7 +88,7 @@
                   <th class="text-left">TAHAPAN</th>
                   <th class="text-left">HASIL</th>
                   <th class="text-left">AUTHOR</th>
-                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
+                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">AKSI</th>
                 </tr>
               </thead>
               <tbody>
@@ -96,7 +96,7 @@
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.id_case.toUpperCase() }}</td>
                   <td>{{ item.name }}</td>
-                  <td>{{ item.age }}</td>
+                  <td>{{ item.age }} Th</td>
                   <td>
                     <div v-if="item.gender =='P'">
                       Perempuan
