@@ -5,6 +5,9 @@ export default {
   SET_TOTAL_LIST_RDT: (state, data) => {
     state.totalList = data
   },
+  SET_LIST_TARGET: (state, data) => {
+    state.listTarget = data
+  },
   RESET_LIST_RDT: (state, data) => {
     state.listRDT = []
   }

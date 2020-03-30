@@ -5,8 +5,8 @@
       :loading="loading"
       :items="listKasus"
       :return-object="false"
-      item-value="_id"
-      item-text="name"
+      item-value="id"
+      item-text="display"
       single-line
       :disabled="disabledCase"
       color="black"
@@ -15,11 +15,11 @@
       @change="onSelectCase"
     >
       <template v-slot:selection="data">
-        {{ data.item.id_case }} - {{ data.item.name }}
+        {{ data.item.display }}
       </template>
       <template v-slot:item="data">
         <v-list-item-content>
-          <v-list-item-title v-html="data.item.id_case +' - '+ data.item.name" />
+          <v-list-item-title v-html="data.item.display" />
         </v-list-item-content>
       </template>
     </v-autocomplete>
@@ -48,27 +48,23 @@ export default {
   data() {
     return {
       loading: false,
+      listKasus: null,
       listQuery: {
-        address_district_code: '',
-        page: 1,
-        limit: 30,
-        search: ''
+        address_district_code: ''
       }
     }
   },
   computed: {
-    ...mapGetters('reports', [
-      'listKasus'
-    ]),
     ...mapGetters('user', [
       'roles',
       'district_user'
     ])
   },
-  async created() {
+  async mounted() {
     this.loading = true
     this.listQuery.address_district_code = this.district_user
-    await this.$store.dispatch('reports/listReportCase', this.listQuery)
+    const response = await this.$store.dispatch('rdt/getCases', this.listQuery.address_district_code)
+    this.listKasus = response.data
     this.loading = false
   }
 }

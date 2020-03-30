@@ -13,11 +13,13 @@
             >
               <label class="required">Kategori</label>
               <v-select
-
+                v-model="formRapid.category"
                 :error-messages="errors"
                 :items="items"
+                item-text="label"
+                item-value="value"
                 solo
-                @change="onChangeType"
+                @change="onChangeCategory"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -26,11 +28,10 @@
             >
               <label class="required">Mekanisme</label>
               <v-select
-
+                v-model="formRapid.mechanism"
                 :error-messages="errors"
-                :items="items"
+                :items="mechanismOptions"
                 solo
-                @change="onChangeType"
               />
             </ValidationProvider>
           </v-col>
@@ -41,9 +42,11 @@
             >
               <label class="required">Sasaran</label>
               <v-select
-                v-model="formRapid.type_target"
+                v-model="formRapid.target"
                 :error-messages="errors"
-                :items="items"
+                :items="targetOptions"
+                item-text="targets"
+                item-value="targets"
                 solo
                 @change="onChangeType"
               />
@@ -103,13 +106,13 @@
                 type="number"
               />
             </ValidationProvider>
-            <!-- <ValidationProvider
+            <ValidationProvider
               v-slot="{ errors }"
               rules="required"
             >
-              <label class="required">Kewarganegaraan</label>
+              <label>Kewarganegaraan</label>
               <v-radio-group
-
+                v-model="formRapid.nationality"
                 :error-messages="errors"
                 row
               >
@@ -118,21 +121,17 @@
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider
-
+              v-if="formRapid.nationality === 'WNA'"
               v-slot="{ errors }"
+              rules="required"
             >
               <v-text-field
-
+                v-model="formRapid.nationality_name"
                 :error-messages="errors"
                 placeholder="Negara Asal"
                 solo-inverted
               />
-            </ValidationProvider> -->
-            <label>Kewarganegaraan</label>
-            <v-radio-group>
-              <v-radio label="WNI" value="WNI" />
-              <v-radio label="WNA" value="WNA" />
-            </v-radio-group>
+            </ValidationProvider>
           </v-col>
           <v-col cols="6">
             <ValidationProvider
@@ -186,7 +185,10 @@
             </ValidationProvider>
           </v-col>
         </v-row>
-        <form-result />
+        <form-result
+          :form-result="formResult"
+          :result-form.sync="formResult"
+        />
         <v-container fluid>
           <v-row class="survey-bottom-form">
             <v-col>
@@ -208,6 +210,8 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import { getAge } from '@/utils/constantVariable'
+import { mapGetters } from 'vuex'
+import { fetchPostUpdate } from '@/api'
 
 export default {
   components: {
@@ -219,15 +223,28 @@ export default {
       formatDate: 'YYYY/MM/DD',
       isODP: true,
       items: [
-        'ODP',
-        'Kluster',
-        'Kontak erat dengan positif',
-        'Anggota keluarga PDP',
-        'Tenaga kesehatan di zona merah'
+        {
+          label: 'Kategori A',
+          value: 'A'
+        },
+        {
+          label: 'Kategori B',
+          value: 'B'
+        },
+        {
+          label: 'Kategori C',
+          value: 'C'
+        }
       ],
+      mechanismOptions: [
+        'Door to door',
+        'Faskes',
+        'Drive-Thru'
+      ],
+      targetOptions: [],
       formRapid: {
         id_case: '',
-        type_target: null,
+        target: '',
         nik: null,
         name: null,
         birth_date: '',
@@ -238,11 +255,36 @@ export default {
         address_subdistrict_code: '',
         address_subdistrict_name: '',
         address_village_code: '',
-        address_village_name: '',
+        address_villagenationality_name: '',
         address_street: null,
-        phone_number: null
+        phone_number: null,
+        category: null,
+        mechanism: null,
+        nationality: null,
+        nationality_name: null
+      },
+      formResult: {
+        final_result: null,
+        test_location: null,
+        test_other_location: null,
+        test_address_district_code: '',
+        test_address_district_name: '',
+        test_address_subdistrict_code: '',
+        test_address_subdistrict_name: '',
+        test_address_village_code: '',
+        test_address_village_name: '',
+        test_address_detail: '',
+        tool_tester: 'RAPID TEST',
+        test_method: null,
+        test_date: '2020/03/02',
+        test_note: null
       }
     }
+  },
+  computed: {
+    ...mapGetters('user', [
+      'district_user'
+    ])
   },
   watch: {
     'formRapid.birth_date': function(value) {
@@ -286,26 +328,53 @@ export default {
         this.formRapid.phone_number = null
       }
     },
+    async onChangeCategory(value) {
+      const response = await this.$store.dispatch('rdt/getListTarget', value)
+      this.targetOptions = response.data
+    },
     async saveData() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
+      } else if (this.formRapid.test_date < 1) {
+        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
       }
-      let response
-      if (this.$route.params.id) {
-        const updateParticipant = {
-          id: this.$route.params.id,
-          data: this.formRapid
-        }
-        response = await this.$store.dispatch('rdt/updateRDT', updateParticipant)
-      } else {
-        response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
-      }
+      // let response
+      // if (this.$route.params.id) {
+      //   const updateParticipant = {
+      //     id: this.$route.params.id,
+      //     data: this.formRapid
+      //   }
+      //   response = await this.$store.dispatch('rdt/updateRDT', updateParticipant)
+      // } else {
+      //   response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
+      // }
+      // if (response.status !== 422) {
+      //   await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+      //   this.$router.push('/rdt/list')
+      //   await this.$refs.form.reset()
+      // }
+      // this.formRapid.status = 'PDP'
+      Object.assign(this.formRapid, this.formResult)
+      // let response
+      // if (this.formRapid.id_case) {
+      //   response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
+      // } else {
+      //   response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
+      // }
+      console.log(this.formRapid)
+      delete this.formRapid.author
+      delete this.formRapid.last_history
+      const response = await fetchPostUpdate(`/api/rdt?address_district_code=${this.district_user}`, 'POST', this.formRapid)
+
       if (response.status !== 422) {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/rdt/list')
         await this.$refs.form.reset()
+      } else {
+        console.log('gagal')
       }
+      console.log(this.formRapid)
     }
   }
 }

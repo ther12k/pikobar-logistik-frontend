@@ -18,7 +18,7 @@
             >
               <label class="required">Hasil Test</label>
               <v-radio-group
-                v-model="formResult.result"
+                v-model="formResult.final_result"
                 :error-messages="errors"
                 row
               >
@@ -33,7 +33,7 @@
             >
               <label class="required">Tempat Pengetesan</label>
               <v-autocomplete
-                v-model="formResult.location_test"
+                v-model="formResult.test_location"
                 :items="hospitalList"
                 :return-object="true"
                 :error-messages="errors"
@@ -47,37 +47,44 @@
               />
             </ValidationProvider>
             <ValidationProvider
-              v-if="formResult.location_test === 'Lainnya'"
+              v-if="formResult.test_location === 'Lainnya'"
               v-slot="{ errors }"
               rules="required"
             >
               <v-text-field
+                v-model="formResult.test_other_location"
                 placeholder="Masukan nama tempat"
                 :error-messages="errors"
                 solo-inverted
               />
             </ValidationProvider>
             <ValidationProvider
-              v-if="formResult.location_test === 'Lainnya'"
+              v-if="formResult.test_location === 'Lainnya'"
               v-slot="{ errors }"
               rules="required"
             >
               <address-region
                 :error-messages="errors"
-                :district-code="formResult.current_location_district_code"
-                :code-district.sync="formResult.current_location_district_code"
-                :sub-district-code="formResult.current_location_subdistrict_code"
-                :code-sub-district.sync="formResult.current_location_subdistrict_code"
-                :village-code="formResult.current_location_village_code"
-                :code-village.sync="formResult.current_location_village_code"
+                :district-code="formResult.test_address_district_code"
+                :district-name="formResult.test_address_district_name"
+                :code-district.sync="formResult.test_address_district_code"
+                :name-district.sync="formResult.test_address_district_name"
+                :sub-district-code="formResult.test_address_subdistrict_code"
+                :sub-district-name="formResult.test_address_subdistrict_name"
+                :code-sub-district.sync="formResult.test_address_subdistrict_code"
+                :name-sub-district.sync="formResult.test_address_subdistrict_name"
+                :village-code="formResult.test_address_village_code"
+                :village-name="formResult.test_address_village_name"
+                :code-village.sync="formResult.test_address_village_code"
+                :name-village.sync="formResult.test_address_village_name"
                 :disabled-address="false"
                 :required-address="true"
               />
             </ValidationProvider>
-            <label v-if="formResult.location_test === 'Lainnya'">Alamat Lengkap Tempat Pengetesan</label>
+            <label v-if="formResult.test_location === 'Lainnya'">Alamat Lengkap Tempat Pengetesan</label>
             <v-textarea
-              v-if="formResult.location_test === 'Lainnya'"
-              v-model="formResult.current_location_address"
+              v-if="formResult.test_location === 'Lainnya'"
+              v-model="formResult.test_address_detail"
               solo
             />
           </v-col>
@@ -88,7 +95,7 @@
             >
               <label class="required">Jenis Alat Pengetesan</label>
               <v-radio-group
-                v-model="formResult.test_type"
+                v-model="formResult.tool_tester"
                 :error-messages="errors"
                 row
               >
@@ -97,13 +104,13 @@
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider
-              v-if="formResult.test_type === 'RAPID TEST'"
+              v-if="formResult.tool_tester === 'RAPID TEST'"
               v-slot="{ errors }"
               rules="required"
             >
               <label class="required">Metode yang digunakan</label>
               <v-radio-group
-                v-model="formResult.model_test"
+                v-model="formResult.test_method"
                 :error-messages="errors"
                 row
               >
@@ -111,41 +118,25 @@
                 <v-radio label="Flebotomy" value="FLEBOTOMY" />
               </v-radio-group>
             </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
+            <!-- <ValidationProvider
+
               rules="required"
-            >
-              <label class="required">Tanggal Pengetesan</label>
-              <v-menu
-                v-model="formResult.date_test"
-                :close-on-content-click="false"
-                max-width="290"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    :value="computedDateFormattedMomentjs"
-                    :error-messages="errors"
-                    clearable
-                    readonly
-                    solo
-                    v-on="on"
-                    @click:clear="date = null"
-                  />
-                </template>
-                <v-date-picker
-                  v-model="date"
-                  @change="formResult.date_test = false"
-                />
-              </v-menu>
-            </ValidationProvider>
+            > -->
+            <label class="required">Tanggal Pengetesan</label>
+            <input-date-picker
+              :label="'Tanggal Pengetesan'"
+              :format-date="'YYYY/MM/DD'"
+              :date-value="formResult.test_date"
+              :value-date.sync="formResult.test_date"
+            />
+            <!-- </ValidationProvider> -->
             <label>Keterangan Tambahan</label>
             <v-textarea
-              v-model="formResult.notes"
+              v-model="formResult.test_note"
               solo
             />
           </v-col>
         </v-row>
-        <v-btn @click="add(formResult)">Kirim</v-btn>
       </v-form>
     </ValidationObserver>
   </div>
@@ -161,21 +152,15 @@ export default {
     ValidationObserver,
     ValidationProvider
   },
+  props: {
+    formResult: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
-      date: new Date().toISOString().substr(0, 10),
-      formResult: {
-        result: null,
-        location_test: null,
-        current_location_district_code: '',
-        current_location_subdistrict_code: '',
-        current_location_village_code: '',
-        current_location_address: '',
-        test_type: 'RAPID TEST',
-        model_test: null,
-        date_test: false,
-        notes: null
-      }
+      date: new Date().toISOString().substr(0, 10)
     }
   },
   computed: {
@@ -183,21 +168,12 @@ export default {
       'hospitalList'
     ]),
     computedDateFormattedMomentjs() {
-      return this.date ? moment(this.date).format('YYYY/MM/DD') : ''
+      return this.formResult.test_date ? moment(this.date).format('YYYY/MM/DD') : ''
     }
   },
   async mounted() {
     await this.$store.dispatch('region/getListHospital')
     this.hospitalList.push('Lainnya')
-    // this.add(this.formResult)
-  },
-  methods: {
-    async add(data) {
-      const valid = await this.$refs.observer.validate()
-      if (!valid) {
-        return
-      }
-    }
   }
 }
 </script>
