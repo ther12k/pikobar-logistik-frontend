@@ -44,5 +44,8 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async resetListRDT({ commit }) {
+    commit('RESET_LIST_RDT')
   }
 }
