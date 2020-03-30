@@ -11,7 +11,35 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <label class="required">Pilih Tipe Sasaran</label>
+              <label class="required">Kategori</label>
+              <v-select
+
+                :error-messages="errors"
+                :items="items"
+                solo
+                @change="onChangeType"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <label class="required">Mekanisme</label>
+              <v-select
+
+                :error-messages="errors"
+                :items="items"
+                solo
+                @change="onChangeType"
+              />
+            </ValidationProvider>
+          </v-col>
+          <v-col>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <label class="required">Sasaran</label>
               <v-select
                 v-model="formRapid.type_target"
                 :error-messages="errors"
@@ -21,6 +49,8 @@
               />
             </ValidationProvider>
           </v-col>
+        </v-row>
+        <v-row>
           <v-col>
             <autocomplete-cases
               :on-select-case="onSelectCase"
@@ -42,14 +72,17 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|isHtml"
+              rules="required"
             >
-              <label class="required">Nama Peserta</label>
-              <v-text-field
-                v-model="formRapid.name"
+              <label class="required">Jenis Kelamin</label>
+              <v-radio-group
+                v-model="formRapid.gender"
                 :error-messages="errors"
-                solo-inverted
-              />
+                row
+              >
+                <v-radio label="Laki-Laki" value="L" />
+                <v-radio label="Perempuan" value="P" />
+              </v-radio-group>
             </ValidationProvider>
             <label>Tanggal Lahir</label>
             <select-datetime
@@ -70,22 +103,48 @@
                 type="number"
               />
             </ValidationProvider>
+            <!-- <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <label class="required">Kewarganegaraan</label>
+              <v-radio-group
 
+                :error-messages="errors"
+                row
+              >
+                <v-radio label="WNI" value="WNI" />
+                <v-radio label="WNA" value="WNA" />
+              </v-radio-group>
+            </ValidationProvider>
+            <ValidationProvider
+
+              v-slot="{ errors }"
+            >
+              <v-text-field
+
+                :error-messages="errors"
+                placeholder="Negara Asal"
+                solo-inverted
+              />
+            </ValidationProvider> -->
+            <label>Kewarganegaraan</label>
+            <v-radio-group>
+              <v-radio label="WNI" value="WNI" />
+              <v-radio label="WNA" value="WNA" />
+            </v-radio-group>
           </v-col>
           <v-col cols="6">
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="required|isHtml"
             >
-              <label class="required">Jenis Kelamin</label>
-              <v-radio-group
-                v-model="formRapid.gender"
+              <label class="required">Nama</label>
+              <v-text-field
+                v-model="formRapid.name"
                 :error-messages="errors"
-                row
-              >
-                <v-radio label="Laki-Laki" value="L" />
-                <v-radio label="Perempuan" value="P" />
-              </v-radio-group>
+                solo-inverted
+              />
             </ValidationProvider>
             <label class="required">Alamat Tempat Tinggal</label>
             <address-region
@@ -127,6 +186,7 @@
             </ValidationProvider>
           </v-col>
         </v-row>
+        <form-result />
         <v-container fluid>
           <v-row class="survey-bottom-form">
             <v-col>
