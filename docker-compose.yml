@@ -1,0 +1,17 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    networks:
+      - internal
+    env_file:
+      - .env
+    environment:
+      VUE_APP_SECURE: ${VUE_APP_SECURE}
+      VUE_APP_URL: ${VUE_APP_URL}
+      VUE_APP_PORT: ${VUE_APP_PORT}
+
+networks:
+  internal:
+    driver: bridge
