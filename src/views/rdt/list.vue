@@ -55,7 +55,7 @@
                 <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
-                  <td>{{ item.code_rdt }}</td>
+                  <td>{{ item.code_test }}</td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.age }} Th</td>
                   <td>
@@ -66,10 +66,10 @@
                       Laki-Laki
                     </div>
                   </td>
-                  <td>{{ item.type_target }}</td>
+                  <td>{{ item.category }}</td>
                   <td>{{ item.address_district_name }} </td>
                   <td>{{ item.final_result }} </td>
-                  <td>{{ item.created_by_name }}</td>
+                  <td>{{ item.author ? item.author.fullname : '-' }}</td>
                   <td v-if="roles[0] === 'dinkeskota'">
                     <v-card-actions>
                       <v-menu
