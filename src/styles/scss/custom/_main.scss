@@ -1,0 +1,309 @@
+/*======== Main Scss ========*/
+.v-application {
+  font-family: $font-family-base;
+}
+
+.v-expansion-panels .v-expansion-panel-header .v-expansion-panel-header__icon .v-icon {
+  color: #009D57 !important;
+  font-size: 2.5rem;
+}
+
+.theme--light.v-app-bar.v-toolbar.v-sheet {
+  background-color: #FFFFFF;
+}
+
+.app-card {
+  background-color: $card-bg;
+  border: $card-border;
+  border-radius: $card-border-radius;
+  // margin-bottom: $card-margin-bottom;
+  box-shadow: $card-shadow;
+  transition: all .4s ease-in-out 0s;
+  .app-card-title {
+    position: relative;
+    padding: $card-title-spacing;
+    h3, .app-title {
+      font-size: $card-title-font-size;
+      color: $card-title-color;
+      text-transform: $card-title-transform;
+      font-weight: $card-title-weight;
+      margin: 0;
+    }
+  }
+  .app-contextual-link {
+    position: absolute;
+    right: 5px;
+    top: 15px;
+    .btn {
+      .icon {
+        color: $contextual-link-color;
+      }
+    }
+  }
+  .app-card-content {
+    padding: $card-spacing;
+  }
+  .app-full-content {
+    padding: 0;
+  }
+  .app-footer {
+    padding: $card-title-spacing;
+    border-top: $card-border;
+  }
+  &:hover {
+    box-shadow: $card-hover-shadow;
+  }
+}
+.v-btn:not(.v-btn--round).v-size--default {
+  height: 51px;
+  min-width: 202px;
+  padding: 0 16px;
+  border-radius: 8px;
+}
+.list {
+  li {
+    a {
+      i.material-icons {
+        font-size: 1.125rem; //18px;
+        margin-right: 10px !important;
+      }
+    }
+  }
+}
+.app-card {
+  background-color: $card-bg;
+  border: $card-border;
+  border-radius: $card-border-radius;
+  margin-bottom: $card-margin-bottom;
+  box-shadow: $card-shadow;
+}
+.content {
+  overflow-y: hidden;
+}
+.dash-title {
+  margin-bottom: 1.25rem; //20px;
+  span {
+    font-size: $d-title-font-size;
+    color: $d-title-color;
+    text-transform: $d-title-transform;
+    letter-spacing: 2px;
+    font-weight: bold;
+    a {
+      vertical-align: 2px;
+      i {
+        font-size: $d-title-font-size;
+        color: $gray-dark !important;
+        margin-left: 5px;
+      }
+    }
+  }
+}
+.dash-card-wrap, .card {
+  transition: all 0.4s ease-in-out 0s;
+  &:hover {
+    box-shadow: $card-hover-shadow;
+  }
+}
+
+.jabarsurvey-breadcrumb, ul, li, a {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  color: #27AE60 !important;
+}
+
+.header-survey-list {
+  margin: 12px;
+  background: linear-gradient(82.33deg, #27AE60 0%, #58DA8F 100%);
+}
+.header-survey-text {
+  font-size: 18px;
+  color: #FFFFFF;
+}
+.bottom-add-survey {
+  flex: none;
+  background-color: #219653 !important;
+  color: #FFFFFF !important;
+  border-radius: 4px;
+}
+
+.vm-back-top-inner {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.vm-back-top-inner i:before {
+  top: 0px !important;
+}
+
+.loading-bar-survey {
+  font-size: 15px;
+  padding-top: 14px !important;
+}
+
+.card-survey {
+  margin-bottom: 1rem;
+}
+
+.dark-mode {
+  .v-input__prepend-outer {
+    .v-label {
+      font-size: 14px;
+      min-width: 5rem;
+    }
+  }
+}
+
+.question-builder-switch {
+  .v-input__prepend-outer {
+    min-width: 5rem !important;
+    .v-label {
+      font-size: 14px;
+    }
+  }
+}
+.required::after {
+  content: " *";
+  color: red;
+}
+
+.material-checkbox-custom {
+  z-index: 0;
+  position: relative;
+  display: inline-block;
+  color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+  font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Input */
+.material-checkbox-custom > input {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  z-index: -1;
+  position: absolute;
+  left: -10px;
+  top: -8px;
+  display: block;
+  margin: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+  box-shadow: none;
+  outline: none;
+  opacity: 0;
+  transform: scale(1);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+/* Span */
+.material-checkbox-custom > span {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Box */
+.material-checkbox-custom > span::before {
+  content: "";
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 3px 11px 3px 1px;
+  border: solid 2px; /* Safari */
+  border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+  border-radius: 2px;
+  width: 18px;
+  height: 18px;
+  vertical-align: top;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Checkmark */
+.material-checkbox-custom > span::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 1px;
+  width: 10px;
+  height: 5px;
+  border: solid 2px transparent;
+  border-right: none;
+  border-top: none;
+  transform: translate(3px, 4px) rotate(-45deg);
+}
+
+/* Checked, Indeterminate */
+.material-checkbox-custom > input:checked,
+.material-checkbox-custom > input:indeterminate {
+  background-color: rgb(33, 150, 243);
+}
+
+.material-checkbox-custom > input:checked + span::before,
+.material-checkbox-custom > input:indeterminate + span::before {
+  border-color: #27AE60;
+  background-color: #27AE60;
+}
+
+.material-checkbox-custom > input:checked + span::after,
+.material-checkbox-custom > input:indeterminate + span::after {
+  border-color: rgb(255, 255, 255);
+}
+
+.material-checkbox-custom > input:indeterminate + span::after {
+  border-left: none;
+  transform: translate(4px, 3px);
+}
+
+/* Hover, Focus */
+.material-checkbox-custom:hover > input {
+  opacity: 0.04;
+}
+
+.material-checkbox-custom > input:focus {
+  opacity: 0.12;
+}
+
+.material-checkbox-custom:hover > input:focus {
+  opacity: 0.16;
+}
+
+/* Active */
+.material-checkbox-custom > input:active {
+  opacity: 1;
+  transform: scale(0);
+  transition: transform 0s, opacity 0s;
+}
+
+.material-checkbox-custom > input:active + span::before {
+  border-color: rgb(33, 150, 243);
+}
+
+.material-checkbox-custom > input:checked:active + span::before {
+  border-color: transparent;
+  background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+}
+
+/* Disabled */
+.material-checkbox-custom > input:disabled {
+  opacity: 0;
+}
+
+.material-checkbox-custom > input:disabled + span {
+  color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+  cursor: initial;
+}
+
+.material-checkbox-custom > input:disabled + span::before {
+  border-color: currentColor;
+}
+
+.material-checkbox-custom > input:checked:disabled + span::before,
+.material-checkbox-custom > input:indeterminate:disabled + span::before {
+  border-color: transparent;
+  background-color: currentColor;
+}
