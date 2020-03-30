@@ -6,7 +6,11 @@
         lazy-validation
       >
         <v-row>
-          <v-col>
+          <v-col
+            cols="12"
+            md="6"
+            sm="12"
+          >
             <ValidationProvider
               v-slot="{ errors }"
               rules="required"
@@ -62,7 +66,11 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            md="6"
+            sm="12"
+          >
             <ValidationProvider
               v-slot="{ errors }"
             >
@@ -110,7 +118,7 @@
               v-slot="{ errors }"
               rules="required"
             >
-              <label>Kewarganegaraan</label>
+              <label class="required">Kewarganegaraan</label>
               <v-radio-group
                 v-model="formRapid.nationality"
                 :error-messages="errors"
@@ -133,7 +141,7 @@
               />
             </ValidationProvider>
           </v-col>
-          <v-col cols="6">
+          <v-col>
             <ValidationProvider
               v-slot="{ errors }"
               rules="required|isHtml"
@@ -191,14 +199,25 @@
         />
         <v-container fluid>
           <v-row class="survey-bottom-form">
-            <v-col>
+            <v-col cols="" md="4" sm="0" />
+            <v-col cols="12" md="3" sm="12">
               <v-btn
                 color="success"
                 bottom
-                style="float: right;"
+                style="float: right; color: white"
                 @click="saveData"
               >
                 Simpan
+              </v-btn>
+            </v-col>
+            <v-col cols="12" md="5" sm="12">
+              <v-btn
+                color="blue"
+                bottom
+                style="float: left; color: white"
+                @click="saveRdtAndCase"
+              >
+                Simpan  & Tambahkan Dilaporan Kasus
               </v-btn>
             </v-col>
           </v-row>
@@ -243,6 +262,7 @@ export default {
       ],
       targetOptions: [],
       formRapid: {
+        id: '',
         id_case: '',
         target: '',
         nik: null,
@@ -276,7 +296,7 @@ export default {
         test_address_detail: '',
         tool_tester: 'RAPID TEST',
         test_method: null,
-        test_date: '2020/03/02',
+        test_date: null,
         test_note: null
       }
     }
@@ -294,6 +314,7 @@ export default {
     }
   },
   async mounted() {
+    this.formRapid.address_district_code = this.district_user
     if (this.$route.params && this.$route.params.id) {
       const response = await this.$store.dispatch('rdt/detailParticipant', this.$route.params.id)
       await Object.assign(this.formRapid, response.data)
@@ -339,42 +360,41 @@ export default {
       } else if (this.formRapid.test_date < 1) {
         await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
       }
-      // let response
-      // if (this.$route.params.id) {
-      //   const updateParticipant = {
-      //     id: this.$route.params.id,
-      //     data: this.formRapid
-      //   }
-      //   response = await this.$store.dispatch('rdt/updateRDT', updateParticipant)
-      // } else {
-      //   response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
-      // }
-      // if (response.status !== 422) {
-      //   await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-      //   this.$router.push('/rdt/list')
-      //   await this.$refs.form.reset()
-      // }
-      // this.formRapid.status = 'PDP'
+
       Object.assign(this.formRapid, this.formResult)
-      // let response
-      // if (this.formRapid.id_case) {
-      //   response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
-      // } else {
-      //   response = await this.$store.dispatch('rdt/createRDT', this.formRapid)
-      // }
-      console.log(this.formRapid)
-      delete this.formRapid.author
-      delete this.formRapid.last_history
+
       const response = await fetchPostUpdate(`/api/rdt?address_district_code=${this.district_user}`, 'POST', this.formRapid)
 
       if (response.status !== 422) {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/rdt/list')
         await this.$refs.form.reset()
-      } else {
-        console.log('gagal')
       }
-      console.log(this.formRapid)
+    },
+    async saveRdtAndCase() {
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      } else if (this.formRapid.test_date < 1) {
+        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
+      }
+
+      this.saveData()
+
+      Object.assign(this.formRapid, this.formResult)
+
+      if (this.formRapid.id_case) {
+        if (this.formRapid.final_result === 'POSITIF') {
+          this.formRapid.status = 'PDP'
+        }
+        const updateCase = {
+          id: this.formRapid._id,
+          data: this.formRapid
+        }
+        await this.$store.dispatch('reports/updateReportCase', updateCase)
+      } else {
+        await this.$store.dispatch('reports/createReportCase', this.formPasien)
+      }
     }
   }
 }

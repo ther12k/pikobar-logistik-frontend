@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Hasil Pengetesan</h1>
+    <h4 class="font-weight-bold" style="color:#43A047">Hasil Pengetesan</h4>
+    <v-divider />
     <ValidationObserver ref="observer">
       <v-form
         ref="form"
@@ -118,18 +119,14 @@
                 <v-radio label="Flebotomy" value="FLEBOTOMY" />
               </v-radio-group>
             </ValidationProvider>
-            <!-- <ValidationProvider
-
-              rules="required"
-            > -->
             <label class="required">Tanggal Pengetesan</label>
             <input-date-picker
               :label="'Tanggal Pengetesan'"
               :format-date="'YYYY/MM/DD'"
               :date-value="formResult.test_date"
               :value-date.sync="formResult.test_date"
+              @changeDate="formResult.test_date = $event"
             />
-            <!-- </ValidationProvider> -->
             <label>Keterangan Tambahan</label>
             <v-textarea
               v-model="formResult.test_note"
@@ -144,7 +141,6 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import { mapGetters } from 'vuex'
-import moment from 'moment'
 
 export default {
   name: 'FormResult',
@@ -158,18 +154,10 @@ export default {
       default: null
     }
   },
-  data() {
-    return {
-      date: new Date().toISOString().substr(0, 10)
-    }
-  },
   computed: {
     ...mapGetters('region', [
       'hospitalList'
-    ]),
-    computedDateFormattedMomentjs() {
-      return this.formResult.test_date ? moment(this.date).format('YYYY/MM/DD') : ''
-    }
+    ])
   },
   async mounted() {
     await this.$store.dispatch('region/getListHospital')
