@@ -136,6 +136,7 @@ export default {
       totalPositif: 0,
       totalReport: 0,
       listQuery: {
+        address_district_code: '',
         page: 1,
         limit: 10,
         search: ''
@@ -151,7 +152,8 @@ export default {
       'totalList'
     ]),
     ...mapGetters('user', [
-      'roles'
+      'roles',
+      'district_user'
     ])
   },
   watch: {
@@ -169,6 +171,8 @@ export default {
     }
   },
   async mounted() {
+    this.listQuery.address_district_code = this.district_user
+    await this.$store.dispatch('rdt/resetListRDT')
     await this.$store.dispatch('rdt/getListRDT', this.listQuery)
   },
   methods: {
