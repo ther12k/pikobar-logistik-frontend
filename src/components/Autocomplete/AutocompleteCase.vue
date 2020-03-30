@@ -67,6 +67,7 @@ export default {
   },
   async created() {
     this.loading = true
+    this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
     this.loading = false
   }
