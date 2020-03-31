@@ -46,8 +46,8 @@
                   <th class="text-left">JENIS KELAMIN</th>
                   <th class="text-left">KATEGORI</th>
                   <th class="text-left">TEMPAT TES</th>
+                  <th class="text-left">TANGGAL TES</th>
                   <th class="text-left">HASIL TES</th>
-                  <th class="text-left">AUTHOR</th>
                   <th v-if="roles[0] === 'dinkeskota'" class="text-left">AKSI</th>
                 </tr>
               </thead>
@@ -68,8 +68,8 @@
                   </td>
                   <td>{{ item.category }}</td>
                   <td>{{ item.address_district_name }} </td>
+                  <td>{{ item.test_date ? formatDatetime(item.test_date, 'DD MMMM YYYY') : '-' }}</td>
                   <td>{{ item.final_result }} </td>
-                  <td>{{ item.author ? item.author.fullname : '-' }}</td>
                   <td v-if="roles[0] === 'dinkeskota'">
                     <v-card-actions>
                       <v-menu
