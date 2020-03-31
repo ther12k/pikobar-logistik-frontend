@@ -20,6 +20,7 @@
           color="success"
           bottom
           style="float: right;"
+          @click="backList"
         >
           Kembali ke list
         </v-btn>
@@ -521,6 +522,9 @@ export default {
     completeAddress,
     getTableRowNumbering(index) {
       return (index + 1)
+    },
+    backList() {
+      this.$router.push('/rdt/list')
     }
   }
 }

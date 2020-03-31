@@ -23,6 +23,7 @@
     "vue-flag-icon": "^1.0.6",
     "vue-i18n": "^8.15.5",
     "vue-infinite-scroll": "^2.0.2",
+    "vue-jest": "^3.0.5",
     "vue-moment": "^4.1.0",
     "vue-multiple-back-top": "^1.0.2",
     "vue-router": "^3.1.5",
