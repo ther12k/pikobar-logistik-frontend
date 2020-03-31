@@ -127,6 +127,7 @@
       :delete-date.sync="dataDelete"
       :store-path-delete="`rdt/deleteRDT`"
       :store-path-get-list="`rdt/getListRDT`"
+      :list-query="listQuery"
     />
   </div>
 </template>
