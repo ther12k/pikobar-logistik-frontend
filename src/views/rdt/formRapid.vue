@@ -73,6 +73,7 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
+              rules="numeric"
             >
               <label>NIK</label>
               <v-text-field
@@ -356,12 +357,16 @@ export default {
     async saveData() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
+        // console.log('tidak valid')
         return
-      } else if (this.formRapid.test_date > 1) {
+      } else if (this.formRapid.test_date < 1) {
         await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
       }
+      console.log('kirim')
 
       Object.assign(this.formRapid, this.formResult)
+      delete this.formRapid._id
+      console.log(this.formRapid)
 
       const response = await fetchPostUpdate(`/api/rdt?address_district_code=${this.district_user}`, 'POST', this.formRapid)
 
@@ -382,18 +387,21 @@ export default {
       this.saveData()
 
       Object.assign(this.formRapid, this.formResult)
+      delete this.formRapid._id
+
+      if (this.formRapid.final_result === 'POSITIF') {
+        this.formRapid.status = 'PDP'
+        this.formRapid.stage = '0'
+      }
 
       if (this.formRapid.id_case) {
-        if (this.formRapid.final_result === 'POSITIF') {
-          this.formRapid.status = 'PDP'
-        }
         const updateCase = {
           id: this.formRapid._id,
           data: this.formRapid
         }
         await this.$store.dispatch('reports/updateReportCase', updateCase)
       } else {
-        await this.$store.dispatch('reports/createReportCase', this.formPasien)
+        await this.$store.dispatch('reports/createReportCase', this.formRapid)
       }
     }
   }
