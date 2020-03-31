@@ -4,9 +4,9 @@ export default {
   route: {
     dashboard: 'Dashboard',
     laporan_title: 'Laporan Kasus',
-    rdt: 'Test Covid-19',
-    create_rdt: 'Tambah Peserta',
-    list_rdt: 'List Peserta',
+    rdt: 'Test Masif',
+    create_rdt: 'Input hasil test',
+    list_rdt: 'List hasil test',
     rdt_detail: 'Detail Peserta',
     rdt_update: 'Update Hasil Peserta',
     medical_personnel: 'Tenaga Kesehatan',
@@ -62,6 +62,7 @@ export default {
     field_must_be_valid_email: 'Masukkan email yang valid',
     field_must_be_filled: 'Bidang tidak boleh kosong',
     field_unauthorized_characters: 'Bidang mengandung karakter yang tidak diizinkan.',
+    field_phone_number_not_valid: 'Nomor telepon tidak valid',
     server_error_occurred: 'Terjadi kesalahan pada server'
   },
 }

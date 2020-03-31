@@ -56,7 +56,7 @@ export default {
       await this.$router.push('/laporan/stepper')
     },
     handleHelp() {
-      window.open('https://bit.ly/panduan_laporcovid19', '_blank')
+      window.open('https://s.id/panduan_laporcovid19', '_blank')
     }
   }
 }

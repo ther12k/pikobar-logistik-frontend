@@ -6,7 +6,8 @@
         <v-row justify="space-between">
           <v-col cols="auto">
             <v-card-text class="header-survey-text">
-              <div>Total Peserta : {{ totalReport }}</div>
+              <div>Jumlah Hasil Test Masif COVID-19 : {{ totalReport }}</div>
+              <div>{{ fullname }}</div>
             </v-card-text>
           </v-col>
         </v-row>
@@ -38,22 +39,25 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-left">KODE RDT</th>
-                  <th class="text-left">KODE CASE ODP</th>
+                  <th class="text-left">ID KASUS</th>
+                  <th class="text-left">ID PESERTA</th>
                   <th class="text-left">NAMA</th>
                   <th class="text-left">USIA</th>
                   <th class="text-left">JENIS KELAMIN</th>
-                  <th class="text-left">TANGGAL PENDAFTARAN</th>
-                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
+                  <th class="text-left">KATEGORI</th>
+                  <th class="text-left">TEMPAT TES</th>
+                  <th class="text-left">HASIL TES</th>
+                  <th class="text-left">AUTHOR</th>
+                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">AKSI</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(item, index) in rdtList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.code_rdt }}</td>
                   <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
+                  <td>{{ item.code_test }}</td>
                   <td>{{ item.name }}</td>
-                  <td>{{ item.age }}</td>
+                  <td>{{ item.age }} Th</td>
                   <td>
                     <div v-if="item.gender =='P'">
                       Perempuan
@@ -62,7 +66,10 @@
                       Laki-Laki
                     </div>
                   </td>
-                  <td>{{ formatDatetime(item.createdAt, 'DD MMMM YYYY') }}</td>
+                  <td>{{ item.category }}</td>
+                  <td>{{ item.address_district_name }} </td>
+                  <td>{{ item.final_result }} </td>
+                  <td>{{ item.author ? item.author.fullname : '-' }}</td>
                   <td v-if="roles[0] === 'dinkeskota'">
                     <v-card-actions>
                       <v-menu
@@ -120,6 +127,7 @@
       :delete-date.sync="dataDelete"
       :store-path-delete="`rdt/deleteRDT`"
       :store-path-get-list="`rdt/getListRDT`"
+      :list-query="listQuery"
     />
   </div>
 </template>
@@ -136,8 +144,9 @@ export default {
       totalPositif: 0,
       totalReport: 0,
       listQuery: {
+        address_district_code: '',
         page: 1,
-        limit: 10,
+        limit: 30,
         search: ''
       },
       countingReports: null,
@@ -151,7 +160,9 @@ export default {
       'totalList'
     ]),
     ...mapGetters('user', [
-      'roles'
+      'roles',
+      'fullname',
+      'district_user'
     ])
   },
   watch: {
@@ -169,6 +180,8 @@ export default {
     }
   },
   async mounted() {
+    this.listQuery.address_district_code = this.district_user
+    await this.$store.dispatch('rdt/resetListRDT')
     await this.$store.dispatch('rdt/getListRDT', this.listQuery)
   },
   methods: {

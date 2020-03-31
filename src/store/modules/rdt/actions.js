@@ -11,9 +11,26 @@ export default {
       return error.response
     }
   },
+  async getListTarget({ commit }, params) {
+    try {
+      const response = await fetchList(`/api/category-target/${params}`, 'GET')
+      commit('SET_LIST_TARGET', response.data.rdt)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async getCases({ commit }, params) {
+    try {
+      const response = await fetchList(`/api/rdt/list-idcase?address_district_code=${params}`)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
   async createRDT({ commit }, data) {
     try {
-      const response = await fetchPostUpdate('/api/rdt', 'POST', data)
+      const response = await fetchPostUpdate(`/api/rdt`, 'POST', data)
       return response
     } catch (error) {
       return error.response
@@ -44,5 +61,8 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async resetListRDT({ commit }) {
+    commit('RESET_LIST_RDT')
   }
 }
