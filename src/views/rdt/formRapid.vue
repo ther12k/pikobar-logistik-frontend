@@ -73,6 +73,7 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
+              rules="numeric"
             >
               <label>NIK</label>
               <v-text-field
@@ -203,6 +204,7 @@
             <v-col cols="12" md="3" sm="12">
               <v-btn
                 color="success"
+                :disabled="formResult.final_result === 'POSITIF'"
                 bottom
                 style="float: right; color: white"
                 @click="saveData"
@@ -213,6 +215,7 @@
             <v-col cols="12" md="5" sm="12">
               <v-btn
                 color="blue"
+                :disabled="formResult.final_result !== 'POSITIF'"
                 bottom
                 style="float: left; color: white"
                 @click="saveRdtAndCase"
@@ -286,7 +289,8 @@ export default {
       formResult: {
         final_result: null,
         test_location: null,
-        test_other_location: null,
+        test_location_type: '',
+        test_other_location: '',
         test_address_district_code: '',
         test_address_district_name: '',
         test_address_subdistrict_code: '',
@@ -354,16 +358,19 @@ export default {
       this.targetOptions = response.data
     },
     async saveData() {
+      if (this.formResult.test_date === null) {
+        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
+      }
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
-      } else if (this.formRapid.test_date > 1) {
-        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
       }
 
       Object.assign(this.formRapid, this.formResult)
+      delete this.formRapid._id
+      console.log(this.formRapid)
 
-      const response = await fetchPostUpdate(`/api/rdt?address_district_code=${this.district_user}`, 'POST', this.formRapid)
+      const response = await fetchPostUpdate('/api/rdt', 'POST', this.formRapid)
 
       if (response.status !== 422) {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
@@ -372,29 +379,32 @@ export default {
       }
     },
     async saveRdtAndCase() {
+      if (this.formResult.test_date === null) {
+        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
+      }
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
-      } else if (this.formRapid.test_date < 1) {
-        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
       }
-
-      this.saveData()
 
       Object.assign(this.formRapid, this.formResult)
 
+      if (this.formRapid.final_result === 'POSITIF') {
+        this.formRapid.status = 'PDP'
+        this.formRapid.stage = '0'
+        this.formRapid.is_test_masif = true
+      }
+
       if (this.formRapid.id_case) {
-        if (this.formRapid.final_result === 'POSITIF') {
-          this.formRapid.status = 'PDP'
-        }
         const updateCase = {
           id: this.formRapid._id,
           data: this.formRapid
         }
         await this.$store.dispatch('reports/updateReportCase', updateCase)
       } else {
-        await this.$store.dispatch('reports/createReportCase', this.formPasien)
+        await this.$store.dispatch('reports/createReportCase', this.formRapid)
       }
+      this.saveData()
     }
   }
 }

@@ -33,6 +33,21 @@
               rules="required"
             >
               <label class="required">Tempat Pengetesan</label>
+              <v-radio-group
+                v-model="formResult.test_location_type"
+                :error-messages="errors"
+                row
+                @change="handleChangeLocationNow"
+              >
+                <v-radio label="Rumah Sakit" value="RS" />
+                <v-radio label="Lainnya" value="LAINNYA" />
+              </v-radio-group>
+            </ValidationProvider>
+            <ValidationProvider
+              v-if="formResult.test_location_type === 'RS'"
+              v-slot="{ errors }"
+              rules="required"
+            >
               <v-autocomplete
                 v-model="formResult.test_location"
                 :items="hospitalList"
@@ -45,27 +60,22 @@
                 single-line
                 solo
                 autocomplete
+                @change="onSelectHospital"
               />
             </ValidationProvider>
             <ValidationProvider
-              v-if="formResult.test_location === 'Lainnya'"
+              v-if="formResult.test_location_type === 'LAINNYA'"
               v-slot="{ errors }"
-              rules="required"
             >
               <v-text-field
                 v-model="formResult.test_other_location"
-                placeholder="Masukan nama tempat"
                 :error-messages="errors"
+                placeholder="Masukan nama tempat"
                 solo-inverted
               />
             </ValidationProvider>
-            <ValidationProvider
-              v-if="formResult.test_location === 'Lainnya'"
-              v-slot="{ errors }"
-              rules="required"
-            >
+            <div v-if="formResult.test_location_type === 'LAINNYA'">
               <address-region
-                :error-messages="errors"
                 :district-code="formResult.test_address_district_code"
                 :district-name="formResult.test_address_district_name"
                 :code-district.sync="formResult.test_address_district_code"
@@ -81,10 +91,10 @@
                 :disabled-address="false"
                 :required-address="true"
               />
-            </ValidationProvider>
-            <label v-if="formResult.test_location === 'Lainnya'">Alamat Lengkap Tempat Pengetesan</label>
+            </div>
+            <label v-if="formResult.test_location_type === 'LAINNYA'">Alamat Lengkap Tempat Pengetesan</label>
             <v-textarea
-              v-if="formResult.test_location === 'Lainnya'"
+              v-if="formResult.test_location_type === 'LAINNYA'"
               v-model="formResult.test_address_detail"
               solo
             />
@@ -161,7 +171,26 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('region/getListHospital')
-    this.hospitalList.push('Lainnya')
+  },
+  methods: {
+    handleChangeLocationNow(value) {
+      if (value === 'LAINNYA') {
+        this.formResult.test_location = null
+      } else {
+        this.formResult.test_address_district_code = ''
+        this.formResult.test_address_district_name = ''
+        this.formResult.test_address_subdistrict_code = ''
+        this.formResult.test_address_subdistrict_name = ''
+        this.formResult.test_address_village_code = ''
+        this.formResult.test_address_village_name = ''
+        this.formResult.test_address_detail = ''
+        this.formResult.test_other_location = ''
+        this.formResult.test_location = null
+      }
+    },
+    onSelectHospital(value) {
+      this.formResult.test_location = value
+    }
   }
 }
 </script>
