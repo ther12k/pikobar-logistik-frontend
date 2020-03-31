@@ -16,6 +16,7 @@ const rdtRouter = {
       component: () => import('@/views/rdt/formRapid'),
       meta: {
         title: 'create_rdt',
+        icon: 'mdi-book-plus',
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
