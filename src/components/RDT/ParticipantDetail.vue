@@ -192,12 +192,7 @@
               <label>Hasil</label>
             </v-col>
             <v-col auto>
-              <v-text-field
-                v-model="detailData.final_result"
-                disabled
-                hide-details
-                solo-inverted
-              />
+              <status :status="detailData.final_result" />
             </v-col>
           </v-row>
           <v-row class="row-detail">
