@@ -8,6 +8,7 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import dashboardRouter from './modules/dashboard'
+import monitoringRdtRouter from './modules/monitoringRdt'
 
 /**
  * constantRoutes
@@ -59,6 +60,7 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   dashboardRouter,
+  monitoringRdtRouter,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
 ]
