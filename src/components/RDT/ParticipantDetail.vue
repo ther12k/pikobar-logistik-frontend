@@ -176,7 +176,7 @@
             </v-col>
             <v-col auto>
               <v-textarea
-                v-model="detailData.test_address_detail"
+                v-model="detailData.testAddres"
                 disabled
                 hide-details
                 solo-inverted
@@ -494,7 +494,8 @@ export default {
       detailGender: '',
       detailCase: '',
       detailData: '',
-      detailAddres: ''
+      detailAddres: '',
+      testAddres: ''
     }
   },
   async mounted() {
@@ -514,6 +515,12 @@ export default {
         this.detailData.address_subdistrict_name,
         this.detailData.address_village_name,
         this.detailData.address_street
+      )
+      this.testAddres = this.completeAddress(
+        this.detailData.test_address_district_name,
+        this.detailData.test_address_subdistrict_name,
+        this.detailData.test_address_village_name,
+        this.detailData.test_address_detail
       )
     }
   },
