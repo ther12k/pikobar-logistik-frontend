@@ -36,7 +36,7 @@
               <v-autocomplete
                 v-model="formResult.test_location"
                 :items="hospitalList"
-                :return-object="true"
+                :return-object="false"
                 :error-messages="errors"
                 label="Pilih tempat pengetesan"
                 menu-props="auto"

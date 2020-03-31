@@ -357,7 +357,7 @@ export default {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
-      } else if (this.formRapid.test_date < 1) {
+      } else if (this.formRapid.test_date > 1) {
         await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
       }
 
