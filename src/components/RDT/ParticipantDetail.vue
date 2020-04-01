@@ -324,24 +324,6 @@
               sm="12"
               class="row-detail-label"
             >
-              <label>Kategori Peserta</label>
-            </v-col>
-            <v-col auto>
-              <v-text-field
-                v-model="detailData.type_target"
-                disabled
-                hide-details
-                solo-inverted
-              />
-            </v-col>
-          </v-row>
-          <v-row class="row-detail">
-            <v-col
-              cols="12"
-              md="3"
-              sm="12"
-              class="row-detail-label"
-            >
               <label>Tanggal Lahir</label>
             </v-col>
             <v-col auto>
