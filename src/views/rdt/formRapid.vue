@@ -357,16 +357,7 @@ export default {
       const response = await this.$store.dispatch('rdt/getListTarget', value)
       this.targetOptions = response.data
     },
-    async checkValidate() {
-      if (this.formResult.test_date === null) {
-        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
-        return
-      }
-      const valid = await this.$refs.observer.validate()
-      if (!valid) {
-        return
-      }
-    },
+
     async saveData() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
