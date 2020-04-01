@@ -59,9 +59,11 @@
         </v-row>
         <v-row>
           <v-col>
+            <label class="required">Cari Kode Kasus/Nama</label>
             <autocomplete-cases
               :on-select-case="onSelectCase"
               :disabled-case="isODP"
+              :required-validation="formRapid.target === 'ODP' ? true : false"
             />
           </v-col>
         </v-row>
@@ -322,6 +324,8 @@ export default {
     if (this.$route.params && this.$route.params.id) {
       const response = await this.$store.dispatch('rdt/detailParticipant', this.$route.params.id)
       await Object.assign(this.formRapid, response.data)
+      await Object.assign(this.formResult, response.data)
+      console.log(response.data)
     }
   },
   methods: {
@@ -343,12 +347,6 @@ export default {
         this.formRapid.birth_date = ''
         this.formRapid.age = null
         this.formRapid.gender = null
-        this.formRapid.address_district_code = ''
-        this.formRapid.address_district_name = ''
-        this.formRapid.address_subdistrict_code = ''
-        this.formRapid.address_subdistrict_name = ''
-        this.formRapid.address_village_code = ''
-        this.formRapid.address_village_name = ''
         this.formRapid.address_street = null
         this.formRapid.phone_number = null
       }
@@ -398,10 +396,13 @@ export default {
       if (this.formRapid.id_case) {
         const updateCase = {
           id: this.formRapid._id,
-          data: this.formRapid
+          status: this.formRapid.status,
+          stage: this.formRapid.stage,
+          is_test_masif: this.formRapid.is_test_masif
         }
-        await this.$store.dispatch('reports/updateReportCase', updateCase)
+        await this.$store.dispatch('reports/createHistoryCase', updateCase)
       } else {
+        delete this.formRapid.id_case
         await this.$store.dispatch('reports/createReportCase', this.formRapid)
       }
       this.saveData()
