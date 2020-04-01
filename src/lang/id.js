@@ -4,6 +4,7 @@ export default {
   route: {
     dashboard: 'Dashboard',
     laporan_title: 'Laporan Kasus',
+    list_case: 'List Kasus',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
     list_rdt: 'List hasil test',

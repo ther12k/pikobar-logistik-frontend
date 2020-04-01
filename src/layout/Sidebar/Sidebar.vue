@@ -1,20 +1,6 @@
 <template>
   <div>
     <v-list shaped>
-      <div
-        style="margin: 2rem;"
-      >
-        <v-btn
-          v-if="roles[0] === 'dinkeskota' || roles[0] === 'faskes'"
-          id="addsurvey"
-          class="bottom-add-survey"
-          depressed
-          @click="handleCreate"
-        >
-          <v-icon left>add_circle_outline</v-icon>
-          Tambah Kasus
-        </v-btn>
-      </div>
       <sidebar-item
         v-for="route in permission_routes"
         :key="route.path"

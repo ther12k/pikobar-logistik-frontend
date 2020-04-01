@@ -17,6 +17,7 @@ const rdtRouter = {
       meta: {
         title: 'create_rdt',
         icon: 'mdi-book-plus',
+        child: true,
         noCache: true,
         roles: ['superadmin', 'dinkeskota', 'faskes']
       }
@@ -24,9 +25,11 @@ const rdtRouter = {
     {
       path: '/rdt/list',
       component: () => import('@/views/rdt/list'),
+      child: true,
       meta: {
         title: 'list_rdt',
         icon: 'mdi-book-plus',
+        child: true,
         noCache: true,
         roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
       }
