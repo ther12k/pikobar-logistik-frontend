@@ -9,7 +9,7 @@
               <v-list-item-title
                 class="headline mb-1"
                 style="color: #FFFFFF;padding-top: 2rem;"
-              >{{ totalRdtTerdistribusi }}</v-list-item-title>
+              >{{ quantity_distributed }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -22,7 +22,7 @@
               <v-list-item-title
                 class="headline mb-1"
                 style="color: #FFFFFF;padding-top: 2rem;"
-              >{{ totalRdtTersedia }}</v-list-item-title>
+              >{{ quantity_available }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -35,7 +35,7 @@
               <v-list-item-title
                 class="headline mb-1"
                 style="color: #FFFFFF;padding-top: 2rem;"
-              >{{ totalRdtTerpakai }}</v-list-item-title>
+              >{{ quantity_used }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -45,18 +45,17 @@
       <v-col cols="12" sm="2">
         <v-label><b>Urutkan</b></v-label>
         <v-select
-          :items="items"
-          label="A-Z"
+          v-model="listQuery.sort"
+          :items="sortOption"
           outlined
+          item-text="label"
+          item-value="value"
+          @change="handleSearch"
         />
       </v-col>
       <v-col cols="12" sm="3">
         <v-label><b>Tujuan Distribusi</b></v-label>
-        <v-select
-          :items="items"
-          label="Tujuan Distribusi"
-          outlined
-        />
+        <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
       </v-col>
       <v-col cols="12" sm="4">
         <v-card outlined style="margin-top:25px">
@@ -129,14 +128,19 @@ export default {
   name: 'MonitoringRdtList',
   data() {
     return {
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-      totalRdtTerdistribusi: 0,
-      totalRdtTersedia: 0,
-      totalRdtTerpakai: 0,
+      sortOption: [
+        { value: 'asc', label: 'A-Z' },
+        { value: 'desc', label: 'Z-A' }
+      ],
+      quantity_distributed: 0,
+      quantity_available: 0,
+      quantity_used: 0,
       listQuery: {
         page: 1,
         limit: 10,
-        search: ''
+        search: '',
+        sort: '',
+        kabkota_kode: ''
       }
     }
   },
@@ -146,23 +150,43 @@ export default {
       'totalList'
     ])
   },
-  watch: {},
-  async mounted() {
-    await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
+  watch: {
+    'listQuery.search': {
+      handler: function(value) {
+        if (value.length >= 3) {
+          this.listQuery.page = 1
+          this.handleSearch()
+        } else if (value.length === 0) {
+          this.listQuery.page = 1
+          this.handleSearch()
+        }
+      },
+      immediate: true
+    }
+  },
+  mounted() {
+    this.getMonitoringRdtList()
   },
   methods: {
-    handleDetail(id) {
-      // Direct to detail page
-      console.log(id)
+    async getMonitoringRdtList() {
+      await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
     },
     async handleSearch() {
-      console.log(this.listQuery)
+      await this.getMonitoringRdtList()
+    },
+    async onNext() {
+      await this.getMonitoringRdtList()
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
     },
-    async onNext() {
-      await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
+    handleDetail(id) {
+      // To do: Direct to detail page
+      console.log(id)
+    },
+    onSelectDistrictCity(value) {
+      this.listQuery.kabkota_kode = value.kemendagri_kabupaten_kode
+      this.handleSearch()
     }
   }
 }
