@@ -182,7 +182,8 @@ export default {
   async mounted() {
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('rdt/resetListRDT')
-    await this.$store.dispatch('rdt/getListRDT', this.listQuery)
+    const response = await this.$store.dispatch('rdt/getListRDT', this.listQuery)
+    this.totalReport = response.data._meta.itemCount
   },
   methods: {
     formatDatetime,
