@@ -5,41 +5,32 @@ const surveyRouter = {
   component: Layout,
   redirect: '/laporan/index',
   meta: {
+    title: 'laporan_title',
     icon: 'library_books',
     roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
   },
   active: false,
   children: [
     {
-      path: 'index',
+      path: '/laporan/create',
+      component: () => import('@/views/laporan/formStepper'),
+      meta: {
+        title: 'laporan_create',
+        icon: 'library_books',
+        child: true,
+        noCache: true,
+        roles: ['superadmin', 'dinkeskota', 'faskes']
+      }
+    },
+    {
+      path: '/laporan/list',
       component: () => import('@/views/laporan/list'),
       meta: {
-        title: 'laporan_title',
+        title: 'list_case',
         icon: 'library_books',
+        child: true,
         noCache: true,
         roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
-      }
-    },
-    {
-      path: 'create',
-      component: () => import('@/views/laporan/form'),
-      hidden: true,
-      meta: {
-        title: 'laporan_create',
-        icon: 'library_books',
-        noCache: true,
-        roles: ['superadmin', 'dinkeskota', 'faskes']
-      }
-    },
-    {
-      path: 'stepper',
-      component: () => import('@/views/laporan/formStepper'),
-      hidden: true,
-      meta: {
-        title: 'laporan_create',
-        icon: 'library_books',
-        noCache: true,
-        roles: ['superadmin', 'dinkeskota', 'faskes']
       }
     },
     {
