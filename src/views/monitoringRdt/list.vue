@@ -162,7 +162,7 @@ export default {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
     },
     async onNext() {
-      await this.$store.dispatch('monitoringRdt/getListMonitoringRdt', this.listQuery)
+      await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
     }
   }
 }
