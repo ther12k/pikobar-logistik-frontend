@@ -69,7 +69,6 @@ export default {
     ])
   },
   async mounted() {
-    console.log(this.requiredValidation)
     this.loading = true
     this.listQuery.address_district_code = this.district_user
     const response = await this.$store.dispatch('rdt/getCases', this.listQuery.address_district_code)

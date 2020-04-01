@@ -325,7 +325,6 @@ export default {
       const response = await this.$store.dispatch('rdt/detailParticipant', this.$route.params.id)
       await Object.assign(this.formRapid, response.data)
       await Object.assign(this.formResult, response.data)
-      console.log(response.data)
     }
   },
   methods: {
@@ -395,9 +394,10 @@ export default {
 
       if (this.formRapid.id_case) {
         const updateCase = {
-          id: this.formRapid._id,
+          case: this.formRapid._id,
           status: this.formRapid.status,
           stage: this.formRapid.stage,
+          final_result: this.formRapid.final_result,
           is_test_masif: this.formRapid.is_test_masif
         }
         await this.$store.dispatch('reports/createHistoryCase', updateCase)
