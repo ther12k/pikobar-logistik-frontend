@@ -60,7 +60,7 @@ export default {
     password_must_be_filled: 'Password harus diisi',
     password_must_be_more_than_characters: 'Password harus lebih dari 5 karakter',
     field_must_be_valid_email: 'Masukkan email yang valid',
-    field_must_be_filled: 'Bidang tidak boleh kosong',
+    field_must_be_filled: 'Kolom harus diisi',
     field_unauthorized_characters: 'Bidang mengandung karakter yang tidak diizinkan.',
     field_phone_number_not_valid: 'Nomor telepon tidak valid',
     server_error_occurred: 'Terjadi kesalahan pada server'

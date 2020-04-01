@@ -357,18 +357,27 @@ export default {
       const response = await this.$store.dispatch('rdt/getListTarget', value)
       this.targetOptions = response.data
     },
-    async saveData() {
+    async checkValidate() {
       if (this.formResult.test_date === null) {
         await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
+        return
       }
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
       }
+    },
+    async saveData() {
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      } else if (this.formResult.test_date === null) {
+        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
+        return
+      }
 
       Object.assign(this.formRapid, this.formResult)
       delete this.formRapid._id
-      console.log(this.formRapid)
 
       const response = await fetchPostUpdate('/api/rdt', 'POST', this.formRapid)
 
@@ -379,11 +388,11 @@ export default {
       }
     },
     async saveRdtAndCase() {
-      if (this.formResult.test_date === null) {
-        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
-      }
       const valid = await this.$refs.observer.validate()
       if (!valid) {
+        return
+      } else if (this.formResult.test_date === null) {
+        await this.$store.dispatch('toast/errorToast', 'Tanggal Harus Diisi')
         return
       }
 
