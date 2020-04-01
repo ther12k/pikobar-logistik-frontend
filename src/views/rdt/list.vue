@@ -94,9 +94,9 @@
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
+                          <!-- <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
                             Update Profil Peserta
-                          </v-list-item>
+                          </v-list-item> -->
                           <v-list-item v-if="item.final_result && item.final_result.length > 0 " @click="handleUpdateResults(item._id)">
                             Update Hasil
                           </v-list-item>
