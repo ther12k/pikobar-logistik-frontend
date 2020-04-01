@@ -20,19 +20,16 @@ export default {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      // fetchPostUpdate('/api/users/info', 'GET').then((response) => {
-      // const { role, fullname, code_district_city } = response.data
-      const data = {
-        roles: ['dinkesprov']
-      }
-      const { roles } = data
-      commit('SET_ROLES', roles)
-      // commit('SET_DISTRICT', code_district_city)
-      // commit('SET_FULLNAME', fullname)
-      resolve(roles)
-      // }).catch((error) => {
-      //   reject(error)
-      // })
+      fetchPostUpdate('/api/v1/user/me', 'GET').then((response) => {
+        const { roles, name, code_district_city } = response.data
+        const role = [roles]
+        commit('SET_ROLES', role)
+        commit('SET_DISTRICT', code_district_city)
+        commit('SET_FULLNAME', name)
+        resolve(role)
+      }).catch((error) => {
+        reject(error)
+      })
     })
   },
 
