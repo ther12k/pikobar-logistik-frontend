@@ -22,6 +22,8 @@
                   >
                     <v-radio label="Positif" value="POSITIF" />
                     <v-radio label="Negatif" value="NEGATIF" />
+                    <v-radio label="Invalid" value="INVALID" />
+
                   </v-radio-group>
                 </ValidationProvider>
               </v-form>

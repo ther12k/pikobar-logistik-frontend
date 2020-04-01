@@ -94,9 +94,9 @@
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
+                          <!-- <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
                             Update Profil Peserta
-                          </v-list-item>
+                          </v-list-item> -->
                           <v-list-item v-if="item.final_result && item.final_result.length > 0 " @click="handleUpdateResults(item._id)">
                             Update Hasil
                           </v-list-item>
@@ -182,7 +182,8 @@ export default {
   async mounted() {
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('rdt/resetListRDT')
-    await this.$store.dispatch('rdt/getListRDT', this.listQuery)
+    const response = await this.$store.dispatch('rdt/getListRDT', this.listQuery)
+    this.totalReport = response.data._meta.itemCount
   },
   methods: {
     formatDatetime,

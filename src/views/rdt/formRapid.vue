@@ -126,6 +126,7 @@
                 v-model="formRapid.nationality"
                 :error-messages="errors"
                 row
+                @change="handleChangeNationality"
               >
                 <v-radio label="WNI" value="WNI" />
                 <v-radio label="WNA" value="WNA" />
@@ -319,6 +320,13 @@ export default {
       }
     }
   },
+  async beforeMount() {
+    await this.$store.dispatch('occupation/getListOccuption')
+    const responseDetails = await this.$store.dispatch('region/getDetailDistrict', this.district_user)
+    if (responseDetails.data[0]) {
+      this.formRapid.address_district_name = responseDetails.data[0].kota_nama
+    }
+  },
   async mounted() {
     this.formRapid.address_district_code = this.district_user
     if (this.$route.params && this.$route.params.id) {
@@ -354,7 +362,11 @@ export default {
       const response = await this.$store.dispatch('rdt/getListTarget', value)
       this.targetOptions = response.data
     },
-
+    handleChangeNationality(value) {
+      if (value === 'WNI') {
+        this.formRapid.nationality_name = ''
+      }
+    },
     async saveData() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
