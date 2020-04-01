@@ -176,7 +176,7 @@
             </v-col>
             <v-col auto>
               <v-textarea
-                v-model="detailData.testAddres"
+                v-model="testAddres"
                 disabled
                 hide-details
                 solo-inverted
