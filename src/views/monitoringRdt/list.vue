@@ -100,13 +100,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listMonitoringRdt" :key="item.index">
+                <tr v-for="(item, index) in recipientList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.tujuan_distribusi }}</td>
-                  <td>{{ item.stok_diterima }}</td>
-                  <td>{{ item.stok_terpakai }}</td>
-                  <td>{{ item.sisa_stok }}</td>
-                  <td>&nbsp;</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.total_stock }}</td>
+                  <td>{{ item.total_used }}</td>
+                  <td>{{ item.total_stock - item.total_used }}</td>
+                  <td><v-btn text small color="info" @click="handleDetail(item.id)">Detail</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -114,10 +114,17 @@
         </v-col>
       </v-row>
     </v-card>
+    <pagination
+      :total="totalList"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      :on-next="onNext"
+    />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'MonitoringRdtList',
   data() {
@@ -127,34 +134,25 @@ export default {
       totalRdtTersedia: 0,
       totalRdtTerpakai: 0,
       listQuery: {
-        address_district_code: '',
         page: 1,
         limit: 10,
         search: ''
-      },
-      listMonitoringRdt: [
-        {
-          id: 1,
-          tujuan_distribusi: 'Kabupaten Bogor',
-          stok_diterima: 1600,
-          stok_terpakai: 0,
-          sisa_stok: 0
-        },
-        {
-          id: 2,
-          tujuan_distribusi: 'Kabupaten Bogor',
-          stok_diterima: 1600,
-          stok_terpakai: 0,
-          sisa_stok: 0
-        }
-      ]
+      }
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters('recipient', [
+      'recipientList',
+      'totalList'
+    ])
+  },
   watch: {},
-  async mounted() {},
+  async mounted() {
+    await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
+  },
   methods: {
-    async handleDetail(id) {
+    handleDetail(id) {
+      // Direct to detail page
       console.log(id)
     },
     async handleSearch() {
@@ -162,6 +160,9 @@ export default {
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
+    },
+    async onNext() {
+      await this.$store.dispatch('monitoringRdt/getListMonitoringRdt', this.listQuery)
     }
   }
 }
