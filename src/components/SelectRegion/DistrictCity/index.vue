@@ -1,33 +1,31 @@
 <template>
-  <v-col cols="12" md="4" sm="4">
-    <ValidationProvider
-      v-slot="{ errors }"
-      :rules="required ? 'required': ''"
-    >
-      <v-autocomplete
-        v-if="disabledDistrict !== true"
-        v-model="nameDistrict"
-        :items="listDistrictCity"
-        :label="$t('label.select_district')"
-        :error-messages="errors"
-        :disabled="disabledSelect"
-        :return-object="true"
-        item-value="kota_kode"
-        item-text="kota_nama"
-        single-line
-        solo
-        autocomplete
-        @change="onSelectDistrict"
-      />
-      <v-text-field
-        v-else
-        v-model="nameDistrict"
-        :error-messages="errors"
-        disabled
-        solo-inverted
-      />
-    </ValidationProvider>
-  </v-col>
+  <ValidationProvider
+    v-slot="{ errors }"
+    :rules="required ? 'required': ''"
+  >
+    <v-autocomplete
+      v-if="disabledDistrict !== true"
+      v-model="nameDistrict"
+      :items="listDistrictCity"
+      :label="$t('label.select_district')"
+      :error-messages="errors"
+      :disabled="disabledSelect"
+      :return-object="true"
+      item-value="kemendagri_kabupaten_kode"
+      item-text="kemendagri_kabupaten_nama"
+      single-line
+      solo
+      autocomplete
+      @change="onSelectDistrict"
+    />
+    <v-text-field
+      v-else
+      v-model="nameDistrict"
+      :error-messages="errors"
+      disabled
+      solo-inverted
+    />
+  </ValidationProvider>
 </template>
 
 <script>
