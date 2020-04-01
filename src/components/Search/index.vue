@@ -5,6 +5,7 @@
       solo-inverted
       flat
       hide-details
+      clearable
       label="Search"
       prepend-inner-icon="search"
       @keyup.enter.native="handleSearch"
