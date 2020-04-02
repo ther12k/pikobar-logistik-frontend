@@ -42,7 +42,7 @@
                       :required="requiredAddress"
                       :district-city="districtCity"
                       :city-district.sync="districtCity"
-                      :on-select-district="onSelectDistrict"
+                      :on-select-district-city="onSelectDistrictCity"
                     />
                   </v-col>
                   <v-col
@@ -50,18 +50,15 @@
                     md="6"
                     sm="6"
                   >
-                    <ValidationProvider
-                      v-slot="{ errors }"
-                      rules="required"
-                    >
-                      <label><strong>Nama Kabupaten Kota</strong></label>
-                      <v-text-field
-                        v-model="tujuanDistribusiLainnya"
-                        :error-messages="errors"
-                        label="Lainnya"
-                        solo-inverted
-                      />
-                    </ValidationProvider>
+                    <label><strong>Kecamatan</strong></label>
+                    <select-area-sub-district
+                      :disabled-select="disabledAddress"
+                      :required="requiredAddress"
+                      :sub-district="subDistrict"
+                      :update-sub-district.sync="subDistrict"
+                      :code-district="formDistribusiRdt.location_district_code"
+                      :on-select-sub-district-city="onSelectSubDistrictCity"
+                    />
                   </v-col>
                 </v-row>
                 <v-row>
@@ -76,57 +73,23 @@
                     >
                       <label><strong>Nama Tujuan Distribusi Lainnya</strong></label>
                       <v-text-field
-                        v-model="namaTujuanDistribusiLainnya"
+                        v-model="formDistribusiRdt.name"
                         :error-messages="errors"
                         label="contoh: DPRD Provinsi Jawa Barat"
                         solo-inverted
                       />
                     </ValidationProvider>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
-                    <label><strong>Kecamatan</strong></label>
-                    <select-area-sub-district
-                      :disabled-select="disabledAddress"
-                      :required="requiredAddress"
-                      :sub-district="subDistrict"
-                      :update-sub-district.sync="subDistrict"
-                      :code-district="districtCity.kemendagri_kabupaten_kode"
-                    />
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
                     <ValidationProvider
                       v-slot="{ errors }"
                       rules="required|numeric"
                     >
                       <label><strong>Jumlah Distribusi</strong></label>
                       <v-text-field
-                        v-model="jumlahDistribusi"
+                        v-model="formDistribusiRdt.quantity"
                         :error-messages="errors"
                         label="Masukkan jumlah yang akan didistribusikan"
                         solo-inverted
                         type="number"
-                      />
-                    </ValidationProvider>
-                    <ValidationProvider
-                      v-slot="{ errors }"
-                      rules="required"
-                    >
-                      <label><strong>Nama Pemohon</strong></label>
-                      <v-text-field
-                        v-model="namaPemohon"
-                        :error-messages="errors"
-                        label="Masukan Nama Pemohon / PIC"
-                        solo-inverted
                       />
                     </ValidationProvider>
                   </v-col>
@@ -141,10 +104,43 @@
                     >
                       <label><strong>Alamat Lengkap</strong></label>
                       <v-textarea
-                        v-model="alamat"
+                        v-model="formDistribusiRdt.location_address"
                         :error-messages="errors"
                         label="Masukkan alamat lengkap tujuan distribusi"
                         solo-inverted
+                      />
+                    </ValidationProvider>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="6"
+                  >
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      rules="required"
+                    >
+                      <label><strong>Nama Pemohon</strong></label>
+                      <v-text-field
+                        v-model="formDistribusiRdt.contact_person"
+                        :error-messages="errors"
+                        label="Masukan Nama Pemohon / PIC"
+                        solo-inverted
+                      />
+                    </ValidationProvider>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="6"
+                  >
+                    <ValidationProvider>
+                      <label><strong>Tanggal Distribusi</strong></label>
+                      <date-picker
+                        :value="date"
+                        @selected="changeDate"
                       />
                     </ValidationProvider>
                   </v-col>
@@ -161,23 +157,11 @@
                     >
                       <label><strong>Nomor Telepon (HP/WA)</strong></label>
                       <v-text-field
-                        v-model="telp"
+                        v-model="formDistribusiRdt.phone_number"
                         :error-messages="errors"
                         label="Masukkan nomor telepon yang bisa dihubungi"
                         solo-inverted
                         type="number"
-                      />
-                    </ValidationProvider>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
-                    <ValidationProvider>
-                      <label><strong>Tanggal Distribusi</strong></label>
-                      <date-picker
-                        :model="tanggalDistribusi"
                       />
                     </ValidationProvider>
                   </v-col>
@@ -205,6 +189,7 @@
   </v-row>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default {
@@ -246,41 +231,53 @@ export default {
         kecamatan_nama: this.subDistrictName
       },
       dialog: false,
-      nameDistrict: '',
-      nameSubDistrict: '',
-      tujuanDistribusiLainnya: '',
-      namaTujuanDistribusiLainnya: '',
-      jumlahDistribusi: '',
-      namaPemohon: '',
-      alamat: '',
-      telp: '',
-      tanggalDistribusi: ''
+      date: ''
+    }
+  },
+  computed: {
+    ...mapGetters('distribusiRdt', [
+      'formDistribusiRdt'
+    ]),
+    ...mapGetters('user', [
+      'user'
+    ])
+  },
+  watch: {
+    'districtCode': function(value) {
+      if (value.length > 0) {
+        this.districtCity = {
+          kemendagri_kabupaten_kode: value,
+          kemendagri_kabupaten_nama: this.districtName
+        }
+      } else {
+        this.districtCity = {
+          kemendagri_kabupaten_kode: null,
+          kemendagri_kabupaten_nama: null
+        }
+      }
     }
   },
   methods: {
     async handleSubmitCase() {
+      this.formDistribusiRdt.id_user = this.user.id
       const valid = await this.$refs.observer.validate()
       if (!valid) {
-        console.log('not valid')
         return
       }
-      console.log(
-        this.dialog,
-        this.nameDistrict,
-        this.nameSubDistrict,
-        this.tujuanDistribusiLainnya,
-        this.namaTujuanDistribusiLainnya,
-        this.jumlahDistribusi,
-        this.namaPemohon,
-        this.alamat,
-        this.telp,
-        this.tanggalDistribusi
-      )
+      await this.$store.dispatch('distribusiRdt/createDistribusiRdt', this.formDistribusiRdt)
+      await this.$store.dispatch('toast/successToast', 'Data berhasil tersimpan!')
+      await this.$store.dispatch('distribusiRdt/resetFormDistribusiRdt')
+      this.dialog = false
     },
-    async onSelectDistrict(value) {
-      this.districtCity = value
+    async onSelectDistrictCity(value) {
+      this.formDistribusiRdt.location_district_code = value.kemendagri_kabupaten_kode
       this.$emit('update:codeDistrict', value.kemendagri_kabupaten_kode)
-      this.$emit('update:nameDistrict', value.kemendagri_kabupaten_nama)
+    },
+    async onSelectSubDistrictCity(value) {
+      this.formDistribusiRdt.location_subdistrict_code = value.kemendagri_kecamatan_kode
+    },
+    changeDate(value) {
+      this.formDistribusiRdt.time = value
     }
   }
 }
