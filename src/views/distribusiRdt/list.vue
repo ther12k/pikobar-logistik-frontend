@@ -8,7 +8,7 @@
         >
           <v-list-item two-line class="card-stok-awal">
             <v-list-item-content>
-              <v-list-item-title class="white--text">Jumlah Stok Awal</v-list-item-title>
+              <v-list-item-title class="white--text">{{ $t('label.first_stock') }}</v-list-item-title>
               <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ jumlahStokAwal }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -20,7 +20,7 @@
         >
           <v-list-item two-line class="card-terdistribusi">
             <v-list-item-content>
-              <v-list-item-title class="white--text">Jumlah Terdistribusi</v-list-item-title>
+              <v-list-item-title class="white--text">{{ $t('label.distributed_stock') }}</v-list-item-title>
               <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ jumlahTerdistribusi }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -32,7 +32,7 @@
         >
           <v-list-item two-line class="card-stok-sisa">
             <v-list-item-content>
-              <v-list-item-title class="white--text">Jumlah Stok Sisa</v-list-item-title>
+              <v-list-item-title class="white--text">{{ $t('label.remaining_stock') }}</v-list-item-title>
               <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ jumlahStokSisa }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
