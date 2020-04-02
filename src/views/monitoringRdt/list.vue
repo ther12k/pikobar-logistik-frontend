@@ -8,7 +8,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ quantity_distributed }}</v-list-item-title>
+              >{{ recipientSummary.quantity_distributed }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -20,7 +20,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_available_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ quantity_available }}</v-list-item-title>
+              >{{ recipientSummary.quantity_available }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -32,7 +32,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_used_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ quantity_used }}</v-list-item-title>
+              >{{ recipientSummary.quantity_used }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -142,7 +142,8 @@ export default {
   computed: {
     ...mapGetters('recipient', [
       'recipientList',
-      'totalList'
+      'totalList',
+      'recipientSummary'
     ])
   },
   watch: {
@@ -161,10 +162,14 @@ export default {
   },
   mounted() {
     this.getMonitoringRdtList()
+    this.getMonitoringRdtSummary()
   },
   methods: {
     async getMonitoringRdtList() {
       await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
+    },
+    async getMonitoringRdtSummary() {
+      await this.$store.dispatch('recipient/getSummaryRecipient')
     },
     async handleSearch() {
       await this.getMonitoringRdtList()

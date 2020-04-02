@@ -10,5 +10,14 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async getSummaryRecipient({ commit }) {
+    try {
+      const response = await fetchList('/api/v1/recipient/summary', 'GET')
+      commit('SET_SUMMARY_RECIPIENT', response.data)
+      return response
+    } catch (error) {
+      return error.response
+    }
   }
 }
