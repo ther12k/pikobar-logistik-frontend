@@ -132,9 +132,9 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
-      quantity_distributed: 0,
-      quantity_available: 0,
-      quantity_used: 0,
+      quantity_distributed: 0, // to do : get data from api
+      quantity_available: 0, // to do : get data from api
+      quantity_used: 0, // to do : get data from api
       listQuery: {
         page: 1,
         limit: 10,
