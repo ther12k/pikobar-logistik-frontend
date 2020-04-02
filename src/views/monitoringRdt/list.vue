@@ -8,7 +8,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_distributed }}</v-list-item-title>
+              >{{ recipientSummary.quantity_distributed | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -20,7 +20,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_available_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_available }}</v-list-item-title>
+              >{{ recipientSummary.quantity_available | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -32,7 +32,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_used_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_used }}</v-list-item-title>
+              >{{ recipientSummary.quantity_used | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -97,9 +97,9 @@
                 <tr v-for="(item, index) in recipientList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.name }}</td>
-                  <td>{{ item.total_stock }}</td>
-                  <td>{{ item.total_used }}</td>
-                  <td>{{ item.total_stock - item.total_used }}</td>
+                  <td>{{ item.total_stock | currency }}</td>
+                  <td>{{ item.total_used | currency }}</td>
+                  <td>{{ item.total_stock - item.total_used | currency }}</td>
                   <td><v-btn text small color="info" @click="handleDetail(item.id)">Detail</v-btn></td>
                 </tr>
               </tbody>
@@ -127,9 +127,6 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
-      quantity_distributed: 0, // to do : get data from api
-      quantity_available: 0, // to do : get data from api
-      quantity_used: 0, // to do : get data from api
       listQuery: {
         page: 1,
         limit: 10,
