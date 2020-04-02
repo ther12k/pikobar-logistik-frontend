@@ -27,12 +27,25 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="4" sm="6">
+        <v-col cols="12" md="3" sm="6">
           <v-card
             color="#fcdfe0"
             style="border-color:#ffb4b5; border-radius: .5rem"
           >
-            <v-card-title class="body-1 font-weight-bold text--secondary">POSITIF COVID-19</v-card-title>
+            <v-card-title class="body-1 font-weight-bold text--secondary">TERKONFIRMASI</v-card-title>
+
+            <v-spacer />
+
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ totalConfirmation }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
+
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="3" sm="6">
+          <v-card
+            color="#fcdfe0"
+            style="border-color:#ffb4b5; border-radius: .5rem"
+          >
+            <v-card-title class="body-1 font-weight-bold text--secondary">POSITIF AKTIF</v-card-title>
 
             <v-spacer />
 
@@ -42,7 +55,7 @@
         </v-col>
         <v-col
           cols="12"
-          md="4"
+          md="3"
           sm="6"
         >
           <v-card
@@ -59,7 +72,7 @@
         </v-col>
         <v-col
           cols="12"
-          md="4"
+          md="3"
           sm="6"
         >
           <v-card
@@ -152,7 +165,8 @@ export default {
       DIED: 0,
       RECOVER: 0
     },
-    total: 0
+    total: 0,
+    totalConfirmation: 0
   }),
   computed: {
     ...mapGetters('user', [
@@ -174,6 +188,7 @@ export default {
     this.patien = await data.data
     this.final = await dataFinal.data
     this.total = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
+    this.totalConfirmation = this.patien.POSITIF + this.final.SEMBUH + this.final.MENINGGAL
   }
 }
 </script>
