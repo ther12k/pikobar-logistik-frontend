@@ -3,7 +3,7 @@ import Layout from '@/layout'
 const surveyRouter = {
   path: '/laporan',
   component: Layout,
-  redirect: '/laporan/index',
+  redirect: '/laporan/list',
   meta: {
     title: 'laporan_title',
     icon: 'library_books',
