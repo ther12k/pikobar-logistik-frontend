@@ -172,9 +172,6 @@ export default {
   data() {
     return {
       totalReport: 0,
-      queryReportCase: {
-        address_district_code: ''
-      },
       listQuery: {
         sort: 'asc',
         page: 1,
@@ -204,29 +201,26 @@ export default {
       'remainingStock'
     ]),
     ...mapGetters('user', [
-      'roles',
-      'district_user'
+      'roles'
     ])
   },
   watch: {
     'listQuery.search': {
-      handler: function(value) {
+      handler: async function(value) {
         if (value.length >= 3) {
           this.listQuery.page = 1
-          this.handleSearch()
+          await this.handleSearch()
         } else if (value.length === 0) {
           this.listQuery.page = 1
-          this.handleSearch()
+          await this.handleSearch()
         }
       },
       immediate: true
     }
   },
   async mounted() {
-    this.listQuery.address_district_code = this.district_user
-    this.queryReportCase.address_district_code = this.district_user
     await this.$store.dispatch('rdtDistribution/getSummary')
-    this.handleSearch()
+    await this.handleSearch()
   },
   methods: {
     async handleSearch() {
@@ -238,13 +232,13 @@ export default {
     async onNext() {
       await this.$store.dispatch('rdtDistribution/getListRdtDistribution', this.listQuery)
     },
-    changeDate(value) {
+    async changeDate(value) {
       this.listQuery.time = value
-      this.handleSearch()
+      await this.handleSearch()
     },
-    changeDistrict(value) {
-      !value ? this.listQuery.kabkota_kode = '' : this.listQuery.kabkota_kode = parseFloat(value.kemendagri_kabupaten_kode)
-      this.handleSearch()
+    async changeDistrict(value) {
+      this.listQuery.kabkota_kode = !value ? '' : parseFloat(value.kemendagri_kabupaten_kode)
+      await this.handleSearch()
     }
   }
 }
