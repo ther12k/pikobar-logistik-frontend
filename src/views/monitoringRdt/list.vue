@@ -175,8 +175,9 @@ export default {
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
     },
-    handleDetail(id) {
+    async handleDetail(id) {
       // To do: Direct to detail page
+      await this.$router.push(`/monitoring-rdt/detail/${id}`)
     },
     onSelectDistrictCity(value) {
       if (!value) {
