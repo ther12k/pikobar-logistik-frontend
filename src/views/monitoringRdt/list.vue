@@ -182,7 +182,6 @@ export default {
     },
     handleDetail(id) {
       // To do: Direct to detail page
-      console.log(id)
     },
     onSelectDistrictCity(value) {
       this.listQuery.kabkota_kode = value.kemendagri_kabupaten_kode
