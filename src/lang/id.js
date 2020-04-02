@@ -59,7 +59,10 @@ export default {
     distribution_destination: 'Tujuan Distribusi',
     distribution_date: 'Tanggal Distribusi',
     rdt_distribution_table_title: 'Daftar Laporan Distribusi RDT Kit',
-    export_button: 'Export Data'
+    export_button: 'Export Data',
+    number: 'No',
+    delivered_kit: 'Kit Terkirim',
+    action: 'Action'
   },
   success: {
     login_success: 'Login Berhasil',

@@ -126,11 +126,11 @@
             <template v-slot:default>
               <thead>
                 <tr>
-                  <th class="text-left">NO</th>
-                  <th class="text-left">TUJUAN DISTRIBUSI</th>
-                  <th class="text-left">KIT TERKIRIM</th>
-                  <th class="text-left">TANGGAL DISTRIBUSI</th>
-                  <th v-if="roles[0] === 'dinkesprov'" class="text-left">ACTION</th>
+                  <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.distribution_destination').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.delivered_kit').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.distribution_date').toUpperCase() }}</th>
+                  <th v-if="roles[0] === 'dinkesprov'" class="text-left">{{ $t('label.action').toUpperCase() }}</th>
                 </tr>
               </thead>
               <tbody>

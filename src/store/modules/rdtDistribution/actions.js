@@ -31,10 +31,10 @@ export default {
     }
   },
   async updateRdtDistribution({ commit }, data) {
-    const id_case = await data.id
+    const idCase = await data.id
     await delete data['id']
     try {
-      const response = await fetchPostUpdate(`/api/rdt/${id_case}`, 'PUT', data.data)
+      const response = await fetchPostUpdate(`/api/rdt/${idCase}`, 'PUT', data.data)
       return response
     } catch (error) {
       return error.response
