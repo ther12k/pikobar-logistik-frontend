@@ -22,10 +22,7 @@ export default {
     return new Promise((resolve, reject) => {
       fetchPostUpdate('/api/v1/user/me', 'GET').then((response) => {
         const { roles, name, code_district_city } = response.data
-        const data = {
-          role: [roles]
-        }
-        const { role } = data
+        const role = [roles]
         commit('SET_ROLES', role)
         commit('SET_DISTRICT', code_district_city)
         commit('SET_FULLNAME', name)
