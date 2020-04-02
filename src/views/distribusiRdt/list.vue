@@ -59,7 +59,7 @@
               :items="optionsUrutkan"
               item-text="display"
               item-value="kode"
-              outlined
+              solo
               @change="handleSearch()"
             />
           </v-list-item-content>
