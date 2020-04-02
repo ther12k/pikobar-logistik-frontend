@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <v-card class="d-block pa-1 mx-auto header-survey-list">
@@ -20,17 +19,16 @@
         <v-col>
           <v-card-text>
             <div style="font-size: 1.5rem;">
-              Data RDT
+              Data Hasil Test
             </div>
           </v-card-text>
         </v-col>
-        <v-col>
-          <search
-            :handle-search="handleSearch"
-            :list-query="listQuery"
-          />
-        </v-col>
+        <v-col />
       </v-row>
+      <filter-hasil-test
+        :list-query="listQuery"
+        :query-list.sync="listQuery"
+      />
       <hr>
       <v-row>
         <v-col auto>
@@ -145,6 +143,9 @@ export default {
       totalReport: 0,
       listQuery: {
         address_district_code: '',
+        // sort: 'asc',
+        // date_check: '',
+        // category: '',
         page: 1,
         limit: 30,
         search: ''
