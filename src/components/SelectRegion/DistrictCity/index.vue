@@ -17,7 +17,7 @@
       solo
       :clearable="true"
       autocomplete
-      @click="clearDistricCity"
+      @click="clearDistrictCity"
       @change="onSelectDistrictCity"
     />
     <v-text-field
@@ -94,7 +94,7 @@ export default {
     await this.$emit('onSelectDistrictCity')
   },
   methods: {
-    async clearDistricCity() {
+    async clearDistrictCity() {
       await this.$emit('onSelectDistrictCity')
     }
   }
