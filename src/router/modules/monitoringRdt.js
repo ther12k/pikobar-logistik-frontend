@@ -5,7 +5,7 @@ const monitoringRdt = {
   component: Layout,
   redirect: '/monitoring-rdt/index',
   meta: {
-    icon: 'dashboard',
+    icon: 'mdi-monitor',
     roles: ['superadmin', 'dinkesprov', 'dinkeskota']
   },
   active: false,
@@ -14,7 +14,7 @@ const monitoringRdt = {
     component: () => import('@/views/monitoringRdt/list'),
     meta: {
       title: 'monitoring_rdt_title',
-      icon: 'dashboard',
+      icon: 'mdi-monitor',
       noCache: true,
       roles: ['superadmin', 'dinkesprov', 'dinkeskota']
     }
