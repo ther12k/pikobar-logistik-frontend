@@ -5,6 +5,7 @@ export default {
     dashboard: 'Dashboard',
     laporan_title: 'Laporan Kasus',
     distribusi_title: 'Distribusi RDT Kit',
+    monitoring_rdt_title: 'Monitoring RDT Kit',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
     list_rdt: 'List hasil test',
@@ -46,7 +47,13 @@ export default {
     light_mode: 'Light Mode',
     dark_mode: 'Dark Mode',
     summary: 'Ringkasan',
-    delete_dialog: 'Apakah Anda yakin akan menghapus data'
+    delete_dialog: 'Apakah Anda yakin akan menghapus data',
+    rdt_available_title: 'Jumlah RDT Kit Tersedia',
+    rdt_distributed_title: 'Jumlah RDT Kit Terdistribusi',
+    rdt_used_title: 'Jumlah RDT Kit Terpakai',
+    first_stock: 'Jumlah Stok Awal',
+    stock_distributed: 'Jumlah Terdistribusi',
+    remaining_stock: 'Jumlah Stok Sisa'
   },
   success: {
     login_success: 'Login Berhasil',

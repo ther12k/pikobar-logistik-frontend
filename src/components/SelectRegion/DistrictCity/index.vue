@@ -1,33 +1,33 @@
 <template>
-  <v-col cols="12" md="4" sm="4">
-    <ValidationProvider
-      v-slot="{ errors }"
-      :rules="required ? 'required': ''"
-    >
-      <v-autocomplete
-        v-if="disabledDistrict !== true"
-        v-model="nameDistrict"
-        :items="listDistrictCity"
-        :label="$t('label.select_district')"
-        :error-messages="errors"
-        :disabled="disabledSelect"
-        :return-object="true"
-        item-value="kota_kode"
-        item-text="kota_nama"
-        single-line
-        solo
-        autocomplete
-        @change="onSelectDistrict"
-      />
-      <v-text-field
-        v-else
-        v-model="nameDistrict"
-        :error-messages="errors"
-        disabled
-        solo-inverted
-      />
-    </ValidationProvider>
-  </v-col>
+  <ValidationProvider
+    v-slot="{ errors }"
+    :rules="required ? 'required': ''"
+  >
+    <v-autocomplete
+      v-if="disabledDistrict !== true"
+      :value="nameDistrict"
+      :items="listDistrictCity"
+      :label="$t('label.select_district')"
+      :error-messages="errors"
+      :disabled="disabledSelect"
+      :return-object="true"
+      item-value="kemendagri_kabupaten_kode"
+      item-text="kemendagri_kabupaten_nama"
+      single-line
+      solo
+      :clearable="true"
+      autocomplete
+      @click="clearDistrictCity"
+      @change="onSelectDistrictCity"
+    />
+    <v-text-field
+      v-else
+      v-model="nameDistrict"
+      :error-messages="errors"
+      disabled
+      solo-inverted
+    />
+  </ValidationProvider>
 </template>
 
 <script>
@@ -49,7 +49,7 @@ export default {
       default: false
     },
     districtCity: {
-      type: Object,
+      type: Array,
       default: function() {
         return []
       }
@@ -58,7 +58,7 @@ export default {
       type: Boolean,
       default: false
     },
-    onSelectDistrict: {
+    onSelectDistrictCity: {
       type: Function,
       default: null
     }
@@ -75,7 +75,7 @@ export default {
   },
   watch: {
     'districtCity': function(value) {
-      if (value && value.kota_kode) {
+      if (value && value.kemendagri_kabupaten_kode) {
         this.nameDistrict = value
       } else {
         this.nameDistrict = ''
@@ -84,12 +84,18 @@ export default {
   },
   async created() {
     if (this.disabledDistrict) {
-      this.nameDistrict = this.districtCity.kota_nama
+      this.nameDistrict = this.districtCity.kemendagri_kabupaten_nama
     } else {
       this.nameDistrict = this.districtCity
     }
     if (!this.disabledSelect) {
       await this.$store.dispatch('region/getListDistrictCity')
+    }
+    await this.$emit('onSelectDistrictCity')
+  },
+  methods: {
+    async clearDistrictCity() {
+      await this.$emit('onSelectDistrictCity')
     }
   }
 }

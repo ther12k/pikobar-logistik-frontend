@@ -4,6 +4,8 @@ import user from './modules/user'
 import permission from './modules/permission'
 import toast from './modules/toast'
 import distribusiRdt from './modules/distribusiRdt'
+import recipient from './modules/recipient'
+import region from './modules/region'
 
 Vue.use(Vuex)
 
@@ -13,6 +15,8 @@ const store = new Vuex.Store({
     toast,
     user,
     distribusiRdt,
+    recipient,
+    region
   }
 })
 

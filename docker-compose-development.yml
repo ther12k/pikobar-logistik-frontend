@@ -1,0 +1,22 @@
+version: '3'
+services:
+  applogistik:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VUE_APP_SECURE=$VUE_APP_SECURE
+        - VUE_APP_URL=$VUE_APP_URL
+        - VUE_APP_PORT=$VUE_APP_PORT
+    networks:
+      - gateway
+    container_name: frontend-logistik-development
+    ports:
+      - 8081:80
+    env_file:
+      - .env.development
+
+networks:
+  gateway:
+    external:
+      name: gateway
