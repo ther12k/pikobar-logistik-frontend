@@ -7,7 +7,7 @@
             <v-list-item-content>
               <v-list-item-title class="title white--text">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
               <v-list-item-title
-                class="headline white--text"
+                class="headline mb-1 white--text"
               >{{ quantity_distributed }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -44,7 +44,7 @@
         <v-select
           v-model="listQuery.sort"
           :items="sortOption"
-          outlined
+          solo
           item-text="label"
           item-value="value"
           @change="handleSearch"
@@ -60,7 +60,7 @@
           <search
             :handle-search="handleSearch"
             :list-query="listQuery"
-            outlined
+            solo
           />
         </v-card>
       </v-col>
