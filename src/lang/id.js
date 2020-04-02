@@ -46,7 +46,11 @@ export default {
     light_mode: 'Light Mode',
     dark_mode: 'Dark Mode',
     summary: 'Ringkasan',
-    delete_dialog: 'Apakah Anda yakin akan menghapus data'
+    delete_dialog: 'Apakah Anda yakin akan menghapus data',
+    rdt_available_title: 'Jumlah RDT Kit Tersedia',
+    rdt_distributed_title: 'Jumlah RDT Kit Terdistribusi',
+    rdt_used_title: 'Jumlah RDT Kit Terpakai',
+
   },
   success: {
     login_success: 'Login Berhasil',

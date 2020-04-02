@@ -5,7 +5,7 @@
         <v-card class="mx-auto" outlined>
           <v-list-item two-line style="background: linear-gradient(90deg, #4F4F4F 0%, #828282 100%)">
             <v-list-item-content>
-              <v-list-item-title style="color: #FFFFFF;">Jumlah RDT Kit Terdistribusi</v-list-item-title>
+              <v-list-item-title style="color: #FFFFFF;">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1"
                 style="color: #FFFFFF;padding-top: 2rem;"
@@ -18,7 +18,7 @@
         <v-card class="mx-auto" outlined>
           <v-list-item two-line style="background: linear-gradient(90deg, #219653 0%, #27AE60 100%);">
             <v-list-item-content>
-              <v-list-item-title style="color: #FFFFFF;">Jumlah RDT Kit Tersedia</v-list-item-title>
+              <v-list-item-title style="color: #FFFFFF;">{{ $t('label.rdt_available_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1"
                 style="color: #FFFFFF;padding-top: 2rem;"
@@ -31,7 +31,7 @@
         <v-card class="mx-auto" outlined>
           <v-list-item two-line style="background: linear-gradient(90deg, #F36464 0%, #FE9090 100%);">
             <v-list-item-content>
-              <v-list-item-title style="color: #FFFFFF;">Jumlah RDT Kit Terpakai</v-list-item-title>
+              <v-list-item-title style="color: #FFFFFF;">{{ $t('label.rdt_used_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1"
                 style="color: #FFFFFF;padding-top: 2rem;"
