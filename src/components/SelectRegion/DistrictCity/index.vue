@@ -5,7 +5,7 @@
   >
     <v-autocomplete
       v-if="disabledDistrict !== true"
-      v-model="nameDistrict"
+      :value="nameDistrict"
       :items="listDistrictCity"
       :label="$t('label.select_district')"
       :error-messages="errors"
@@ -15,7 +15,9 @@
       item-text="kemendagri_kabupaten_nama"
       single-line
       solo
+      :clearable="true"
       autocomplete
+      @click="clearDistricCity"
       @change="onSelectDistrictCity"
     />
     <v-text-field
@@ -90,6 +92,11 @@ export default {
       await this.$store.dispatch('region/getListDistrictCity')
     }
     await this.$emit('onSelectDistrictCity')
+  },
+  methods: {
+    async clearDistricCity() {
+      await this.$emit('onSelectDistrictCity')
+    }
   }
 }
 </script>

@@ -184,8 +184,13 @@ export default {
       // To do: Direct to detail page
     },
     onSelectDistrictCity(value) {
-      this.listQuery.kabkota_kode = value.kemendagri_kabupaten_kode
-      this.handleSearch()
+      if (!value) {
+        this.listQuery.kabkota_kode = ''
+        this.handleSearch()
+      } else {
+        this.listQuery.kabkota_kode = value.kemendagri_kabupaten_kode
+        this.handleSearch()
+      }
     }
   }
 }
