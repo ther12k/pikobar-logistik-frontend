@@ -2,39 +2,36 @@
   <div>
     <v-row>
       <v-col>
-        <v-card class="mx-auto" outlined>
-          <v-list-item two-line style="background: linear-gradient(90deg, #4F4F4F 0%, #828282 100%)">
+        <v-card class="mx-auto bg-dark" outlined>
+          <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title style="color: #FFFFFF;">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
+              <v-list-item-title class="title white--text">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
               <v-list-item-title
-                class="headline mb-1"
-                style="color: #FFFFFF;padding-top: 2rem;"
+                class="headline white--text"
               >{{ quantity_distributed }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
       </v-col>
       <v-col>
-        <v-card class="mx-auto" outlined>
-          <v-list-item two-line style="background: linear-gradient(90deg, #219653 0%, #27AE60 100%);">
+        <v-card class="mx-auto bg-success" outlined>
+          <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title style="color: #FFFFFF;">{{ $t('label.rdt_available_title') }}</v-list-item-title>
+              <v-list-item-title class="title white--text">{{ $t('label.rdt_available_title') }}</v-list-item-title>
               <v-list-item-title
-                class="headline mb-1"
-                style="color: #FFFFFF;padding-top: 2rem;"
+                class="headline mb-1 white--text"
               >{{ quantity_available }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
       </v-col>
       <v-col>
-        <v-card class="mx-auto" outlined>
-          <v-list-item two-line style="background: linear-gradient(90deg, #F36464 0%, #FE9090 100%);">
+        <v-card class="mx-auto bg-danger" outlined>
+          <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title style="color: #FFFFFF;">{{ $t('label.rdt_used_title') }}</v-list-item-title>
+              <v-list-item-title class="title white--text">{{ $t('label.rdt_used_title') }}</v-list-item-title>
               <v-list-item-title
-                class="headline mb-1"
-                style="color: #FFFFFF;padding-top: 2rem;"
+                class="headline mb-1 white--text"
               >{{ quantity_used }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -43,7 +40,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" sm="2">
-        <v-label><b>Urutkan</b></v-label>
+        <v-label class="title">Urutkan</v-label>
         <v-select
           v-model="listQuery.sort"
           :items="sortOption"
@@ -54,11 +51,12 @@
         />
       </v-col>
       <v-col cols="12" sm="3">
-        <v-label><b>Tujuan Distribusi</b></v-label>
+        <v-label class="title">Tujuan Distribusi</v-label>
         <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
       </v-col>
       <v-col cols="12" sm="4">
-        <v-card outlined style="margin-top:25px">
+        <br>
+        <v-card outlined>
           <search
             :handle-search="handleSearch"
             :list-query="listQuery"
@@ -69,7 +67,6 @@
       <v-col cols="1" sm="1">
         <v-btn
           class="bottom-add-survey"
-          style="margin-top:25px"
           depressed
           outlined
         >
@@ -79,9 +76,7 @@
     </v-row>
     <v-card outlined>
       <v-card-text>
-        <div style="font-size: 1.5rem;">
-          Daftar Laporan Penggunaan RDT Kit
-        </div>
+        <span class="headline">Daftar Laporan Penggunaan RDT Kit</span>
       </v-card-text>
       <hr>
       <v-row>
@@ -195,3 +190,21 @@ export default {
   }
 }
 </script>
+
+<style>
+.bg-dark {
+  background: linear-gradient(90deg, #4F4F4F 0%, #828282 100%);
+}
+.bg-success {
+  background: linear-gradient(90deg, #219653 0%, #27AE60 100%);
+}
+.bg-danger {
+  background: linear-gradient(90deg, #F36464 0%, #FE9090 100%);
+}
+.bottom-add-survey {
+  margin-top:25px;
+}
+.headline{
+  padding-top: 2rem;
+}
+</style>
