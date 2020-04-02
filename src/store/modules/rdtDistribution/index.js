@@ -4,7 +4,10 @@ import getters from './getters'
 
 const state = {
   totalList: 0,
-  listRdtDistribution: []
+  listRdtDistribution: [],
+  firstStock: 0,
+  distributedStock: 0,
+  remainingStock: 0
 }
 
 export default {

@@ -9,7 +9,7 @@
           <v-list-item two-line class="card-stok-awal">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.first_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ firstStock }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(firstStock) }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -21,7 +21,7 @@
           <v-list-item two-line class="card-terdistribusi">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.distributed_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ distributedStock }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(distributedStock) }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -33,7 +33,7 @@
           <v-list-item two-line class="card-stok-sisa">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.remaining_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ remainingStock }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(remainingStock) }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -171,9 +171,6 @@ export default {
   name: 'LaporanList',
   data() {
     return {
-      firstStock: 0,
-      distributedStock: 0,
-      remainingStock: 0,
       totalReport: 0,
       queryReportCase: {
         address_district_code: ''
@@ -201,7 +198,10 @@ export default {
   computed: {
     ...mapGetters('rdtDistribution', [
       'listRdtDistribution',
-      'totalList'
+      'totalList',
+      'firstStock',
+      'distributedStock',
+      'remainingStock'
     ]),
     ...mapGetters('user', [
       'roles',
@@ -225,6 +225,7 @@ export default {
   async mounted() {
     this.listQuery.address_district_code = this.district_user
     this.queryReportCase.address_district_code = this.district_user
+    await this.$store.dispatch('rdtDistribution/getSummary')
     this.handleSearch()
   },
   methods: {

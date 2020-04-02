@@ -11,6 +11,17 @@ export default {
       return error.response
     }
   },
+  async getSummary({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/transaction/summary', 'GET', params)
+      commit('SET_FIRST_STOCK', response.data.quantity_original)
+      commit('SET_DISTRIBUTED_STOCK', response.data.quantity_distributed)
+      commit('SET_REMAINING_STOCK', response.data.quantity_available)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
   async createRdtDistribution({ commit }, data) {
     try {
       const response = await fetchPostUpdate('/api/rdt', 'POST', data)
