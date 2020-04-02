@@ -31,11 +31,13 @@ export default {
       default: ''
     }
   },
-  data: vm => ({
-    menu1: false,
-    date: null,
-    dateFormatted: null
-  }),
+  data() {
+    return {
+      menu1: false,
+      date: null,
+      dateFormatted: null
+    }
+  },
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.date)

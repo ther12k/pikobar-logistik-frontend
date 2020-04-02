@@ -45,7 +45,7 @@
           class="btn-tambah-distribusi"
         >
           <v-icon left>add</v-icon>
-          Tambah Distribusi
+          {{ $t('label.add_distribution') }}
         </v-btn>
       </v-col>
     </v-row>
@@ -53,7 +53,7 @@
       <v-col cols="2">
         <v-list-item two-line>
           <v-list-item-content>
-            <v-label class="title">Urutkan</v-label>
+            <v-label class="title">{{ $t('label.sort') }}</v-label>
             <v-select
               v-model="listQuery.sort"
               :items="sortOptions"
@@ -68,7 +68,7 @@
       <v-col cols="3">
         <v-list-item two-line>
           <v-list-item-content>
-            <v-label class="title">Tujuan Distribusi</v-label>
+            <v-label class="title">{{ $t('label.distribution_destination') }}</v-label>
             <select-area-district-city
               :on-select-district-city="changeDistrict"
             />
@@ -78,7 +78,7 @@
       <v-col cols="3">
         <v-list-item two-line>
           <v-list-item-content>
-            <v-label class="title">Tanggal Distribusi</v-label>
+            <v-label class="title">{{ $t('label.distribution_date') }}</v-label>
             <date-picker
               :value="date"
               @selected="changeDate"
@@ -103,7 +103,7 @@
           class="bottom-add-survey btn-export"
           color="#14a942"
         >
-          Export Data
+          {{ $t('label.export_button') }}
         </v-btn>
       </v-col>
     </v-row>
@@ -114,7 +114,7 @@
         <v-col>
           <v-card-text>
             <div class="headline">
-              Daftar Laporan Distribusi RDT Kit
+              {{ $t('label.rdt_distribution_table_title') }}
             </div>
           </v-card-text>
         </v-col>
@@ -243,11 +243,7 @@ export default {
       this.handleSearch()
     },
     changeDistrict(value) {
-      if (!value) {
-        this.listQuery.kabkota_kode = ''
-      } else {
-        this.listQuery.kabkota_kode = parseFloat(value.kemendagri_kabupaten_kode)
-      }
+      !value ? this.listQuery.kabkota_kode = '' : this.listQuery.kabkota_kode = parseFloat(value.kemendagri_kabupaten_kode)
       this.handleSearch()
     }
   }
