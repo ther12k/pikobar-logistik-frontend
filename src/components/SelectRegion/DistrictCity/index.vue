@@ -5,7 +5,7 @@
   >
     <v-autocomplete
       v-if="disabledDistrict !== true"
-      v-model="nameDistrict"
+      :value="nameDistrict"
       :items="listDistrictCity"
       :label="$t('label.select_district')"
       :error-messages="errors"
@@ -15,8 +15,10 @@
       item-text="kemendagri_kabupaten_nama"
       single-line
       solo
+      :clearable="true"
       autocomplete
-      @change="onSelectDistrict"
+      @click="clearDistricCity"
+      @change="onSelectDistrictCity"
     />
     <v-text-field
       v-else
@@ -56,7 +58,7 @@ export default {
       type: Boolean,
       default: false
     },
-    onSelectDistrict: {
+    onSelectDistrictCity: {
       type: Function,
       default: null
     }
@@ -73,7 +75,7 @@ export default {
   },
   watch: {
     'districtCity': function(value) {
-      if (value && value.kota_kode) {
+      if (value && value.kemendagri_kabupaten_kode) {
         this.nameDistrict = value
       } else {
         this.nameDistrict = ''
@@ -82,12 +84,18 @@ export default {
   },
   async created() {
     if (this.disabledDistrict) {
-      this.nameDistrict = this.districtCity.kota_nama
+      this.nameDistrict = this.districtCity.kemendagri_kabupaten_nama
     } else {
       this.nameDistrict = this.districtCity
     }
     if (!this.disabledSelect) {
       await this.$store.dispatch('region/getListDistrictCity')
+    }
+    await this.$emit('onSelectDistrictCity')
+  },
+  methods: {
+    async clearDistricCity() {
+      await this.$emit('onSelectDistrictCity')
     }
   }
 }
