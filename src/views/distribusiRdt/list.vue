@@ -94,6 +94,7 @@
           <search
             :handle-search="handleSearch"
             :list-query="listQuery"
+            solo
           />
         </v-card>
       </v-col>
