@@ -130,7 +130,7 @@
                   <th class="text-left">TUJUAN DISTRIBUSI</th>
                   <th class="text-left">KIT TERKIRIM</th>
                   <th class="text-left">TANGGAL DISTRIBUSI</th>
-                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">ACTIONS</th>
+                  <th v-if="roles[0] === 'dinkesprov'" class="text-left">ACTION</th>
                 </tr>
               </thead>
               <tbody>
