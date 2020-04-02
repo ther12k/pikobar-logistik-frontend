@@ -4,7 +4,7 @@ import getters from './getters'
 
 const state = {
   totalList: 0,
-  listDistribusiRdt: []
+  listRdtDistribution: []
 }
 
 export default {

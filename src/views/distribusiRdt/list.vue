@@ -9,7 +9,7 @@
           <v-list-item two-line class="card-stok-awal">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.first_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ jumlahStokAwal }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ firstStock }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -21,7 +21,7 @@
           <v-list-item two-line class="card-terdistribusi">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.distributed_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ jumlahTerdistribusi }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ distributedStock }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -33,7 +33,7 @@
           <v-list-item two-line class="card-stok-sisa">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.remaining_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ jumlahStokSisa }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ remainingStock }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -56,9 +56,9 @@
             <v-label class="title">Urutkan</v-label>
             <v-select
               v-model="listQuery.sort"
-              :items="optionsUrutkan"
-              item-text="display"
-              item-value="kode"
+              :items="sortOptions"
+              item-text="label"
+              item-value="value"
               solo
               @change="handleSearch()"
             />
@@ -134,7 +134,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listDistribusiRdt" :key="item.index">
+                <tr v-for="(item, index) in listRdtDistribution" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.name.toUpperCase() }}</td>
                   <td>{{ Math.abs(item.quantity) }}</td>
@@ -159,7 +159,7 @@
       :dialog-delete.sync="dialog"
       :delete-date.sync="dataDelete"
       :store-path-delete="`reports/deleteReportCase`"
-      :store-path-get-list="`distribusiRdt/getListDistribusiRdt`"
+      :store-path-get-list="`rdtDistribution/getListRdtDistribution`"
       :list-query="listQuery"
     />
   </div>
@@ -171,9 +171,9 @@ export default {
   name: 'LaporanList',
   data() {
     return {
-      jumlahStokAwal: 0,
-      jumlahTerdistribusi: 0,
-      jumlahStokSisa: 0,
+      firstStock: 0,
+      distributedStock: 0,
+      remainingStock: 0,
       totalReport: 0,
       queryReportCase: {
         address_district_code: ''
@@ -192,21 +192,15 @@ export default {
       dataDelete: null,
       modal: false,
       date: null,
-      optionsUrutkan: [
-        {
-          kode: 'asc',
-          display: 'A-Z'
-        },
-        {
-          kode: 'desc',
-          display: 'Z-A'
-        }
+      sortOptions: [
+        { value: 'asc', label: 'A-Z' },
+        { value: 'desc', label: 'Z-A' }
       ]
     }
   },
   computed: {
-    ...mapGetters('distribusiRdt', [
-      'listDistribusiRdt',
+    ...mapGetters('rdtDistribution', [
+      'listRdtDistribution',
       'totalList'
     ]),
     ...mapGetters('user', [
@@ -235,13 +229,13 @@ export default {
   },
   methods: {
     async handleSearch() {
-      await this.$store.dispatch('distribusiRdt/getListDistribusiRdt', this.listQuery)
+      await this.$store.dispatch('rdtDistribution/getListRdtDistribution', this.listQuery)
     },
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
     },
     async onNext() {
-      await this.$store.dispatch('distribusiRdt/getListDistribusiRdt', this.listQuery)
+      await this.$store.dispatch('rdtDistribution/getListRdtDistribution', this.listQuery)
     },
     changeDate(value) {
       this.listQuery.time = value

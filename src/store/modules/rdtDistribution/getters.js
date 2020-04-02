@@ -1,6 +1,6 @@
 export default {
-  listDistribusiRdt: (state, getters) => {
-    return state.listDistribusiRdt
+  listRdtDistribution: (state, getters) => {
+    return state.listRdtDistribution
   },
   totalList: (state, getters) => {
     return state.totalList
