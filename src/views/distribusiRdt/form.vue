@@ -277,6 +277,7 @@ export default {
       await this.$store.dispatch('toast/successToast', 'Data berhasil tersimpan!')
       await this.$store.dispatch('rdtDistribution/resetRdtDistributionForm')
       this.dialog = false
+      this.$emit('close', this.dialog)
       this.submitBtn = false
     },
     async onSelectDistrictCity(value) {
