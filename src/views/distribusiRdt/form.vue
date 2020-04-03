@@ -154,7 +154,7 @@
                         :error-messages="errors"
                         label="Masukkan nomor telepon yang bisa dihubungi"
                         solo-inverted
-                        type="number"
+                        type="number|string"
                       />
                     </ValidationProvider>
                   </v-col>
@@ -262,7 +262,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.districtCity)
     this.dialog = this.show
   },
   methods: {
