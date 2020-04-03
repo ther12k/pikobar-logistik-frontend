@@ -24,7 +24,7 @@ export default {
   },
   async createRdtDistribution({ commit }, data) {
     try {
-      const response = await fetchPostUpdate('/api/rdt', 'POST', data)
+      const response = await fetchPostUpdate('/api/v1/transactions', 'POST', data)
       return response
     } catch (error) {
       return error.response
@@ -39,5 +39,8 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async resetRdtDistributionFrom({ commit }) {
+    commit('RESET_RDT_DISTRIBUTION_FORM')
   }
 }
