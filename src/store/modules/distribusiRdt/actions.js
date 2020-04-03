@@ -13,7 +13,7 @@ export default {
   },
   async createDistribusiRdt({ commit }, data) {
     try {
-      const response = await fetchPostUpdate('api/v1/transaction', 'POST', data)
+      const response = await fetchPostUpdate('api/v1/transactions', 'POST', data)
       return response
     } catch (error) {
       return error.response

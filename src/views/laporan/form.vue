@@ -30,29 +30,17 @@
             <v-form>
               <v-container>
                 <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <label><strong>Tujuan Distribusi</strong></label>
                     <select-area-district-city
-                      :disabled-select="disabledAddress"
                       :disabled-district="disabledDistrict"
                       :required="requiredAddress"
-                      :district-city="districtCity"
-                      :city-district.sync="districtCity"
                       :on-select-district-city="onSelectDistrictCity"
                     />
                   </v-col>
-                  <v-col
-                    cols="12"
-                    md="6"
-                    sm="6"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <label><strong>Kecamatan</strong></label>
                     <select-area-sub-district
-                      :disabled-select="disabledAddress"
                       :required="requiredAddress"
                       :sub-district="subDistrict"
                       :update-sub-district.sync="subDistrict"
@@ -62,11 +50,7 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <ValidationProvider
                       v-slot="{ errors }"
                       rules="required"
@@ -93,11 +77,7 @@
                       />
                     </ValidationProvider>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <ValidationProvider
                       v-slot="{ errors }"
                       rules="required"
@@ -113,11 +93,7 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
+                  <v-col cols="12" sm="6" md="6">
                     <ValidationProvider
                       v-slot="{ errors }"
                       rules="required"
@@ -199,10 +175,6 @@ export default {
     ValidationProvider
   },
   props: {
-    disabledAddress: {
-      type: Boolean,
-      default: false
-    },
     disabledDistrict: {
       type: Boolean,
       default: false
@@ -210,22 +182,10 @@ export default {
     requiredAddress: {
       type: Boolean,
       default: false
-    },
-    districtCode: {
-      type: String,
-      default: null
-    },
-    districtName: {
-      type: String,
-      default: null
     }
   },
   data() {
     return {
-      districtCity: {
-        kota_kode: this.districtCode,
-        kota_nama: this.districtName
-      },
       subDistrict: {
         kecamatan_kode: this.subDistrictCode,
         kecamatan_nama: this.subDistrictName
@@ -260,6 +220,7 @@ export default {
   methods: {
     async handleSubmitCase() {
       this.formDistribusiRdt.id_user = this.user.id
+      this.formDistribusiRdt.quantity = -this.formDistribusiRdt.quantity
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
