@@ -8,7 +8,7 @@ const state = {
   firstStock: 0,
   distributedStock: 0,
   remainingStock: 0,
-  rdtDistributionFrom: {
+  rdtDistributionForm: {
     id_product: 1,
     id_user: '',
     id_recepient: 1,

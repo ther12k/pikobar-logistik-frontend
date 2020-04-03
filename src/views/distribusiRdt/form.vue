@@ -51,7 +51,7 @@
                       :required="requiredField"
                       :sub-district="subDistrict"
                       :update-sub-district.sync="subDistrict"
-                      :code-district="rdtDistributionFrom.location_district_code"
+                      :code-district="rdtDistributionForm.location_district_code"
                       :on-select-sub-district="onSelectSubDistrictCity"
                     />
                   </v-col>
@@ -68,7 +68,7 @@
                     >
                       <label><strong>Nama Tujuan Distribusi Lainnya</strong></label>
                       <v-text-field
-                        v-model="rdtDistributionFrom.name"
+                        v-model="rdtDistributionForm.name"
                         :error-messages="errors"
                         label="contoh: DPRD Provinsi Jawa Barat"
                         solo-inverted
@@ -80,7 +80,7 @@
                     >
                       <label><strong>Jumlah Distribusi</strong></label>
                       <v-text-field
-                        v-model="rdtDistributionFrom.fromQuantity"
+                        v-model="rdtDistributionForm.fromQuantity"
                         :error-messages="errors"
                         label="Masukkan jumlah yang akan didistribusikan"
                         solo-inverted
@@ -99,7 +99,7 @@
                     >
                       <label><strong>Alamat Lengkap</strong></label>
                       <v-textarea
-                        v-model="rdtDistributionFrom.location_address"
+                        v-model="rdtDistributionForm.location_address"
                         :error-messages="errors"
                         label="Masukkan alamat lengkap tujuan distribusi"
                         solo-inverted
@@ -119,7 +119,7 @@
                     >
                       <label><strong>Nama Pemohon</strong></label>
                       <v-text-field
-                        v-model="rdtDistributionFrom.contact_person"
+                        v-model="rdtDistributionForm.contact_person"
                         :error-messages="errors"
                         label="Masukan Nama Pemohon / PIC"
                         solo-inverted
@@ -143,7 +143,7 @@
                       rules="required"
                     >
                       <v-text-field
-                        v-model="rdtDistributionFrom.time"
+                        v-model="rdtDistributionForm.time"
                         style="display:none"
                         :error-messages="errors"
                       />
@@ -162,7 +162,7 @@
                     >
                       <label><strong>Nomor Telepon (HP/WA)</strong></label>
                       <v-text-field
-                        v-model="rdtDistributionFrom.phone_number"
+                        v-model="rdtDistributionForm.phone_number"
                         :error-messages="errors"
                         label="Masukkan nomor telepon yang bisa dihubungi"
                         solo-inverted
@@ -251,7 +251,7 @@ export default {
   },
   computed: {
     ...mapGetters('rdtDistribution', [
-      'rdtDistributionFrom'
+      'rdtDistributionForm'
     ]),
     ...mapGetters('user', [
       'user'
@@ -286,28 +286,28 @@ export default {
   },
   methods: {
     async handleSubmitCase() {
-      this.rdtDistributionFrom.id_user = this.user.id
-      this.rdtDistributionFrom.quantity = -this.rdtDistributionFrom.fromQuantity
+      this.rdtDistributionForm.id_user = this.user.id
+      this.rdtDistributionForm.quantity = -this.rdtDistributionForm.fromQuantity
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
       }
       this.submitBtn = true
-      await this.$store.dispatch('rdtDistribution/createRdtDistribution', this.rdtDistributionFrom)
+      await this.$store.dispatch('rdtDistribution/createRdtDistribution', this.rdtDistributionForm)
       await this.$store.dispatch('toast/successToast', 'Data berhasil tersimpan!')
-      await this.$store.dispatch('rdtDistribution/resetRdtDistributionFrom')
+      await this.$store.dispatch('rdtDistribution/resetRdtDistributionForm')
       this.dialog = false
       this.submitBtn = false
     },
     async onSelectDistrictCity(value) {
-      this.rdtDistributionFrom.location_district_code = value.kemendagri_kabupaten_kode
+      this.rdtDistributionForm.location_district_code = value.kemendagri_kabupaten_kode
       this.$emit('update:codeDistrict', value.kemendagri_kabupaten_kode)
     },
     async onSelectSubDistrictCity(value) {
-      this.rdtDistributionFrom.location_subdistrict_code = value.kemendagri_kecamatan_kode
+      this.rdtDistributionForm.location_subdistrict_code = value.kemendagri_kecamatan_kode
     },
     changeDate(value) {
-      this.rdtDistributionFrom.time = value
+      this.rdtDistributionForm.time = value
     },
     closeDialog() {
       this.dialog = false

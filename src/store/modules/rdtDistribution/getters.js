@@ -14,7 +14,7 @@ export default {
   remainingStock: (state, getters) => {
     return state.remainingStock
   },
-  rdtDistributionFrom: (state, getters) => {
-    return state.rdtDistributionFrom
+  rdtDistributionForm: (state, getters) => {
+    return state.rdtDistributionForm
   }
 }

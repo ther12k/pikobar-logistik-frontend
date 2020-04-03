@@ -14,19 +14,16 @@ export default {
   SET_REMAINING_STOCK: (state, data) => {
     state.remainingStock = data
   },
-  SET_FORM_DISTRIBUSI_RDT: (state, data) => {
-    state.rdtDistributionFrom = data
-  },
   RESET_RDT_DISTRIBUTION_FORM: (state) => {
-    state.rdtDistributionFrom.id_user = ''
-    state.rdtDistributionFrom.name = ''
-    state.rdtDistributionFrom.contact_person = ''
-    state.rdtDistributionFrom.phone_number = ''
-    state.rdtDistributionFrom.location_address = ''
-    state.rdtDistributionFrom.location_subdistrict_code = ''
-    state.rdtDistributionFrom.location_district_code = ''
-    state.rdtDistributionFrom.quantity = ''
-    state.rdtDistributionFrom.time = ''
-    state.rdtDistributionFrom.note = ''
+    state.rdtDistributionForm.id_user = ''
+    state.rdtDistributionForm.name = ''
+    state.rdtDistributionForm.contact_person = ''
+    state.rdtDistributionForm.phone_number = ''
+    state.rdtDistributionForm.location_address = ''
+    state.rdtDistributionForm.location_subdistrict_code = ''
+    state.rdtDistributionForm.location_district_code = ''
+    state.rdtDistributionForm.quantity = ''
+    state.rdtDistributionForm.time = ''
+    state.rdtDistributionForm.note = ''
   }
 }
