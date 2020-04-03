@@ -62,7 +62,7 @@ export default {
   },
   watch: {
     'subDistrict': function(value) {
-      if (value && value.kecamatan_kode) {
+      if (value && value.kemendagri_kecamatan_kode) {
         this.nameSubDistrict = value
       } else {
         this.nameSubDistrict = ''
@@ -79,7 +79,7 @@ export default {
     }
   },
   async created() {
-    if (this.subDistrict.kecamatan_kode) {
+    if (this.subDistrict.kemendagri_kecamatan_kode) {
       this.nameSubDistrict = this.subDistrict
     }
     if (this.disabledSelect) {
