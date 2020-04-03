@@ -34,8 +34,9 @@
                   >
                     <label><strong>Tujuan Distribusi</strong></label>
                     <select-area-district-city
-                      :disabled-district="disabledDistrict"
                       :required="true"
+                      :district-city="districtCity"
+                      :city-district.sync="districtCity"
                       :on-select-district-city="onSelectDistrictCity"
                     />
                   </v-col>
@@ -192,10 +193,6 @@ export default {
     ValidationProvider
   },
   props: {
-    disabledDistrict: {
-      type: Boolean,
-      default: false
-    },
     districtCode: {
       type: String,
       default: null
@@ -244,7 +241,7 @@ export default {
     'districtCode': function(value) {
       if (value.length > 0) {
         this.districtCity = {
-          kemendagri_kabupaten_kode: value,
+          kemendagri_kabupaten_kode: value.kemendagri_kabupaten_kode,
           kemendagri_kabupaten_nama: this.districtName
         }
       } else {
@@ -265,6 +262,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.districtCity)
     this.dialog = this.show
   },
   methods: {
@@ -283,6 +281,7 @@ export default {
       this.submitBtn = false
     },
     async onSelectDistrictCity(value) {
+      this.districtCity = value
       this.rdtDistributionForm.location_district_code = value.kemendagri_kabupaten_kode
       this.$emit('update:codeDistrict', value.kemendagri_kabupaten_kode)
     },
