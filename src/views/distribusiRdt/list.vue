@@ -139,7 +139,7 @@
                   <td>{{ item.name.toUpperCase() }}</td>
                   <td>{{ Math.abs(item.quantity) }}</td>
                   <td>{{ item.time.substr(0, 10) }}</td>
-                  <td><a href="">Edit</a></td>
+                  <td><a href="">{{ $t('label.edit_2') }}</a></td>
                 </tr>
               </tbody>
             </template>
@@ -207,10 +207,7 @@ export default {
   watch: {
     'listQuery.search': {
       handler: async function(value) {
-        if (value.length >= 3) {
-          this.listQuery.page = 1
-          await this.handleSearch()
-        } else if (value.length === 0) {
+        if (value.length >= 3 || value.length === 0) {
           this.listQuery.page = 1
           await this.handleSearch()
         }

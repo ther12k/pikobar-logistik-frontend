@@ -62,7 +62,8 @@ export default {
     export_button: 'Export Data',
     number: 'No',
     delivered_kit: 'Kit Terkirim',
-    action: 'Action'
+    action: 'Action',
+    edit_2: 'Edit'
   },
   success: {
     login_success: 'Login Berhasil',

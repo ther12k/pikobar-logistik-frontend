@@ -3,7 +3,7 @@ import { fetchList, fetchPostUpdate } from '@/api'
 export default {
   async getListRdtDistribution({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/transaction', 'GET', params)
+      const response = await fetchList('/api/v1/transactions', 'GET', params)
       commit('SET_TOTAL_LIST_RDT_DISTRIBUTION', response.last_page)
       commit('SET_LIST_RDT_DISTRIBUTION', response.data)
       return response
@@ -13,7 +13,7 @@ export default {
   },
   async getSummary({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/transaction/summary', 'GET', params)
+      const response = await fetchList('/api/v1/transactions/summary', 'GET', params)
       commit('SET_FIRST_STOCK', response.data.quantity_original)
       commit('SET_DISTRIBUTED_STOCK', response.data.quantity_distributed)
       commit('SET_REMAINING_STOCK', response.data.quantity_available)

@@ -38,11 +38,6 @@ export default {
       dateFormatted: null
     }
   },
-  computed: {
-    computedDateFormatted() {
-      return this.formatDate(this.date)
-    }
-  },
   watch: {
     date(val) {
       if (this.date == null) {
