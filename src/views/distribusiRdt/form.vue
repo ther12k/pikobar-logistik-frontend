@@ -35,6 +35,7 @@
                     <label><strong>Tujuan Distribusi</strong></label>
                     <select-area-district-city
                       :disabled-district="disabledDistrict"
+                      :district-city="districtCity"
                       :required="true"
                       :on-select-district-city="onSelectDistrictCity"
                     />
@@ -153,7 +154,7 @@
                         :error-messages="errors"
                         label="Masukkan nomor telepon yang bisa dihubungi"
                         solo-inverted
-                        type="number"
+                        type="number|string"
                       />
                     </ValidationProvider>
                   </v-col>
