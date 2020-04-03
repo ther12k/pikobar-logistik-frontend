@@ -67,7 +67,13 @@ export default {
     kit_received: 'Kit Diterima',
     kit_available: 'Kit Tersedia',
     used_kit: 'Kit Terpakai',
-    label_human: 'Orang'
+    label_human: 'Orang',
+    list_rdt_kit: 'Daftar Penggunaan RDT Kit',
+    positive: 'Positif',
+    negative: 'Negatif',
+    invalid: 'Invalid',
+    faskes_name: 'Nama Faskes'
+    
   },
   success: {
     login_success: 'Login Berhasil',
