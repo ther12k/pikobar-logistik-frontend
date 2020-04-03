@@ -9,6 +9,7 @@ import * as VeeValidate from 'vee-validate'
 import moment from 'moment'
 import infiniteScroll from 'vue-infinite-scroll'
 import FlagIcon from 'vue-flag-icon'
+import VueCurrencyFilter from 'vue-currency-filter'
 
 moment.locale('id')
 
@@ -40,6 +41,15 @@ Vue.use(VueMoment, {
 
 Vue.use(VeeValidate, {
   i18n
+})
+
+Vue.use(VueCurrencyFilter, {
+  symbol: '',
+  thousandsSeparator: '.',
+  fractionCount: 0,
+  fractionSeparator: ',',
+  symbolPosition: 'front',
+  symbolSpacing: true
 })
 
 /* eslint-disable no-new */

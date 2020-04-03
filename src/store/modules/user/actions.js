@@ -20,7 +20,7 @@ export default {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      fetchPostUpdate('/api/v1/user/me', 'GET').then((response) => {
+      fetchPostUpdate('/api/v1/users/me', 'GET').then((response) => {
         const { roles, name, code_district_city } = response.data
         const role = [roles]
         commit('SET_ROLES', role)
