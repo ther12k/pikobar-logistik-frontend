@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import user from './modules/user'
 import permission from './modules/permission'
 import toast from './modules/toast'
+import rdtDistribution from './modules/rdtDistribution'
 import recipient from './modules/recipient'
 import region from './modules/region'
 
@@ -13,6 +14,7 @@ const store = new Vuex.Store({
     permission,
     toast,
     user,
+    rdtDistribution,
     recipient,
     region
   }

@@ -4,6 +4,7 @@ export default {
   route: {
     dashboard: 'Dashboard',
     laporan_title: 'Laporan Kasus',
+    distribusi_title: 'Distribusi RDT Kit',
     monitoring_rdt_title: 'Monitoring RDT Kit',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
@@ -50,10 +51,22 @@ export default {
     rdt_available_title: 'Jumlah RDT Kit Tersedia',
     rdt_distributed_title: 'Jumlah RDT Kit Terdistribusi',
     rdt_used_title: 'Jumlah RDT Kit Terpakai',
+    first_stock: 'Jumlah Stok Awal',
+    distributed_stock: 'Jumlah Terdistribusi',
+    remaining_stock: 'Jumlah Stok Sisa',
+    add_distribution: 'Tambah Distribusi',
+    sort: 'Urutkan',
+    distribution_destination: 'Tujuan Distribusi',
+    distribution_date: 'Tanggal Distribusi',
+    rdt_distribution_table_title: 'Daftar Laporan Distribusi RDT Kit',
+    export_button: 'Export Data',
+    number: 'No',
+    delivered_kit: 'Kit Terkirim',
+    action: 'Action',
+    edit_2: 'Edit',
     kit_received: 'Kit Diterima',
     kit_available: 'Kit Tersedia',
     used_kit: 'Kit Terpakai'
-
   },
   success: {
     login_success: 'Login Berhasil',
