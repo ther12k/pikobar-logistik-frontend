@@ -49,7 +49,7 @@
 
             <v-spacer />
 
-            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ patien.POSITIF }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
+            <v-card-subtitle class="display-2 font-weight-bold text--primary pt-0 mb-4"> {{ final.POSITIF }} <span class="display-1 font-weight-medium text--secondary pl-4">orang</span></v-card-subtitle>
 
           </v-card>
         </v-col>
@@ -162,8 +162,9 @@ export default {
       POSITIF: 0
     },
     final: {
-      DIED: 0,
-      RECOVER: 0
+      MENINGGAL: 0,
+      SEMBUH: 0,
+      POSITIF: 0
     },
     total: 0,
     totalConfirmation: 0
@@ -183,12 +184,12 @@ export default {
       }
     }
     const data = await this.$store.dispatch('reports/countReportCase', params)
-    const dataFinal = await this.$store.dispatch('reports/countReportCaseFinal', params)
+    const dataFinal = await this.$store.dispatch('reports/countReportCaseFinal')
 
     this.patien = await data.data
     this.final = await dataFinal.data
     this.total = this.patien.ODP + this.patien.PDP + this.patien.POSITIF
-    this.totalConfirmation = this.patien.POSITIF + this.final.SEMBUH + this.final.MENINGGAL
+    this.totalConfirmation = this.final.POSITIF + this.final.SEMBUH + this.final.MENINGGAL
   }
 }
 </script>
