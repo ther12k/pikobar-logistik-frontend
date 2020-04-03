@@ -43,6 +43,7 @@
           outlined
           color="#14a942"
           class="btn-tambah-distribusi"
+          @click.stop="showFormInput = true"
         >
           <v-icon left>add</v-icon>
           {{ $t('label.add_distribution') }}
@@ -162,13 +163,19 @@
       :store-path-get-list="`rdtDistribution/getListRdtDistribution`"
       :list-query="listQuery"
     />
+    <FormRdt
+      :show="showFormInput"
+      @close="closeDialog"
+    />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import FormRdt from './form'
 export default {
   name: 'LaporanList',
+  components: { FormRdt },
   data() {
     return {
       totalReport: 0,
@@ -189,7 +196,8 @@ export default {
       sortOptions: [
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
-      ]
+      ],
+      showFormInput: false
     }
   },
   computed: {
@@ -235,6 +243,10 @@ export default {
     },
     async changeDistrict(value) {
       this.listQuery.kabkota_kode = !value ? '' : parseFloat(value.kemendagri_kabupaten_kode)
+      await this.handleSearch()
+    },
+    async closeDialog(value) {
+      this.showFormInput = value
       await this.handleSearch()
     }
   }
