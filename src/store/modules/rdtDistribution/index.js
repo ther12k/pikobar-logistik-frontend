@@ -1,6 +1,7 @@
 import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
+import constant from '@/constants/state'
 
 const state = {
   totalList: 0,
@@ -18,7 +19,7 @@ const state = {
     location_address: '',
     location_subdistrict_code: '',
     location_district_code: '',
-    location_province_code: 32,
+    location_province_code: constant.westJavaLocalProvinceCode,
     quantity: '',
     time: '',
     note: ''
