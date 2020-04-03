@@ -26,7 +26,7 @@
         </v-card>
       </v-col>
       <v-col>
-        <v-card class="mx-auto bg-danger" outlined>
+        <v-card class="mx-auto bg-info" outlined>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="title white--text">{{ $t('label.rdt_used_title') }}</v-list-item-title>
@@ -53,25 +53,6 @@
       <v-col cols="12" sm="3">
         <v-label class="title">Tujuan Distribusi</v-label>
         <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
-      </v-col>
-      <v-col cols="12" sm="4">
-        <br>
-        <v-card outlined>
-          <search
-            :handle-search="handleSearch"
-            :list-query="listQuery"
-            solo
-          />
-        </v-card>
-      </v-col>
-      <v-col cols="1" sm="1">
-        <v-btn
-          class="bottom-add-survey"
-          depressed
-          outlined
-        >
-          Export Data
-        </v-btn>
       </v-col>
     </v-row>
     <v-card :loading="loading" outlined>
@@ -131,9 +112,8 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        search: '',
         sort: '',
-        kabkota_kode: ''
+        city_code: ''
       }
     }
   },
@@ -145,7 +125,7 @@ export default {
     ])
   },
   watch: {
-    'listQuery.search': {
+    'listQuery.city_code': {
       handler: function(value) {
         if (value.length >= 3) {
           this.listQuery.page = 1
@@ -185,10 +165,10 @@ export default {
     },
     onSelectDistrictCity(value) {
       if (!value) {
-        this.listQuery.kabkota_kode = ''
+        this.listQuery.city_code = ''
         this.handleSearch()
       } else {
-        this.listQuery.kabkota_kode = value.kemendagri_kabupaten_kode
+        this.listQuery.city_code = value.kemendagri_kabupaten_kode
         this.handleSearch()
       }
     }
@@ -203,8 +183,8 @@ export default {
 .bg-success {
   background: linear-gradient(90deg, #219653 0%, #27AE60 100%);
 }
-.bg-danger {
-  background: linear-gradient(90deg, #F36464 0%, #FE9090 100%);
+.bg-info {
+  background: linear-gradient(90deg, #2F80ED 0%, #2D9CDB 100%);
 }
 .bottom-add-survey {
   margin-top:25px;
