@@ -50,6 +50,9 @@ export default {
     rdt_available_title: 'Jumlah RDT Kit Tersedia',
     rdt_distributed_title: 'Jumlah RDT Kit Terdistribusi',
     rdt_used_title: 'Jumlah RDT Kit Terpakai',
+    kit_received: 'Kit Diterima',
+    kit_available: 'Kit Tersedia',
+    used_kit: 'Kit Terpakai'
 
   },
   success: {

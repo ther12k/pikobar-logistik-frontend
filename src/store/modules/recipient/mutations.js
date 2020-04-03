@@ -7,5 +7,8 @@ export default {
   },
   SET_SUMMARY_RECIPIENT: (state, data) => {
     state.summaryRecipient = data
+  },
+  SET_RECIPIENT: (state, data) => {
+    state.dataRecipient = data
   }
 }

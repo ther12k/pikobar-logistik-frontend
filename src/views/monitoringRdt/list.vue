@@ -81,7 +81,7 @@
                   <td>{{ item.total_stock | currency }}</td>
                   <td>{{ item.total_used | currency }}</td>
                   <td>{{ item.total_stock - item.total_used | currency }}</td>
-                  <td><v-btn text small color="info" @click="handleDetail(item.id)">Detail</v-btn></td>
+                  <td><v-btn text small color="info" @click="handleDetail(item.kemendagri_kabupaten_kode)">Detail</v-btn></td>
                 </tr>
               </tbody>
             </template>
