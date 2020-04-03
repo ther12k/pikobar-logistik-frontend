@@ -103,7 +103,7 @@
           class="bottom-add-survey btn-export"
           color="#14a942"
         >
-          {{ $t('label.export_button') }}
+          {{ $t('label.export_button') }} <!-- To Do : Menjalankan fungsi eksport tabel -->
         </v-btn>
       </v-col>
     </v-row>
@@ -137,7 +137,7 @@
                 <tr v-for="(item, index) in listRdtDistribution" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.name.toUpperCase() }}</td>
-                  <td>{{ Math.abs(item.quantity) }}</td>
+                  <td>{{ Math.abs(item.quantity) | currency }}</td>
                   <td>{{ item.time.substr(0, 10) }}</td>
                   <td><a href="">{{ $t('label.edit_2') }}</a></td>
                 </tr>
