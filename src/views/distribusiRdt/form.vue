@@ -5,7 +5,7 @@
         <v-card-title>
           <v-row class="survey-bottom-form">
             <v-col>
-              <span class="headline">Tambah Distribusi</span>
+              <span class="headline">{{ $t('label.add_distribution') }}</span>
             </v-col>
             <v-col>
               <v-btn
@@ -32,7 +32,7 @@
                     sm="6"
                     md="6"
                   >
-                    <label><strong>Tujuan Distribusi</strong></label>
+                    <label><strong>{{ $t('label.distribution_destination') }}</strong></label>
                     <select-area-district-city
                       :required="true"
                       :district-city="districtCity"
@@ -45,7 +45,7 @@
                     sm="6"
                     md="6"
                   >
-                    <label><strong>Kecamatan</strong></label>
+                    <label><strong>{{ $t('label.select_sub_district_full_name') }}</strong></label>
                     <select-area-sub-district
                       :required="true"
                       :sub-district="subDistrict"
@@ -65,7 +65,7 @@
                       v-slot="{ errors }"
                       rules="required"
                     >
-                      <label><strong>Nama Tujuan Distribusi Lainnya</strong></label>
+                      <label><strong>{{ $t('label.distribution_destination_name') }}</strong></label>
                       <v-text-field
                         v-model="rdtDistributionForm.name"
                         :error-messages="errors"
@@ -77,7 +77,7 @@
                       v-slot="{ errors }"
                       rules="required|numeric"
                     >
-                      <label><strong>Jumlah Distribusi</strong></label>
+                      <label><strong>{{ $t('label.distribution_quantity') }}</strong></label>
                       <v-text-field
                         v-model="rdtDistributionForm.fromQuantity"
                         :error-messages="errors"
@@ -96,7 +96,7 @@
                       v-slot="{ errors }"
                       rules="required"
                     >
-                      <label><strong>Alamat Lengkap</strong></label>
+                      <label><strong>{{ $t('label.address') }}</strong></label>
                       <v-textarea
                         v-model="rdtDistributionForm.location_address"
                         :error-messages="errors"
@@ -116,7 +116,7 @@
                       v-slot="{ errors }"
                       rules="required"
                     >
-                      <label><strong>Nama Pemohon</strong></label>
+                      <label><strong>{{ $t('label.contact_person') }}</strong></label>
                       <v-text-field
                         v-model="rdtDistributionForm.contact_person"
                         :error-messages="errors"
@@ -130,7 +130,7 @@
                     sm="6"
                     md="6"
                   >
-                    <label><strong>Tanggal Distribusi</strong></label>
+                    <label><strong>{{ $t('label.distribution_date') }}</strong></label>
                     <date-picker
                       :required="true"
                       :value="date"
@@ -148,7 +148,7 @@
                       v-slot="{ errors }"
                       rules="isPhoneNumber|required"
                     >
-                      <label><strong>Nomor Telepon (HP/WA)</strong></label>
+                      <label><strong>{{ $t('label.phone_number') }}</strong></label>
                       <v-text-field
                         v-model="rdtDistributionForm.phone_number"
                         :error-messages="errors"
@@ -170,7 +170,7 @@
                       :disabled="submitBtn"
                       @click="handleSubmitCase"
                     >
-                      Simpan
+                      {{ $t('label.save') }}}}
                     </v-btn>
                   </v-col>
                 </v-row>

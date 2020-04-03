@@ -42,6 +42,7 @@ export default {
     address: 'Alamat',
     select_district: 'Kota/Kab.',
     select_sub_district: 'Kec.',
+    select_sub_district_full_name: 'Kecamatan',
     select_village: 'Desa/Kel.',
     must_be_filled: 'Harus Diisi',
     light_mode: 'Light Mode',
@@ -57,7 +58,9 @@ export default {
     add_distribution: 'Tambah Distribusi',
     sort: 'Urutkan',
     distribution_destination: 'Tujuan Distribusi',
+    distribution_destination_name: 'Nama Tujuan Distribusi',
     distribution_date: 'Tanggal Distribusi',
+    distribution_quantity: 'Jumlah Distribusi',
     rdt_distribution_table_title: 'Daftar Laporan Distribusi RDT Kit',
     export_button: 'Export Data',
     number: 'No',
@@ -67,7 +70,10 @@ export default {
     kit_received: 'Kit Diterima',
     kit_available: 'Kit Tersedia',
     used_kit: 'Kit Terpakai',
-    label_human: 'Orang'
+    label_human: 'Orang',
+    contact_person: 'Nama Pemohon',
+    phone_number: 'Nomor Telepon (HP/WA)',
+    save: 'Simpan'
   },
   success: {
     login_success: 'Login Berhasil',
