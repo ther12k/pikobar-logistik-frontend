@@ -139,15 +139,18 @@ export default {
   name: 'RDTList',
   data() {
     return {
+      headers: [],
       totalODP: 0,
       totalPDP: 0,
       totalPositif: 0,
       totalReport: 0,
       listQuery: {
         address_district_code: '',
-        sort: 'asc',
-        date_check: '',
-        category: '',
+        sort: {
+          code_test: 'desc'
+        },
+        // date_check: '',
+        // category: '',
         page: 1,
         limit: 30,
         search: ''
@@ -171,10 +174,10 @@ export default {
   watch: {
     'listQuery.search': {
       handler: function(value) {
-        if (value.length >= 3) {
+        if (value !== null && value.length >= 3) {
           this.listQuery.page = 1
           this.handleSearch()
-        } else if (value.length === 0) {
+        } else if (value !== null && value.length === 0) {
           this.listQuery.page = 1
           this.handleSearch()
         }
@@ -204,9 +207,9 @@ export default {
       await this.$router.push(`/rdt/update-result/${id}`)
     },
     async handleResetFilter() {
-      this.listQuery.sort = 'asc'
-      this.listQuery.category = ''
-      this.listQuery.date_check = ''
+      // this.listQuery.sort = 'asc'
+      // this.listQuery.category = ''
+      // this.listQuery.date_check = ''
       this.listQuery.search = ''
     },
     async handleSearch() {

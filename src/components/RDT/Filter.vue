@@ -5,7 +5,7 @@
         <v-col cols="12" sm="2">
           <v-label class="title">Urutkan</v-label>
           <v-select
-            v-model="listQuery.sort"
+            v-model="listQuery.sort.code_test"
             :items="sortOption"
             solo
             item-text="label"
