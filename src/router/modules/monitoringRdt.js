@@ -18,6 +18,17 @@ const monitoringRdt = {
       noCache: true,
       roles: ['superadmin', 'dinkesprov', 'dinkeskota']
     }
+  },
+  {
+    path: 'detail/:id',
+    component: () => import('@/views/monitoringRdt/detail'),
+    hidden: true,
+    meta: {
+      title: 'laporan_detail',
+      icon: 'library_books',
+      noCache: true,
+      roles: ['superadmin', 'dinkeskota', 'dinkesprov']
+    }
   }]
 }
 
