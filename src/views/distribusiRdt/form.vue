@@ -253,7 +253,7 @@ export default {
     },
     'subDistrictCode': function(value) {
       this.subDistrict = {
-        kemendagri_kecamatan_kode: value,
+        kemendagri_kecamatan_kode: value.kemendagri_kecamatan_kode,
         kemendagri_kecamatan_nama: this.subDistrictName
       }
     },
