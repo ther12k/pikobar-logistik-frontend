@@ -2,7 +2,7 @@
   <div>
     <h1><b>{{ recipientList.kemendagri_kabupaten_nama }}</b></h1>
     <v-row>
-      <v-col>
+      <v-col cols="12" sm="6">
         <v-card
           class="mx-auto"
           outlined
@@ -23,7 +23,7 @@
           </v-list-item>
         </v-card>
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="6">
         <v-card
           class="mx-auto"
           outlined
@@ -49,7 +49,7 @@
       outlined
     >
       <v-row>
-        <v-col>
+        <v-col cols="12" sm="6">
           <v-card-text>
             <div class="text-size">
               Daftar Penggunaan RDT Kit
