@@ -33,10 +33,9 @@
                     md="6"
                   >
                     <label><strong>Tujuan Distribusi</strong></label>
-                    <!-- TODO: Perbaiki function required untuk field select-area-district-city -->
                     <select-area-district-city
                       :disabled-district="disabledDistrict"
-                      :required="requiredField"
+                      :required="true"
                       :on-select-district-city="onSelectDistrictCity"
                     />
                   </v-col>
@@ -46,9 +45,8 @@
                     md="6"
                   >
                     <label><strong>Kecamatan</strong></label>
-                    <!-- TODO: Perbaiki function required untuk field select-area-sub-district-city -->
                     <select-area-sub-district
-                      :required="requiredField"
+                      :required="true"
                       :sub-district="subDistrict"
                       :update-sub-district.sync="subDistrict"
                       :code-district="rdtDistributionForm.location_district_code"
@@ -132,22 +130,11 @@
                     md="6"
                   >
                     <label><strong>Tanggal Distribusi</strong></label>
-                    <!-- TODO: Perbaiki function required untuk field date-picker -->
                     <date-picker
-                      :required="requiredField"
+                      :required="true"
                       :value="date"
                       @selected="changeDate"
                     />
-                    <ValidationProvider
-                      v-slot="{ errors }"
-                      rules="required"
-                    >
-                      <v-text-field
-                        v-model="rdtDistributionForm.time"
-                        style="display:none"
-                        :error-messages="errors"
-                      />
-                    </ValidationProvider>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -206,10 +193,6 @@ export default {
   },
   props: {
     disabledDistrict: {
-      type: Boolean,
-      default: false
-    },
-    requiredField: {
       type: Boolean,
       default: false
     },
