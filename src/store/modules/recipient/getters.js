@@ -4,5 +4,8 @@ export default {
   },
   totalList: (state, getters) => {
     return state.totalList
+  },
+  recipientSummary: (state, getters) => {
+    return state.summaryRecipient
   }
 }

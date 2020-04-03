@@ -3,9 +3,11 @@ import mutations from './mutations'
 import getters from './getters'
 
 const state = {
-  listRecipient: [],
   totalList: 0,
-  summaryRecipient: []
+  listRdtDistribution: [],
+  firstStock: 0,
+  distributedStock: 0,
+  remainingStock: 0
 }
 
 export default {
