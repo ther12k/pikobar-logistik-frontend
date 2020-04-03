@@ -31,15 +31,15 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="text-green">Positif</v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitDiterima }} Orang)</v-list-item-title>
+              <v-list-item-title class="mb-1">0% ({{ kitDiterima }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">Negatif</v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitTersedia }} Orang)</v-list-item-title>
+              <v-list-item-title class="mb-1">0% ({{ kitTersedia }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">Invalid</v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitTerpakai }} Orang)</v-list-item-title>
+              <v-list-item-title class="mb-1">0% ({{ kitTerpakai }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>

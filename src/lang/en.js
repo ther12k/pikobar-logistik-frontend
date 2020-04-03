@@ -43,7 +43,8 @@ export default {
     must_be_filled: 'Must be filled',
     kit_received: 'Kit Received',
     kit_available: 'Kit Available',
-    used_kit: 'Used Kit'
+    used_kit: 'Used Kit',
+    label_human: 'Humans'
   },
   success: {
     login_success: 'Login Success',
