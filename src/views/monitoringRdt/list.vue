@@ -8,7 +8,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ quantity_distributed }}</v-list-item-title>
+              >{{ recipientSummary.quantity_distributed | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -20,19 +20,19 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_available_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ quantity_available }}</v-list-item-title>
+              >{{ recipientSummary.quantity_available | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
       </v-col>
       <v-col>
-        <v-card class="mx-auto bg-danger" outlined>
+        <v-card class="mx-auto bg-info" outlined>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="title white--text">{{ $t('label.rdt_used_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ quantity_used }}</v-list-item-title>
+              >{{ recipientSummary.quantity_used | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -54,27 +54,8 @@
         <v-label class="title">Tujuan Distribusi</v-label>
         <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
       </v-col>
-      <v-col cols="12" sm="4">
-        <br>
-        <v-card outlined>
-          <search
-            :handle-search="handleSearch"
-            :list-query="listQuery"
-            solo
-          />
-        </v-card>
-      </v-col>
-      <v-col cols="1" sm="1">
-        <v-btn
-          class="bottom-add-survey"
-          depressed
-          outlined
-        >
-          Export Data
-        </v-btn>
-      </v-col>
     </v-row>
-    <v-card outlined>
+    <v-card :loading="loading" outlined>
       <v-card-text>
         <span class="headline">Daftar Laporan Penggunaan RDT Kit</span>
       </v-card-text>
@@ -96,10 +77,10 @@
               <tbody>
                 <tr v-for="(item, index) in recipientList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.total_stock }}</td>
-                  <td>{{ item.total_used }}</td>
-                  <td>{{ item.total_stock - item.total_used }}</td>
+                  <td>{{ item.kemendagri_kabupaten_nama }}</td>
+                  <td>{{ item.total_stock | currency }}</td>
+                  <td>{{ item.total_used | currency }}</td>
+                  <td>{{ item.total_stock - item.total_used | currency }}</td>
                   <td><v-btn text small color="info" @click="handleDetail(item.id)">Detail</v-btn></td>
                 </tr>
               </tbody>
@@ -127,26 +108,24 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
-      quantity_distributed: 0, // to do : get data from api
-      quantity_available: 0, // to do : get data from api
-      quantity_used: 0, // to do : get data from api
+      loading: false,
       listQuery: {
         page: 1,
         limit: 10,
-        search: '',
         sort: '',
-        kabkota_kode: ''
+        city_code: ''
       }
     }
   },
   computed: {
     ...mapGetters('recipient', [
       'recipientList',
-      'totalList'
+      'totalList',
+      'recipientSummary'
     ])
   },
   watch: {
-    'listQuery.search': {
+    'listQuery.city_code': {
       handler: function(value) {
         if (value.length >= 3) {
           this.listQuery.page = 1
@@ -161,10 +140,16 @@ export default {
   },
   mounted() {
     this.getMonitoringRdtList()
+    this.getMonitoringRdtSummary()
   },
   methods: {
     async getMonitoringRdtList() {
+      this.loading = true
       await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
+      this.loading = false
+    },
+    async getMonitoringRdtSummary() {
+      await this.$store.dispatch('recipient/getSummaryRecipient')
     },
     async handleSearch() {
       await this.getMonitoringRdtList()
@@ -180,10 +165,10 @@ export default {
     },
     onSelectDistrictCity(value) {
       if (!value) {
-        this.listQuery.kabkota_kode = ''
+        this.listQuery.city_code = ''
         this.handleSearch()
       } else {
-        this.listQuery.kabkota_kode = value.kemendagri_kabupaten_kode
+        this.listQuery.city_code = value.kemendagri_kabupaten_kode
         this.handleSearch()
       }
     }
@@ -198,8 +183,8 @@ export default {
 .bg-success {
   background: linear-gradient(90deg, #219653 0%, #27AE60 100%);
 }
-.bg-danger {
-  background: linear-gradient(90deg, #F36464 0%, #FE9090 100%);
+.bg-info {
+  background: linear-gradient(90deg, #2F80ED 0%, #2D9CDB 100%);
 }
 .bottom-add-survey {
   margin-top:25px;
