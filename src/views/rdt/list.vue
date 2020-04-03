@@ -28,6 +28,8 @@
       <filter-hasil-test
         :list-query="listQuery"
         :query-list.sync="listQuery"
+        :on-search="handleSearch"
+        :on-reset="handleResetFilter"
       />
       <hr>
       <v-row>
@@ -143,9 +145,9 @@ export default {
       totalReport: 0,
       listQuery: {
         address_district_code: '',
-        // sort: 'asc',
-        // date_check: '',
-        // category: '',
+        sort: 'asc',
+        date_check: '',
+        category: '',
         page: 1,
         limit: 30,
         search: ''
@@ -200,6 +202,12 @@ export default {
     },
     async handleUpdateResults(id) {
       await this.$router.push(`/rdt/update-result/${id}`)
+    },
+    async handleResetFilter() {
+      this.listQuery.sort = 'asc'
+      this.listQuery.category = ''
+      this.listQuery.date_check = ''
+      this.listQuery.search = ''
     },
     async handleSearch() {
       await this.$store.dispatch('rdt/getListRDT', this.listQuery)

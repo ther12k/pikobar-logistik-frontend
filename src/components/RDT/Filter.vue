@@ -47,12 +47,14 @@
             <v-btn
               color="grey"
               style="height: 46px;min-width: 120px;margin-right: 4px;"
+              @click="onReset"
             >
               Reset
             </v-btn>
             <v-btn
               color="success"
               style="height: 46px;min-width: 120px;"
+              @click="onSearch"
             >
               Cari
             </v-btn>
@@ -69,6 +71,14 @@ export default {
   props: {
     listQuery: {
       type: Object,
+      default: null
+    },
+    onSearch: {
+      type: Function,
+      default: null
+    },
+    onReset: {
+      type: Function,
       default: null
     }
   },
