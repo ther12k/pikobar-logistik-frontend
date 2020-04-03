@@ -5,8 +5,7 @@ import getters from './getters'
 const state = {
   listRecipient: [],
   totalList: 0,
-  summaryRecipient: [],
-  dataRecipient: {}
+  summaryRecipient: []
 }
 
 export default {

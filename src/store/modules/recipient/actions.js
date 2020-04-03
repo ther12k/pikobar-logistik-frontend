@@ -19,14 +19,5 @@ export default {
     } catch (error) {
       return error.response
     }
-  },
-  async getRecipient({ commit }, params) {
-    try {
-      const response = await fetchList('/api/v1/recipients', 'GET', params)
-      commit('SET_RECIPIENT', response.data.data[0])
-      return response
-    } catch (error) {
-      return error.response
-    }
   }
 }
