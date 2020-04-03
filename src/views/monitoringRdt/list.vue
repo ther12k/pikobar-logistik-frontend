@@ -74,7 +74,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-card outlined>
+    <v-card :loading="loading" outlined>
       <v-card-text>
         <span class="headline">Daftar Laporan Penggunaan RDT Kit</span>
       </v-card-text>
@@ -96,7 +96,7 @@
               <tbody>
                 <tr v-for="(item, index) in recipientList" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.name }}</td>
+                  <td>{{ item.kemendagri_kabupaten_nama }}</td>
                   <td>{{ item.total_stock | currency }}</td>
                   <td>{{ item.total_used | currency }}</td>
                   <td>{{ item.total_stock - item.total_used | currency }}</td>
@@ -127,6 +127,7 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
+      loading: false,
       listQuery: {
         page: 1,
         limit: 10,
@@ -163,7 +164,9 @@ export default {
   },
   methods: {
     async getMonitoringRdtList() {
+      this.loading = true
       await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
+      this.loading = false
     },
     async getMonitoringRdtSummary() {
       await this.$store.dispatch('recipient/getSummaryRecipient')
