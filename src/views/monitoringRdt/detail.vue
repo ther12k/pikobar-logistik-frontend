@@ -30,15 +30,15 @@
         >
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title class="text-green">Positif</v-list-item-title>
+              <v-list-item-title class="text-green"> {{ $t('label.positive') }} </v-list-item-title>
               <v-list-item-title class="mb-1">0% ({{ kitDiterima }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
-              <v-list-item-title class="text-green">Negatif</v-list-item-title>
+              <v-list-item-title class="text-green"> {{ $t('label.negative') }} </v-list-item-title>
               <v-list-item-title class="mb-1">0% ({{ kitTersedia }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
-              <v-list-item-title class="text-green">Invalid</v-list-item-title>
+              <v-list-item-title class="text-green"> {{ $t('label.invalid') }} </v-list-item-title>
               <v-list-item-title class="mb-1">0% ({{ kitTerpakai }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -52,7 +52,7 @@
         <v-col cols="12" sm="6">
           <v-card-text>
             <div class="text-size">
-              Daftar Penggunaan RDT Kit
+              {{ $t('label.list_rdt_kit') }}
             </div>
           </v-card-text>
         </v-col>
@@ -65,11 +65,11 @@
               <thead>
                 <tr>
                   <th class="text-left">#</th>
-                  <th class="text-left">NAMA FASKES</th>
-                  <th class="text-left">KIT TERPAKAI</th>
-                  <th class="text-left">POSITIF</th>
-                  <th class="text-left">NEGATIF</th>
-                  <th class="text-left">INVALID</th>
+                  <th class="text-left">{{ $t('label.faskes_name').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.used_kit').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.positive').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.negative').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.invalid').toUpperCase() }}</th>
                 </tr>
               </thead>
               <tbody>
