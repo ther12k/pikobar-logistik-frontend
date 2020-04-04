@@ -285,7 +285,7 @@ export default {
       this.rdtDistributionForm.location_district_code = value.kemendagri_kabupaten_kode
       this.$emit('update:codeDistrict', value.kemendagri_kabupaten_kode)
     },
-    async onSelectSubDistrictCity(value) {
+    onSelectSubDistrictCity(value) {
       this.rdtDistributionForm.location_subdistrict_code = value.kemendagri_kecamatan_kode
     },
     changeDate(value) {
