@@ -40,7 +40,7 @@ export default {
       return error.response
     }
   },
-  async resetRdtDistributionForm({ commit }) {
+  resetRdtDistributionForm({ commit }) {
     commit('RESET_RDT_DISTRIBUTION_FORM')
   }
 }
