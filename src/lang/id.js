@@ -64,7 +64,11 @@ export default {
     number: 'No',
     delivered_kit: 'Kit Terkirim',
     action: 'Action',
-    edit_2: 'Edit'
+    edit_2: 'Edit',
+    kit_received: 'Kit Diterima',
+    kit_available: 'Kit Tersedia',
+    used_kit: 'Kit Terpakai',
+    label_human: 'Orang'
   },
   success: {
     login_success: 'Login Berhasil',
