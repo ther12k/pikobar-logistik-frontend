@@ -274,7 +274,7 @@ export default {
       }
       this.submitBtn = true
       await this.$store.dispatch('rdtDistribution/createRdtDistribution', this.rdtDistributionForm)
-      await this.$store.dispatch('toast/successToast', 'Data berhasil tersimpan!')
+      await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
       await this.$store.dispatch('rdtDistribution/resetRdtDistributionForm')
       this.dialog = false
       this.$emit('close', this.dialog)

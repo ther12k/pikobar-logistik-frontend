@@ -80,7 +80,7 @@ export default {
     contact_person: 'Nama Pemohon',
     example_contact_person: 'Masukkan nama pemohon/PIC',
     phone_number: 'Nomor Telepon (HP/WA)',
-    example_phone_number: 'Masukkan nomor telpon yang bisa dihubungi',
+    example_phone_number: 'Masukkan nomor telepon yang bisa dihubungi',
     save: 'Simpan'
   },
   success: {
