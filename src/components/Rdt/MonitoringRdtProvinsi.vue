@@ -57,7 +57,7 @@
     </v-row>
     <v-card :loading="loading" outlined>
       <v-card-text>
-        <span class="headline">Daftar Laporan Penggunaan RDT Kit</span>
+        <span class="headline">{{ $t('label.rdt_distribution_list_title') }}</span>
       </v-card-text>
       <hr>
       <v-row>

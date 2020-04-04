@@ -52,6 +52,8 @@ export default {
     rdt_distributed_title: 'Jumlah RDT Kit Terdistribusi',
     rdt_used_title: 'Jumlah RDT Kit Terpakai',
     rdt_receipt_title: 'Jumlah Penerimaan',
+    rdt_distribution_list_title: 'Daftar Distribusi RDT Kit',
+    rdt_usage_report_title: 'Daftar Laporan Penggunaan RDT Kit',
     first_stock: 'Jumlah Stok Awal',
     distributed_stock: 'Jumlah Terdistribusi',
     remaining_stock: 'Jumlah Stok Sisa',
