@@ -32,16 +32,17 @@ export default {
     state.formPasien.address_subdistrict_name = ''
     state.formPasien.address_village_code = ''
     state.formPasien.address_village_name = ''
-    state.formRiwayatPasien.status = ''
-    state.formRiwayatPasien.stage = ''
-    state.formRiwayatPasien.diagnosis = []
-    state.formRiwayatPasien.history_tracing = []
-    state.formRiwayatPasien.history_notes = ''
-    state.formRiwayatPasien.current_location_type = ''
-    state.formRiwayatPasien.current_location_address = ''
-    state.formRiwayatPasien.current_location_district_code = ''
-    state.formRiwayatPasien.current_location_subdistrict_code = ''
-    state.formRiwayatPasien.current_location_village_code = ''
+    state.formPasien.status = ''
+    state.formPasien.stage = ''
+    state.formPasien.first_symptom_date = ''
+    state.formPasien.diagnosis = []
+    state.formPasien.history_tracing = []
+    state.formPasien.history_notes = ''
+    state.formPasien.current_location_type = ''
+    state.formPasien.current_location_address = ''
+    state.formPasien.current_location_district_code = ''
+    state.formPasien.current_location_subdistrict_code = ''
+    state.formPasien.current_location_village_code = ''
   },
   RESET_RIWAYAT_FORM_PASIEN: (state) => {
     state.formRiwayatPasien.case = ''
@@ -49,6 +50,7 @@ export default {
     state.formRiwayatPasien.stage = ''
     state.formRiwayatPasien.diagnosis = []
     state.formRiwayatPasien.history_tracing = []
+    state.formRiwayatPasien.first_symptom_date = ''
     state.formRiwayatPasien.history_notes = ''
     state.formRiwayatPasien.current_location_type = ''
     state.formRiwayatPasien.current_location_address = ''

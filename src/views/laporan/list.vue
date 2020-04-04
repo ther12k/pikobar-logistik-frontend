@@ -142,6 +142,7 @@
                           <v-btn
                             class="ma-1"
                             color="success"
+                            style="height: 44px;min-width: 150px;"
                             tile
                             outlined
                             v-on="on"
