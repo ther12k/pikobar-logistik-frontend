@@ -69,7 +69,7 @@
                       <v-text-field
                         v-model="rdtDistributionForm.name"
                         :error-messages="errors"
-                        label="contoh: DPRD Provinsi Jawa Barat"
+                        :label="$t('label.example_distribution_destination_name')"
                         solo-inverted
                       />
                     </ValidationProvider>
@@ -81,7 +81,7 @@
                       <v-text-field
                         v-model="rdtDistributionForm.fromQuantity"
                         :error-messages="errors"
-                        label="Masukkan jumlah yang akan didistribusikan"
+                        :label="$t('label.example_distribution_quantity')"
                         solo-inverted
                         type="number"
                       />
@@ -100,7 +100,7 @@
                       <v-textarea
                         v-model="rdtDistributionForm.location_address"
                         :error-messages="errors"
-                        label="Masukkan alamat lengkap tujuan distribusi"
+                        :label="$t('label.example_address')"
                         solo-inverted
                       />
                     </ValidationProvider>
@@ -120,7 +120,7 @@
                       <v-text-field
                         v-model="rdtDistributionForm.contact_person"
                         :error-messages="errors"
-                        label="Masukan Nama Pemohon / PIC"
+                        :label="$t('label.example_contact_person')"
                         solo-inverted
                       />
                     </ValidationProvider>
@@ -152,7 +152,7 @@
                       <v-text-field
                         v-model="rdtDistributionForm.phone_number"
                         :error-messages="errors"
-                        label="Masukkan nomor telepon yang bisa dihubungi"
+                        :label="$t('label.example_phone_number')"
                         solo-inverted
                         type="number|string"
                       />
@@ -280,7 +280,7 @@ export default {
       this.$emit('close', this.dialog)
       this.submitBtn = false
     },
-    async onSelectDistrictCity(value) {
+    onSelectDistrictCity(value) {
       this.districtCity = value
       this.rdtDistributionForm.location_district_code = value.kemendagri_kabupaten_kode
       this.$emit('update:codeDistrict', value.kemendagri_kabupaten_kode)
