@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <v-card class="d-block pa-1 mx-auto header-survey-list">
@@ -20,7 +19,7 @@
         <v-col>
           <v-card-text>
             <div style="font-size: 1.5rem;">
-              Data RDT
+              Data Hasil Test
             </div>
           </v-card-text>
         </v-col>
@@ -31,6 +30,12 @@
           />
         </v-col>
       </v-row>
+      <!--      <filter-hasil-test-->
+      <!--        :list-query="listQuery"-->
+      <!--        :query-list.sync="listQuery"-->
+      <!--        :on-search="handleSearch"-->
+      <!--        :on-reset="handleResetFilter"-->
+      <!--      />-->
       <hr>
       <v-row>
         <v-col auto>
@@ -83,6 +88,7 @@
                           <v-btn
                             class="ma-1"
                             color="success"
+                            style="height: 44px;min-width: 150px;"
                             tile
                             outlined
                             v-on="on"
@@ -139,12 +145,18 @@ export default {
   name: 'RDTList',
   data() {
     return {
+      headers: [],
       totalODP: 0,
       totalPDP: 0,
       totalPositif: 0,
       totalReport: 0,
       listQuery: {
         address_district_code: '',
+        // sort: {
+        //   code_test: 'desc'
+        // },
+        // date_check: '',
+        // category: '',
         page: 1,
         limit: 30,
         search: ''
@@ -168,10 +180,10 @@ export default {
   watch: {
     'listQuery.search': {
       handler: function(value) {
-        if (value.length >= 3) {
+        if (value !== null && value.length >= 3) {
           this.listQuery.page = 1
           this.handleSearch()
-        } else if (value.length === 0) {
+        } else if (value !== null && value.length === 0) {
           this.listQuery.page = 1
           this.handleSearch()
         }
@@ -199,6 +211,12 @@ export default {
     },
     async handleUpdateResults(id) {
       await this.$router.push(`/rdt/update-result/${id}`)
+    },
+    async handleResetFilter() {
+      // this.listQuery.sort = 'asc'
+      // this.listQuery.category = ''
+      // this.listQuery.date_check = ''
+      this.listQuery.search = ''
     },
     async handleSearch() {
       await this.$store.dispatch('rdt/getListRDT', this.listQuery)

@@ -264,6 +264,7 @@ export default {
       if (!valid) {
         return
       }
+      await this.$store.dispatch('reports/resetRiwayatFormPasien')
       EventBus.$emit('nextSurveySteps', this.steps)
     },
     handleChangeNationality(value) {

@@ -60,9 +60,9 @@
                           :error-messages="errors"
                           row
                         >
-                          <v-radio label="Negatif" value="0" />
-                          <v-radio label="Sembuh" value="1" />
-                          <v-radio label="Meninggal" value="2" />
+                          <v-radio label="Negatif" value="0" @click.prevent="uncheck('0')" />
+                          <v-radio label="Sembuh" value="1" @click.prevent="uncheck('1')" />
+                          <v-radio label="Meninggal" value="2" @click.prevent="uncheck('2')" />
                         </v-radio-group>
                       </ValidationProvider>
                       <ValidationProvider
@@ -366,6 +366,13 @@ export default {
     onSelectHospital(value) {
       this.formRiwayatPasien.current_hospital_id = value._id
       this.formRiwayatPasien.current_location_address = value.name
+    },
+    uncheck(value) {
+      if (value === this.formRiwayatPasien.final_result) {
+        this.formRiwayatPasien.final_result = ''
+      } else {
+        this.formRiwayatPasien.final_result = value
+      }
     },
     handleChangeLocationNow(value) {
       if (value === 'RUMAH') {
