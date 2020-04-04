@@ -3,6 +3,7 @@ import mutations from './mutations'
 import getters from './getters'
 import constant from '@/constants/state'
 
+// TODO: Ubah variable yang masih statis!
 const state = {
   totalList: 0,
   listRdtDistribution: [],
