@@ -14,7 +14,8 @@ export default {
   remainingStock: (state, getters) => {
     return state.remainingStock
   },
-  rdtDistributionForm: (state, getters) => {
+  rdtDistributionForm: (state, getters, rootState) => {
+    state.rdtDistributionForm.location_province_code = rootState.constants.westJavaLocalProvinceCode
     return state.rdtDistributionForm
   }
 }
