@@ -2,10 +2,14 @@ import { fetchList, fetchDetail, fetchPostUpdate } from '@/api'
 
 export default {
   async listReportCase({ commit }, params) {
-    const response = await fetchList('/api/cases', 'GET', params)
-    commit('SET_TOTAL_LIST_PASIEN', response.data._meta.totalPages)
-    commit('SET_LIST_PASIEN', response.data.cases)
-    return response
+    try {
+      const response = await fetchList('/api/cases', 'GET', params)
+      commit('SET_TOTAL_LIST_PASIEN', response.data._meta.totalPages)
+      commit('SET_LIST_PASIEN', response.data.cases)
+      return response
+    } catch (error) {
+      return error.response
+    }
   },
   async createReportCase({ commit }, data) {
     try {
