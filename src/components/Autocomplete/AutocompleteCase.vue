@@ -7,7 +7,7 @@
         :loading="loading"
         :items="listKasus"
         :return-object="false"
-        item-value="id"
+        item-value="display"
         item-text="display"
         single-line
         :disabled="disabledCase"
@@ -58,7 +58,7 @@ export default {
       loading: false,
       listKasus: null,
       listQuery: {
-        address_district_code: ''
+        address_district_code: null
       }
     }
   },
@@ -71,7 +71,7 @@ export default {
   async mounted() {
     this.loading = true
     this.listQuery.address_district_code = this.district_user
-    const response = await this.$store.dispatch('rdt/getCases', this.listQuery.address_district_code)
+    const response = await this.$store.dispatch('rdt/getCases', this.listQuery)
     this.listKasus = response.data
     this.loading = false
   }

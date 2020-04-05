@@ -96,10 +96,10 @@
                           </v-list-item>
                           <!-- <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
                             Update Profil Peserta
-                          </v-list-item> -->
+                          </v-list-item>
                           <v-list-item v-if="item.final_result && item.final_result.length > 0 " @click="handleUpdateResults(item._id)">
                             Update Hasil
-                          </v-list-item>
+                          </v-list-item> -->
                           <v-list-item @click="handleDeleteRDT(item._id)">
                             Hapus Peserta
                           </v-list-item>
@@ -183,7 +183,7 @@ export default {
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('rdt/resetListRDT')
     const response = await this.$store.dispatch('rdt/getListRDT', this.listQuery)
-    this.totalReport = response.data._meta.itemCount
+    this.totalReport = response.data._meta.itemCount ? response.data._meta.itemCount : '0'
   },
   methods: {
     formatDatetime,
