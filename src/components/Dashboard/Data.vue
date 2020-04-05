@@ -184,7 +184,7 @@ export default {
       }
     }
     const data = await this.$store.dispatch('reports/countReportCase', params)
-    const dataFinal = await this.$store.dispatch('reports/countReportCaseFinal')
+    const dataFinal = await this.$store.dispatch('reports/countReportCaseFinal', params)
 
     this.patien = await data.data
     this.final = await dataFinal.data
