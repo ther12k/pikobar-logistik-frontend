@@ -22,9 +22,9 @@ export default {
       return error.response
     }
   },
-  async createRdtDistribution({ commit }, data) {
+  createRdtDistribution({ commit }, data) {
     try {
-      const response = await fetchPostUpdate('/api/v1/transactions', 'POST', data)
+      const response = fetchPostUpdate('/api/v1/transactions', 'POST', data)
       return response
     } catch (error) {
       return error.response
