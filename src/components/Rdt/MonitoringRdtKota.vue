@@ -50,7 +50,7 @@
           @change="handleSearch"
         />
       </v-col>
-      <v-col cols="12" sm="4">
+      <v-col cols="12" sm="5">
         <br>
         <v-card outlined>
           <search
@@ -59,6 +59,17 @@
             solo
           />
         </v-card>
+      </v-col>
+      <v-col cols="12" sm="2">&nbsp;</v-col>
+      <v-col cols="1" sm="1">
+        <v-btn
+          class="bottom-add-survey"
+          style="margin-top:25px"
+          depressed
+          outlined
+        >
+          Export Data
+        </v-btn>
       </v-col>
     </v-row>
     <v-card :loading="loading" outlined>
