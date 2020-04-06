@@ -1,10 +1,31 @@
 <template>
   <div>
-    <v-card-text>
-      <div style="font-size: 1.5rem;">
-        Detail Kasus
-      </div>
-    </v-card-text>
+    <v-row>
+      <v-col
+        cols="12"
+        md="6"
+        sm="12"
+        class="row-detail-label"
+      >
+        <div style="font-size: 1.5rem;">
+          {{ titleDetail }}
+        </div>
+      </v-col>
+      <v-col
+        cols="12"
+        md="6"
+        sm="12"
+      >
+        <v-btn
+          color="success"
+          bottom
+          style="float: right;"
+          @click="backList"
+        >
+          Kembali ke list
+        </v-btn>
+      </v-col>
+    </v-row>
     <v-card
       outlined
     >
@@ -353,6 +374,10 @@ import { completeAddress } from '@/utils/utilsFunction'
 export default {
   name: 'DetailPatient',
   props: {
+    titleDetail: {
+      type: String,
+      default: null
+    },
     idData: {
       type: String,
       default: null
@@ -393,6 +418,9 @@ export default {
     completeAddress,
     getTableRowNumbering(index) {
       return (index + 1)
+    },
+    backList() {
+      this.$router.push('/laporan/list')
     }
   }
 }
