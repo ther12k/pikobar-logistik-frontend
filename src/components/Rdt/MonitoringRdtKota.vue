@@ -64,7 +64,6 @@
       <v-col cols="1" sm="1">
         <v-btn
           class="bottom-add-survey"
-          style="margin-top:25px"
           depressed
           outlined
         >
