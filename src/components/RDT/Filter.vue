@@ -2,17 +2,18 @@
   <div>
     <v-container>
       <v-row>
-        <v-col cols="12" sm="2">
-          <v-label class="title">Urutkan</v-label>
-          <v-select
-            v-model="listQuery.sort.code_test"
-            :items="sortOption"
+        <v-col cols="12" sm="12">
+          <br>
+          <v-text-field
+            v-model="listQuery.search"
             solo
-            item-text="label"
-            item-value="value"
+            label="Search"
+            prepend-inner-icon="search"
           />
         </v-col>
-        <v-col cols="12" sm="2">
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="3">
           <v-label class="title">Kategori Sasaran</v-label>
           <v-select
             v-model="listQuery.category"
@@ -22,23 +23,34 @@
             item-value="value"
           />
         </v-col>
-        <v-col cols="12" sm="2">
+        <!--        <v-col cols="12" sm="2">-->
+        <!--          <v-label class="title">Hasil Pemeriksaan</v-label>-->
+        <!--          <v-select-->
+        <!--            v-model="listQuery.final_result"-->
+        <!--            :items="resultCheckList"-->
+        <!--            solo-->
+        <!--            item-text="label"-->
+        <!--            item-value="value"-->
+        <!--          />-->
+        <!--        </v-col>-->
+        <v-col cols="12" sm="3">
           <v-label class="title">Tanggal Pemeriksaan</v-label>
           <input-date-picker
-            :format-date="'YYYY/MM/DD'"
-            :date-value="listQuery.date_check"
-            :value-date.sync="listQuery.date_check"
-            @changeDate="listQuery.date_check = $event"
+            :format-date="formatDate"
+            :label="'Tanggal Awal'"
+            :date-value="listQuery.start_date"
+            :value-date.sync="listQuery.start_date"
+            @changeDate="listQuery.start_date = $event"
           />
         </v-col>
         <v-col cols="12" sm="3">
           <br>
-          <v-text-field
-            v-model="listQuery.search"
-            solo
-            clearable
-            label="Search"
-            prepend-inner-icon="search"
+          <input-date-picker
+            :format-date="formatDate"
+            :label="'Tanggal Akhir'"
+            :date-value="listQuery.end_date"
+            :value-date.sync="listQuery.end_date"
+            @changeDate="listQuery.end_date = $event"
           />
         </v-col>
         <v-col cols="12" sm="3">
@@ -84,15 +96,16 @@ export default {
   },
   data() {
     return {
-      sortOption: [
-        { value: 'asc', label: 'A-Z' },
-        { value: 'desc', label: 'Z-A' }
-      ],
-      formatDate: 'YYYY/MM/DD',
+      formatDate: 'YYYY-MM-DD',
       categoryList: [
         { label: 'Kategori A', value: 'A' },
         { label: 'Kategori B', value: 'B' },
         { label: 'Kategori C', value: 'C' }
+      ],
+      resultCheckList: [
+        { label: 'Negatif', value: 'NEGATIF' },
+        { label: 'Positif', value: 'POSITIF' },
+        { label: 'Invalid', value: 'INVALID' }
       ]
     }
   }
