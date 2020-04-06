@@ -34,84 +34,71 @@
       <hr>
       <v-row>
         <v-col auto>
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">#</th>
-                  <th class="text-left">ID KASUS</th>
-                  <th class="text-left">ID PESERTA</th>
-                  <th class="text-left">NAMA</th>
-                  <th class="text-left">USIA</th>
-                  <th class="text-left">JENIS KELAMIN</th>
-                  <th class="text-left">KATEGORI</th>
-                  <th class="text-left">TEMPAT TES</th>
-                  <th class="text-left">TANGGAL TES</th>
-                  <th class="text-left">HASIL TES</th>
-                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">AKSI</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in rdtList" :key="item.index">
-                  <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
-                  <td>{{ item.code_test }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.age }} Th</td>
-                  <td>
-                    <div v-if="item.gender =='P'">
-                      Perempuan
-                    </div>
-                    <div v-else>
-                      Laki-Laki
-                    </div>
-                  </td>
-                  <td>{{ item.category }}</td>
-                  <td>{{ item.address_district_name }} </td>
-                  <td>{{ item.test_date ? formatDatetime(item.test_date, 'DD MMMM YYYY') : '-' }}</td>
-                  <td>{{ item.final_result }} </td>
-                  <td v-if="roles[0] === 'dinkeskota'">
-                    <v-card-actions>
-                      <v-menu
-                        :close-on-content-click="false"
-                        :nudge-width="100"
-                        :nudge-left="220"
-                        :nudge-top="40"
-                        offset-y
-                      >
-                        <template v-slot:activator="{ on }">
-                          <v-btn
-                            class="ma-1"
-                            color="success"
-                            style="height: 44px;min-width: 150px;"
-                            tile
-                            outlined
-                            v-on="on"
-                          >
-                            Pilih Aksi <v-icon style="font-size: 2rem;" right>mdi-menu-down</v-icon>
-                          </v-btn>
-                        </template>
-                        <v-card>
-                          <v-list-item @click="handleDetail(item._id)">
-                            Lihat Detail
-                          </v-list-item>
-                          <!-- <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
-                            Update Profil Peserta
-                          </v-list-item> -->
-                          <v-list-item v-if="item.final_result && item.final_result.length > 0 " @click="handleUpdateResults(item._id)">
-                            Update Hasil
-                          </v-list-item>
-                          <v-list-item @click="handleDeleteRDT(item._id)">
-                            Hapus Peserta
-                          </v-list-item>
-                        </v-card>
-                      </v-menu>
-                    </v-card-actions>
-                  </td>
-                </tr>
-              </tbody>
+          <v-data-table
+            :headers="headers"
+            :items="rdtList"
+            hide-default-footer
+          >
+            <template v-slot:item="{ item, index }">
+              <tr>
+                <td>{{ getTableRowNumbering(index) }}</td>
+                <td>{{ item.id_case ? item.id_case.toUpperCase() : '-' }}</td>
+                <td>{{ item.code_test }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.age }} Th</td>
+                <td>
+                  <div v-if="item.gender =='P'">
+                    Perempuan
+                  </div>
+                  <div v-else>
+                    Laki-Laki
+                  </div>
+                </td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.address_district_name }} </td>
+                <td>{{ item.test_date ? formatDatetime(item.test_date, 'DD MMMM YYYY') : '-' }}</td>
+                <td>{{ item.final_result }} </td>
+                <td v-if="roles[0] === 'dinkeskota'">
+                  <v-card-actions>
+                    <v-menu
+                      :close-on-content-click="false"
+                      :nudge-width="100"
+                      :nudge-left="220"
+                      :nudge-top="40"
+                      offset-y
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-btn
+                          class="ma-1"
+                          color="success"
+                          style="height: 44px;min-width: 150px;"
+                          tile
+                          outlined
+                          v-on="on"
+                        >
+                          Pilih Aksi <v-icon style="font-size: 2rem;" right>mdi-menu-down</v-icon>
+                        </v-btn>
+                      </template>
+                      <v-card>
+                        <v-list-item @click="handleDetail(item._id)">
+                          Lihat Detail
+                        </v-list-item>
+                        <!-- <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
+                          Update Profil Peserta
+                        </v-list-item> -->
+                        <v-list-item v-if="item.final_result && item.final_result.length > 0 " @click="handleUpdateResults(item._id)">
+                          Update Hasil
+                        </v-list-item>
+                        <v-list-item @click="handleDeleteRDT(item._id)">
+                          Hapus Peserta
+                        </v-list-item>
+                      </v-card>
+                    </v-menu>
+                  </v-card-actions>
+                </td>
+              </tr>
             </template>
-          </v-simple-table>
+          </v-data-table>
         </v-col>
       </v-row>
     </v-card>
@@ -140,19 +127,32 @@ export default {
   name: 'RDTList',
   data() {
     return {
-      headers: [],
+      headers: [
+        { text: '#', value: '_id', sortable: false },
+        { text: 'ID KASUS', value: 'id_case' },
+        { text: 'ID PESERTA', value: 'code_test' },
+        { text: 'NAMA', value: 'name' },
+        { text: 'USIA', value: 'age' },
+        { text: 'JENIS KELAMIN', value: 'gender' },
+        { text: 'KATEGORI', value: 'category' },
+        { text: 'TEMPAT TES', value: 'address_district_name', sortable: false },
+        { text: 'TANGGAL TES', value: 'test_date' },
+        { text: 'HASIL TES', value: 'final_result' },
+        { text: 'Aksi', value: 'actions', sortable: false }
+      ],
       totalODP: 0,
       totalPDP: 0,
       totalPositif: 0,
       totalReport: 0,
       listQuery: {
         address_district_code: '',
-        sort: {
-          code_test: 'desc'
-        },
-        start_date: '',
-        end_date: '',
-        category: '',
+        // sort: {
+        //   code_test: 'desc'
+        // },
+        // start_date: '',
+        // end_date: '',
+        // final_result: '',
+        // category: '',
         page: 1,
         limit: 30,
         search: ''
@@ -224,3 +224,29 @@ export default {
   }
 }
 </script>
+<style scoped>
+  th.active .arrow {
+    opacity: 1;
+  }
+
+  .arrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    opacity: 0.66;
+  }
+
+  .arrow.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #42b983;
+  }
+
+  .arrow.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #42b983;
+  }
+</style>

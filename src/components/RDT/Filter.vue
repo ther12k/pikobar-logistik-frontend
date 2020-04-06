@@ -14,20 +14,20 @@
       </v-row>
       <v-row>
         <v-col cols="12" sm="2">
-          <v-label class="title">Urutkan</v-label>
+          <v-label class="title">Kategori Sasaran</v-label>
           <v-select
-            v-model="listQuery.sort.code_test"
-            :items="sortOption"
+            v-model="listQuery.category"
+            :items="categoryList"
             solo
             item-text="label"
             item-value="value"
           />
         </v-col>
         <v-col cols="12" sm="2">
-          <v-label class="title">Kategori Sasaran</v-label>
+          <v-label class="title">Hasil Pemeriksaan</v-label>
           <v-select
-            v-model="listQuery.category"
-            :items="categoryList"
+            v-model="listQuery.final_result"
+            :items="resultCheckList"
             solo
             item-text="label"
             item-value="value"
@@ -105,6 +105,11 @@ export default {
         { label: 'Kategori A', value: 'A' },
         { label: 'Kategori B', value: 'B' },
         { label: 'Kategori C', value: 'C' }
+      ],
+      resultCheckList: [
+        { label: 'Negatif', value: 'NEGATIF' },
+        { label: 'Positif', value: 'POSITIF' },
+        { label: 'Invalid', value: 'INVALID' }
       ]
     }
   }
