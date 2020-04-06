@@ -88,7 +88,7 @@
                   <th class="text-left">TAHAPAN</th>
                   <th class="text-left">HASIL</th>
                   <th class="text-left">AUTHOR</th>
-                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">AKSI</th>
+                  <th class="text-left">AKSI</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,7 +129,7 @@
                     </div>
                   </td>
                   <td>{{ item.author.fullname }}</td>
-                  <td v-if="roles[0] === 'dinkeskota'">
+                  <td>
                     <v-card-actions>
                       <v-menu
                         :close-on-content-click="false"
@@ -154,15 +154,17 @@
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <v-list-item @click="handleEditCase(item._id)">
-                            Update Profil
-                          </v-list-item>
-                          <v-list-item @click="handleEditHistoryCase(item._id)">
-                            Update Riwayat
-                          </v-list-item>
-                          <v-list-item @click="handleDeleteCase(item)">
-                            Hapus Kasus
-                          </v-list-item>
+                          <div v-if="roles[0] === 'dinkeskota'">
+                            <v-list-item @click="handleEditCase(item._id)">
+                              Update Profil
+                            </v-list-item>
+                            <v-list-item @click="handleEditHistoryCase(item._id)">
+                              Update Riwayat
+                            </v-list-item>
+                            <v-list-item @click="handleDeleteCase(item)">
+                              Hapus Kasus
+                            </v-list-item>
+                          </div>
                         </v-card>
                       </v-menu>
                     </v-card-actions>
