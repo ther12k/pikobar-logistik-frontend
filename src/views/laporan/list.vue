@@ -142,12 +142,12 @@
                           <v-btn
                             class="ma-1"
                             color="#828282"
-                            style="height: 30px;min-width: 80px;"
+                            style="text-transform: none;height: 30px;min-width: 80px;"
                             tile
                             outlined
                             v-on="on"
                           >
-                            Pilih Aksi <v-icon style="color: #009D57;font-size: 2rem;" right>mdi-menu-down</v-icon>
+                            Pilih aksi<v-icon style="color: #009D57;font-size: 2rem;" right>mdi-menu-down</v-icon>
                           </v-btn>
                         </template>
                         <v-card>
