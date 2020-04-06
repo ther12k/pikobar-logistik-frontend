@@ -5,6 +5,9 @@ export default {
   token: (state, getters) => {
     return state.token
   },
+  user: (state, getters) => {
+    return state.user
+  },
   district_user: (state, getters) => {
     return state.district_user
   },

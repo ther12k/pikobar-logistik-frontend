@@ -81,7 +81,7 @@
                   <td>{{ item.total_stock | currency }}</td>
                   <td>{{ item.total_used | currency }}</td>
                   <td>{{ item.total_stock - item.total_used | currency }}</td>
-                  <td><v-btn text small color="info" @click="handleDetail(item.id)">Detail</v-btn></td>
+                  <td><v-btn text small color="info" @click="handleDetail(item.kemendagri_kabupaten_kode)">Detail</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -160,8 +160,9 @@ export default {
     getTableRowNumbering(index) {
       return ((this.listQuery.page - 1) * this.listQuery.limit) + (index + 1)
     },
-    handleDetail(id) {
+    async handleDetail(id) {
       // To do: Direct to detail page
+      await this.$router.push(`/monitoring-rdt/detail/${id}`)
     },
     onSelectDistrictCity(value) {
       if (!value) {
