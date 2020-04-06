@@ -348,6 +348,8 @@ export default {
       if (this.formRapid.id_case) {
         this.formRapid.category = 'A'
         this.onChangeCategory(this.formRapid.category, 'ODP')
+      } else {
+        this.onChangeCategory(this.formRapid.category)
       }
     },
     async onChangeCategory(value, isODP) {
