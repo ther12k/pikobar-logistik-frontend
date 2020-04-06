@@ -13,7 +13,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="2">
+        <v-col cols="12" sm="3">
           <v-label class="title">Kategori Sasaran</v-label>
           <v-select
             v-model="listQuery.category"
@@ -23,17 +23,17 @@
             item-value="value"
           />
         </v-col>
-        <v-col cols="12" sm="2">
-          <v-label class="title">Hasil Pemeriksaan</v-label>
-          <v-select
-            v-model="listQuery.final_result"
-            :items="resultCheckList"
-            solo
-            item-text="label"
-            item-value="value"
-          />
-        </v-col>
-        <v-col cols="12" sm="2">
+        <!--        <v-col cols="12" sm="2">-->
+        <!--          <v-label class="title">Hasil Pemeriksaan</v-label>-->
+        <!--          <v-select-->
+        <!--            v-model="listQuery.final_result"-->
+        <!--            :items="resultCheckList"-->
+        <!--            solo-->
+        <!--            item-text="label"-->
+        <!--            item-value="value"-->
+        <!--          />-->
+        <!--        </v-col>-->
+        <v-col cols="12" sm="3">
           <v-label class="title">Tanggal Pemeriksaan</v-label>
           <input-date-picker
             :format-date="formatDate"
@@ -43,7 +43,7 @@
             @changeDate="listQuery.start_date = $event"
           />
         </v-col>
-        <v-col cols="12" sm="2">
+        <v-col cols="12" sm="3">
           <br>
           <input-date-picker
             :format-date="formatDate"
@@ -96,10 +96,6 @@ export default {
   },
   data() {
     return {
-      sortOption: [
-        { value: 'asc', label: 'A-Z' },
-        { value: 'desc', label: 'Z-A' }
-      ],
       formatDate: 'YYYY-MM-DD',
       categoryList: [
         { label: 'Kategori A', value: 'A' },

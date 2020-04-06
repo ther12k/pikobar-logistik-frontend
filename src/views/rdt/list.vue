@@ -146,13 +146,10 @@ export default {
       totalReport: 0,
       listQuery: {
         address_district_code: '',
-        // sort: {
-        //   code_test: 'desc'
-        // },
-        // start_date: '',
-        // end_date: '',
+        start_date: '',
+        end_date: '',
         // final_result: '',
-        // category: '',
+        category: '',
         page: 1,
         limit: 30,
         search: ''
@@ -206,10 +203,10 @@ export default {
       await this.$router.push(`/rdt/update-result/${id}`)
     },
     async handleResetFilter() {
-      this.listQuery.sort.code_test = 'desc'
       this.listQuery.category = ''
       this.listQuery.start_date = ''
       this.listQuery.end_date = ''
+      // this.listQuery.final_result = ''
       this.listQuery.search = ''
     },
     async handleSearch() {
