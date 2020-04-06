@@ -110,8 +110,6 @@
 </template>
 
 <script>
-import { formatDatetime } from '@/utils/parseDatetime'
-import { completeAddress } from '@/utils/utilsFunction'
 import { mapGetters } from 'vuex'
 
 export default {
