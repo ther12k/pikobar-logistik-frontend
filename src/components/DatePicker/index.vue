@@ -59,6 +59,15 @@ export default {
       } else {
         this.dateFormatted = this.formatDate(this.date)
       }
+    },
+    value() {
+      if (this.value !== '') {
+        this.date = this.value
+        this.dateFormatted = this.formatDate(this.value)
+      } else {
+        this.date = null
+        this.dateFormatted = null
+      }
     }
   },
   mounted() {

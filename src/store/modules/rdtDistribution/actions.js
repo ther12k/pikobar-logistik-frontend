@@ -1,4 +1,4 @@
-import { fetchList, fetchPostUpdate } from '@/api'
+import { fetchList, fetchPostUpdate, fetchDetailDelete } from '@/api'
 
 export default {
   async getListRdtDistribution({ commit }, params) {
@@ -42,5 +42,14 @@ export default {
   },
   resetRdtDistributionForm({ commit }) {
     commit('RESET_RDT_DISTRIBUTION_FORM')
+  },
+  async getDistributionItem({ commit }, idDistribution) {
+    try {
+      const response = await fetchDetailDelete(`/api/v1/transactions`, 'GET', idDistribution)
+      commit('SET_RDT_DISTRIBUTION_FORM', response.data)
+      return response
+    } catch (error) {
+      return error.response
+    }
   }
 }

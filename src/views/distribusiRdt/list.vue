@@ -9,7 +9,7 @@
           <v-list-item two-line class="card-stok-awal">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.first_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(firstStock) }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(firstStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -21,7 +21,7 @@
           <v-list-item two-line class="card-terdistribusi">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.distributed_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(distributedStock) }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(distributedStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -33,7 +33,7 @@
           <v-list-item two-line class="card-stok-sisa">
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ $t('label.remaining_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(remainingStock) }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(remainingStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -43,7 +43,7 @@
           outlined
           color="#14a942"
           class="btn-tambah-distribusi"
-          @click.stop="showFormInput = true"
+          @click.stop="handleCreate()"
         >
           <v-icon left>add</v-icon>
           {{ $t('label.add_distribution') }}
@@ -141,7 +141,7 @@
                   <td>{{ item.name.toUpperCase() }}</td>
                   <td>{{ Math.abs(item.quantity) | currency }}</td>
                   <td>{{ item.time.substr(0, 10) }}</td>
-                  <td><v-btn text small color="info" @click="showFormInput = true">{{ $t('label.edit_2') }}</v-btn></td>
+                  <td><v-btn text small color="info" @click="handleEdit(item.id)">{{ $t('label.edit_2') }}</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -166,6 +166,8 @@
     />
     <FormDistribusi
       :show="showFormInput"
+      :id-distribution="idDistribution"
+      :is-edit="isEdit"
       @close="closeDialog"
     />
   </div>
@@ -201,7 +203,9 @@ export default {
         { value: 'desc', label: 'Z-A' }
       ],
       linkExport: '',
-      showFormInput: false
+      showFormInput: false,
+      idDistribution: null,
+      isEdit: false
     }
   },
   computed: {
@@ -254,6 +258,15 @@ export default {
     async closeDialog(value) {
       this.showFormInput = value
       await this.handleSearch()
+    },
+    handleEdit(value) {
+      this.showFormInput = true
+      this.isEdit = true
+      this.idDistribution = value
+    },
+    handleCreate() {
+      this.showFormInput = true
+      this.isEdit = false
     }
   }
 }
