@@ -1,5 +1,6 @@
 <template>
   <detail-patient
+    :title-detail="'Detail Kasus'"
     :id-data="this.$route.params.id"
   />
 </template>
