@@ -4,7 +4,7 @@
       v-slot="{ errors }"
     >
       <v-autocomplete
-        no-data-text="Masukan Nama Peserta"
+        no-data-text="Masukan berdasarkan nama peserta/NIK/No telepon"
         :search-input.sync="search"
         :disabled="disabledCase"
         :error-messages="errors"
@@ -18,8 +18,7 @@
         single-line
         solo
         @change="onSelectCase"
-      >
-      </v-autocomplete>
+      />
     </ValidationProvider>
   </div>
 </template>
@@ -72,6 +71,9 @@ export default {
       this.listKasus = response.data
       this.loading = false
     }
+  },
+  async mounted() {
+    this.listQuery.address_district_code = this.district_user
   }
 }
 </script>
