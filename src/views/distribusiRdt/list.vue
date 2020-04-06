@@ -102,6 +102,7 @@
         <v-btn
           class="bottom-add-survey btn-export"
           color="#14a942"
+          :href="linkExport"
         >
           {{ $t('label.export_button') }} <!-- To Do : Menjalankan fungsi eksport tabel -->
         </v-btn>
@@ -139,7 +140,7 @@
                   <td>{{ item.name.toUpperCase() }}</td>
                   <td>{{ Math.abs(item.quantity) | currency }}</td>
                   <td>{{ item.time.substr(0, 10) }}</td>
-                  <td><a href="">{{ $t('label.edit_2') }}</a></td>
+                  <td><v-btn text small color="info" @click="showFormInput = true">{{ $t('label.edit_2') }}</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -162,13 +163,18 @@
       :store-path-get-list="`rdtDistribution/getListRdtDistribution`"
       :list-query="listQuery"
     />
+    <form-distribusi :show="showFormInput" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import FormDistribusi from './form.vue'
 export default {
   name: 'LaporanList',
+  components: {
+    FormDistribusi
+  },
   data() {
     return {
       totalReport: 0,
@@ -189,7 +195,9 @@ export default {
       sortOptions: [
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
-      ]
+      ],
+      linkExport: '',
+      showFormInput: false
     }
   },
   computed: {
@@ -201,7 +209,8 @@ export default {
       'remainingStock'
     ]),
     ...mapGetters('user', [
-      'roles'
+      'roles',
+      'token'
     ])
   },
   watch: {
@@ -218,6 +227,7 @@ export default {
   async mounted() {
     await this.$store.dispatch('rdtDistribution/getSummary')
     await this.handleSearch()
+    this.linkExport = '/api/v1/transactions/export?token=' + this.token
   },
   methods: {
     async handleSearch() {
