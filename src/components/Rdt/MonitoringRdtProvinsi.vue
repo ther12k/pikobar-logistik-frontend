@@ -40,7 +40,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" sm="2">
-        <v-label class="title">Urutkan</v-label>
+        <v-label class="title">{{ $t('label.sort') }}</v-label>
         <v-select
           v-model="listQuery.sort"
           :items="sortOption"
@@ -51,7 +51,7 @@
         />
       </v-col>
       <v-col cols="12" sm="3">
-        <v-label class="title">Tujuan Distribusi</v-label>
+        <v-label class="title">{{ $t('label.distribution_destination') }}</v-label>
         <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
       </v-col>
     </v-row>
@@ -66,12 +66,12 @@
             <template v-slot:default>
               <thead>
                 <tr>
-                  <th class="text-left">NO</th>
-                  <th class="text-left">TUJUAN DISTRIBUSI</th>
-                  <th class="text-left">STOK DITERIMA</th>
-                  <th class="text-left">STOK TERPAKAI</th>
-                  <th class="text-left">SISA STOK</th>
-                  <th class="text-left">ACTION</th>
+                  <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.distribution_destination').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.received_stock').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.used_stock').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.remaining_stock').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.action').toUpperCase() }}</th>
                 </tr>
               </thead>
               <tbody>

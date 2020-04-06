@@ -70,7 +70,11 @@ export default {
     kit_received: 'Kit Diterima',
     kit_available: 'Kit Tersedia',
     used_kit: 'Kit Terpakai',
-    label_human: 'Orang'
+    label_human: 'Orang',
+    faskes_name: 'Nama Faskes',
+    received_stock: 'Stok Diterima',
+    used_stock: 'Stok Terpakai',
+    remaining_stock: 'Sisa Stok'
   },
   success: {
     login_success: 'Login Berhasil',
