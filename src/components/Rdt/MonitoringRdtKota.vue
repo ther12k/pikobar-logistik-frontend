@@ -91,13 +91,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in recipientList" :key="item.index">
+                <tr v-for="(recipent, index) in recipientList" :key="recipent.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.kemendagri_kabupaten_nama }}</td>
-                  <td>{{ item.total_stock | currency }}</td>
-                  <td>{{ item.total_used | currency }}</td>
-                  <td>{{ item.total_stock - item.total_used | currency }}</td>
-                  <td><v-btn text small color="info" @click="handleDetail(item.id)">Detail</v-btn></td>
+                  <td>{{ recipent.kemendagri_kabupaten_nama }}</td>
+                  <td>{{ recipent.total_stock | currency }}</td>
+                  <td>{{ recipent.total_used | currency }}</td>
+                  <td>{{ recipent.total_stock - recipent.total_used | currency }}</td>
+                  <td><v-btn text small color="info" @click="handleDetail(recipent.id)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -144,10 +144,7 @@ export default {
   watch: {
     'listQuery.search': {
       handler: function(value) {
-        if (value.length >= 3) {
-          this.listQuery.page = 1
-          this.handleSearch()
-        } else if (value.length === 0) {
+        if (value.length >= 3 || value.length === 0) {
           this.listQuery.page = 1
           this.handleSearch()
         }
@@ -181,15 +178,7 @@ export default {
     },
     handleDetail(id) {
       // To do: Direct to detail page
-    },
-    onSelectDistrictCity(value) {
-      if (!value) {
-        this.listQuery.city_code = ''
-        this.handleSearch()
-      } else {
-        this.listQuery.city_code = value.kemendagri_kabupaten_kode
-        this.handleSearch()
-      }
+      this.$store.dispatch('toast/errorToast', this.$t('errors.feature_under_development'))
     }
   }
 }

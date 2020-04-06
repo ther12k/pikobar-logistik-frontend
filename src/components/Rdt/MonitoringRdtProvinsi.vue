@@ -75,13 +75,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in recipientList" :key="item.index">
+                <tr v-for="(recipent, index) in recipientList" :key="recipent.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.kemendagri_kabupaten_nama }}</td>
-                  <td>{{ item.total_stock | currency }}</td>
-                  <td>{{ item.total_used | currency }}</td>
-                  <td>{{ item.total_stock - item.total_used | currency }}</td>
-                  <td><v-btn text small color="info" @click="handleDetail(item)">Detail</v-btn></td>
+                  <td>{{ recipent.kemendagri_kabupaten_nama }}</td>
+                  <td>{{ recipent.total_stock | currency }}</td>
+                  <td>{{ recipent.total_used | currency }}</td>
+                  <td>{{ recipent.total_stock - recipent.total_used | currency }}</td>
+                  <td><v-btn text small color="info" @click="handleDetail(recipent)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -128,10 +128,7 @@ export default {
   watch: {
     'listQuery.city_code': {
       handler: function(value) {
-        if (value.length >= 3) {
-          this.listQuery.page = 1
-          this.handleSearch()
-        } else if (value.length === 0) {
+        if (value.length >= 3 || value.length === 0) {
           this.listQuery.page = 1
           this.handleSearch()
         }
@@ -165,13 +162,8 @@ export default {
       this.$router.push(`/monitoring-rdt/detail/${row.kemendagri_kabupaten_kode}`)
     },
     onSelectDistrictCity(value) {
-      if (!value) {
-        this.listQuery.city_code = ''
-        this.handleSearch()
-      } else {
-        this.listQuery.city_code = value.kemendagri_kabupaten_kode
-        this.handleSearch()
-      }
+      value ? this.listQuery.city_code = value.kemendagri_kabupaten_kode : this.listQuery.city_code = ''
+      this.handleSearch()
     }
   }
 }
