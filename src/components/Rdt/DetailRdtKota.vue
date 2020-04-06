@@ -154,13 +154,13 @@ export default {
         }
       ],
       queryReportCase: {
-        address_district_code: ''
+        addressDistrictCode: '' 
       },
       listQuery: {
         page: 1,
         limit: 10,
         sort: '',
-        city_code: ''
+        cityCode: ''
       },
       countingReports: null,
       dialog: false,
