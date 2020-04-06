@@ -345,9 +345,12 @@ export default {
       }
       const response = await this.$store.dispatch('rdt/getDetailRegister', listQuery)
       await Object.assign(this.formRapid, response.data)
+      this.formRapid.address_street = response.data.address_detail
       if (this.formRapid.id_case) {
         this.formRapid.category = 'A'
         this.onChangeCategory(this.formRapid.category, 'ODP')
+      } else {
+        this.onChangeCategory(this.formRapid.category)
       }
     },
     async onChangeCategory(value, isODP) {

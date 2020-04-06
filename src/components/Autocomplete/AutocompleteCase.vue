@@ -4,28 +4,21 @@
       v-slot="{ errors }"
     >
       <v-autocomplete
-        :loading="loading"
-        :items="listKasus"
-        :return-object="false"
-        item-value="display"
-        item-text="display"
-        single-line
+        no-data-text="Masukan berdasarkan nama peserta/NIK/No telepon"
+        :search-input.sync="search"
         :disabled="disabledCase"
         :error-messages="errors"
-        color="black"
-        solo
+        :return-object="false"
+        :loading="loading"
+        :items="listKasus"
+        item-value="display"
+        item-text="display"
+        menu-props="auto"
         autocomplete
+        single-line
+        solo
         @change="onSelectCase"
-      >
-        <template v-slot:selection="data">
-          {{ data.item.display }}
-        </template>
-        <template v-slot:item="data">
-          <v-list-item-content>
-            <v-list-item-title v-html="data.item.display" />
-          </v-list-item-content>
-        </template>
-      </v-autocomplete>
+      />
     </ValidationProvider>
   </div>
 </template>
@@ -56,9 +49,11 @@ export default {
   data() {
     return {
       loading: false,
-      listKasus: null,
+      search: null,
+      listKasus: [],
       listQuery: {
-        address_district_code: null
+        address_district_code: null,
+        search: null
       }
     }
   },
@@ -68,12 +63,17 @@ export default {
       'district_user'
     ])
   },
+  watch: {
+    async search(value) {
+      this.loading = true
+      this.listQuery.search = value
+      const response = await this.$store.dispatch('rdt/getCases', this.listQuery)
+      this.listKasus = response.data
+      this.loading = false
+    }
+  },
   async mounted() {
-    this.loading = true
     this.listQuery.address_district_code = this.district_user
-    const response = await this.$store.dispatch('rdt/getCases', this.listQuery)
-    this.listKasus = response.data
-    this.loading = false
   }
 }
 </script>
