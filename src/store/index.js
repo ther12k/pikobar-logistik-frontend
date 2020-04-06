@@ -6,6 +6,7 @@ import toast from './modules/toast'
 import rdtDistribution from './modules/rdtDistribution'
 import recipient from './modules/recipient'
 import region from './modules/region'
+import constants from './modules/constants'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ const store = new Vuex.Store({
     user,
     rdtDistribution,
     recipient,
-    region
+    region,
+    constants
   }
 })
 

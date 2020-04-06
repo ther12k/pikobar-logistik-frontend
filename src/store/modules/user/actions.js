@@ -26,6 +26,7 @@ export default {
         commit('SET_ROLES', role)
         commit('SET_DISTRICT', code_district_city)
         commit('SET_FULLNAME', name)
+        commit('SET_USER', response.data)
         resolve(role)
       }).catch((error) => {
         reject(error)
