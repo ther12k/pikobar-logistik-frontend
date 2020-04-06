@@ -161,7 +161,7 @@ export default {
       this.$router.push(`/monitoring-rdt/detail/${row.kemendagri_kabupaten_kode}`)
     },
     onSelectDistrictCity(value) {
-      value ? this.listQuery.city_code = value.kemendagri_kabupaten_kode : this.listQuery.city_code = ''
+      this.listQuery.city_code = value ? value.kemendagri_kabupaten_kode : ''
       this.handleSearch()
     }
   }
