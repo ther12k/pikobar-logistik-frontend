@@ -41,7 +41,7 @@ const surveyRouter = {
         title: 'laporan_detail',
         icon: 'library_books',
         noCache: true,
-        roles: ['superadmin', 'dinkeskota', 'faskes']
+        roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
       }
     },
     {
