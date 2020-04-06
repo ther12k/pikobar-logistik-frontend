@@ -8,7 +8,7 @@ export default {
   SET_SUMMARY_RECIPIENT: (state, data) => {
     state.summaryRecipient = data
   },
-  SET_DATA_RECIPIENT: (state, data) => {
+  SET_DETAIL_RECIPIENT: (state, data) => {
     state.dataRecipient = data[0]
   }
 }

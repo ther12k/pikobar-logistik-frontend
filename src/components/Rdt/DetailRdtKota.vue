@@ -182,9 +182,9 @@ export default {
     getTableRowNumbering(index) {
       return (index + 1)
     },
-    async getRecipient(city_code) {
+    async getRecipient(cityCode) {
       this.loading = true
-      await this.$store.dispatch('recipient/getListRecipient', { city_code: city_code })
+      await this.$store.dispatch('recipient/getListRecipient', { city_code: cityCode })
       this.loading = false
     }
   }
