@@ -113,8 +113,7 @@ export default {
         page: 1,
         limit: 10,
         sort: '',
-        city_code: '',
-        type: 'dinkesprov'
+        city_code: ''
       }
     }
   },

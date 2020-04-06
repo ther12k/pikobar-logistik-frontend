@@ -8,7 +8,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_receipt_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_distributed | currency }}</v-list-item-title>
+              >{{ recipientFaskesSummary.quantity_distributed | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -20,7 +20,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_available_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_available | currency }}</v-list-item-title>
+              >{{ recipientFaskesSummary.quantity_available | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -32,7 +32,7 @@
               <v-list-item-title class="title white--text">{{ $t('label.rdt_used_title') }}</v-list-item-title>
               <v-list-item-title
                 class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_used | currency }}</v-list-item-title>
+              >{{ recipientFaskesSummary.quantity_used | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -91,13 +91,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(recipent, index) in recipientList" :key="recipent.index">
+                <tr v-for="(recipentFaskes, index) in recipientFaskesList" :key="recipentFaskes.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ recipent.kemendagri_kabupaten_nama }}</td>
-                  <td>{{ recipent.total_stock | currency }}</td>
-                  <td>{{ recipent.total_used | currency }}</td>
-                  <td>{{ recipent.total_stock - recipent.total_used | currency }}</td>
-                  <td><v-btn text small color="info" @click="handleDetail(recipent.id)">{{ $t('label.detail') }}</v-btn></td>
+                  <td>{{ recipentFaskes.faskes_name }}</td>
+                  <td>{{ recipentFaskes.total_stock | currency }}</td>
+                  <td>{{ recipentFaskes.total_used | currency }}</td>
+                  <td>{{ recipentFaskes.total_stock - recipentFaskes.total_used | currency }}</td>
+                  <td><v-btn text small color="info" @click="handleDetail(recipentFaskes.id)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -129,16 +129,15 @@ export default {
         page: 1,
         limit: 10,
         sort: '',
-        search: '',
-        type: 'dinkeskota'
+        search: ''
       }
     }
   },
   computed: {
-    ...mapGetters('recipient', [
-      'recipientList',
+    ...mapGetters('recipientFaskes', [
+      'recipientFaskesList',
       'totalList',
-      'recipientSummary'
+      'recipientFaskesSummary'
     ])
   },
   watch: {
@@ -159,13 +158,11 @@ export default {
   methods: {
     async getMonitoringRdtList() {
       this.loading = true
-      // TO DO: switch api to api recipient kota/kabupaten
-      await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
+      await this.$store.dispatch('recipientFaskes/getListRecipientFaskes', this.listQuery)
       this.loading = false
     },
     async getMonitoringRdtSummary() {
-      // TO DO: switch api to api recipient kota/kabupaten
-      await this.$store.dispatch('recipient/getSummaryRecipient')
+      await this.$store.dispatch('recipientFaskes/getSummaryRecipientFaskes')
     },
     async handleSearch() {
       await this.getMonitoringRdtList()
