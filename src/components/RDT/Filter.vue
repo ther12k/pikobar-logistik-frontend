@@ -58,14 +58,14 @@
           <div>
             <v-btn
               color="grey"
-              style="height: 46px;min-width: 120px;margin-right: 4px;"
+              style="height: 46px;min-width: 100px;margin-right: 4px;"
               @click="onReset"
             >
               Reset
             </v-btn>
             <v-btn
               color="success"
-              style="height: 46px;min-width: 120px;"
+              style="height: 46px;min-width: 100px;"
               @click="onSearch"
             >
               Cari
