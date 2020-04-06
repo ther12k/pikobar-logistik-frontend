@@ -128,7 +128,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        sort: '',
+        sort: 'asc',
         search: ''
       }
     }
