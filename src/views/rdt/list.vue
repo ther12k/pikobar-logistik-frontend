@@ -23,19 +23,14 @@
             </div>
           </v-card-text>
         </v-col>
-        <v-col>
-          <search
-            :handle-search="handleSearch"
-            :list-query="listQuery"
-          />
-        </v-col>
+        <v-col />
       </v-row>
-      <!--      <filter-hasil-test-->
-      <!--        :list-query="listQuery"-->
-      <!--        :query-list.sync="listQuery"-->
-      <!--        :on-search="handleSearch"-->
-      <!--        :on-reset="handleResetFilter"-->
-      <!--      />-->
+      <filter-hasil-test
+        :list-query="listQuery"
+        :query-list.sync="listQuery"
+        :on-search="handleSearch"
+        :on-reset="handleResetFilter"
+      />
       <hr>
       <v-row>
         <v-col auto>
@@ -152,11 +147,12 @@ export default {
       totalReport: 0,
       listQuery: {
         address_district_code: '',
-        // sort: {
-        //   code_test: 'desc'
-        // },
-        // date_check: '',
-        // category: '',
+        sort: {
+          code_test: 'desc'
+        },
+        start_date: '',
+        end_date: '',
+        category: '',
         page: 1,
         limit: 30,
         search: ''
@@ -180,10 +176,7 @@ export default {
   watch: {
     'listQuery.search': {
       handler: function(value) {
-        if (value !== null && value.length >= 3) {
-          this.listQuery.page = 1
-          this.handleSearch()
-        } else if (value !== null && value.length === 0) {
+        if (value !== null && value.length === 0 || value.length >= 3) {
           this.listQuery.page = 1
           this.handleSearch()
         }
@@ -213,9 +206,10 @@ export default {
       await this.$router.push(`/rdt/update-result/${id}`)
     },
     async handleResetFilter() {
-      // this.listQuery.sort = 'asc'
-      // this.listQuery.category = ''
-      // this.listQuery.date_check = ''
+      this.listQuery.sort.code_test = 'desc'
+      this.listQuery.category = ''
+      this.listQuery.start_date = ''
+      this.listQuery.end_date = ''
       this.listQuery.search = ''
     },
     async handleSearch() {

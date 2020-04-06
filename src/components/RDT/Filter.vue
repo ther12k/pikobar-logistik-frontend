@@ -2,6 +2,17 @@
   <div>
     <v-container>
       <v-row>
+        <v-col cols="12" sm="12">
+          <br>
+          <v-text-field
+            v-model="listQuery.search"
+            solo
+            label="Search"
+            prepend-inner-icon="search"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col cols="12" sm="2">
           <v-label class="title">Urutkan</v-label>
           <v-select
@@ -25,20 +36,21 @@
         <v-col cols="12" sm="2">
           <v-label class="title">Tanggal Pemeriksaan</v-label>
           <input-date-picker
-            :format-date="'YYYY/MM/DD'"
-            :date-value="listQuery.date_check"
-            :value-date.sync="listQuery.date_check"
-            @changeDate="listQuery.date_check = $event"
+            :format-date="formatDate"
+            :label="'Tanggal Awal'"
+            :date-value="listQuery.start_date"
+            :value-date.sync="listQuery.start_date"
+            @changeDate="listQuery.start_date = $event"
           />
         </v-col>
-        <v-col cols="12" sm="3">
+        <v-col cols="12" sm="2">
           <br>
-          <v-text-field
-            v-model="listQuery.search"
-            solo
-            clearable
-            label="Search"
-            prepend-inner-icon="search"
+          <input-date-picker
+            :format-date="formatDate"
+            :label="'Tanggal Akhir'"
+            :date-value="listQuery.end_date"
+            :value-date.sync="listQuery.end_date"
+            @changeDate="listQuery.end_date = $event"
           />
         </v-col>
         <v-col cols="12" sm="3">
@@ -88,7 +100,7 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
-      formatDate: 'YYYY/MM/DD',
+      formatDate: 'YYYY-MM-DD',
       categoryList: [
         { label: 'Kategori A', value: 'A' },
         { label: 'Kategori B', value: 'B' },
