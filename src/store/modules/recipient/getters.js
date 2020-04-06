@@ -7,5 +7,8 @@ export default {
   },
   recipientSummary: (state, getters) => {
     return state.summaryRecipient
+  },
+  dataRecipient: (state, getters) => {
+    return state.dataRecipient
   }
 }

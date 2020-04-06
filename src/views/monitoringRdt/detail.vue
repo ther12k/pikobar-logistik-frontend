@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1><b>{{ recipientList.kemendagri_kabupaten_nama }}</b></h1>
+    <h1><b>{{ dataRecipient.kemendagri_kabupaten_nama }}</b></h1>
     <v-row>
       <v-col cols="12" sm="6">
         <v-card
@@ -14,11 +14,11 @@
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.kit_available') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ recipientList.total_stock }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataRecipient.total_stock }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.used_kit') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ recipientList.total_used }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataRecipient.total_used }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -169,7 +169,7 @@ export default {
   },
   computed: {
     ...mapGetters('recipient', [
-      'recipientList'
+      'dataRecipient'
     ])
   },
   async mounted() {
