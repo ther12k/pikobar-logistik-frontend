@@ -54,6 +54,9 @@ export default {
     rdt_available_title: 'Jumlah RDT Kit Tersedia',
     rdt_distributed_title: 'Jumlah RDT Kit Terdistribusi',
     rdt_used_title: 'Jumlah RDT Kit Terpakai',
+    rdt_receipt_title: 'Jumlah Penerimaan',
+    rdt_distribution_list_title: 'Daftar Distribusi RDT Kit',
+    rdt_usage_report_title: 'Daftar Laporan Penggunaan RDT Kit',
     first_stock: 'Jumlah Stok Awal',
     distributed_stock: 'Jumlah Terdistribusi',
     remaining_stock: 'Jumlah Stok Sisa',
@@ -82,6 +85,11 @@ export default {
     phone_number: 'Nomor Telepon (HP/WA)',
     example_phone_number: 'Masukkan nomor telepon yang bisa dihubungi',
     save: 'Simpan',
+    faskes_name: 'Nama Faskes',
+    received_stock: 'Stok Diterima',
+    used_stock: 'Stok Terpakai',
+    remaining_stock: 'Sisa Stok',
+    detail: 'Detail',
     list_rdt_kit: 'Daftar Penggunaan RDT Kit',
     positive: 'Positif',
     negative: 'Negatif',
@@ -104,6 +112,7 @@ export default {
     field_must_be_filled: 'Bidang tidak boleh kosong',
     field_unauthorized_characters: 'Bidang mengandung karakter yang tidak diizinkan.',
     field_phone_number_not_valid: 'Nomor telepon tidak valid',
-    server_error_occurred: 'Terjadi kesalahan pada server'
+    server_error_occurred: 'Terjadi kesalahan pada server',
+    feature_under_development: 'Fitur dalam pengembangan'
   },
 }
