@@ -185,7 +185,7 @@ export default {
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('rdt/resetListRDT')
     const response = await this.$store.dispatch('rdt/getListRDT', this.listQuery)
-    this.totalReport = response.data._meta.itemCount
+    this.totalReport = response.data._meta.itemCount ? response.data._meta.itemCount : '0'
   },
   methods: {
     formatDatetime,
