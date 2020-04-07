@@ -94,7 +94,13 @@ export default {
     positive: 'Positif',
     negative: 'Negatif',
     invalid: 'Invalid',
-    faskes_name: 'Nama Faskes'
+    faskes_name: 'Nama Faskes',
+    rdt_code: "Kode RDT",
+    nik: 'NIK',
+    full_name: 'Nama Lengkap',
+    category: 'Kategori',
+    check_date: 'Tanggal Pemeriksaan',
+    test_result: 'Hasil Test'
   },
   success: {
     login_success: 'Login Berhasil',

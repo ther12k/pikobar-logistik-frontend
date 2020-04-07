@@ -97,7 +97,8 @@
                   <td>{{ recipentFaskes.total_stock | currency }}</td>
                   <td>{{ recipentFaskes.total_used | currency }}</td>
                   <td>{{ recipentFaskes.total_stock - recipentFaskes.total_used | currency }}</td>
-                  <td><v-btn text small color="info" @click="handleDetail(recipentFaskes.id)">{{ $t('label.detail') }}</v-btn></td>
+                  <!-- sementara diganti menggunakan faskes name karna tidak ada idnya -->
+                  <td><v-btn text small color="info" @click="handleDetail(recipentFaskes.faskes_name)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -175,7 +176,7 @@ export default {
     },
     handleDetail(id) {
       // To do: Direct to detail page
-      this.$store.dispatch('toast/errorToast', this.$t('errors.feature_under_development'))
+      this.$router.push(`/monitoring-rdt/detail/${id}`)
     }
   }
 }
