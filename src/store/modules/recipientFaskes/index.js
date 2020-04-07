@@ -3,10 +3,9 @@ import mutations from './mutations'
 import getters from './getters'
 
 const state = {
-  listRecipient: [],
+  listRecipientFaskes: [],
   totalList: 0,
-  summaryRecipient: [],
-  dataRecipient: {}
+  summaryRecipientFaskes: []
 }
 
 export default {

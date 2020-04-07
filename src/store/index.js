@@ -5,6 +5,7 @@ import permission from './modules/permission'
 import toast from './modules/toast'
 import rdtDistribution from './modules/rdtDistribution'
 import recipient from './modules/recipient'
+import recipientFaskes from './modules/recipientFaskes'
 import region from './modules/region'
 import constants from './modules/constants'
 
@@ -17,6 +18,7 @@ const store = new Vuex.Store({
     user,
     rdtDistribution,
     recipient,
+    recipientFaskes,
     region,
     constants
   }
