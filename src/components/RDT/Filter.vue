@@ -41,11 +41,12 @@
             item-value="value"
           />
         </v-col>
-        <v-col cols="12" sm="3">
+        <v-col v-if="roles[0] === 'dinkesprov'" cols="12" sm="3">
           <v-label class="title">Tempat Test:</v-label>
           <select-area-district-city
-            :district-city="listQuery.test_district_code"
-            :city-district.sync="listQuery.test_district_code"
+            :district-city="districtCity"
+            :city-district.sync="districtCity"
+            :on-select-district="onSelectDistrict"
           />
         </v-col>
       </v-row>
@@ -105,10 +106,10 @@
 </template>
 
 <script>
-import SelectAreaDistrictCity from '../SelectRegion/DistrictCity/index'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'FilterHasilTest',
-  components: { SelectAreaDistrictCity },
   props: {
     listQuery: {
       type: Object,
@@ -126,6 +127,9 @@ export default {
   data() {
     return {
       formatDate: 'YYYY-MM-DD',
+      districtCity: {
+        kota_kode: ''
+      },
       methodsOptions: [
         'HAND PRIX',
         'FLEBOTOMY'
@@ -145,6 +149,16 @@ export default {
         { label: 'Positif', value: 'POSITIF' },
         { label: 'Invalid', value: 'INVALID' }
       ]
+    }
+  },
+  computed: {
+    ...mapGetters('user', [
+      'roles'
+    ])
+  },
+  methods: {
+    onSelectDistrict(value) {
+      this.listQuery.address_district_code = value.kota_kode
     }
   }
 }

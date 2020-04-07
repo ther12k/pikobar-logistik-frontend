@@ -37,6 +37,7 @@
           <v-data-table
             :headers="headers"
             :items="rdtList"
+            :no-data-text="'Tidak ada data'"
             hide-default-footer
           >
             <template v-slot:item="{ item, index }">
@@ -148,10 +149,9 @@ export default {
         address_district_code: '',
         start_date: '',
         end_date: '',
-        // mechanism: '',
-        // test_method: '',
-        // test_district_code: '',
-        // final_result: '',
+        mechanism: '',
+        test_method: '',
+        final_result: '',
         category: '',
         page: 1,
         limit: 30,
@@ -209,7 +209,9 @@ export default {
       this.listQuery.category = ''
       this.listQuery.start_date = ''
       this.listQuery.end_date = ''
-      // this.listQuery.final_result = ''
+      this.listQuery.final_result = ''
+      this.listQuery.mechanism = ''
+      this.listQuery.test_method = ''
       this.listQuery.search = ''
       await this.$store.dispatch('rdt/getListRDT', this.listQuery)
     },
