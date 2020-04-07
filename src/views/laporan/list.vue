@@ -1,57 +1,77 @@
 
 <template>
   <div>
-    <v-card class="d-block pa-1 mx-auto header-survey-list">
-      <v-container>
-        <v-row justify="space-between">
-          <v-col cols="auto">
-            <v-card-text class="header-survey-text">
-              <div>Total data Kasus : {{ totalReport }}</div>
-              <div v-if="roles[0] === 'dinkeskota' || roles[0] === 'faskes'">Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
-            </v-card-text>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card>
+    <v-skeleton-loader
+      :loading="loading"
+      type="article"
+    >
+      <v-card class="d-block pa-1 mx-auto header-survey-list">
+        <v-container>
+          <v-row justify="space-between">
+            <v-col cols="auto">
+              <v-card-text class="header-survey-text">
+                <div>Total data Kasus : {{ totalReport }}</div>
+                <div v-if="roles[0] === 'dinkeskota' || roles[0] === 'faskes'">Tambahkan data Kasus baru dengan menekan tombol Tambah Kasus</div>
+              </v-card-text>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-skeleton-loader>
     <v-row>
       <v-col>
-        <v-card
-          class="mx-auto"
-          outlined
+        <v-skeleton-loader
+          :loading="loading"
+          type="article"
         >
-          <v-list-item two-line style="background: #D2EAFF">
-            <v-list-item-content>
-              <v-list-item-title style="color: #2F80ED;">Orang Dalam Pemantauan</v-list-item-title>
-              <v-list-item-title class="headline mb-1" style="color: #2F80ED;padding-top: 2rem;">{{ totalODP }} Orang</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
+          <v-card
+            class="mx-auto"
+            outlined
+          >
+            <v-list-item two-line style="background: #D2EAFF">
+              <v-list-item-content>
+                <v-list-item-title style="color: #2F80ED;">Orang Dalam Pemantauan</v-list-item-title>
+                <v-list-item-title class="headline mb-1" style="color: #2F80ED;padding-top: 2rem;">{{ totalODP }} Orang</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+        </v-skeleton-loader>
       </v-col>
       <v-col>
-        <v-card
-          class="mx-auto"
-          outlined
+        <v-skeleton-loader
+          :loading="loading"
+          type="article"
         >
-          <v-list-item two-line style="background: #FEF9EC">
-            <v-list-item-content>
-              <v-list-item-title style="color: #F2994A;">Pasien Dalam Pengawasan</v-list-item-title>
-              <v-list-item-title class="headline mb-1" style="color: #F2994A;padding-top: 2rem;">{{ totalPDP }} Orang</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
+          <v-card
+            class="mx-auto"
+            outlined
+          >
+            <v-list-item two-line style="background: #FEF9EC">
+              <v-list-item-content>
+                <v-list-item-title style="color: #F2994A;">Pasien Dalam Pengawasan</v-list-item-title>
+                <v-list-item-title class="headline mb-1" style="color: #F2994A;padding-top: 2rem;">{{ totalPDP }} Orang</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+        </v-skeleton-loader>
       </v-col>
       <v-col>
-        <v-card
-          class="mx-auto"
-          outlined
+        <v-skeleton-loader
+          :loading="loading"
+          type="article"
         >
-          <v-list-item two-line style="background: #FDEDED">
-            <v-list-item-content>
-              <v-list-item-title style="color: #EB5757;">POSITIF</v-list-item-title>
-              <v-list-item-title class="headline mb-1" style="color: #EB5757;padding-top: 2rem;">{{ totalPositif }} Orang</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
+          <v-card
+            class="mx-auto"
+            outlined
+          >
+            <v-list-item two-line style="background: #FDEDED">
+              <v-list-item-content>
+                <v-list-item-title style="color: #EB5757;">POSITIF</v-list-item-title>
+                <v-list-item-title class="headline mb-1" style="color: #EB5757;padding-top: 2rem;">{{ totalPositif }} Orang</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+        </v-skeleton-loader>
       </v-col>
     </v-row>
     <v-card
@@ -198,6 +218,7 @@ export default {
   name: 'LaporanList',
   data() {
     return {
+      loading: true,
       totalODP: 0,
       totalPDP: 0,
       totalPositif: 0,
@@ -245,6 +266,7 @@ export default {
     this.queryReportCase.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
     const response = await this.$store.dispatch('reports/countReportCase', this.queryReportCase)
+    if (response) this.loading = false
     this.totalODP = response.data.ODP
     this.totalPDP = response.data.PDP
     this.totalPositif = response.data.POSITIF
