@@ -127,7 +127,6 @@ export default {
           namaFaskes: 'RSUD 1',
           stokDinkes: 115,
           kitTerpakai: 100,
-          kitTersedia: 0,
           stokSisa: 15,
           positif: 25,
           negatif: 50,
