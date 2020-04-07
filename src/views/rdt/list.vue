@@ -59,7 +59,7 @@
                 <td>{{ item.address_district_name }} </td>
                 <td>{{ item.test_date ? formatDatetime(item.test_date, 'DD MMMM YYYY') : '-' }}</td>
                 <td>{{ item.final_result }} </td>
-                <td v-if="roles[0] === 'dinkeskota'">
+                <td v-if="roles[0] === 'dinkeskota' || 'dinkesprov'">
                   <v-card-actions>
                     <v-menu
                       :close-on-content-click="false"
