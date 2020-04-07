@@ -109,7 +109,7 @@ export default {
   name: 'DetailRdtKota',
   props: {
     idData: {
-      type: Number,
+      type: String,
       default: null
     }
   },
@@ -119,12 +119,15 @@ export default {
       positif: 0,
       negatif: 0,
       invalid: 0,
+      kitTersedia: 0,
+      kitTerpakai: 0,
       // data dummy TODO: integrasi dengan API
       dataPengguna: [
         {
           namaFaskes: 'RSUD 1',
           stokDinkes: 115,
           kitTerpakai: 100,
+          kitTersedia: 0,
           stokSisa: 15,
           positif: 25,
           negatif: 50,
