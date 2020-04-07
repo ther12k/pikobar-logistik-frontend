@@ -10,15 +10,15 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.kit_received') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ kitDiterima }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ kitReceived }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.kit_available') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ kitTersedia }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ kitAvailable }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.used_kit') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ kitTerpakai }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ kitUsed }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -31,15 +31,15 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="text-green"> {{ $t('label.positive') }} </v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitDiterima }} {{ $t('label.label_human') }})</v-list-item-title>
+              <v-list-item-title class="mb-1">0% ({{ positive }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green"> {{ $t('label.negative') }} </v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitTersedia }} {{ $t('label.label_human') }})</v-list-item-title>
+              <v-list-item-title class="mb-1">0% ({{ negative }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green"> {{ $t('label.invalid') }} </v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitTerpakai }} {{ $t('label.label_human') }})</v-list-item-title>
+              <v-list-item-title class="mb-1">0% ({{ invalid }} {{ $t('label.label_human') }})</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -74,14 +74,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in dataPengguna" :key="item.index">
+                <tr v-for="(item, index) in dataUser" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
+                  <td>{{ item.rdtCode }}</td>
                   <td>{{ item.nik }}</td>
-                  <td>{{ item.kodeRdt }}</td>
-                  <td>{{ item.namaLengkap }}</td>
-                  <td>{{ item.kategori }}</td>
-                  <td>{{ item.tanggal_pemeriksaan }}</td>
-                  <td>{{ item.hasil_test }}</td>
+                  <td>{{ item.fullName }}</td>
+                  <td>{{ item.category }}</td>
+                  <td>{{ item.checkDate }}</td>
+                  <td>{{ item.testResult }}</td>
                 </tr>
               </tbody>
             </template>
@@ -111,29 +111,29 @@ export default {
   },
   data() {
     return {
-      kitDiterima: 0,
-      kitTersedia: 0,
-      kitTerpakai: 0,
-      positif: 0,
-      negatif: 0,
+      kitReceived: 0,
+      kitAvailable: 0,
+      kitUsed: 0,
+      positive: 0,
+      negative: 0,
       invalid: 0,
       // data dummy TODO: integrasi dengan API
-      dataPengguna: [
+      dataUser: [
         {
-          kodeRdt: '123',
+          rdtCode: '123',
           nik: '115',
-          namaLengkap: 'orang 1',
-          kategori: 'kategori 1',
-          tanggal_pemeriksaan: '1-1-2020',
-          hasil_test: 'positif'
+          fullName: 'orang 1',
+          category: 'kategori 1',
+          checkDate: '1-1-2020',
+          testResult: 'positif'
         },
         {
-          kodeRdt: '123123',
+          rdtCode: '123123',
           nik: '115123',
-          namaLengkap: 'orang 2',
-          kategori: 'kategori 2',
-          tanggal_pemeriksaan: '1-1-2020',
-          hasil_test: 'negatif'
+          fullName: 'orang 2',
+          category: 'kategori 2',
+          checkDate: '1-1-2020',
+          testResult: 'negatif'
         }
       ],
       dialog: false,
