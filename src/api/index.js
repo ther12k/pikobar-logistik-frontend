@@ -1,30 +1,19 @@
 import request from '@/utils/request'
 
-export function fetchList(url, method, params) {
-  return request({
-    url: url,
-    method: method,
-    params: params
-  })
+export function requestServer(url, method, data) {
+  if ((method === 'GET') || method === 'DELETE') {
+    return request({
+      url: url,
+      method: method,
+      params: data
+    })
+  } else if ((method === 'PUT') || (method === 'POST')) {
+    return request({
+      url: url,
+      method: method,
+      data
+    })
+  }
 }
 
-export function fetchDetail(url, method, id) {
-  return request({
-    url: `${url}/${id}`,
-    method: method
-  })
-}
-
-export function fetchPostUpdate(url, method, data) {
-  return request({
-    url: url,
-    method: method,
-    data
-  })
-}
-
-export default {
-  fetchList,
-  fetchDetail,
-  fetchPostUpdate
-}
+export default requestServer

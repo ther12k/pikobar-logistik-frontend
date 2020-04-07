@@ -88,7 +88,7 @@
                   <th class="text-left">TAHAPAN</th>
                   <th class="text-left">HASIL</th>
                   <th class="text-left">AUTHOR</th>
-                  <th v-if="roles[0] === 'dinkeskota'" class="text-left">AKSI</th>
+                  <th class="text-left">AKSI</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,7 +129,7 @@
                     </div>
                   </td>
                   <td>{{ item.author.fullname }}</td>
-                  <td v-if="roles[0] === 'dinkeskota'">
+                  <td>
                     <v-card-actions>
                       <v-menu
                         :close-on-content-click="false"
@@ -141,28 +141,30 @@
                         <template v-slot:activator="{ on }">
                           <v-btn
                             class="ma-1"
-                            color="success"
-                            style="height: 30px;min-width: 80px;"
+                            color="#828282"
+                            style="text-transform: none;height: 30px;min-width: 80px;"
                             tile
                             outlined
                             v-on="on"
                           >
-                            Pilih Aksi <v-icon style="font-size: 2rem;" right>mdi-menu-down</v-icon>
+                            Pilih aksi<v-icon style="color: #009D57;font-size: 2rem;" right>mdi-menu-down</v-icon>
                           </v-btn>
                         </template>
                         <v-card>
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <v-list-item @click="handleEditCase(item._id)">
-                            Update Profil
-                          </v-list-item>
-                          <v-list-item @click="handleEditHistoryCase(item._id)">
-                            Update Riwayat
-                          </v-list-item>
-                          <v-list-item @click="handleDeleteCase(item)">
-                            Hapus Kasus
-                          </v-list-item>
+                          <div v-if="roles[0] === 'dinkeskota'">
+                            <v-list-item @click="handleEditCase(item._id)">
+                              Update Profil
+                            </v-list-item>
+                            <v-list-item @click="handleEditHistoryCase(item._id)">
+                              Update Riwayat
+                            </v-list-item>
+                            <v-list-item @click="handleDeleteCase(item)">
+                              Hapus Kasus
+                            </v-list-item>
+                          </div>
                         </v-card>
                       </v-menu>
                     </v-card-actions>
@@ -208,7 +210,7 @@ export default {
       listQuery: {
         address_district_code: '',
         page: 1,
-        limit: 10,
+        limit: 30,
         search: ''
       },
       countingReports: null,
@@ -241,6 +243,7 @@ export default {
     }
   },
   async mounted() {
+    await this.$store.dispatch('reports/listReportCase')
     this.listQuery.address_district_code = this.district_user
     this.queryReportCase.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
