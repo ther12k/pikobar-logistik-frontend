@@ -1,9 +1,9 @@
-import { fetchList } from '@/api'
+import requestServer from '@/api'
 
 export default {
   async getListOccuption({ commit }) {
     try {
-      const response = await fetchList('/api/occupations', 'GET')
+      const response = await requestServer('/api/occupations', 'GET')
       commit('SET_LIST_OCCUPTION', response.data)
       return response
     } catch (error) {

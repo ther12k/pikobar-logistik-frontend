@@ -359,7 +359,7 @@ export default {
       await this.$store.dispatch('reports/createHistoryCase', this.formRiwayatPasien)
       await this.$store.dispatch('toast/successToast', 'Data Riwayat Kasus Berhasil Di Perbaharui')
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
-      await this.$router.push('/laporan/index')
+      await this.$router.push('/laporan/list')
     },
     getTableRowNumbering(index) {
       return (index + 1)

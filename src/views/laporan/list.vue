@@ -210,7 +210,7 @@ export default {
       listQuery: {
         address_district_code: '',
         page: 1,
-        limit: 10,
+        limit: 30,
         search: ''
       },
       countingReports: null,
