@@ -65,7 +65,7 @@
       >
         <v-list-item class="mt-5" two-line>
           <v-list-item-content>
-            <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.inspection_date') }}</b></v-list-item-title>
+            <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.check_date') }}</b></v-list-item-title>
             <v-list-item-title
               class="mb-1"
             >26 Maret 2020</v-list-item-title>

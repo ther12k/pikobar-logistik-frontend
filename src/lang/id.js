@@ -96,19 +96,15 @@ export default {
     invalid: 'Invalid',
     test_results: 'Hasil Test',
     rdt_code: 'Kode RDT Kit',
-    inspection_date: 'Tanggal Pemeriksaan',
     birth_date: 'Tanggal Lahir',
     age: 'Umur',
     gender: 'Jenis Kelamin',
     citizen: 'Warganegara',
-    nik: 'NIK',
     goal_category: 'Kategori Sasaran',
-    rdt_code: "Kode RDT",
     nik: 'NIK',
     full_name: 'Nama Lengkap',
     category: 'Kategori',
-    check_date: 'Tanggal Pemeriksaan',
-    test_result: 'Hasil Test'
+    check_date: 'Tanggal Pemeriksaan'
   },
   success: {
     login_success: 'Login Berhasil',
