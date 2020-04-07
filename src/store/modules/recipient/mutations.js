@@ -1,15 +1,14 @@
 export default {
   SET_LIST_RECIPIENT: (state, data) => {
-    if (data.length !== 1) {
-      state.listRecipient = data
-    } else {
-      state.listRecipient = data[0]
-    }
+    state.listRecipient = data
   },
   SET_TOTAL_LIST_RECIPIENT: (state, data) => {
     state.totalList = data
   },
   SET_SUMMARY_RECIPIENT: (state, data) => {
     state.summaryRecipient = data
+  },
+  SET_DETAIL_RECIPIENT: (state, data) => {
+    state.dataRecipient = data[0]
   }
 }

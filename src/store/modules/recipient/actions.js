@@ -6,6 +6,7 @@ export default {
       const response = await fetchList('/api/v1/recipients', 'GET', params)
       commit('SET_TOTAL_LIST_RECIPIENT', response.data.last_page)
       commit('SET_LIST_RECIPIENT', response.data.data)
+      commit('SET_DETAIL_RECIPIENT', response.data.data)
       return response
     } catch (error) {
       return error.response

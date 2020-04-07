@@ -89,7 +89,12 @@ export default {
     received_stock: 'Stok Diterima',
     used_stock: 'Stok Terpakai',
     remaining_stock: 'Sisa Stok',
-    detail: 'Detail'
+    detail: 'Detail',
+    list_rdt_kit: 'Daftar Penggunaan RDT Kit',
+    positive: 'Positif',
+    negative: 'Negatif',
+    invalid: 'Invalid',
+    faskes_name: 'Nama Faskes'
   },
   success: {
     login_success: 'Login Berhasil',
