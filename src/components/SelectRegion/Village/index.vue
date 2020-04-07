@@ -1,25 +1,23 @@
 <template>
-  <v-col cols="12" md="4" sm="4">
-    <ValidationProvider
-      v-slot="{ errors }"
-      :rules="required ? 'required': ''"
-    >
-      <v-autocomplete
-        v-model="nameVillage"
-        :items="listVillage"
-        :label="$t('label.select_village')"
-        :error-messages="errors"
-        :disabled="disable"
-        :return-object="true"
-        menu-props="auto"
-        item-text="desa_nama"
-        single-line
-        solo
-        autocomplete
-        @change="onSelectVillage"
-      />
-    </ValidationProvider>
-  </v-col>
+  <ValidationProvider
+    v-slot="{ errors }"
+    :rules="required ? 'required': ''"
+  >
+    <v-autocomplete
+      v-model="nameVillage"
+      :items="listVillage"
+      :label="$t('label.select_village')"
+      :error-messages="errors"
+      :disabled="disable"
+      :return-object="true"
+      menu-props="auto"
+      item-text="desa_nama"
+      single-line
+      solo
+      autocomplete
+      @change="onSelectVillage"
+    />
+  </ValidationProvider>
 </template>
 
 <script>

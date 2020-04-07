@@ -14,7 +14,44 @@
       </v-row>
       <v-row>
         <v-col cols="12" sm="3">
-          <v-label class="title">Kategori Sasaran</v-label>
+          <v-label class="title">Hasil Test:</v-label>
+          <v-select
+            v-model="listQuery.final_result"
+            :items="resultCheckList"
+            solo
+            item-text="label"
+            item-value="value"
+          />
+        </v-col>
+        <v-col cols="12" sm="3">
+          <v-label class="title">Mekanisme:</v-label>
+          <v-select
+            v-model="listQuery.mechanism"
+            :items="mechanismOptions"
+            solo
+          />
+        </v-col>
+        <v-col cols="12" sm="3">
+          <v-label class="title">Metode Yang Digunakan:</v-label>
+          <v-select
+            v-model="listQuery.test_method"
+            :items="methodsOptions"
+            solo
+            item-text="label"
+            item-value="value"
+          />
+        </v-col>
+        <v-col cols="12" sm="3">
+          <v-label class="title">Tempat Test:</v-label>
+          <select-area-district-city
+            :district-city="listQuery.test_district_code"
+            :city-district.sync="listQuery.test_district_code"
+          />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" sm="3">
+          <v-label class="title">Kategori Sasaran:</v-label>
           <v-select
             v-model="listQuery.category"
             :items="categoryList"
@@ -23,18 +60,8 @@
             item-value="value"
           />
         </v-col>
-        <!--        <v-col cols="12" sm="2">-->
-        <!--          <v-label class="title">Hasil Pemeriksaan</v-label>-->
-        <!--          <v-select-->
-        <!--            v-model="listQuery.final_result"-->
-        <!--            :items="resultCheckList"-->
-        <!--            solo-->
-        <!--            item-text="label"-->
-        <!--            item-value="value"-->
-        <!--          />-->
-        <!--        </v-col>-->
         <v-col cols="12" sm="3">
-          <v-label class="title">Tanggal Pemeriksaan</v-label>
+          <v-label class="title">Tanggal Pemeriksaan:</v-label>
           <input-date-picker
             :format-date="formatDate"
             :label="'Tanggal Awal'"
@@ -78,8 +105,10 @@
 </template>
 
 <script>
+import SelectAreaDistrictCity from '../SelectRegion/DistrictCity/index'
 export default {
   name: 'FilterHasilTest',
+  components: { SelectAreaDistrictCity },
   props: {
     listQuery: {
       type: Object,
@@ -97,6 +126,15 @@ export default {
   data() {
     return {
       formatDate: 'YYYY-MM-DD',
+      methodsOptions: [
+        'HAND PRIX',
+        'FLEBOTOMY'
+      ],
+      mechanismOptions: [
+        'Door to door',
+        'Faskes',
+        'Drive-Thru'
+      ],
       categoryList: [
         { label: 'Kategori A', value: 'A' },
         { label: 'Kategori B', value: 'B' },

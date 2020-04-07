@@ -1,32 +1,38 @@
 <template>
   <div class="type-questions-ddress">
     <v-row>
-      <select-area-district-city
-        :disabled-select="disabledAddress"
-        :disabled-district="disabledDistrict"
-        :required="requiredAddress"
-        :district-city="districtCity"
-        :city-district.sync="districtCity"
-        :on-select-district="onSelectDistrict"
-      />
-      <select-area-sub-district
-        :disabled-select="disabledAddress"
-        :required="requiredAddress"
-        :sub-district="subDistrict"
-        :update-sub-district.sync="subDistrict"
-        :code-district="districtCity.kota_kode"
-        :district-code.sync="districtCity.kota_kode"
-        :on-select-sub-district="onSelectSubDistrict"
-      />
-      <select-area-village
-        :disabled-select="disabledAddress"
-        :required="requiredAddress"
-        :village="village"
-        :update-village.sync="village"
-        :code-sub-district="subDistrict.kecamatan_kode"
-        :sub-district-code.sync="subDistrict.kecamatan_kode"
-        :on-select-village="onSelectVillage"
-      />
+      <v-col cols="12" md="4" sm="4">
+        <select-area-district-city
+          :disabled-select="disabledAddress"
+          :disabled-district="disabledDistrict"
+          :required="requiredAddress"
+          :district-city="districtCity"
+          :city-district.sync="districtCity"
+          :on-select-district="onSelectDistrict"
+        />
+      </v-col>
+      <v-col cols="12" md="4" sm="4">
+        <select-area-sub-district
+          :disabled-select="disabledAddress"
+          :required="requiredAddress"
+          :sub-district="subDistrict"
+          :update-sub-district.sync="subDistrict"
+          :code-district="districtCity.kota_kode"
+          :district-code.sync="districtCity.kota_kode"
+          :on-select-sub-district="onSelectSubDistrict"
+        />
+      </v-col>
+      <v-col cols="12" md="4" sm="4">
+        <select-area-village
+          :disabled-select="disabledAddress"
+          :required="requiredAddress"
+          :village="village"
+          :update-village.sync="village"
+          :code-sub-district="subDistrict.kecamatan_kode"
+          :sub-district-code.sync="subDistrict.kecamatan_kode"
+          :on-select-village="onSelectVillage"
+        />
+      </v-col>
     </v-row>
   </div>
 </template>
