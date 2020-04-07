@@ -91,12 +91,6 @@
         </v-col>
       </v-row>
     </v-card>
-    <pagination
-      :total="totalList "
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
-      :on-next="onNext"
-    />
     <dialog-delete
       :dialog="dialog"
       :data-deleted="dataDelete"
@@ -104,7 +98,6 @@
       :delete-date.sync="dataDelete"
       :store-path-delete="`reports/deleteReportCase`"
       :store-path-get-list="`reports/listReportCase`"
-      :list-query="listQuery"
     />
   </div>
 </template>
@@ -126,10 +119,6 @@ export default {
       positif: 0,
       negatif: 0,
       invalid: 0,
-      totalODP: 0,
-      totalPDP: 0,
-      totalPositif: 0,
-      totalReport: 0,
       // data dummy TODO: integrasi dengan API
       dataPengguna: [
         {
@@ -151,16 +140,6 @@ export default {
           invalid: 25
         }
       ],
-      queryReportCase: {
-        addressDistrictCode: '' 
-      },
-      listQuery: {
-        page: 1,
-        limit: 10,
-        sort: '',
-        cityCode: ''
-      },
-      countingReports: null,
       dialog: false,
       dataDelete: null
     }
@@ -175,8 +154,6 @@ export default {
     this.getRecipient(this.$route.params.id)
   },
   methods: {
-    formatDatetime,
-    completeAddress,
     getTableRowNumbering(index) {
       return (index + 1)
     },
