@@ -303,8 +303,30 @@ export default {
         return
       }
       this.submitBtn = true
-      await this.$store.dispatch('rdtDistribution/createRdtDistribution', this.rdtDistributionForm)
-      await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+      if (this.isEdit) {
+        const updateRawData = {
+          id: this.idDistribution,
+          data: {
+            'id_product': this.rdtDistributionForm.id_product,
+            'id_user': this.rdtDistributionForm.id_user,
+            'name': this.rdtDistributionForm.name,
+            'contact_person': this.rdtDistributionForm.contact_person,
+            'phone_number': this.rdtDistributionForm.phone_number,
+            'location_address': this.rdtDistributionForm.location_address,
+            'location_subdistrict_code': this.rdtDistributionForm.location_subdistrict_code,
+            'location_district_code': this.rdtDistributionForm.location_district_code,
+            'location_province_code': this.rdtDistributionForm.location_province_code,
+            'quantity': this.rdtDistributionForm.quantity,
+            'time': this.rdtDistributionForm.time,
+            'note': this.rdtDistributionForm.note
+          }
+        }
+        await this.$store.dispatch('rdtDistribution/updateRdtDistribution', updateRawData)
+        await this.$store.dispatch('toast/updateToast', this.$t('success.data_success_edit'))
+      } else {
+        await this.$store.dispatch('rdtDistribution/createRdtDistribution', this.rdtDistributionForm)
+        await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+      }
       await this.$store.dispatch('rdtDistribution/resetRdtDistributionForm')
       this.dialog = false
       this.$emit('close', this.dialog)

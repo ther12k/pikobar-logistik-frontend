@@ -36,7 +36,7 @@ export default {
     state.rdtDistributionForm.location_subdistrict_code = data.location_subdistrict_code
     state.rdtDistributionForm.location_district_code = data.location_district_code
     state.rdtDistributionForm.quantity = Math.abs(data.quantity)
-    state.rdtDistributionForm.time = data.time.date
+    state.rdtDistributionForm.time = data.time.date.substr(0, 10)
     state.rdtDistributionForm.note = data.note
     state.rdtDistributionForm.formQuantity = Math.abs(data.quantity)
   }

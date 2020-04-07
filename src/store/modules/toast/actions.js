@@ -5,6 +5,9 @@ export default {
   successToast({ commit }, message) {
     commit('SUCCESS_TOAST', message)
   },
+  updateToast({ commit }, message) {
+    commit('UPDATE_TOAST', message)
+  },
   warningToast({ commit }, message) {
     commit('WARNING_TOAST', message)
   },
