@@ -21,7 +21,8 @@ const state = {
     location_district_code: '',
     quantity: '',
     time: '',
-    note: ''
+    note: '',
+    formQuantity: ''
   }
 }
 

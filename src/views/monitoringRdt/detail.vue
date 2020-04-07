@@ -1,6 +1,13 @@
 <template>
   <div>
-    <detail-rdt-kota v-if="roles[0] === 'dinkesprov'" :id-data="this.$route.params.id" />
+    <detail-rdt-kota
+      v-if="roles[0] === 'dinkesprov'"
+      :id-data="this.$route.params.id"
+    />
+    <detail-rdt-faskes
+      v-if="roles[0] === 'dinkeskota'"
+      :id-data="this.$route.params.id"
+    />
     <detail-rdt-perorang v-if="roles[0] === 'faskes'" />
   </div>
 </template>

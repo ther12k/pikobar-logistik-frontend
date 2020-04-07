@@ -102,7 +102,13 @@ export default {
     gender: 'Jenis Kelamin',
     citizen: 'Warganegara',
     nik: 'NIK',
-    goal_category: 'Kategori Sasaran'
+    goal_category: 'Kategori Sasaran',
+    rdt_code: "Kode RDT",
+    nik: 'NIK',
+    full_name: 'Nama Lengkap',
+    category: 'Kategori',
+    check_date: 'Tanggal Pemeriksaan',
+    test_result: 'Hasil Test'
   },
   success: {
     login_success: 'Login Berhasil',

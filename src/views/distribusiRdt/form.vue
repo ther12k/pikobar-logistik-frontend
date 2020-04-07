@@ -79,7 +79,7 @@
                     >
                       <label><strong>{{ $t('label.distribution_quantity') }}</strong></label>
                       <v-text-field
-                        v-model="rdtDistributionForm.fromQuantity"
+                        v-model="rdtDistributionForm.formQuantity"
                         :error-messages="errors"
                         :label="$t('label.example_distribution_quantity')"
                         solo-inverted
@@ -170,7 +170,7 @@
                       :disabled="submitBtn"
                       @click="handleSubmitCase"
                     >
-                      {{ $t('label.save') }}}}
+                      {{ $t('label.save') }}
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -187,7 +187,6 @@ import { mapGetters } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default {
-
   components: {
     ValidationObserver,
     ValidationProvider
@@ -212,6 +211,14 @@ export default {
     show: {
       type: Boolean,
       default: false
+    },
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    idDistribution: {
+      type: Number,
+      default: null
     }
   },
   data() {
@@ -257,8 +264,31 @@ export default {
         kemendagri_kecamatan_nama: this.subDistrictName
       }
     },
-    'show': function(value) {
+    'show': async function(value) {
       this.dialog = value
+      if (this.isEdit && this.show) {
+        const response = await this.$store.dispatch('rdtDistribution/getDistributionItem', this.idDistribution)
+        this.districtCity = {
+          kemendagri_kabupaten_kode: response.data.location_district_code,
+          kemendagri_kabupaten_nama: response.data.location_district_name
+        }
+        this.subDistrict = {
+          kemendagri_kecamatan_kode: response.data.location_subdistrict_code,
+          kemendagri_kecamatan_nama: response.data.location_subdistrict_code
+        }
+        this.date = response.data.time.date.substr(0, 10)
+      } else {
+        await this.$store.dispatch('rdtDistribution/resetRdtDistributionForm')
+        this.districtCity = {
+          kemendagri_kabupaten_kode: null,
+          kemendagri_kabupaten_nama: null
+        }
+        this.subDistrict = {
+          kemendagri_kecamatan_kode: null,
+          kemendagri_kecamatan_nama: null
+        }
+        this.date = ''
+      }
     }
   },
   mounted() {
@@ -267,14 +297,36 @@ export default {
   methods: {
     async handleSubmitCase() {
       this.rdtDistributionForm.id_user = this.user.id
-      this.rdtDistributionForm.quantity = -this.rdtDistributionForm.fromQuantity
+      this.rdtDistributionForm.quantity = -this.rdtDistributionForm.formQuantity
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
       }
       this.submitBtn = true
-      await this.$store.dispatch('rdtDistribution/createRdtDistribution', this.rdtDistributionForm)
-      await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+      if (this.isEdit) {
+        const updateRawData = {
+          id: this.idDistribution,
+          data: {
+            'id_product': this.rdtDistributionForm.id_product,
+            'id_user': this.rdtDistributionForm.id_user,
+            'name': this.rdtDistributionForm.name,
+            'contact_person': this.rdtDistributionForm.contact_person,
+            'phone_number': this.rdtDistributionForm.phone_number,
+            'location_address': this.rdtDistributionForm.location_address,
+            'location_subdistrict_code': this.rdtDistributionForm.location_subdistrict_code,
+            'location_district_code': this.rdtDistributionForm.location_district_code,
+            'location_province_code': this.rdtDistributionForm.location_province_code,
+            'quantity': this.rdtDistributionForm.quantity,
+            'time': this.rdtDistributionForm.time,
+            'note': this.rdtDistributionForm.note
+          }
+        }
+        await this.$store.dispatch('rdtDistribution/updateRdtDistribution', updateRawData)
+        await this.$store.dispatch('toast/updateToast', this.$t('success.data_success_edit'))
+      } else {
+        await this.$store.dispatch('rdtDistribution/createRdtDistribution', this.rdtDistributionForm)
+        await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
+      }
       await this.$store.dispatch('rdtDistribution/resetRdtDistributionForm')
       this.dialog = false
       this.$emit('close', this.dialog)
