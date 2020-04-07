@@ -1,4 +1,4 @@
-import { fetchPostUpdate } from '@/api'
+import requestServer from '@/api'
 import { setToken, removeToken } from '@/utils/cookies'
 import { resetRouter } from '@/router'
 
@@ -6,7 +6,7 @@ export default {
   // user login
   login({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
-      fetchPostUpdate('/api/login', 'POST', userInfo).then((response) => {
+      requestServer('/api/login', 'POST', userInfo).then((response) => {
         const { token } = response.data
         commit('SET_TOKEN', token)
         setToken(token)
@@ -20,7 +20,7 @@ export default {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      fetchPostUpdate('/api/users/info', 'GET').then((response) => {
+      requestServer('/api/users/info', 'GET').then((response) => {
         const { role, fullname, code_district_city } = response.data
         const data = {
           roles: [role]
@@ -38,7 +38,7 @@ export default {
 
   async changePasswordUser({ commit }, data) {
     try {
-      const response = await fetchPostUpdate('/api/users/change-password', 'PUT', data)
+      const response = await requestServer('/api/users/change-password', 'PUT', data)
       return response
     } catch (e) {
       return e
