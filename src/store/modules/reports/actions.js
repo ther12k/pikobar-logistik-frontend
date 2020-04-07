@@ -85,10 +85,13 @@ export default {
       return error.response
     }
   },
-  async resetFormPasien({ commit }) {
+  resetListCase({ commit }) {
+    commit('RESET_LIST_CASE')
+  },
+  resetFormPasien({ commit }) {
     commit('RESET_FORM_PASIEN')
   },
-  async resetRiwayatFormPasien({ commit }) {
+  resetRiwayatFormPasien({ commit }) {
     commit('RESET_RIWAYAT_FORM_PASIEN')
   }
 }

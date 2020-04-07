@@ -52,11 +52,11 @@
                         </v-radio-group>
                       </ValidationProvider>
                       <ValidationProvider
+                        v-if="formRiwayatPasien.status !== 'ODP'"
                         v-slot="{ errors }"
                       >
                         <label>Hasil Pemeriksaan Akhir</label>
                         <v-radio-group
-                          v-if="formRiwayatPasien.status !== 'ODP'"
                           v-model="formRiwayatPasien.final_result"
                           :error-messages="errors"
                           row

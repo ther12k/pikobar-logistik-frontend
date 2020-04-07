@@ -243,6 +243,7 @@ export default {
     }
   },
   async mounted() {
+    await this.$store.dispatch('reports/listReportCase')
     this.listQuery.address_district_code = this.district_user
     this.queryReportCase.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)
