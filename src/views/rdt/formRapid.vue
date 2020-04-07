@@ -381,11 +381,8 @@ export default {
         if (this.isEdit) {
           const id = this.$route.params && this.$route.params.id
           await this.$store.dispatch('rdt/updateRDT', id, this.formRapid)
-          console.log(this.formRapid)
         } else {
-          // await fetchPostUpdate('/api/rdt', 'POST', this.formRapid)
           await this.$store.dispatch('rdt/createRDT', this.formRapid)
-          console.log('ini tambah')
         }
 
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
@@ -394,14 +391,6 @@ export default {
       } catch {
         await this.$store.dispatch('toast/errorToast', 'Data gagal disimpan')
       }
-
-      // const response = await fetchPostUpdate('/api/rdt', 'POST', this.formRapid)
-
-      // if (response.status !== 422) {
-      //   await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-      //   this.$router.push('/rdt/list')
-      //   await this.$refs.form.reset()
-      // }
     },
     async saveRdtAndCase() {
       const valid = await this.$refs.observer.validate()
@@ -422,7 +411,7 @@ export default {
 
       if (this.formRapid.id_case) {
         const updateCase = {
-          case: this.formRapid._id,
+          case: this.formRapid.id,
           status: this.formRapid.status,
           stage: this.formRapid.stage,
           final_result: this.formRapid.final_result,
