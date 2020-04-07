@@ -41,6 +41,7 @@
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider
+              v-if="formPasien.status !== 'ODP'"
               v-slot="{ errors }"
             >
               <label>Hasil Pemeriksaan Akhir</label>
@@ -294,7 +295,7 @@ export default {
       if (response.status !== 422) {
         await this.$store.dispatch('reports/resetFormPasien')
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
-        this.$router.push('/laporan/index')
+        this.$router.push('/laporan/list')
         await this.$refs.form.reset()
       }
     },

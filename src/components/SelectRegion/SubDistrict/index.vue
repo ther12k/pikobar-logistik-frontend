@@ -1,26 +1,24 @@
 <template>
-  <v-col cols="12" md="4" sm="4">
-    <ValidationProvider
-      v-slot="{ errors }"
-      :rules="required ? 'required': ''"
-    >
-      <v-autocomplete
-        v-model="nameSubDistrict"
-        :items="listSubDistrict"
-        :label="$t('label.select_sub_district')"
-        :error-messages="errors"
-        :disabled="disable"
-        :return-object="true"
-        menu-props="auto"
-        item-value="kecamatan_kode"
-        item-text="kecamatan_nama"
-        single-line
-        solo
-        autocomplete
-        @change="onSelectSubDistrict"
-      />
-    </ValidationProvider>
-  </v-col>
+  <ValidationProvider
+    v-slot="{ errors }"
+    :rules="required ? 'required': ''"
+  >
+    <v-autocomplete
+      v-model="nameSubDistrict"
+      :items="listSubDistrict"
+      :label="$t('label.select_sub_district')"
+      :error-messages="errors"
+      :disabled="disable"
+      :return-object="true"
+      menu-props="auto"
+      item-value="kecamatan_kode"
+      item-text="kecamatan_nama"
+      single-line
+      solo
+      autocomplete
+      @change="onSelectSubDistrict"
+    />
+  </ValidationProvider>
 </template>
 
 <script>

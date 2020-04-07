@@ -330,7 +330,7 @@ export default {
       await this.$store.dispatch('reports/updateReportCase', updateCase)
       await this.$store.dispatch('toast/successToast', 'Data Profil Berhasil Di Rubah')
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
-      await this.$router.push('/laporan/index')
+      await this.$router.push('/laporan/list')
     },
     handleChangeNationality(value) {
       if (value === 'WNI') {

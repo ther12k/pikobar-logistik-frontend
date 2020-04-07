@@ -1,10 +1,22 @@
 <template>
   <v-container>
+    <h4 class="font-weight-bold" style="color:#43A047">Cari Peserta</h4>
+    <v-divider />
     <ValidationObserver ref="observer">
       <v-form
         ref="form"
         lazy-validation
       >
+        <v-row>
+          <v-col>
+            <label>Cari Nama Peserta/NIK/No Telepon</label>
+            <autocomplete-cases
+              :on-select-case="onSelectCase"
+            />
+          </v-col>
+        </v-row>
+        <h4 class="font-weight-bold" style="color:#43A047">Data Diri Peserta</h4>
+        <v-divider />
         <v-row>
           <v-col
             cols="12"
@@ -38,41 +50,6 @@
                 solo
               />
             </ValidationProvider>
-          </v-col>
-          <v-col>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-            >
-              <label class="required">Sasaran</label>
-              <v-select
-                v-model="formRapid.target"
-                :error-messages="errors"
-                :items="targetOptions"
-                item-text="targets"
-                item-value="targets"
-                solo
-                @change="onChangeType"
-              />
-            </ValidationProvider>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <label class="required">Cari Kode Kasus/Nama</label>
-            <autocomplete-cases
-              :on-select-case="onSelectCase"
-              :disabled-case="isODP"
-              :required-validation="formRapid.target === 'ODP' ? true : false"
-            />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col
-            cols="12"
-            md="6"
-            sm="12"
-          >
             <ValidationProvider
               v-slot="{ errors }"
               rules="numeric"
@@ -145,7 +122,26 @@
               />
             </ValidationProvider>
           </v-col>
-          <v-col>
+          <v-col
+            cols="12"
+            md="6"
+            sm="12"
+          >
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <label class="required">Sasaran</label>
+              <v-select
+                v-model="formRapid.target"
+                :error-messages="errors"
+                :return-object="false"
+                :items="targetOptions"
+                item-text="targets"
+                item-value="targets"
+                solo
+              />
+            </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
               rules="required|isHtml"
@@ -236,7 +232,6 @@
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import { getAge } from '@/utils/constantVariable'
 import { mapGetters } from 'vuex'
-import { fetchPostUpdate } from '@/api'
 
 export default {
   components: {
@@ -247,6 +242,8 @@ export default {
     return {
       formatDate: 'YYYY/MM/DD',
       isODP: true,
+      isEdit: false,
+      idEdit: null,
       items: [
         {
           label: 'Kategori A',
@@ -329,7 +326,9 @@ export default {
   },
   async mounted() {
     this.formRapid.address_district_code = this.district_user
-    if (this.$route.params && this.$route.params.id) {
+    this.idEdit = this.$route.params.id
+    if (this.$route.params && this.idEdit) {
+      this.isEdit = true
       const response = await this.$store.dispatch('rdt/detailParticipant', this.$route.params.id)
       await Object.assign(this.formRapid, response.data)
       await Object.assign(this.formResult, response.data)
@@ -338,29 +337,28 @@ export default {
   methods: {
     getAge,
     async onSelectCase(value) {
-      if (value) {
-        const response = await this.$store.dispatch('reports/detailReportCase', value)
-        await Object.assign(this.formRapid, response.data)
+      const getEndSearch = value.indexOf('/')
+      const getName = value.slice(0, getEndSearch)
+      const listQuery = {
+        address_district_code: this.district_user,
+        search: getName
       }
-    },
-    async onChangeType(value) {
-      if (value === 'ODP') {
-        this.isODP = false
+      const response = await this.$store.dispatch('rdt/getDetailRegister', listQuery)
+      await Object.assign(this.formRapid, response.data)
+      this.formRapid.address_street = response.data.address_detail
+      if (this.formRapid.id_case) {
+        this.formRapid.category = 'A'
+        this.onChangeCategory(this.formRapid.category, 'ODP')
       } else {
-        this.isODP = true
-        this.formRapid.id_case = null
-        this.formRapid.nik = null
-        this.formRapid.name = null
-        this.formRapid.birth_date = ''
-        this.formRapid.age = null
-        this.formRapid.gender = null
-        this.formRapid.address_street = null
-        this.formRapid.phone_number = null
+        this.onChangeCategory(this.formRapid.category)
       }
     },
-    async onChangeCategory(value) {
+    async onChangeCategory(value, isODP) {
       const response = await this.$store.dispatch('rdt/getListTarget', value)
       this.targetOptions = response.data
+      if (isODP === 'ODP') {
+        this.formRapid.target = this.targetOptions[0].targets
+      }
     },
     handleChangeNationality(value) {
       if (value === 'WNI') {
@@ -376,15 +374,22 @@ export default {
         return
       }
 
-      Object.assign(this.formRapid, this.formResult)
-      delete this.formRapid._id
+      try {
+        Object.assign(this.formRapid, this.formResult)
+        delete this.formRapid._id
 
-      const response = await fetchPostUpdate('/api/rdt', 'POST', this.formRapid)
+        if (this.isEdit) {
+          const id = this.$route.params && this.$route.params.id
+          await this.$store.dispatch('rdt/updateRDT', id, this.formRapid)
+        } else {
+          await this.$store.dispatch('rdt/createRDT', this.formRapid)
+        }
 
-      if (response.status !== 422) {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/rdt/list')
         await this.$refs.form.reset()
+      } catch {
+        await this.$store.dispatch('toast/errorToast', 'Data gagal disimpan')
       }
     },
     async saveRdtAndCase() {
@@ -406,7 +411,7 @@ export default {
 
       if (this.formRapid.id_case) {
         const updateCase = {
-          case: this.formRapid._id,
+          case: this.formRapid.id,
           status: this.formRapid.status,
           stage: this.formRapid.stage,
           final_result: this.formRapid.final_result,

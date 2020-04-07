@@ -3,14 +3,11 @@ export default {
   SET_LIST_PASIEN: (state, data) => {
     state.listKasus = data
   },
+  RESET_LIST_CASE: (state, data) => {
+    state.listKasus = []
+  },
   SET_TOTAL_LIST_PASIEN: (state, data) => {
     state.totalList = data
-  },
-  SET_DETAIL_PASIEN: (state, data) => {
-    state.detailPasien = data
-  },
-  SET_FORM_PASIEN: (state, data) => {
-    state.formPasien = data
   },
   RESET_FORM_PASIEN: (state) => {
     state.formPasien.nik = ''

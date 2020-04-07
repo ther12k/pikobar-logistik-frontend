@@ -51,7 +51,7 @@ const rdtRouter = {
       meta: {
         title: 'rdt_detail',
         noCache: true,
-        roles: ['superadmin', 'dinkeskota', 'faskes']
+        roles: ['superadmin', 'dinkeskota', 'faskes', 'dinkesprov']
       }
     },
     {
