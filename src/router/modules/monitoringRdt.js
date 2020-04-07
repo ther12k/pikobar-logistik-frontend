@@ -6,7 +6,7 @@ const monitoringRdt = {
   redirect: '/monitoring-rdt/index',
   meta: {
     icon: 'mdi-monitor',
-    roles: ['superadmin', 'dinkesprov', 'dinkeskota']
+    roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
   },
   active: false,
   children: [{
@@ -16,7 +16,7 @@ const monitoringRdt = {
       title: 'monitoring_rdt_title',
       icon: 'mdi-monitor',
       noCache: true,
-      roles: ['superadmin', 'dinkesprov', 'dinkeskota']
+      roles: ['superadmin', 'dinkesprov', 'dinkeskota', 'faskes']
     }
   },
   {
@@ -27,7 +27,7 @@ const monitoringRdt = {
       title: 'laporan_detail',
       icon: 'library_books',
       noCache: true,
-      roles: ['superadmin', 'dinkeskota', 'dinkesprov']
+      roles: ['superadmin', 'dinkeskota', 'dinkesprov', 'faskes']
     }
   }]
 }

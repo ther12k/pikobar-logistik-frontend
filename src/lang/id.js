@@ -39,7 +39,7 @@ export default {
     add_choice: 'Tambah pilihan',
     sort_by: 'Urutkan Berdasarkan',
     target: 'Capaian / Target',
-    address: 'Alamat',
+    address: 'Alamat Tempat Tinggal',
     example_address: 'Masukkan alamat lengkap tujuan',
     select_district: 'Kota/Kab.',
     select_sub_district: 'Kec.',
@@ -94,7 +94,15 @@ export default {
     positive: 'Positif',
     negative: 'Negatif',
     invalid: 'Invalid',
-    faskes_name: 'Nama Faskes'
+    test_results: 'Hasil Test',
+    rdt_code: 'Kode RDT Kit',
+    inspection_date: 'Tanggal Pemeriksaan',
+    birth_date: 'Tanggal Lahir',
+    age: 'Umur',
+    gender: 'Jenis Kelamin',
+    citizen: 'Warganegara',
+    nik: 'NIK',
+    goal_category: 'Kategori Sasaran'
   },
   success: {
     login_success: 'Login Berhasil',
