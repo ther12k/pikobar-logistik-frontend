@@ -1,4 +1,4 @@
-import { fetchList, fetchPostUpdate, fetchDetailDelete } from '@/api'
+import { fetchList, doPostUpdate, doDetailDelete } from '@/api'
 
 export default {
   async getListRdtDistribution({ commit }, params) {
@@ -24,7 +24,7 @@ export default {
   },
   async createRdtDistribution({ commit }, data) {
     try {
-      const response = await fetchPostUpdate('/api/v1/transactions', 'POST', data)
+      const response = await doPostUpdate('/api/v1/transactions', 'POST', data)
       return response
     } catch (error) {
       return error.response
@@ -33,7 +33,7 @@ export default {
   async updateRdtDistribution({ commit }, data) {
     const idCase = await data.id
     try {
-      const response = await fetchPostUpdate(`/api/v1/transactions/${idCase}`, 'PUT', data.data)
+      const response = await doPostUpdate(`/api/v1/transactions/${idCase}`, 'PUT', data.data)
       return response
     } catch (error) {
       return error.response
@@ -44,7 +44,7 @@ export default {
   },
   async getDistributionItem({ commit }, idDistribution) {
     try {
-      const response = await fetchDetailDelete(`/api/v1/transactions`, 'GET', idDistribution)
+      const response = await doDetailDelete(`/api/v1/transactions`, 'GET', idDistribution)
       commit('SET_RDT_DISTRIBUTION_FORM', response.data)
       return response
     } catch (error) {

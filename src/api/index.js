@@ -8,14 +8,14 @@ export function fetchList(url, method, params) {
   })
 }
 
-export function fetchDetailDelete(url, method, id) {
+export function doDetailDelete(url, method, id) {
   return request({
     url: `${url}/${id}`,
     method: method
   })
 }
 
-export function fetchPostUpdate(url, method, data) {
+export function doPostUpdate(url, method, data) {
   return request({
     url: url,
     method: method,
@@ -25,6 +25,6 @@ export function fetchPostUpdate(url, method, data) {
 
 export default {
   fetchList,
-  fetchDetailDelete,
-  fetchPostUpdate
+  doDetailDelete,
+  doPostUpdate
 }
