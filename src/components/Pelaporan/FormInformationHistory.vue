@@ -45,6 +45,7 @@
             >
               <label>Hasil Pemeriksaan Akhir</label>
               <v-radio-group
+                v-if="formPasien.status !== 'ODP'"
                 v-model="formPasien.final_result"
                 :error-messages="errors"
                 row
