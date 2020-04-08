@@ -5,7 +5,7 @@
       lazy-validation
     >
       <v-container>
-        <v-row>
+        <v-row class="filter-row" style="margin-top: -40px;">
           <v-col cols="12" sm="12">
             <br>
             <v-text-field
@@ -16,7 +16,7 @@
             />
           </v-col>
         </v-row>
-        <v-row>
+        <v-row class="filter-row">
           <v-col cols="12" sm="6">
             <v-label class="title">Tahapan:</v-label>
             <v-select
@@ -36,7 +36,7 @@
             />
           </v-col>
         </v-row>
-        <v-row>
+        <v-row class="filter-row">
           <v-col cols="12" sm="3">
             <v-label class="title">Tanggal:</v-label>
             <input-date-picker
@@ -155,3 +155,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .filter-row {
+    margin-bottom: -40px;
+  }
+</style>
