@@ -46,7 +46,7 @@
       </v-col>
     </v-row>
     <v-card
-      outlined
+      outlined :loading="loading"
     >
       <v-row>
         <v-col cols="12" sm="6">
