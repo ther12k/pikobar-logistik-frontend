@@ -85,95 +85,86 @@
             </div>
           </v-card-text>
         </v-col>
-        <v-col>
-          <search
-            :handle-search="handleSearch"
-            :list-query="listQuery"
-          />
-        </v-col>
+        <v-col />
       </v-row>
+      <case-filter
+        :list-query="listQuery"
+        :query-list.sync="listQuery"
+        :on-search="handleSearch"
+      />
       <hr>
       <v-row>
         <v-col auto>
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">#</th>
-                  <th class="text-left">KODE KASUS</th>
-                  <th class="text-left">NAMA</th>
-                  <th class="text-left">USIA</th>
-                  <th class="text-left">JENIS KELAMIN</th>
-                  <th class="text-left">STATUS</th>
-                  <th class="text-left">TAHAPAN</th>
-                  <th class="text-left">HASIL</th>
-                  <th class="text-left">AUTHOR</th>
-                  <th class="text-left">AKSI</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in listKasus" :key="item.index">
-                  <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.id_case.toUpperCase() }}</td>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.age }} Th</td>
-                  <td>
-                    <div v-if="item.gender =='P'">
-                      Perempuan
-                    </div>
-                    <div v-else>
-                      Laki-Laki
-                    </div>
-                  </td>
-                  <td><status :status="item.status" /> </td>
-                  <td>
-                    <div v-if=" item.last_history.stage =='0'">
-                      Proses
-                    </div>
-                    <div v-else>
-                      Selesai
-                    </div>
-                  </td>
-                  <td>
-                    <div v-if=" item.last_history.final_result =='0'">
-                      Negatif
-                    </div>
-                    <div v-else-if=" item.last_history.final_result =='1'">
-                      Sembuh
-                    </div>
-                    <div v-else-if=" item.last_history.final_result =='2'">
-                      Meninggal
-                    </div>
-                    <div v-else>
-                      -
-                    </div>
-                  </td>
-                  <td>{{ item.author.fullname }}</td>
-                  <td>
-                    <v-card-actions>
-                      <v-menu
-                        :close-on-content-click="false"
-                        :nudge-width="100"
-                        :nudge-left="220"
-                        :nudge-top="40"
-                        offset-y
-                      >
-                        <template v-slot:activator="{ on }">
-                          <v-btn
-                            class="ma-1"
-                            color="#828282"
-                            style="text-transform: none;height: 30px;min-width: 80px;"
-                            tile
-                            outlined
-                            v-on="on"
-                          >
-                            Pilih aksi<v-icon style="color: #009D57;font-size: 2rem;" right>mdi-menu-down</v-icon>
-                          </v-btn>
-                        </template>
-                        <v-card>
-                          <v-list-item @click="handleDetail(item._id)">
-                            Lihat Detail
-                          </v-list-item>
+          <v-data-table
+            :headers="headers"
+            :items="listKasus"
+            :no-data-text="'Tidak ada data'"
+            :loading="loadingTable"
+            hide-default-footer
+          >
+            <template v-slot:item="{ item, index }">
+              <tr>
+                <td>{{ getTableRowNumbering(index) }}</td>
+                <td>{{ item.id_case.toUpperCase() }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.age }} Th</td>
+                <td>
+                  <div v-if="item.gender =='P'">
+                    Perempuan
+                  </div>
+                  <div v-else>
+                    Laki-Laki
+                  </div>
+                </td>
+                <td><status :status="item.status" /> </td>
+                <td>
+                  <div v-if=" item.last_history.stage =='0'">
+                    Proses
+                  </div>
+                  <div v-else>
+                    Selesai
+                  </div>
+                </td>
+                <td>
+                  <div v-if=" item.last_history.final_result =='0'">
+                    Negatif
+                  </div>
+                  <div v-else-if=" item.last_history.final_result =='1'">
+                    Sembuh
+                  </div>
+                  <div v-else-if=" item.last_history.final_result =='2'">
+                    Meninggal
+                  </div>
+                  <div v-else>
+                    -
+                  </div>
+                </td>
+                <td>{{ item.author.fullname }}</td>
+                <td>
+                  <v-card-actions>
+                    <v-menu
+                      :close-on-content-click="false"
+                      :nudge-width="100"
+                      :nudge-left="220"
+                      :nudge-top="40"
+                      offset-y
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-btn
+                          class="ma-1"
+                          color="#828282"
+                          style="text-transform: none;height: 30px;min-width: 80px;"
+                          tile
+                          outlined
+                          v-on="on"
+                        >
+                          Pilih aksi<v-icon style="color: #009D57;font-size: 2rem;" right>mdi-menu-down</v-icon>
+                        </v-btn>
+                      </template>
+                      <v-card>
+                        <v-list-item @click="handleDetail(item._id)">
+                          Lihat Detail
+                        </v-list-item>
                           <div v-if="roles[0] === 'dinkeskota'">
                             <v-list-item @click="handleEditCase(item._id)">
                               Update Profil
@@ -190,9 +181,8 @@
                     </v-card-actions>
                   </td>
                 </tr>
-              </tbody>
             </template>
-          </v-simple-table>
+          </v-data-table>
         </v-col>
       </v-row>
     </v-card>
@@ -220,7 +210,20 @@ export default {
   name: 'LaporanList',
   data() {
     return {
+      headers: [
+        { text: '#', value: '_id', sortable: false },
+        { text: 'KODE KASUS', value: 'id_case' },
+        { text: 'NAMA', value: 'name' },
+        { text: 'USIA', value: 'age' },
+        { text: 'JENIS KELAMIN', value: 'gender' },
+        { text: 'STATUS', value: 'status' },
+        { text: 'TAHAPAN', value: 'stage' },
+        { text: 'HASIL', value: 'final_result' },
+        { text: 'AUTHOR', value: 'author' },
+        { text: 'Aksi', value: 'actions', sortable: false }
+      ],
       loading: true,
+      loadingTable: false,
       totalODP: 0,
       totalPDP: 0,
       totalPositif: 0,
@@ -230,6 +233,8 @@ export default {
       },
       listQuery: {
         address_district_code: '',
+        // status: '',
+        // final_result: '',
         page: 1,
         limit: 30,
         search: ''
@@ -252,10 +257,7 @@ export default {
   watch: {
     'listQuery.search': {
       handler: function(value) {
-        if (value.length >= 3) {
-          this.listQuery.page = 1
-          this.handleSearch()
-        } else if (value.length === 0) {
+        if ((value !== undefined) && (value.length === 0 || value.length >= 3)) {
           this.listQuery.page = 1
           this.handleSearch()
         }
@@ -264,7 +266,6 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('reports/listReportCase')
     this.listQuery.address_district_code = this.district_user
     this.queryReportCase.address_district_code = this.district_user
     await this.$store.dispatch('reports/listReportCase', this.listQuery)

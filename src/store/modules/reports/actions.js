@@ -4,8 +4,13 @@ export default {
   async listReportCase({ commit }, params) {
     try {
       const response = await requestServer('/api/cases', 'GET', params)
-      commit('SET_TOTAL_LIST_PASIEN', response.data._meta.totalPages)
-      commit('SET_LIST_PASIEN', response.data.cases)
+      if (response.data === null) {
+        commit('SET_TOTAL_LIST_PASIEN', 1)
+        commit('SET_LIST_PASIEN', [])
+      } else {
+        commit('SET_TOTAL_LIST_PASIEN', response.data._meta.totalPages)
+        commit('SET_LIST_PASIEN', response.data.cases)
+      }
       return response
     } catch (error) {
       return error.response

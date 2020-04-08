@@ -25,11 +25,10 @@
         </v-col>
         <v-col />
       </v-row>
-      <filter-hasil-test
+      <filter-test-result
         :list-query="listQuery"
         :query-list.sync="listQuery"
         :on-search="handleSearch"
-        :on-reset="handleResetFilter"
       />
       <hr>
       <v-row>
@@ -176,7 +175,7 @@ export default {
   watch: {
     'listQuery.search': {
       handler: function(value) {
-        if (value !== null && value.length === 0 || value.length >= 3) {
+        if ((value !== undefined) && (value.length === 0 || value.length >= 3)) {
           this.listQuery.page = 1
           this.handleSearch()
         }
@@ -204,16 +203,6 @@ export default {
     },
     async handleUpdateResults(id) {
       await this.$router.push(`/rdt/update-result/${id}`)
-    },
-    async handleResetFilter() {
-      this.listQuery.category = ''
-      this.listQuery.start_date = ''
-      this.listQuery.end_date = ''
-      this.listQuery.final_result = ''
-      this.listQuery.mechanism = ''
-      this.listQuery.test_method = ''
-      this.listQuery.search = ''
-      await this.$store.dispatch('rdt/getListRDT', this.listQuery)
     },
     async handleSearch() {
       await this.$store.dispatch('rdt/getListRDT', this.listQuery)
