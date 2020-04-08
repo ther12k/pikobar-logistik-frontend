@@ -100,6 +100,9 @@
                   <!-- sementara diganti menggunakan faskes name karna tidak ada idnya -->
                   <td><v-btn text small color="info" @click="handleDetail(recipentFaskes.faskes_name)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
+                <tr v-if="totalList === 0">
+                  <td colspan="5" class="text-center">{{ $t('errors.no_data') }}</td>
+                </tr>
               </tbody>
             </template>
           </v-simple-table>

@@ -1,76 +1,101 @@
 <template>
   <div>
     <div class="title"><b>Abdul Ghani</b></div>
-    <v-row style="height: 110px;" no-gutters>
+
+    <v-row no-gutters>
       <v-col
         class="bg-success"
         cols="12"
         sm="2"
       >
-        <v-list-item class="mt-5" two-line>
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 white--text text-center"><b>{{ $t('label.test_results') }}</b></v-list-item-title>
-            <v-list-item-title
-              class="mb-1 white--text text-center"
-            >Negatif</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-card
+          class="mx-auto bg-success"
+        >
+          <v-card-text>
+            <div class="subtitle-1 white--text text-center">
+              <b>{{ $t('label.test_results') }}</b>
+            </div>
+            <div class="white--text text-center">
+              <b>Negatif</b>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col
         class="bg-default"
         cols="12"
         sm="2"
       >
-        <v-list-item class="mt-5" two-line>
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.rdt_code') }}</b></v-list-item-title>
-            <v-list-item-title
-              class="mb-1"
-            >7689768969867896</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-card
+          class="mx-auto"
+          color="white"
+        >
+          <v-card-text>
+            <div class="subtitle-1 green--text">
+              <b>{{ $t('label.rdt_code') }}</b>
+            </div>
+            <div>
+              <b>656758765876567858</b>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col
         class="bg-default"
         cols="12"
         sm="3"
       >
-        <v-list-item class="mt-5" two-line>
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.faskes_name') }}</b></v-list-item-title>
-            <v-list-item-title
-              class="mb-1"
-            >RSUD Kota Depok</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-card
+          class="mx-auto"
+          color="white"
+        >
+          <v-card-text>
+            <div class="subtitle-1 green--text">
+              <b>{{ $t('label.faskes_name') }}</b>
+            </div>
+            <div>
+              <b>RSUD Kota Depok</b>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col
         class="bg-default"
         cols="12"
         sm="2"
       >
-        <v-list-item class="mt-5" two-line>
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.goal_category') }}</b></v-list-item-title>
-            <v-list-item-title
-              class="mb-1"
-            >Kategori B</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-card
+          class="mx-auto"
+          color="white"
+        >
+          <v-card-text>
+            <div class="subtitle-1 green--text">
+              <b>{{ $t('label.goal_category') }}</b>
+            </div>
+            <div>
+              <b>Kategori B</b>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col
         class="bg-default"
         cols="12"
         sm="3"
       >
-        <v-list-item class="mt-5" two-line>
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.check_date') }}</b></v-list-item-title>
-            <v-list-item-title
-              class="mb-1"
-            >26 Maret 2020</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <v-card
+          class="mx-auto"
+          color="white"
+        >
+          <v-card-text>
+            <div class="subtitle-1 green--text">
+              <b>{{ $t('label.check_date') }}</b>
+            </div>
+            <div>
+              <b>26 Maret 2020</b>
+            </div>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
 
@@ -82,72 +107,107 @@
               cols="12"
               sm="3"
             >
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.nik') }}</b></v-list-item-title>
-                  <v-list-item-title
-                    class="mb-1"
-                  >3037686867868</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.birth_date') }}</b></v-list-item-title>
-                  <v-list-item-title
-                    class="mb-1"
-                  >23 Juni 1975</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.age') }}</b></v-list-item-title>
-                  <v-list-item-title
-                    class="mb-1"
-                  >45 Tahun</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+              <v-card
+                class="mx-auto"
+                color="white"
+              >
+                <v-card-text>
+                  <div class="subtitle-1 green--text">
+                    <b>{{ $t('label.nik') }}</b>
+                  </div>
+                  <div>
+                    <b>3037686867868</b>
+                  </div>
+                </v-card-text>
+              </v-card>
+              <v-card
+                class="mx-auto"
+                color="white"
+              >
+                <v-card-text>
+                  <div class="subtitle-1 green--text">
+                    <b>{{ $t('label.birth_date') }}</b>
+                  </div>
+                  <div>
+                    <b>23 Juni 1975</b>
+                  </div>
+                </v-card-text>
+              </v-card>
+              <v-card
+                class="mx-auto"
+                color="white"
+              >
+                <v-card-text>
+                  <div class="subtitle-1 green--text">
+                    <b>{{ $t('label.age') }}</b>
+                  </div>
+                  <div>
+                    <b>45 Tahun</b>
+                  </div>
+                </v-card-text>
+              </v-card>
             </v-col>
             <v-col
               cols="12"
               sm="3"
             >
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.gender') }}</b></v-list-item-title>
-                  <v-list-item-title
-                    class="mb-1"
-                  >Laki-Laki</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.phone_number') }}</b></v-list-item-title>
-                  <v-list-item-title
-                    class="mb-1"
-                  >0898765775566</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.citizen') }}</b></v-list-item-title>
-                  <v-list-item-title
-                    class="mb-1"
-                  >Indonesia</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+              <v-card
+                class="mx-auto"
+                color="white"
+              >
+                <v-card-text>
+                  <div class="subtitle-1 green--text">
+                    <b>{{ $t('label.gender') }}</b>
+                  </div>
+                  <div>
+                    <b>Laki-Laki</b>
+                  </div>
+                </v-card-text>
+              </v-card>
+              <v-card
+                class="mx-auto"
+                color="white"
+              >
+                <v-card-text>
+                  <div class="subtitle-1 green--text">
+                    <b>{{ $t('label.phone_number') }}</b>
+                  </div>
+                  <div>
+                    <b>0898765775566</b>
+                  </div>
+                </v-card-text>
+              </v-card>
+              <v-card
+                class="mx-auto"
+                color="white"
+              >
+                <v-card-text>
+                  <div class="subtitle-1 green--text">
+                    <b>{{ $t('label.citizen') }}</b>
+                  </div>
+                  <div>
+                    <b>Indonesia</b>
+                  </div>
+                </v-card-text>
+              </v-card>
             </v-col>
             <v-col
               cols="12"
               sm="6"
             >
-              <v-list-item two-line>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1 green--text"><b>{{ $t('label.address') }}</b></v-list-item-title>
-                  <v-list-item-title
-                    class="mb-1"
-                  >Jl. Merdeka II No.18</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+              <v-card
+                class="mx-auto"
+                color="white"
+              >
+                <v-card-text>
+                  <div class="subtitle-1 green--text">
+                    <b>{{ $t('label.address') }}</b>
+                  </div>
+                  <div>
+                    <b>Jl. Merdeka II No.18</b>
+                  </div>
+                </v-card-text>
+              </v-card>
             </v-col>
           </v-row>
         </v-card>
@@ -172,6 +232,7 @@ export default {
 .bg-success {
   background: linear-gradient(90deg, #219653 0%, #27AE60 100%);
   border-radius: 4px;
+  border: 0px !important;
 }
 .bg-default {
   background: #FFFFFF;
