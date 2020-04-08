@@ -122,6 +122,16 @@ export default {
     field_unauthorized_characters: 'Bidang mengandung karakter yang tidak diizinkan.',
     field_phone_number_not_valid: 'Nomor telepon tidak valid',
     server_error_occurred: 'Terjadi kesalahan pada server',
-    feature_under_development: 'Fitur dalam pengembangan'
+    feature_under_development: 'Fitur dalam pengembangan',
+    required_fields: {
+      distribution_destination: 'Tujuan distribusi harus diisi',
+      address: 'Alamat harus diisi',
+      phone_number: 'Nomor telepon harus diisi',
+      distribution_destination_name: 'Nama tujuan distribusi harus diisi',
+      distribution_quantity: 'Jumlah distribusi harus diisi',
+      contact_person: 'Nama pemohon harus diisi',
+      distribution_date: 'Tanggal distribusi harus diisi',
+      select_sub_district: 'Kecamatan harus diisi',
+    }
   },
 }

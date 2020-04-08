@@ -1,7 +1,7 @@
 <template>
   <ValidationProvider
     v-slot="{ errors }"
-    :rules="required ? 'required': ''"
+    :rules="required ? rule : ''"
   >
     <v-autocomplete
       v-model="nameSubDistrict"
@@ -51,6 +51,10 @@ export default {
     codeDistrict: {
       type: String,
       default: null
+    },
+    rule: {
+      type: String,
+      default: ''
     }
   },
   data() {

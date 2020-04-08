@@ -35,35 +35,14 @@
                     <label><strong>{{ $t('label.distribution_destination') }}</strong></label>
                     <select-area-district-city
                       :required="true"
+                      :rule="distributionDestinationRule"
                       :district-city="districtCity"
                       :city-district.sync="districtCity"
                       :on-select-district-city="onSelectDistrictCity"
                     />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
-                    <label><strong>{{ $t('label.select_sub_district_full_name') }}</strong></label>
-                    <select-area-sub-district
-                      :required="true"
-                      :sub-district="subDistrict"
-                      :update-sub-district.sync="subDistrict"
-                      :code-district="rdtDistributionForm.location_district_code"
-                      :on-select-sub-district="onSelectSubDistrictCity"
-                    />
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
                     <ValidationProvider
                       v-slot="{ errors }"
-                      rules="required"
+                      rules="distributionDestinationNameRequired"
                     >
                       <label><strong>{{ $t('label.distribution_destination_name') }}</strong></label>
                       <v-text-field
@@ -75,7 +54,7 @@
                     </ValidationProvider>
                     <ValidationProvider
                       v-slot="{ errors }"
-                      rules="required|numeric"
+                      rules="distributionQuantityRequired|numeric"
                     >
                       <label><strong>{{ $t('label.distribution_quantity') }}</strong></label>
                       <v-text-field
@@ -86,35 +65,9 @@
                         type="number"
                       />
                     </ValidationProvider>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
                     <ValidationProvider
                       v-slot="{ errors }"
-                      rules="required"
-                    >
-                      <label><strong>{{ $t('label.address') }}</strong></label>
-                      <v-textarea
-                        v-model="rdtDistributionForm.location_address"
-                        :error-messages="errors"
-                        :label="$t('label.example_address')"
-                        solo-inverted
-                      />
-                    </ValidationProvider>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
-                    <ValidationProvider
-                      v-slot="{ errors }"
-                      rules="required"
+                      rules="contactPersonRequired"
                     >
                       <label><strong>{{ $t('label.contact_person') }}</strong></label>
                       <v-text-field
@@ -124,29 +77,9 @@
                         solo-inverted
                       />
                     </ValidationProvider>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
-                    <label><strong>{{ $t('label.distribution_date') }}</strong></label>
-                    <date-picker
-                      :required="true"
-                      :value="date"
-                      @selected="changeDate"
-                    />
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="6"
-                  >
                     <ValidationProvider
                       v-slot="{ errors }"
-                      rules="isPhoneNumber|required"
+                      rules="isPhoneNumber|phoneRequired"
                     >
                       <label><strong>{{ $t('label.phone_number') }}</strong></label>
                       <v-text-field
@@ -157,6 +90,40 @@
                         type="number|string"
                       />
                     </ValidationProvider>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="6"
+                  >
+                    <label><strong>{{ $t('label.select_sub_district_full_name') }}</strong></label>
+                    <select-area-sub-district
+                      :required="true"
+                      :rule="subDistrictRule"
+                      :sub-district="subDistrict"
+                      :update-sub-district.sync="subDistrict"
+                      :code-district="rdtDistributionForm.location_district_code"
+                      :on-select-sub-district="onSelectSubDistrictCity"
+                    />
+                    <ValidationProvider
+                      v-slot="{ errors }"
+                      rules="addressRequired"
+                    >
+                      <label><strong>{{ $t('label.address') }}</strong></label>
+                      <v-textarea
+                        v-model="rdtDistributionForm.location_address"
+                        :error-messages="errors"
+                        :label="$t('label.example_address')"
+                        solo-inverted
+                      />
+                    </ValidationProvider>
+                    <label><strong>{{ $t('label.distribution_date') }}</strong></label>
+                    <date-picker
+                      :required="true"
+                      :rule="distributionDateRule"
+                      :value="date"
+                      @selected="changeDate"
+                    />
                   </v-col>
                 </v-row>
               </v-container>
@@ -233,7 +200,10 @@ export default {
       },
       dialog: false,
       submitBtn: false,
-      date: ''
+      date: '',
+      distributionDestinationRule: 'distributionDestinationRequired',
+      subDistrictRule: 'subDistricRequired',
+      distributionDateRule: 'distributionDateRequired'
     }
   },
   computed: {

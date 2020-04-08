@@ -11,7 +11,7 @@
     <template v-slot:activator="{ on }">
       <ValidationProvider
         v-slot="{ errors }"
-        :rules="required ? 'required': ''"
+        :rules="required ? rule : ''"
       >
         <v-text-field
           v-model="dateFormatted"
@@ -44,6 +44,10 @@ export default {
     required: {
       type: Boolean,
       default: false
+    },
+    rule: {
+      type: String,
+      default: ''
     }
   },
   data() {
