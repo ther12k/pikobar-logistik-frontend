@@ -57,9 +57,9 @@ export default {
     rdt_receipt_title: 'Jumlah Penerimaan',
     rdt_distribution_list_title: 'Daftar Distribusi RDT Kit',
     rdt_usage_report_title: 'Daftar Laporan Penggunaan RDT Kit',
-    first_stock: 'Jumlah Stok Awal',
+    rdt_province_available_title: 'Jumlah RDT Kit Tersedia di Provinsi',
     distributed_stock: 'Jumlah Terdistribusi',
-    remaining_stock: 'Jumlah Stok Sisa',
+    rdt_used_in_location_title: 'Jumlah RDT Terpakai di Lokasi Tes',
     add_distribution: 'Tambah Distribusi',
     add_data: 'Tambah Data',
     sort: 'Urutkan',
@@ -102,7 +102,8 @@ export default {
     category: 'Kategori',
     check_date: 'Tanggal Pemeriksaan',
     test_result: 'Hasil Test',
-    no_data: 'Tidak ada data'
+    no_data: 'Tidak ada data',
+    null: '-'
   },
   success: {
     login_success: 'Login Berhasil',

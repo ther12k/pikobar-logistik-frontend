@@ -6,9 +6,9 @@ import getters from './getters'
 const state = {
   totalList: 0,
   listRdtDistribution: [],
-  firstStock: 0,
+  availableStock: 0,
   distributedStock: 0,
-  remainingStock: 0,
+  usedStock: 0,
   rdtDistributionForm: {
     id_product: 1,
     id_user: '',
