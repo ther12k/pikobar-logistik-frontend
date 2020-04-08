@@ -50,6 +50,7 @@
             >
               <v-autocomplete
                 v-model="formResult.test_location"
+                no-data-text="Data tidak tersedia"
                 :items="hospitalList"
                 :return-object="false"
                 :error-messages="errors"
@@ -174,7 +175,10 @@ export default {
     ])
   },
   async mounted() {
-    await this.$store.dispatch('region/getListHospital')
+    const listQuery = {
+      city_code: this.district_user
+    }
+    await this.$store.dispatch('region/getListHospital', listQuery)
   },
   methods: {
     handleChangeLocationNow(value) {
