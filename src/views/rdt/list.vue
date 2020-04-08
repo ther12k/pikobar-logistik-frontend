@@ -59,7 +59,7 @@
                 <td>{{ item.address_district_name }} </td>
                 <td>{{ item.test_date ? formatDatetime(item.test_date, 'DD MMMM YYYY') : '-' }}</td>
                 <td>{{ item.final_result }} </td>
-                <td v-if="roles[0] === 'dinkeskota' || 'dinkesprov'">
+                <td>
                   <v-card-actions>
                     <v-menu
                       :close-on-content-click="false"
@@ -81,16 +81,16 @@
                         </v-btn>
                       </template>
                       <v-card>
-                        <v-list-item @click="handleDetail(item._id)">
+                        <v-list-item v-if="roles[0] === 'dinkeskota' || 'dinkesprov'" @click="handleDetail(item._id)">
                           Lihat Detail
                         </v-list-item>
                         <!-- <v-list-item v-if="item.final_result && item.final_result.length > 0" @click="handleEditRDT(item._id)">
                           Update Profil Peserta
                         </v-list-item> -->
-                        <v-list-item v-if="item.final_result && item.final_result.length > 0 " @click="handleUpdateResults(item._id)">
+                        <v-list-item v-if="roles[0] === 'dinkeskota' && item.final_result && item.final_result.length > 0 " @click="handleUpdateResults(item._id)">
                           Update Hasil
                         </v-list-item>
-                        <v-list-item @click="handleDeleteRDT(item._id)">
+                        <v-list-item v-if="roles[0] === 'dinkeskota'" @click="handleDeleteRDT(item._id)">
                           Hapus Peserta
                         </v-list-item>
                       </v-card>
