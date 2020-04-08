@@ -38,17 +38,6 @@
           </v-list-item>
         </v-card>
       </v-col>
-      <v-col cols="3">
-        <v-btn
-          outlined
-          color="#14a942"
-          class="btn-tambah-distribusi"
-          @click.stop="handleCreate()"
-        >
-          <v-icon left>add</v-icon>
-          {{ $t('label.add_distribution') }}
-        </v-btn>
-      </v-col>
     </v-row>
     <v-row>
       <v-col cols="2">
@@ -101,27 +90,27 @@
       </v-col>
       <v-col cols="2">
         <v-btn
-          class="bottom-add-survey btn-export"
+          class="bottom-add-survey btn-create"
           color="#14a942"
-          :href="linkExport"
+          @click.stop="handleCreate()"
         >
-          {{ $t('label.export_button') }} <!-- To Do : Menjalankan fungsi eksport tabel -->
+          {{ $t('label.add_data') }}
         </v-btn>
       </v-col>
     </v-row>
     <v-card
       outlined
     >
-      <v-row>
-        <v-col>
-          <v-card-text>
-            <div class="headline">
-              {{ $t('label.rdt_distribution_table_title') }}
-            </div>
-          </v-card-text>
-        </v-col>
-      </v-row>
-      <hr>
+      <v-card-text>
+        <span class="table-title">
+          {{ $t('label.rdt_distribution_table_title') }}
+        </span>
+        <a :href="linkExport" class="export">
+          <v-icon color="#4990ef">mdi-download</v-icon>
+          {{ $t('label.export_button') }}
+        </a>
+      </v-card-text>
+      <hr class="thin">
       <v-row>
         <v-col auto>
           <v-simple-table>
@@ -136,7 +125,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listRdtDistribution" :key="item.index">
+                <tr v-if="listRdtDistribution.length === 0">
+                  <td class="text-center" :colspan="5">Tidak ada data</td>
+                </tr>
+                <tr v-for="(item, index) in listRdtDistribution" v-else :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
                   <td>{{ item.name.toUpperCase() }}</td>
                   <td>{{ Math.abs(item.quantity) | currency }}</td>
@@ -233,12 +225,12 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('rdtDistribution/getSummary')
     await this.handleSearch()
     this.linkExport = '/api/v1/transactions/export?token=' + this.token
   },
   methods: {
     async handleSearch() {
+      await this.$store.dispatch('rdtDistribution/getSummary')
       await this.$store.dispatch('rdtDistribution/getListRdtDistribution', this.listQuery)
     },
     getTableRowNumbering(index) {
@@ -292,9 +284,27 @@ export default {
   .card-search {
     margin-top: 30px
   }
-  .btn-export {
+  .btn-create {
     height: 50px !important;
     margin-top: 29px !important;
-    min-width: 100% !important
+    min-width: 100% !important;
+    text-transform: none;
+    font-size: 14px !important;
+  }
+  .table-title {
+    font-family: "Product Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #828282;
+  }
+  .thin {
+    margin-top: 5px;
+    margin-bottom: 0px;
+  }
+  .export {
+    float: right;
+    color: #4990ef !important;
   }
 </style>

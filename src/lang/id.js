@@ -61,6 +61,7 @@ export default {
     distributed_stock: 'Jumlah Terdistribusi',
     remaining_stock: 'Jumlah Stok Sisa',
     add_distribution: 'Tambah Distribusi',
+    add_data: 'Tambah Data',
     sort: 'Urutkan',
     distribution_destination: 'Tujuan Distribusi',
     example_distribution_destination: 'Masukkan tujuan distribusi',
