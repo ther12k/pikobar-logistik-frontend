@@ -26,12 +26,13 @@
                         v-slot="{ errors }"
                         rules="required"
                       >
-                        <label class="required">Hasil Pemeriksaan Awal</label>
+                        <label class="required">Kriteria</label>
                         <v-radio-group
                           v-model="formRiwayatPasien.status"
                           :error-messages="errors"
                           row
                         >
+                          <v-radio label="OTG" value="OTG" />
                           <v-radio label="ODP" value="ODP" />
                           <v-radio label="PDP" value="PDP" />
                           <v-radio label="POSITIF" value="POSITIF" />
@@ -41,7 +42,7 @@
                         v-slot="{ errors }"
                         rules="required"
                       >
-                        <label class="required">Proses Pemeriksaan</label>
+                        <label class="required">Tahapan</label>
                         <v-radio-group
                           v-model="formRiwayatPasien.stage"
                           :error-messages="errors"
@@ -55,7 +56,7 @@
                         v-if="formRiwayatPasien.status !== 'ODP'"
                         v-slot="{ errors }"
                       >
-                        <label>Hasil Pemeriksaan Akhir</label>
+                        <label>Hasil</label>
                         <v-radio-group
                           v-model="formRiwayatPasien.final_result"
                           :error-messages="errors"
