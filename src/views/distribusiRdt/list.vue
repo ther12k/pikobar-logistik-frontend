@@ -306,5 +306,6 @@ export default {
   .export {
     float: right;
     color: #4990ef !important;
+    font-size: 16px;
   }
 </style>
