@@ -61,6 +61,7 @@ export default {
     distributed_stock: 'Jumlah Terdistribusi',
     remaining_stock: 'Jumlah Stok Sisa',
     add_distribution: 'Tambah Distribusi',
+    add_data: 'Tambah Data',
     sort: 'Urutkan',
     distribution_destination: 'Tujuan Distribusi',
     example_distribution_destination: 'Masukkan tujuan distribusi',
@@ -100,7 +101,8 @@ export default {
     full_name: 'Nama Lengkap',
     category: 'Kategori',
     check_date: 'Tanggal Pemeriksaan',
-    test_result: 'Hasil Test'
+    test_result: 'Hasil Test',
+    no_data: 'Tidak ada data'
   },
   success: {
     login_success: 'Login Berhasil',
@@ -119,6 +121,16 @@ export default {
     field_unauthorized_characters: 'Bidang mengandung karakter yang tidak diizinkan.',
     field_phone_number_not_valid: 'Nomor telepon tidak valid',
     server_error_occurred: 'Terjadi kesalahan pada server',
-    feature_under_development: 'Fitur dalam pengembangan'
+    feature_under_development: 'Fitur dalam pengembangan',
+    required_fields: {
+      distribution_destination: 'Tujuan distribusi harus diisi',
+      address: 'Alamat harus diisi',
+      phone_number: 'Nomor telepon harus diisi',
+      distribution_destination_name: 'Nama tujuan distribusi harus diisi',
+      distribution_quantity: 'Jumlah distribusi harus diisi',
+      contact_person: 'Nama pemohon harus diisi',
+      distribution_date: 'Tanggal distribusi harus diisi',
+      select_sub_district: 'Kecamatan harus diisi',
+    }
   },
 }
