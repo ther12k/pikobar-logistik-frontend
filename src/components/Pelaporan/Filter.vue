@@ -17,56 +17,28 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12" sm="3">
-            <v-label class="title">Hasil Test:</v-label>
+          <v-col cols="12" sm="6">
+            <v-label class="title">Tahapan:</v-label>
             <v-select
               v-model="listQuery.status"
-              :items="resultCheckList"
+              :items="stagesList"
+              solo
+            />
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-label class="title">Hasil:</v-label>
+            <v-select
+              v-model="listQuery.final_result"
+              :items="resultList"
               solo
               item-text="label"
               item-value="value"
-            />
-          </v-col>
-          <v-col cols="12" sm="3">
-            <v-label class="title">Mekanisme:</v-label>
-            <v-select
-              v-model="listQuery.mechanism"
-              :items="mechanismOptions"
-              solo
-            />
-          </v-col>
-          <v-col cols="12" sm="3">
-            <v-label class="title">Metode Yang Digunakan:</v-label>
-            <v-select
-              v-model="listQuery.test_method"
-              :items="methodsOptions"
-              solo
-              item-text="label"
-              item-value="value"
-            />
-          </v-col>
-          <v-col v-if="roles[0] === 'dinkesprov'" cols="12" sm="3">
-            <v-label class="title">Tempat Test:</v-label>
-            <select-area-district-city
-              :district-city="districtCity"
-              :city-district.sync="districtCity"
-              :on-select-district="onSelectDistrict"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12" sm="3">
-            <v-label class="title">Kategori Sasaran:</v-label>
-            <v-select
-              v-model="listQuery.category"
-              :items="categoryList"
-              solo
-              item-text="label"
-              item-value="value"
-            />
-          </v-col>
-          <v-col cols="12" sm="3">
-            <v-label class="title">Tanggal Pemeriksaan:</v-label>
+            <v-label class="title">Tanggal:</v-label>
             <input-date-picker
               :format-date="formatDate"
               :label="'Tanggal Awal'"
@@ -85,7 +57,7 @@
               @changeDate="listQuery.end_date = $event"
             />
           </v-col>
-          <v-col cols="12" sm="3">
+          <v-col cols="12" sm="6">
             <br>
             <div>
               <v-btn
@@ -97,10 +69,17 @@
               </v-btn>
               <v-btn
                 color="success"
-                style="height: 46px;min-width: 100px;"
+                style="height: 46px;min-width: 100px;margin-right: 4px;"
                 @click="onSearch"
               >
                 Cari
+              </v-btn>
+              <v-btn
+                color="success"
+                style="height: 46px;min-width: 100px;"
+                @click="onSearch"
+              >
+                Export Excel
               </v-btn>
             </div>
           </v-col>
@@ -114,7 +93,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'FilterTestResult',
+  name: 'CaseFilter',
   props: {
     listQuery: {
       type: Object,
@@ -131,24 +110,24 @@ export default {
       districtCity: {
         kota_kode: ''
       },
-      methodsOptions: [
-        'HAND PRIX',
-        'FLEBOTOMY'
+      stagesList: [
+        'ODP',
+        'PDP',
+        'POSITIF'
       ],
-      mechanismOptions: [
-        'Door to door',
-        'Faskes',
-        'Drive-Thru'
-      ],
-      categoryList: [
-        { label: 'Kategori A', value: 'A' },
-        { label: 'Kategori B', value: 'B' },
-        { label: 'Kategori C', value: 'C' }
-      ],
-      resultCheckList: [
-        { label: 'Negatif', value: 'NEGATIF' },
-        { label: 'Positif', value: 'POSITIF' },
-        { label: 'Invalid', value: 'INVALID' }
+      resultList: [
+        {
+          label: 'Negatif',
+          value: 0
+        },
+        {
+          label: 'Sembuh',
+          value: 1
+        },
+        {
+          label: 'Meninggal',
+          value: 2
+        }
       ]
     }
   },

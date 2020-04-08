@@ -85,13 +85,13 @@
             </div>
           </v-card-text>
         </v-col>
-        <v-col>
-          <search
-            :handle-search="handleSearch"
-            :list-query="listQuery"
-          />
-        </v-col>
+        <v-col />
       </v-row>
+      <case-filter
+        :list-query="listQuery"
+        :query-list.sync="listQuery"
+        :on-search="handleSearch"
+      />
       <hr>
       <v-row>
         <v-col auto>
@@ -230,6 +230,8 @@ export default {
       },
       listQuery: {
         address_district_code: '',
+        status: '',
+        final_result: '',
         page: 1,
         limit: 30,
         search: ''
