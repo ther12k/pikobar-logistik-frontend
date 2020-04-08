@@ -124,6 +124,7 @@ export default {
         page: 1,
         limit: 10
       },
+      loading: false,
       dialog: false,
       dataDelete: null
     }
@@ -140,6 +141,7 @@ export default {
     await this.getRecipient(this.$route.params.id)
     await this.getWidgetRecipient(this.$route.params.id)
     await this.getListRecipient()
+
   },
   methods: {
     getTableRowNumbering(index) {
