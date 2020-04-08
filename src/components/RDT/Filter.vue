@@ -20,7 +20,7 @@
           <v-col cols="12" sm="3">
             <v-label class="title">Hasil Test:</v-label>
             <v-select
-              v-model="listQuery.status"
+              v-model="listQuery.final_result"
               :items="resultCheckList"
               solo
               item-text="label"

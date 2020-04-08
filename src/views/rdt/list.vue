@@ -37,6 +37,7 @@
             :headers="headers"
             :items="rdtList"
             :no-data-text="'Tidak ada data'"
+            :loading="loadingTable"
             hide-default-footer
           >
             <template v-slot:item="{ item, index }">
@@ -140,6 +141,7 @@ export default {
         { text: 'HASIL TES', value: 'final_result' },
         { text: 'Aksi', value: 'actions', sortable: false }
       ],
+      loadingTable: false,
       totalODP: 0,
       totalPDP: 0,
       totalPositif: 0,
@@ -176,8 +178,10 @@ export default {
     'listQuery.search': {
       handler: function(value) {
         if ((value !== undefined) && (value.length === 0 || value.length >= 3)) {
+          this.loadingTable = true
           this.listQuery.page = 1
           this.handleSearch()
+          this.loadingTable = false
         }
       },
       immediate: true
@@ -186,7 +190,9 @@ export default {
   async mounted() {
     this.listQuery.address_district_code = this.district_user
     await this.$store.dispatch('rdt/resetListRDT')
+    this.loadingTable = true
     const response = await this.$store.dispatch('rdt/getListRDT', this.listQuery)
+    if (response) this.loadingTable = false
     this.totalReport = response.data._meta.itemCount ? response.data._meta.itemCount : '0'
   },
   methods: {
