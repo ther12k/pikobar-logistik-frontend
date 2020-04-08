@@ -5,7 +5,7 @@ import getters from './getters'
 function initialState() {
   return {
     detailPasien: null,
-    listKasus: null,
+    listKasus: [],
     totalList: 0,
     formPasien: {
       id_case: '',
