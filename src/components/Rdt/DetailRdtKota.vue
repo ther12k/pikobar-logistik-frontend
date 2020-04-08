@@ -82,7 +82,7 @@
                   <td>{{ item.total_invalid }}</td>
                 </tr>
                 <tr v-if="detailListRecipient.length == 0">
-                  <td colspan="6" class="text-center">Tidak Ada Data</td>
+                  <td colspan="6" class="text-center">{{ $t('label.no_data') }}</td>
                 </tr>
               </tbody>
             </template>
