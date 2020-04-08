@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1><b>{{ dataRecipient.cityName }}</b></h1>
+    <h1><b>{{ dataKitRecipient.cityName }}</b></h1>
     <v-row>
       <v-col cols="12" sm="6">
         <v-card
@@ -10,15 +10,15 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.kit_received') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ dataRecipient.totalReceived }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataKitRecipient.totalReceived }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.kit_available') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ dataRecipient.totalStock }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataKitRecipient.totalStock }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.used_kit') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ dataRecipient.totalUsed }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataKitRecipient.totalUsed }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -73,17 +73,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in dataPengguna" :key="item.index">
+                <tr v-for="(item, index) in detailListRecipient" :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.namaFaskes }}</td>
-                  <td>{{ item.kitTerpakai }}</td>
-                  <td>{{ item.positif }}</td>
-                  <td>
-                    {{ item.negatif }}
-                  </td>
-                  <td>
-                    {{ item.invalid }}
-                  </td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.total_used }}</td>
+                  <td>{{ item.total_positif }}</td>
+                  <td>{{ item.total_negatif }}</td>
+                  <td>{{ item.total_invalid }}</td>
+                </tr>
+                <tr v-if="detailListRecipient.length == 0">
+                  <td colspan="6" class="text-center">Tidak Ada Data</td>
                 </tr>
               </tbody>
             </template>
@@ -91,6 +90,12 @@
         </v-col>
       </v-row>
     </v-card>
+    <pagination
+      :total="totalListDetailRecipient"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      :on-next="onNext"
+    />
     <dialog-delete
       :dialog="dialog"
       :data-deleted="dataDelete"
@@ -115,45 +120,30 @@ export default {
   },
   data() {
     return {
-      // data dummy TODO: integrasi dengan API
-      dataPengguna: [
-        {
-          namaFaskes: 'RSUD 1',
-          stokDinkes: 115,
-          kitTerpakai: 100,
-          stokSisa: 15,
-          positif: 25,
-          negatif: 50,
-          invalid: 25
-        },
-        {
-          namaFaskes: 'RSUD 2',
-          stokDinkes: 100,
-          kitTerpakai: 80,
-          stokSisa: 20,
-          positif: 25,
-          negatif: 50,
-          invalid: 25
-        }
-      ],
+      listQuery: {
+        page: 1,
+        limit: 10
+      },
       dialog: false,
       dataDelete: null
     }
   },
   computed: {
     ...mapGetters('recipient', [
-      'dataRecipient',
-      'dataWidgetRecipient'
+      'dataKitRecipient',
+      'dataWidgetRecipient',
+      'detailListRecipient',
+      'totalListDetailRecipient'
     ])
   },
   async mounted() {
-    // TODO: integrasi dengan API
     await this.getRecipient(this.$route.params.id)
     await this.getWidgetRecipient(this.$route.params.id)
+    await this.getListRecipient()
   },
   methods: {
     getTableRowNumbering(index) {
-      return (index + 1)
+      return (parseInt(index) + 1)
     },
     async getRecipient(cityCode) {
       this.loading = true
@@ -164,6 +154,14 @@ export default {
       this.loading = true
       await this.$store.dispatch('recipient/getWidgetRecipient', { city_code: cityCode })
       this.loading = false
+    },
+    async getListRecipient() {
+      this.loading = true
+      await this.$store.dispatch('recipient/getListDetailRecipient', [this.$route.params.id, this.listQuery])
+      this.loading = false
+    },
+    async onNext() {
+      await this.getListRecipient()
     }
   }
 }

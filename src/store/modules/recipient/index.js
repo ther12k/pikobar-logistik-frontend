@@ -6,8 +6,10 @@ const state = {
   listRecipient: [],
   totalList: 0,
   summaryRecipient: [],
-  dataRecipient: {},
-  dataWidgetRecipient: {}
+  dataKitRecipient: {},
+  dataWidgetRecipient: {},
+  listDetailRecipient: [],
+  totalListDetailRecipient: 0
 }
 
 export default {

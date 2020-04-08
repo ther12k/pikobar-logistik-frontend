@@ -9,7 +9,7 @@ export default {
     state.summaryRecipient = data
   },
   SET_DETAIL_RECIPIENT: (state, data) => {
-    state.dataRecipient = {
+    state.dataKitRecipient = {
       cityCode: data[0]['kemendagri_kabupaten_kode'],
       cityName: data[0]['kemendagri_kabupaten_nama'],
       totalStock: parseInt(data[0]['total_stock']) - parseInt(data[0]['total_used']),
@@ -19,6 +19,11 @@ export default {
   },
   SET_WIDGET_RECIPIENT: (state, data) => {
     state.dataWidgetRecipient = data
-    console.log(state.dataWidgetRecipient)
+  },
+  SET_LIST_DETAIL_RECIPIENT: (state, data) => {
+    state.listDetailRecipient = data
+  },
+  SET_TOTAL_LIST_DETAIL_RECIPIENT: (state, data) => {
+    state.totalListDetailRecipient = data
   }
 }

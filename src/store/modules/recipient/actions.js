@@ -28,5 +28,10 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async getListDetailRecipient({ commit }, params) {
+    const response = await fetchList('api/v1/recipients/' + params[0], 'GET', params[1])
+    commit('SET_LIST_DETAIL_RECIPIENT', response.data.data)
+    commit('SET_TOTAL_LIST_DETAIL_RECIPIENT', response.data.last_page)
   }
 }
