@@ -10,7 +10,7 @@
     <template v-slot:activator="{ on }">
       <ValidationProvider
         v-slot="{ errors }"
-        :rules="required ? rule: ''"
+        :rules="required ? rule : ''"
       >
         <v-text-field
           v-model="dateFormatted"

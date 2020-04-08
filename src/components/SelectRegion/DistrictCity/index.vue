@@ -1,7 +1,7 @@
 <template>
   <ValidationProvider
     v-slot="{ errors }"
-    :rules="required ? rule: ''"
+    :rules="required ? rule : ''"
   >
     <v-autocomplete
       v-if="disabledDistrict !== true"
