@@ -174,7 +174,7 @@
                           <v-list-item @click="handleDetail(item._id)">
                             Lihat Detail
                           </v-list-item>
-                          <div v-if="roles[0] === 'dinkeskota' || 'dinkesprov'">
+                          <div v-if="roles[0] === 'dinkeskota'">
                             <v-list-item @click="handleEditCase(item._id)">
                               Update Profil
                             </v-list-item>
