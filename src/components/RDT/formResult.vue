@@ -76,6 +76,7 @@
             </ValidationProvider>
             <div v-if="formResult.test_location_type === 'LAINNYA'">
               <address-region
+                v-model="formResult.test_address_district_name"
                 :district-code="formResult.test_address_district_code"
                 :district-name="formResult.test_address_district_name"
                 :code-district.sync="formResult.test_address_district_code"
@@ -88,7 +89,7 @@
                 :village-name="formResult.test_address_village_name"
                 :code-village.sync="formResult.test_address_village_code"
                 :name-village.sync="formResult.test_address_village_name"
-                :disabled-address="false"
+                :disabled-address="true"
                 :required-address="true"
               />
             </div>
@@ -167,6 +168,9 @@ export default {
   computed: {
     ...mapGetters('region', [
       'hospitalList'
+    ]),
+    ...mapGetters('user', [
+      'district_user'
     ])
   },
   async mounted() {
@@ -176,6 +180,7 @@ export default {
     handleChangeLocationNow(value) {
       if (value === 'LAINNYA') {
         this.formResult.test_location = null
+        this.getCity()
       } else {
         this.formResult.test_address_district_code = ''
         this.formResult.test_address_district_name = ''
@@ -190,6 +195,13 @@ export default {
     },
     onSelectHospital(value) {
       this.formResult.test_location = value
+    },
+    async getCity() {
+      const responseDetails = await this.$store.dispatch('region/getDetailDistrict', this.district_user)
+      if (responseDetails.data[0]) {
+        this.formResult.test_address_district_name = responseDetails.data[0].kota_nama
+        this.formResult.test_address_district_code = responseDetails.data[0].kota_kode
+      }
     }
   }
 }
