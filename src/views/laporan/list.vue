@@ -165,22 +165,22 @@
                         <v-list-item @click="handleDetail(item._id)">
                           Lihat Detail
                         </v-list-item>
-                        <div v-if="roles[0] === 'dinkeskota' || 'dinkesprov'">
-                          <v-list-item @click="handleEditCase(item._id)">
-                            Update Profil
-                          </v-list-item>
-                          <v-list-item @click="handleEditHistoryCase(item._id)">
-                            Update Riwayat
-                          </v-list-item>
-                          <v-list-item @click="handleDeleteCase(item)">
-                            Hapus Kasus
-                          </v-list-item>
-                        </div>
-                      </v-card>
-                    </v-menu>
-                  </v-card-actions>
-                </td>
-              </tr>
+                          <div v-if="roles[0] === 'dinkeskota'">
+                            <v-list-item @click="handleEditCase(item._id)">
+                              Update Profil
+                            </v-list-item>
+                            <v-list-item @click="handleEditHistoryCase(item._id)">
+                              Update Riwayat
+                            </v-list-item>
+                            <v-list-item @click="handleDeleteCase(item)">
+                              Hapus Kasus
+                            </v-list-item>
+                          </div>
+                        </v-card>
+                      </v-menu>
+                    </v-card-actions>
+                  </td>
+                </tr>
             </template>
           </v-data-table>
         </v-col>
