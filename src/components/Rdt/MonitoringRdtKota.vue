@@ -73,9 +73,9 @@
     </v-row>
     <v-card :loading="loading" outlined>
       <v-card-text>
-        <span class="headline">{{ $t('label.rdt_usage_report_title') }}</span>
+        <span class="table-title">{{ $t('label.rdt_usage_report_title') }}</span>
       </v-card-text>
-      <hr>
+      <hr class="thin">
       <v-row>
         <v-col auto>
           <v-simple-table>
@@ -101,7 +101,7 @@
                   <td><v-btn text small color="info" @click="handleDetail(recipentFaskes.faskes_name)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
                 <tr v-if="recipientFaskesList.length === 0">
-                  <td colspan="5" class="text-center">{{ $t('errors.no_data') }}</td>
+                  <td colspan="5" class="text-center">{{ $t('label.no_data') }}</td>
                 </tr>
               </tbody>
             </template>
@@ -198,7 +198,16 @@ export default {
 .bottom-add-survey {
   margin-top:25px;
 }
-.headline{
-  padding-top: 2rem;
+.table-title {
+  font-family: "Product Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  color: #828282;
+}
+.thin {
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
 </style>
