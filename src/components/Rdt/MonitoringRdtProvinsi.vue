@@ -83,6 +83,9 @@
                   <td>{{ recipent.total_stock - recipent.total_used | currency }}</td>
                   <td><v-btn text small color="info" @click="handleDetail(recipent)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
+                <tr v-if="recipientList.length === 0">
+                  <td colspan="5" class="text-center">{{ $t('errors.no_data') }}</td>
+                </tr>
               </tbody>
             </template>
           </v-simple-table>
