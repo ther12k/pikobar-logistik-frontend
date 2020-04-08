@@ -20,5 +20,13 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async getWidgetRecipient({ commit }, params) {
+    try {
+      const response = await fetchList('api/v1/recipients/rdt-result-summary', 'GET', params)
+      commit('SET_WIDGET_RECIPIENT', response.data)
+    } catch (error) {
+      return error.response
+    }
   }
 }

@@ -10,5 +10,8 @@ export default {
   },
   dataRecipient: (state, getters) => {
     return state.dataRecipient
+  },
+  dataWidgetRecipient: (state, getters) => {
+    return state.dataWidgetRecipient
   }
 }

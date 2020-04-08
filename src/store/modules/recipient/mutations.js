@@ -9,6 +9,16 @@ export default {
     state.summaryRecipient = data
   },
   SET_DETAIL_RECIPIENT: (state, data) => {
-    state.dataRecipient = data[0]
+    state.dataRecipient = {
+      cityCode: data[0]['kemendagri_kabupaten_kode'],
+      cityName: data[0]['kemendagri_kabupaten_nama'],
+      totalStock: parseInt(data[0]['total_stock']) - parseInt(data[0]['total_used']),
+      totalUsed: data[0]['total_used'],
+      totalReceived: data[0]['total_stock']
+    }
+  },
+  SET_WIDGET_RECIPIENT: (state, data) => {
+    state.dataWidgetRecipient = data
+    console.log(state.dataWidgetRecipient)
   }
 }

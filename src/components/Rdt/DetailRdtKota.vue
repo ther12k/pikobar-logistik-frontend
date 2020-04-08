@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1><b>{{ dataRecipient.kemendagri_kabupaten_nama }}</b></h1>
+    <h1><b>{{ dataRecipient.cityName }}</b></h1>
     <v-row>
       <v-col cols="12" sm="6">
         <v-card
@@ -10,15 +10,15 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.kit_received') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ kitDiterima }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataRecipient.totalReceived }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.kit_available') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ dataRecipient.total_stock }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataRecipient.totalStock }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green">{{ $t('label.used_kit') }}</v-list-item-title>
-              <v-list-item-title class="mb-1">{{ dataRecipient.total_used }}</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataRecipient.totalUsed }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -31,15 +31,15 @@
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title class="text-green"> {{ $t('label.positive') }} </v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitDiterima }} {{ $t('label.label_human') }})</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataWidgetRecipient.POSITIF }} {{ $t('label.label_human') }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green"> {{ $t('label.negative') }} </v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitTersedia }} {{ $t('label.label_human') }})</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataWidgetRecipient.NEGATIF }} {{ $t('label.label_human') }}</v-list-item-title>
             </v-list-item-content>
             <v-list-item-content>
               <v-list-item-title class="text-green"> {{ $t('label.invalid') }} </v-list-item-title>
-              <v-list-item-title class="mb-1">0% ({{ kitTerpakai }} {{ $t('label.label_human') }})</v-list-item-title>
+              <v-list-item-title class="mb-1">{{ dataWidgetRecipient.INVALID }} {{ $t('label.label_human') }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -115,12 +115,6 @@ export default {
   },
   data() {
     return {
-      kitDiterima: 0,
-      positif: 0,
-      negatif: 0,
-      invalid: 0,
-      kitTersedia: 0,
-      kitTerpakai: 0,
       // data dummy TODO: integrasi dengan API
       dataPengguna: [
         {
@@ -148,12 +142,14 @@ export default {
   },
   computed: {
     ...mapGetters('recipient', [
-      'dataRecipient'
+      'dataRecipient',
+      'dataWidgetRecipient'
     ])
   },
   async mounted() {
     // TODO: integrasi dengan API
-    this.getRecipient(this.$route.params.id)
+    await this.getRecipient(this.$route.params.id)
+    await this.getWidgetRecipient(this.$route.params.id)
   },
   methods: {
     getTableRowNumbering(index) {
@@ -162,6 +158,11 @@ export default {
     async getRecipient(cityCode) {
       this.loading = true
       await this.$store.dispatch('recipient/getListRecipient', { city_code: cityCode })
+      this.loading = false
+    },
+    async getWidgetRecipient(cityCode) {
+      this.loading = true
+      await this.$store.dispatch('recipient/getWidgetRecipient', { city_code: cityCode })
       this.loading = false
     }
   }
