@@ -8,8 +8,8 @@
         >
           <v-list-item two-line class="card-stok-awal">
             <v-list-item-content>
-              <v-list-item-title class="white--text">{{ $t('label.first_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(firstStock) | currency }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.rdt_province_available_title') }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(availableStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -20,7 +20,7 @@
         >
           <v-list-item two-line class="card-terdistribusi">
             <v-list-item-content>
-              <v-list-item-title class="white--text">{{ $t('label.distributed_stock') }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.distributed_stock') }}</v-list-item-title>
               <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(distributedStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -32,8 +32,8 @@
         >
           <v-list-item two-line class="card-stok-sisa">
             <v-list-item-content>
-              <v-list-item-title class="white--text">{{ $t('label.remaining_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(remainingStock) | currency }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.rdt_used_in_location_title') }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(usedStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -119,6 +119,7 @@
                 <tr>
                   <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.distribution_destination').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.distribution_destination_name').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.delivered_kit').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.distribution_date').toUpperCase() }}</th>
                   <th v-if="roles[0] === 'dinkesprov'" class="text-left">{{ $t('label.action').toUpperCase() }}</th>
@@ -130,9 +131,10 @@
                 </tr>
                 <tr v-for="(item, index) in listRdtDistribution" v-else :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.name.toUpperCase() }}</td>
-                  <td>{{ Math.abs(item.quantity) | currency }}</td>
-                  <td>{{ item.time.substr(0, 10) }}</td>
+                  <td>{{ item.subdistrict === null ? $t('label.stripe') : item.subdistrict.kemendagri_kabupaten_nama === null ? $t('label.stripe') : item.subdistrict.kemendagri_kabupaten_nama.toUpperCase() }}</td>
+                  <td>{{ item.name === null ? $t('label.stripe') : item.name.toUpperCase() }}</td>
+                  <td>{{ item.quantity === null ? $t('label.stripe') : Math.abs(item.quantity) | currency }}</td>
+                  <td>{{ item.time === null ? $t('label.stripe') : $moment(item.time).format('DD MMMM YYYY') }}</td>
                   <td><v-btn text small color="info" @click="handleEdit(item.id)">{{ $t('label.edit_2') }}</v-btn></td>
                 </tr>
               </tbody>
@@ -204,9 +206,9 @@ export default {
     ...mapGetters('rdtDistribution', [
       'listRdtDistribution',
       'totalList',
-      'firstStock',
+      'usedStock',
       'distributedStock',
-      'remainingStock'
+      'availableStock'
     ]),
     ...mapGetters('user', [
       'roles',
@@ -307,5 +309,8 @@ export default {
     float: right;
     color: #4990ef !important;
     font-size: 15px;
+  }
+  .card-title {
+    font-size: 12px;
   }
 </style>
