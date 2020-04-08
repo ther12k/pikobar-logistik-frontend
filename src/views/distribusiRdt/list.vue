@@ -126,7 +126,7 @@
               </thead>
               <tbody>
                 <tr v-if="listRdtDistribution.length === 0">
-                  <td class="text-center" :colspan="5">Tidak ada data</td>
+                  <td class="text-center" :colspan="5">{{ $t('label.no_data') }}</td>
                 </tr>
                 <tr v-for="(item, index) in listRdtDistribution" v-else :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>

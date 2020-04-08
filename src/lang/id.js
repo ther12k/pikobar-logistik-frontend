@@ -101,7 +101,8 @@ export default {
     full_name: 'Nama Lengkap',
     category: 'Kategori',
     check_date: 'Tanggal Pemeriksaan',
-    test_result: 'Hasil Test'
+    test_result: 'Hasil Test',
+    no_data: 'Tidak ada data'
   },
   success: {
     login_success: 'Login Berhasil',
