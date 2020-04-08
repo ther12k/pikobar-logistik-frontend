@@ -131,10 +131,10 @@
                 </tr>
                 <tr v-for="(item, index) in listRdtDistribution" v-else :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.subdistrict === null ? $t('label.null') : item.subdistrict.kemendagri_kabupaten_nama === null ? $t('label.null') : item.subdistrict.kemendagri_kabupaten_nama.toUpperCase() }}</td>
-                  <td>{{ item.name === null ? $t('label.null') : item.name.toUpperCase() }}</td>
-                  <td>{{ item.quantity === null ? $t('label.null') : Math.abs(item.quantity) | currency }}</td>
-                  <td>{{ item.time === null ? $t('label.null') : item.time.substr(0, 10) }}</td>
+                  <td>{{ item.subdistrict === null ? $t('label.stripe') : item.subdistrict.kemendagri_kabupaten_nama === null ? $t('label.stripe') : item.subdistrict.kemendagri_kabupaten_nama.toUpperCase() }}</td>
+                  <td>{{ item.name === null ? $t('label.stripe') : item.name.toUpperCase() }}</td>
+                  <td>{{ item.quantity === null ? $t('label.stripe') : Math.abs(item.quantity) | currency }}</td>
+                  <td>{{ item.time === null ? $t('label.stripe') : item.time.substr(0, 10) }}</td>
                   <td><v-btn text small color="info" @click="handleEdit(item.id)">{{ $t('label.edit_2') }}</v-btn></td>
                 </tr>
               </tbody>

@@ -103,7 +103,7 @@ export default {
     check_date: 'Tanggal Pemeriksaan',
     test_result: 'Hasil Test',
     no_data: 'Tidak ada data',
-    null: '-'
+    stripe: '-'
   },
   success: {
     login_success: 'Login Berhasil',
