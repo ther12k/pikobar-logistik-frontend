@@ -6,6 +6,7 @@
     transition="scale-transition"
     offset-y
     width="100%"
+    min-width="none"
   >
     <template v-slot:activator="{ on }">
       <ValidationProvider
