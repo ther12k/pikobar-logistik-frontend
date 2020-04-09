@@ -204,6 +204,7 @@
               <v-btn
                 color="success"
                 :disabled="formResult.final_result === 'POSITIF'"
+                :loading="loading"
                 bottom
                 style="float: right; color: white"
                 @click="saveData"
@@ -215,6 +216,7 @@
               <v-btn
                 color="blue"
                 :disabled="formResult.final_result !== 'POSITIF'"
+                :loading="loading"
                 bottom
                 style="float: left; color: white"
                 @click="saveRdtAndCase"
@@ -240,6 +242,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       formatDate: 'YYYY/MM/DD',
       isODP: true,
       isEdit: false,
@@ -375,6 +378,7 @@ export default {
       }
 
       try {
+        this.loading = true
         Object.assign(this.formRapid, this.formResult)
         delete this.formRapid._id
 
@@ -388,8 +392,11 @@ export default {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/rdt/list')
         await this.$refs.form.reset()
-      } catch {
+      } catch (e) {
+        console.log(e)
         await this.$store.dispatch('toast/errorToast', 'Data gagal disimpan')
+      } finally {
+        this.loading = false
       }
     },
     async saveRdtAndCase() {
@@ -401,28 +408,35 @@ export default {
         return
       }
 
-      Object.assign(this.formRapid, this.formResult)
+      try {
+        this.loading = true
+        Object.assign(this.formRapid, this.formResult)
 
-      if (this.formRapid.final_result === 'POSITIF') {
-        this.formRapid.status = 'PDP'
-        this.formRapid.stage = '0'
-        this.formRapid.is_test_masif = true
-      }
-
-      if (this.formRapid.id_case) {
-        const updateCase = {
-          case: this.formRapid.id,
-          status: this.formRapid.status,
-          stage: this.formRapid.stage,
-          final_result: this.formRapid.final_result,
-          is_test_masif: this.formRapid.is_test_masif
+        if (this.formRapid.final_result === 'POSITIF') {
+          this.formRapid.status = 'PDP'
+          this.formRapid.stage = '0'
+          this.formRapid.is_test_masif = true
         }
-        await this.$store.dispatch('reports/createHistoryCase', updateCase)
-      } else {
-        delete this.formRapid.id_case
-        await this.$store.dispatch('reports/createReportCase', this.formRapid)
+
+        if (this.formRapid.id_case) {
+          const updateCase = {
+            case: this.formRapid.id,
+            status: this.formRapid.status,
+            stage: this.formRapid.stage,
+            final_result: this.formRapid.final_result,
+            is_test_masif: this.formRapid.is_test_masif
+          }
+          await this.$store.dispatch('reports/createHistoryCase', updateCase)
+        } else {
+          delete this.formRapid.id_case
+          await this.$store.dispatch('reports/createReportCase', this.formRapid)
+        }
+        this.saveData()
+      } catch {
+        await this.$store.dispatch('toast/errorToast', 'Data gagal disimpan')
+      } finally {
+        this.loading = false
       }
-      this.saveData()
     }
   }
 }
