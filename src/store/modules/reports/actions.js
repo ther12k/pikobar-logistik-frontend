@@ -91,11 +91,12 @@ export default {
       return error.response
     }
   },
-  async exportExcel({ commit }) {
+  async exportExcel({ commit }, params) {
     try {
       const response = await request({
         url: `/api/cases-export`,
         method: 'GET',
+        params: params,
         responseType: 'blob'
       })
       return response
