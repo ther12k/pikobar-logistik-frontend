@@ -77,7 +77,7 @@
               <v-btn
                 color="success"
                 style="height: 46px;min-width: 100px;"
-                @click="onSearch"
+                @click="onExport"
               >
                 Export Excel
               </v-btn>
@@ -86,11 +86,15 @@
         </v-row>
       </v-container>
     </v-form>
+    <loading-bar
+      :loading="loadingBar"
+    />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import FileSaver from 'file-saver'
 
 export default {
   name: 'CaseFilter',
@@ -107,6 +111,7 @@ export default {
   data() {
     return {
       formatDate: 'YYYY-MM-DD',
+      loadingBar: false,
       districtCity: {
         kota_kode: ''
       },
@@ -150,7 +155,13 @@ export default {
       this.listQuery.start_date = ''
       this.listQuery.end_date = ''
       this.$refs.form.reset()
-      this.$store.dispatch('rdt/getListRDT', this.listQuery)
+      this.$store.dispatch('reports/getListRDT', this.listQuery)
+    },
+    async onExport() {
+      this.loadingBar = true
+      const response = await this.$store.dispatch('reports/exportExcel')
+      if (response) this.loadingBar = false
+      FileSaver.saveAs(response, 'kasus.xlsx')
     }
   }
 }

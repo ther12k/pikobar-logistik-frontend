@@ -99,6 +99,7 @@
             :headers="headers"
             :items="listKasus"
             :no-data-text="'Tidak ada data'"
+            :items-per-page="listQuery.limit"
             :loading="loadingTable"
             hide-default-footer
           >

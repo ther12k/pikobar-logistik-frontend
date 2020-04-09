@@ -1,4 +1,5 @@
 import requestServer from '@/api'
+import request from '@/utils/request'
 
 export default {
   async listReportCase({ commit }, params) {
@@ -85,6 +86,18 @@ export default {
   async createHistoryCase({ commit }, data) {
     try {
       const response = await requestServer('/api/history_cases', 'POST', data)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  async exportExcel({ commit }) {
+    try {
+      const response = await request({
+        url: `/api/cases-export`,
+        method: 'GET',
+        responseType: 'blob'
+      })
       return response
     } catch (error) {
       return error.response
