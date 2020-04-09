@@ -84,7 +84,7 @@
                   <td><v-btn text small color="info" @click="handleDetail(recipent)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
                 <tr v-if="recipientList.length === 0">
-                  <td colspan="5" class="text-center">{{ $t('label.no_data') }}</td>
+                  <td colspan="6" class="text-center">{{ $t('label.no_data') }}</td>
                 </tr>
               </tbody>
             </template>
