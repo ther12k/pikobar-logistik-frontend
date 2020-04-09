@@ -392,8 +392,7 @@ export default {
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/rdt/list')
         await this.$refs.form.reset()
-      } catch (e) {
-        console.log(e)
+      } catch {
         await this.$store.dispatch('toast/errorToast', 'Data gagal disimpan')
       } finally {
         this.loading = false
