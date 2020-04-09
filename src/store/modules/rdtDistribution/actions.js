@@ -14,9 +14,9 @@ export default {
   async getSummary({ commit }, params) {
     try {
       const response = await fetchList('/api/v1/transactions/summary', 'GET', params)
-      commit('SET_FIRST_STOCK', response.data.quantity_original)
+      commit('SET_AVAILABLE_STOCK', response.data.quantity_available)
       commit('SET_DISTRIBUTED_STOCK', response.data.quantity_distributed)
-      commit('SET_REMAINING_STOCK', response.data.quantity_available)
+      commit('SET_USED_STOCK', response.data.quantity_used)
       return response
     } catch (error) {
       return error.response

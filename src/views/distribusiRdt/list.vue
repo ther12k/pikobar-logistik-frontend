@@ -8,8 +8,8 @@
         >
           <v-list-item two-line class="card-stok-awal">
             <v-list-item-content>
-              <v-list-item-title class="white--text">{{ $t('label.first_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(firstStock) | currency }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.rdt_province_available_title') }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(availableStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -20,7 +20,7 @@
         >
           <v-list-item two-line class="card-terdistribusi">
             <v-list-item-content>
-              <v-list-item-title class="white--text">{{ $t('label.distributed_stock') }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.distributed_stock') }}</v-list-item-title>
               <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(distributedStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -32,22 +32,11 @@
         >
           <v-list-item two-line class="card-stok-sisa">
             <v-list-item-content>
-              <v-list-item-title class="white--text">{{ $t('label.remaining_stock') }}</v-list-item-title>
-              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(remainingStock) | currency }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.rdt_used_in_location_title') }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text isi-jumlah">{{ Math.abs(usedStock) | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
-      </v-col>
-      <v-col cols="3">
-        <v-btn
-          outlined
-          color="#14a942"
-          class="btn-tambah-distribusi"
-          @click.stop="handleCreate()"
-        >
-          <v-icon left>add</v-icon>
-          {{ $t('label.add_distribution') }}
-        </v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -101,27 +90,27 @@
       </v-col>
       <v-col cols="2">
         <v-btn
-          class="bottom-add-survey btn-export"
+          class="bottom-add-survey btn-create"
           color="#14a942"
-          :href="linkExport"
+          @click.stop="handleCreate()"
         >
-          {{ $t('label.export_button') }} <!-- To Do : Menjalankan fungsi eksport tabel -->
+          {{ $t('label.add_data') }}
         </v-btn>
       </v-col>
     </v-row>
     <v-card
       outlined
     >
-      <v-row>
-        <v-col>
-          <v-card-text>
-            <div class="headline">
-              {{ $t('label.rdt_distribution_table_title') }}
-            </div>
-          </v-card-text>
-        </v-col>
-      </v-row>
-      <hr>
+      <v-card-text>
+        <span class="table-title">
+          {{ $t('label.rdt_distribution_table_title') }}
+        </span>
+        <a :href="linkExport" class="export">
+          <v-icon color="#4990ef">mdi-download</v-icon>
+          {{ $t('label.export_button') }}
+        </a>
+      </v-card-text>
+      <hr class="thin">
       <v-row>
         <v-col auto>
           <v-simple-table>
@@ -130,17 +119,22 @@
                 <tr>
                   <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.distribution_destination').toUpperCase() }}</th>
+                  <th class="text-left">{{ $t('label.distribution_destination_name').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.delivered_kit').toUpperCase() }}</th>
                   <th class="text-left">{{ $t('label.distribution_date').toUpperCase() }}</th>
                   <th v-if="roles[0] === 'dinkesprov'" class="text-left">{{ $t('label.action').toUpperCase() }}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in listRdtDistribution" :key="item.index">
+                <tr v-if="listRdtDistribution.length === 0">
+                  <td class="text-center" :colspan="5">{{ $t('label.no_data') }}</td>
+                </tr>
+                <tr v-for="(item, index) in listRdtDistribution" v-else :key="item.index">
                   <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.name.toUpperCase() }}</td>
-                  <td>{{ Math.abs(item.quantity) | currency }}</td>
-                  <td>{{ item.time.substr(0, 10) }}</td>
+                  <td>{{ item.subdistrict === null ? $t('label.stripe') : item.subdistrict.kemendagri_kabupaten_nama === null ? $t('label.stripe') : item.subdistrict.kemendagri_kabupaten_nama.toUpperCase() }}</td>
+                  <td>{{ item.name === null ? $t('label.stripe') : item.name.toUpperCase() }}</td>
+                  <td>{{ item.quantity === null ? $t('label.stripe') : Math.abs(item.quantity) | currency }}</td>
+                  <td>{{ item.time === null ? $t('label.stripe') : $moment(item.time).format('DD MMMM YYYY') }}</td>
                   <td><v-btn text small color="info" @click="handleEdit(item.id)">{{ $t('label.edit_2') }}</v-btn></td>
                 </tr>
               </tbody>
@@ -212,9 +206,9 @@ export default {
     ...mapGetters('rdtDistribution', [
       'listRdtDistribution',
       'totalList',
-      'firstStock',
+      'usedStock',
       'distributedStock',
-      'remainingStock'
+      'availableStock'
     ]),
     ...mapGetters('user', [
       'roles',
@@ -233,12 +227,12 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch('rdtDistribution/getSummary')
     await this.handleSearch()
     this.linkExport = '/api/v1/transactions/export?token=' + this.token
   },
   methods: {
     async handleSearch() {
+      await this.$store.dispatch('rdtDistribution/getSummary')
       await this.$store.dispatch('rdtDistribution/getListRdtDistribution', this.listQuery)
     },
     getTableRowNumbering(index) {
@@ -292,9 +286,31 @@ export default {
   .card-search {
     margin-top: 30px
   }
-  .btn-export {
+  .btn-create {
     height: 50px !important;
     margin-top: 29px !important;
-    min-width: 100% !important
+    min-width: 100% !important;
+    text-transform: none;
+    font-size: 14px !important;
+  }
+  .table-title {
+    font-family: "Product Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #828282;
+  }
+  .thin {
+    margin-top: 5px;
+    margin-bottom: 0px;
+  }
+  .export {
+    float: right;
+    color: #4990ef !important;
+    font-size: 15px;
+  }
+  .card-title {
+    font-size: 12px;
   }
 </style>

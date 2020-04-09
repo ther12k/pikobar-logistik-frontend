@@ -8,6 +8,7 @@
       v-if="roles[0] === 'dinkeskota'"
       :id-data="this.$route.params.id"
     />
+    <detail-rdt-perorang v-if="roles[0] === 'faskes'" />
   </div>
 </template>
 
