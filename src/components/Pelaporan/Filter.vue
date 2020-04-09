@@ -148,14 +148,12 @@ export default {
     onReset() {
       this.listQuery.search = ''
       this.listQuery.final_result = ''
-      this.listQuery.mechanism = ''
-      this.listQuery.test_method = ''
-      this.listQuery.category = ''
+      this.listQuery.status = ''
       this.listQuery.address_district_code = ''
       this.listQuery.start_date = ''
       this.listQuery.end_date = ''
       this.$refs.form.reset()
-      this.$store.dispatch('reports/getListRDT', this.listQuery)
+      this.$store.dispatch('reports/listReportCase', this.listQuery)
     },
     async onExport() {
       this.loadingBar = true
