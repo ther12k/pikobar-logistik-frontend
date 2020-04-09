@@ -42,7 +42,7 @@
               </v-radio-group>
             </ValidationProvider>
             <ValidationProvider
-              v-if="formPasien.status !== 'ODP'"
+              v-if="formPasien.status !== 'OTG' && formPasien.status !== 'ODP'"
               v-slot="{ errors }"
             >
               <label>Hasil</label>
@@ -224,6 +224,7 @@
           <v-row class="survey-bottom-form">
             <v-col>
               <v-btn
+                :loading="loading"
                 bottom
                 outlined
                 @click="backStep()"
@@ -234,6 +235,7 @@
             <v-col>
               <v-btn
                 color="success"
+                :loading="loading"
                 bottom
                 style="float: right;"
                 @click="handleSave"
@@ -271,6 +273,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       optionGejala: optionGejala,
       formatDate: 'YYYY/MM/DD'
     }
@@ -292,12 +295,14 @@ export default {
       if (!valid) {
         return
       }
+      this.loading = true
       const response = await this.$store.dispatch('reports/createReportCase', this.formPasien)
       if (response.status !== 422) {
         await this.$store.dispatch('reports/resetFormPasien')
         await this.$store.dispatch('toast/successToast', this.$t('success.create_date_success'))
         this.$router.push('/laporan/list')
         await this.$refs.form.reset()
+        this.loading = false
       }
     },
     onSelectHospital(value) {

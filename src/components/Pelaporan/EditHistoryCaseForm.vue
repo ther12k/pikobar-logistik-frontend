@@ -53,7 +53,7 @@
                         </v-radio-group>
                       </ValidationProvider>
                       <ValidationProvider
-                        v-if="formRiwayatPasien.status !== 'ODP'"
+                        v-if="formRiwayatPasien.status !== 'OTG' && formRiwayatPasien.status !== 'ODP'"
                         v-slot="{ errors }"
                       >
                         <label>Hasil</label>
