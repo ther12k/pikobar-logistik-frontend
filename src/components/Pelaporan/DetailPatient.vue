@@ -364,6 +364,9 @@
         </v-expansion-panels>
       </v-row>
     </v-card>
+    <loading-bar
+      :loading="loadingBar"
+    />
   </div>
 </template>
 
@@ -385,6 +388,7 @@ export default {
   },
   data() {
     return {
+      loadingBar: false,
       listHistoryCase: null,
       panelListRiwayat: [0],
       birthDate: '',
@@ -395,7 +399,9 @@ export default {
     }
   },
   async mounted() {
+    this.loadingBar = true
     const response = await this.$store.dispatch('reports/detailReportCase', this.idData)
+    if (response) this.loadingBar = false
     const responseHistory = await this.$store.dispatch('reports/listHistoryCase', this.idData)
     this.listHistoryCase = responseHistory.data
     this.detailData = await response.data
