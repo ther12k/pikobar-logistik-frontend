@@ -159,7 +159,7 @@ export default {
     },
     async onExport() {
       this.loadingBar = true
-      const response = await this.$store.dispatch('reports/exportExcel')
+      const response = await this.$store.dispatch('reports/exportExcel', this.listQuery)
       if (response) this.loadingBar = false
       FileSaver.saveAs(response, 'kasus.xlsx')
     }
