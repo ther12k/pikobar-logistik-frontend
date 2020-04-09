@@ -66,6 +66,7 @@
           class="bottom-add-survey"
           depressed
           outlined
+          :href="linkExport"
         >
           {{ $t('label.export_button') }}
         </v-btn>
@@ -129,6 +130,7 @@ export default {
         { value: 'desc', label: 'Z-A' }
       ],
       loading: false,
+      linkExport: '',
       listQuery: {
         page: 1,
         limit: 10,
@@ -142,6 +144,9 @@ export default {
       'recipientFaskesList',
       'totalList',
       'recipientFaskesSummary'
+    ]),
+    ...mapGetters('user', [
+      'token'
     ])
   },
   watch: {
@@ -158,6 +163,7 @@ export default {
   created() {
     this.getMonitoringRdtList()
     this.getMonitoringRdtSummary()
+    this.linkExport = '/api/v1/recipients-faskes/export?token=' + this.token
   },
   methods: {
     async getMonitoringRdtList() {
