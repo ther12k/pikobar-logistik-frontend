@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div class="title"><b>Abdul Ghani</b></div>
-
+    <div class="title"><b>Abdul Ghani</b></div> <!-- To do: get data from api -->
     <v-row no-gutters>
       <v-col
         class="bg-success"
@@ -16,7 +15,7 @@
               <b>{{ $t('label.test_results') }}</b>
             </div>
             <div class="white--text text-center">
-              <b>Negatif</b>
+              <b>Negatif</b> <!-- To do: get data from api -->
             </div>
           </v-card-text>
         </v-card>
@@ -35,7 +34,7 @@
               <b>{{ $t('label.rdt_code') }}</b>
             </div>
             <div>
-              <b>656758765876567858</b>
+              <b>656758765876567858</b> <!-- To do: get data from api -->
             </div>
           </v-card-text>
         </v-card>
@@ -54,7 +53,7 @@
               <b>{{ $t('label.faskes_name') }}</b>
             </div>
             <div>
-              <b>RSUD Kota Depok</b>
+              <b>RSUD Kota Depok</b> <!-- To do: get data from api -->
             </div>
           </v-card-text>
         </v-card>
@@ -73,7 +72,7 @@
               <b>{{ $t('label.goal_category') }}</b>
             </div>
             <div>
-              <b>Kategori B</b>
+              <b>Kategori B</b> <!-- To do: get data from api -->
             </div>
           </v-card-text>
         </v-card>
@@ -92,7 +91,7 @@
               <b>{{ $t('label.check_date') }}</b>
             </div>
             <div>
-              <b>26 Maret 2020</b>
+              <b>26 Maret 2020</b> <!-- To do: get data from api -->
             </div>
           </v-card-text>
         </v-card>
@@ -116,7 +115,7 @@
                     <b>{{ $t('label.nik') }}</b>
                   </div>
                   <div>
-                    <b>3037686867868</b>
+                    <b>3037686867868</b> <!-- To do: get data from api -->
                   </div>
                 </v-card-text>
               </v-card>
@@ -129,7 +128,7 @@
                     <b>{{ $t('label.birth_date') }}</b>
                   </div>
                   <div>
-                    <b>23 Juni 1975</b>
+                    <b>23 Juni 1975</b> <!-- To do: get data from api -->
                   </div>
                 </v-card-text>
               </v-card>
@@ -142,7 +141,7 @@
                     <b>{{ $t('label.age') }}</b>
                   </div>
                   <div>
-                    <b>45 Tahun</b>
+                    <b>45 Tahun</b> <!-- To do: get data from api -->
                   </div>
                 </v-card-text>
               </v-card>
@@ -160,7 +159,7 @@
                     <b>{{ $t('label.gender') }}</b>
                   </div>
                   <div>
-                    <b>Laki-Laki</b>
+                    <b>Laki-Laki</b> <!-- To do: get data from api -->
                   </div>
                 </v-card-text>
               </v-card>
@@ -173,7 +172,7 @@
                     <b>{{ $t('label.phone_number') }}</b>
                   </div>
                   <div>
-                    <b>0898765775566</b>
+                    <b>0898765775566</b> <!-- To do: get data from api -->
                   </div>
                 </v-card-text>
               </v-card>
@@ -186,7 +185,7 @@
                     <b>{{ $t('label.citizen') }}</b>
                   </div>
                   <div>
-                    <b>Indonesia</b>
+                    <b>Indonesia</b> <!-- To do: get data from api -->
                   </div>
                 </v-card-text>
               </v-card>
@@ -204,7 +203,7 @@
                     <b>{{ $t('label.address') }}</b>
                   </div>
                   <div>
-                    <b>Jl. Merdeka II No.18</b>
+                    <b>Jl. Merdeka II No.18</b> <!-- To do: get data from api -->
                   </div>
                 </v-card-text>
               </v-card>
