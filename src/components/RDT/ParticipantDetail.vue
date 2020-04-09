@@ -449,6 +449,9 @@
         </v-col>
       </v-row>
     </v-card>
+    <loading-bar
+      :loading="loadingBar"
+    />
   </div>
 </template>
 
@@ -470,6 +473,7 @@ export default {
   },
   data() {
     return {
+      loadingBar: false,
       panelListRiwayat: [0],
       birthDate: '',
       testDate: '',
@@ -481,7 +485,9 @@ export default {
     }
   },
   async mounted() {
+    this.loadingBar = true
     const response = await this.$store.dispatch('rdt/detailParticipant', this.idData)
+    if (response) this.loadingBar = false
     this.detailData = await response.data
     this.detailCase = await response.data.id_case ? response.data.id_case.toUpperCase() : ''
     if (this.detailData) {
