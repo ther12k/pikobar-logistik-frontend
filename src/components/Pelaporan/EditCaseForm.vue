@@ -195,6 +195,7 @@
                     <v-row class="survey-bottom-form">
                       <v-col>
                         <v-btn
+                          :loading="loading"
                           color="success"
                           bottom
                           style="float: right;"
@@ -290,6 +291,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       formatDate: 'YYYY/MM/DD',
       panelCase: [0],
       panelListRiwayat: [0],
@@ -327,9 +329,11 @@ export default {
         id: this.idData,
         data: this.formPasien
       }
+      this.loading = true
       await this.$store.dispatch('reports/updateReportCase', updateCase)
       await this.$store.dispatch('toast/successToast', 'Data Profil Berhasil Di Rubah')
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
+      this.loading = false
       await this.$router.push('/laporan/list')
     },
     handleChangeNationality(value) {
