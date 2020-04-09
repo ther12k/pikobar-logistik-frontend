@@ -42,6 +42,7 @@
                 Simpan
               </v-btn>
               <v-btn
+                :loading="loading"
                 color="grey"
                 bottom
                 outlined
@@ -78,6 +79,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       formatDate: 'YYYY-MM-DD',
       formRapid: {
         final_result: null
@@ -97,13 +99,14 @@ export default {
       if (!valid) {
         return
       }
-
+      this.loading = true
       const updateFinalRDT = {
         id: this.idData,
         data: this.formRapid
       }
 
       this.$store.dispatch('rdt/updateRDT', updateFinalRDT)
+      this.loading = false
       this.$router.push('/rdt/list')
     }
   }

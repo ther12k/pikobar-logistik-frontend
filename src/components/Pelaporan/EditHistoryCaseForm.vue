@@ -235,6 +235,7 @@
                     <v-row class="survey-bottom-form">
                       <v-col>
                         <v-btn
+                          :loading="loading"
                           color="success"
                           bottom
                           style="float: right;"
@@ -330,6 +331,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       formatDate: 'YYYY/MM/DD',
       panelRiwayat: [0],
       panelListRiwayat: [0],
@@ -357,9 +359,11 @@ export default {
       if (!valid) {
         return
       }
+      this.loading = true
       await this.$store.dispatch('reports/createHistoryCase', this.formRiwayatPasien)
       await this.$store.dispatch('toast/successToast', 'Data Riwayat Kasus Berhasil Di Perbaharui')
       await this.$store.dispatch('reports/resetRiwayatFormPasien')
+      this.loading = false
       await this.$router.push('/laporan/list')
     },
     getTableRowNumbering(index) {
