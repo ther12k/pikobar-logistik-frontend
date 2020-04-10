@@ -3,11 +3,11 @@
     id="inspire"
   >
     <toast-notification />
-    <template v-if="pageLoading">
+    <template v-if="$store.state.general.isLoading">
       <!-- Loader -->
       <div class="spinwrap">
         <div class="spinner">
-          <lottie :options="lottieOptions" :width="100" :height="100" /> 
+          <lottie :options="lottieOptions" :width="100" :height="100" />
         </div>
       </div>
     </template>
@@ -28,22 +28,7 @@ export default {
   },
   data() {
     return {
-      loading: true, // page loading
       lottieOptions: { animationData: animationLoading, loop: true }
-    }
-  },
-  computed: {
-    pageLoading: function() {
-      return this.loadingPage()
-    }
-  },
-  methods: {
-    loadingPage() {
-      var self = this
-      setTimeout(function() {
-        self.loading = false
-      }, 1500)
-      return self.loading
     }
   }
 }
