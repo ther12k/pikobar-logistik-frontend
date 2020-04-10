@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -74,6 +75,16 @@ const createRouter = () => new Router({
 })
 
 const router = createRouter()
+
+router.beforeEach((to, from, next) => {
+  // show loading every change page. No need async actions, its sync.
+  store.commit('general/SET_LOADING', true)
+  next()
+})
+
+router.afterEach((to, from) => {
+  store.commit('general/SET_LOADING', false)
+})
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
