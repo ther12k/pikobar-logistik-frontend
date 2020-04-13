@@ -27,6 +27,7 @@
             <v-autocomplete outlined :items="district" :placeholder="$t('label.autocomplete_capital_placeholder')" />
           </v-col>
         </v-row>
+        <v-row class="mx-auto margin-negative">
           <v-col cols="6">
             <v-label><b>{{ $t('label.instance_phone_number') }}</b></v-label>
             <v-text-field outlined :error-messages="errors" :placeholder="$t('label.example_phone_number')" solo-inverted />
