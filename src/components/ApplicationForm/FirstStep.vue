@@ -52,6 +52,7 @@ export default {
   name: 'IdentitasInstansiPemohon',
   data() {
     return {
+      // TODO: integrasi API, data yang digunakan saat ini masih data dummy
       instance: ['Puskesmas', 'Rumah Sakit'],
       city: ['Kota Bandung', 'Kab Bandung', 'Kota Bogor', 'Kab Bogor'],
       district: ['Kecamatan 1', 'Kecamatan 2'],

@@ -65,17 +65,7 @@
 
 <script>
 export default {
-  name: 'FormPermohonanLogistik',
-  data() {
-    return {
-      step: 1,
-      // TODO: masih menggunakan data dummy (belum ada API)
-      instance: ['Puskesmas', 'Rumah Sakit'],
-      city: ['Kota Bandung', 'Kab Bandung', 'Kota Bogor', 'Kab Bogor'],
-      district: ['Kecamatan 1', 'Kecamatan 2'],
-      village: ['Desa 1', 'Desa 2']
-    }
-  }
+  name: 'FormPermohonanLogistik'
 }
 </script>
 <style>
