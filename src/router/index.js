@@ -53,6 +53,11 @@ export const constantRoutes = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/form-pemohon',
+    component: () => import('@/views/permohonan/formPemohon'),
+    hidden: true
   }
 ]
 
