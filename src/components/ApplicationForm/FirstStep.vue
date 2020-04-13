@@ -52,7 +52,6 @@ export default {
   name: 'IdentitasInstansiPemohon',
   data() {
     return {
-      e1: 1,
       instance: ['Puskesmas', 'Rumah Sakit'],
       city: ['Kota Bandung', 'Kab Bandung', 'Kota Bogor', 'Kab Bogor'],
       district: ['Kecamatan 1', 'Kecamatan 2'],
