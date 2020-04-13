@@ -36,8 +36,10 @@
           <v-stepper-items>
             <v-stepper-content step="1">
               <identitas-instansi-pemohon />
-              <v-btn class="margin-positive" color="primary" @click="e1 = 2">{{ $t('label.next') }}</v-btn>
-              <v-btn class="margin-positive" outlined text>{{ $t('label.cancel') }}</v-btn>
+              <div class="margin-button">
+                <v-btn class="margin-positive" color="primary" @click="e1 = 2">{{ $t('label.next') }}</v-btn>
+                <v-btn class="margin-positive" outlined text>{{ $t('label.cancel') }}</v-btn>
+              </div>
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
@@ -129,5 +131,8 @@ export default {
 }
 .right-margin {
   margin-right: 200px;
+}
+.margin-button {
+  margin-top: -80px;
 }
 </style>
