@@ -69,6 +69,7 @@ export default {
   data() {
     return {
       step: 1,
+      // TODO: masih menggunakan data dummy (belum ada API)
       instance: ['Puskesmas', 'Rumah Sakit'],
       city: ['Kota Bandung', 'Kab Bandung', 'Kota Bogor', 'Kab Bogor'],
       district: ['Kecamatan 1', 'Kecamatan 2'],
