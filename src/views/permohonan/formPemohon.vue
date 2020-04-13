@@ -22,11 +22,11 @@
         </v-row>
       </div>
       <v-card>
-        <v-stepper v-model="e1" :alt-labels="true">
+        <v-stepper v-model="step" :alt-labels="true">
           <v-stepper-header>
-            <v-stepper-step class="left-margin" :complete="e1 > 1" step="1"><center>{{ $t('label.step_title_1') }}</center></v-stepper-step>
+            <v-stepper-step class="left-margin" :complete="step > 1" step="1"><center>{{ $t('label.step_title_1') }}</center></v-stepper-step>
             <v-divider />
-            <v-stepper-step :complete="e1 > 2" step="2"><center>{{ $t('label.step_title_2') }}</center></v-stepper-step>
+            <v-stepper-step :complete="step > 2" step="2"><center>{{ $t('label.step_title_2') }}</center></v-stepper-step>
             <v-divider />
             <v-stepper-step step="3"><center>{{ $t('label.step_title_3') }}</center></v-stepper-step>
             <v-divider />
@@ -37,24 +37,24 @@
             <v-stepper-content step="1">
               <identitas-instansi-pemohon />
               <div class="margin-button">
-                <v-btn class="margin-positive" color="primary" @click="e1 = 2">{{ $t('label.next') }}</v-btn>
+                <v-btn class="margin-positive" color="primary" @click="step = 2">{{ $t('label.next') }}</v-btn>
                 <v-btn class="margin-positive" outlined text>{{ $t('label.cancel') }}</v-btn>
               </div>
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
-              <v-btn class="margin-positive" color="primary" @click="e1 = 3">{{ $t('label.next') }}</v-btn>
-              <v-btn class="margin-positive" outlined text @click="e1 = 1">{{ $t('label.cancel') }}</v-btn>
+              <v-btn class="margin-positive" color="primary" @click="step = 3">{{ $t('label.next') }}</v-btn>
+              <v-btn class="margin-positive" outlined text @click="step = 1">{{ $t('label.cancel') }}</v-btn>
             </v-stepper-content>
             <v-stepper-content step="3">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
-              <v-btn class="margin-positive" color="primary" @click="e1 = 4">{{ $t('label.next') }}</v-btn>
-              <v-btn class="margin-positive" outlined text @click="e1 = 2">{{ $t('label.cancel') }}</v-btn>
+              <v-btn class="margin-positive" color="primary" @click="step = 4">{{ $t('label.next') }}</v-btn>
+              <v-btn class="margin-positive" outlined text @click="step = 2">{{ $t('label.cancel') }}</v-btn>
             </v-stepper-content>
             <v-stepper-content step="4">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
-              <v-btn class="margin-positive" color="primary" @click="e1 = 1">{{ $t('label.next') }}</v-btn>
-              <v-btn class="margin-positive" outlined text @click="e1 = 3">{{ $t('label.cancel') }}</v-btn>
+              <v-btn class="margin-positive" color="primary" @click="step = 1">{{ $t('label.next') }}</v-btn>
+              <v-btn class="margin-positive" outlined text @click="step = 3">{{ $t('label.cancel') }}</v-btn>
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -68,7 +68,7 @@ export default {
   name: 'FormPermohonanLogistik',
   data() {
     return {
-      e1: 1,
+      step: 1,
       instance: ['Puskesmas', 'Rumah Sakit'],
       city: ['Kota Bandung', 'Kab Bandung', 'Kota Bogor', 'Kab Bogor'],
       district: ['Kecamatan 1', 'Kecamatan 2'],
