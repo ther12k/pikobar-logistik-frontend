@@ -136,7 +136,7 @@ export default {
     icon_help: 'mdi-help-circle',
     logistics_medical_device: 'Logistik Alat Kesehatan',
     welcome: 'Selamat Datang',
-    coma: ',',
+    comma: ',',
     landing_page_text: 'Formulir ini berfungsi untuk mendata permohonan darurat logistik kesehatan yang dibutuhkan oleh INSTANSI KESEHATAN meliputi: rumah sakit, puskesmas, dan klinik umum dan akan kami saring sesuai dengan prioritas wilayah kedaruratan terdampak COVID-19 di Jawa Barat.',
     start: 'Mulai',
     logistic: 'Logistik',

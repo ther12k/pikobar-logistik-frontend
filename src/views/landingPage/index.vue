@@ -47,7 +47,7 @@
       <v-card class="main-card-landing-page" outlined>
         <v-row align="center">
           <v-col class="text-card-main" cols="12" md="8">
-            <div class="font-product-sans-landing-page card-title-landing-page ml-10 mb-5 font-weight-bold">{{ $t('label.welcome') }}{{ $t('label.coma') }}</div>
+            <div class="font-product-sans-landing-page card-title-landing-page ml-10 mb-5 font-weight-bold">{{ $t('label.welcome') }}{{ $t('label.comma') }}</div>
             <p
               class="ml-10 font-product-sans-landing-page card-text-landing-page"
             >{{ $t('label.landing_page_text') }}</p>
