@@ -1,16 +1,15 @@
 <template name="component-name">
   <div class="background">
-    <div class="full" />
-    <div class="negative">
+    <div class="full">
       <div class="header">
         <v-row justify="space-between" align="center">
-          <v-col md="8" xs="8">
+          <v-col cols="12" md="8" xs="12">
             <v-row>
               <img height="40" src="../../static/logistik_logo_lingkar.svg">
               <div class="title-page">{{ $t('label.logistics_medical_device') }}</div>
             </v-row>
           </v-col>
-          <v-col md="4" xs="4">
+          <v-col cols="12" md="4" xs="12">
             <v-row class="float-right">
               <v-icon color="white" size="17">{{ $t('label.icon_talk') }}</v-icon>
               <div class="call-center">{{ $t('label.call_center') }}</div>
@@ -20,17 +19,19 @@
           </v-col>
         </v-row>
       </div>
+    </div>
+    <div class="negative">
       <v-card class="main-card" outlined>
         <v-row align="center">
-          <v-col>
+          <v-col cols="12" md="8">
             <div class="font-product-sans card-title ml-10 mb-5 font-weight-bold">{{ $t('label.welcome') }}</div>
             <p
               class="ml-10 font-product-sans card-text"
             >{{ $t('label.landing_page_text') }}</p>
             <v-btn class="ml-10 white--text" min-width="140px" color="success" href="#/form-pemohon">{{ $t('label.start') }}</v-btn>
           </v-col>
-          <v-col>
-            <img height="340" src="../../static/intro.svg">
+          <v-col cols="12" md="4">
+            <img src="../../static/intro.svg">
           </v-col>
         </v-row>
       </v-card>
@@ -52,7 +53,7 @@ export default {
   padding: 100px 10px;
 }
 .header {
-  margin: 30px 130px 10px 130px;
+  padding: 45px;
 }
 .title-page {
   padding: 5px 20px;
@@ -87,11 +88,26 @@ export default {
   line-height: 24px;
 }
 .full {
-  width: 100vw;
-  height: 30vh;
   background: #27ae60;
 }
 .negative {
-  margin-top: -200px;
+  margin-top: -50px;
+}
+@media (max-width: 1199px) and (min-width: 960px) {
+
+}
+@media (max-width: 768px) and (min-width: 320px) {
+  .main-card {
+    margin: 0px;
+    height: 500px;
+    padding: 100px 10px;
+  }
+}
+@media (max-width: 588px) and (min-width: 320px) {
+  .main-card {
+    margin: 0px;
+    height: 500px;
+    padding: 100px 10px;
+  }
 }
 </style>
