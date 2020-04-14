@@ -3,11 +3,16 @@
     id="inspire"
   >
     <toast-notification />
-    <template v-if="$store.state.general.isLoading">
+    <loading-logo
+      :loading="$store.state.general.isLoading"
+    />
+    <template v-if="pageLoading">
       <!-- Loader -->
       <div class="spinwrap">
         <div class="spinner">
-          <lottie :options="lottieOptions" :width="100" :height="100" />
+          <loading-logo
+            :loading="true"
+          />
         </div>
       </div>
     </template>
@@ -18,17 +23,25 @@
 </template>
 
 <script>
-import Lottie from 'vue-lottie'
-import animationLoading from '@/static/logistik_loader.json'
-
 export default {
   name: 'App',
-  components: {
-    Lottie
-  },
   data() {
     return {
-      lottieOptions: { animationData: animationLoading, loop: true }
+      loading: true // page loading
+    }
+  },
+  computed: {
+    pageLoading: function() {
+      return this.loadingPage()
+    }
+  },
+  methods: {
+    loadingPage() {
+      var self = this
+      setTimeout(function() {
+        self.loading = false
+      }, 1500)
+      return self.loading
     }
   }
 }

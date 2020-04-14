@@ -72,7 +72,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-card :loading="loading" outlined>
+    <v-card outlined>
       <v-card-text>
         <span class="table-title">{{ $t('label.rdt_usage_report_title') }}</span>
       </v-card-text>
@@ -129,7 +129,6 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
-      loading: false,
       linkExport: '',
       listQuery: {
         page: 1,
@@ -167,9 +166,7 @@ export default {
   },
   methods: {
     async getMonitoringRdtList() {
-      this.loading = true
       await this.$store.dispatch('recipientFaskes/getListRecipientFaskes', this.listQuery)
-      this.loading = false
     },
     async getMonitoringRdtSummary() {
       await this.$store.dispatch('recipientFaskes/getSummaryRecipientFaskes')

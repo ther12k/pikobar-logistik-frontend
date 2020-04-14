@@ -45,10 +45,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-card
-      outlined
-      :loading="loading"
-    >
+    <v-card outlined>
       <v-row>
         <v-col cols="12" sm="6">
           <v-card-text>
@@ -125,7 +122,6 @@ export default {
         page: 1,
         limit: 10
       },
-      loading: false,
       dialog: false,
       dataDelete: null
     }
@@ -148,19 +144,13 @@ export default {
       return (parseInt(index) + 1)
     },
     async getRecipient(cityCode) {
-      this.loading = true
       await this.$store.dispatch('recipient/getListRecipient', { city_code: cityCode })
-      this.loading = false
     },
     async getWidgetRecipient(cityCode) {
-      this.loading = true
       await this.$store.dispatch('recipient/getWidgetRecipient', { city_code: cityCode })
-      this.loading = false
     },
     async getListRecipient() {
-      this.loading = true
       await this.$store.dispatch('recipient/getListDetailRecipient', [this.$route.params.id, this.listQuery])
-      this.loading = false
     },
     async onNext() {
       await this.getListRecipient()
