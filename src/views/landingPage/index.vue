@@ -1,4 +1,4 @@
-<template name="component-name">
+<template>
   <div class="background-landing-page">
     <div class="full-landing-page">
       <div class="header-landing-page">
@@ -23,7 +23,7 @@
         <v-row>
           <v-col cols="8">
             <v-row>
-              <v-col class="magrin-left-20" cols="2">
+              <v-col class="margin-left-20" cols="2">
                 <img height="40" src="../../static/logistik_logo_lingkar.svg">
               </v-col>
               <v-col cols="6">
