@@ -46,7 +46,8 @@
       </v-col>
     </v-row>
     <v-card
-      outlined :loading="loading"
+      outlined
+      :loading="loading"
     >
       <v-row>
         <v-col cols="12" sm="6">
@@ -141,7 +142,6 @@ export default {
     await this.getRecipient(this.$route.params.id)
     await this.getWidgetRecipient(this.$route.params.id)
     await this.getListRecipient()
-
   },
   methods: {
     getTableRowNumbering(index) {

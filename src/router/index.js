@@ -40,6 +40,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/landing-page',
+    component: () => import('@/views/landingPage/index'),
+    hidden: true
+  },
+  {
     path: '/change-password',
     component: Layout,
     hidden: true,
