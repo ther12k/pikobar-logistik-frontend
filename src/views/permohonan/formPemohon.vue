@@ -38,7 +38,7 @@
               <identitas-instansi-pemohon />
               <div class="margin-button">
                 <v-btn class="margin-positive" color="primary" @click="step = 2">{{ $t('label.next') }}</v-btn>
-                <v-btn class="margin-positive" outlined text>{{ $t('label.cancel') }}</v-btn>
+                <v-btn class="margin-positive grey--text" outlined text href="#/landing-page">{{ $t('label.cancel') }}</v-btn>
               </div>
             </v-stepper-content>
             <v-stepper-content step="2">
