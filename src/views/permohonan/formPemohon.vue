@@ -50,7 +50,7 @@
               <center>{{ $t('label.step_title_1') }}</center>
             </v-stepper-step>
             <v-divider />
-            <v-stepper-step :complete="step > 2" step="2">
+            <v-stepper-step step="2">
               <center>{{ $t('label.step_title_2') }}</center>
             </v-stepper-step>
             <v-divider />
@@ -203,7 +203,12 @@
 
 <script>
 export default {
-  name: 'FormPermohonanLogistik'
+  name: 'FormPermohonanLogistik',
+  data() {
+    return {
+      step: 1
+    }
+  }
 }
 </script>
 <style>

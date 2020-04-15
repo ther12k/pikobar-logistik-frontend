@@ -139,7 +139,7 @@ export default {
   display: none;
 }
 .margin-negative {
-  margin-top: -30px;
+  margin-top: -30px !important;
 }
 .text-small {
   font-size: 13px;
