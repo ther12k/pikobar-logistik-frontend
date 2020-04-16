@@ -109,19 +109,38 @@
           </v-col>
         </v-row>
         <v-container fluid>
-          <v-col cols="6" sm="6" md="6" class="float-right">
-            <v-btn
-              class="margin-positive"
-              color="primary"
-              @click="onNext()"
-            >{{ $t('label.next') }}</v-btn>
-            <v-btn
-              class="margin-positive"
-              outlined
-              text
-              href="#/landing-page"
-            >{{ $t('label.cancel') }}</v-btn>
-          </v-col>
+          <div class="btn-desktop">
+            <v-col cols="6" sm="6" md="6" class="float-right">
+              <v-btn
+                class="margin-positive"
+                color="primary"
+                @click="onNext()"
+              >{{ $t('label.next') }}</v-btn>
+              <v-btn
+                class="margin-positive"
+                outlined
+                text
+                href="#/landing-page"
+              >{{ $t('label.cancel') }}</v-btn>
+            </v-col>
+          </div>
+          <div class="btn-mobile">
+            <v-col cols="6" sm="6" md="6" class="float-right">
+              <v-btn
+                class="margin-positive"
+                color="primary"
+                @click="onNext()"
+                >{{ $t('label.next') }}</v-btn>
+              </v-col>
+              <v-col cols="6" sm="6" md="6" class="float-right">
+                <v-btn
+                  class="margin-positive"
+                  outlined
+                  text
+                  href="#/landing-page"
+                >{{ $t('label.cancel') }}</v-btn>
+            </v-col>
+          </div>
         </v-container>
       </v-form>
     </ValidationObserver>
@@ -202,6 +221,12 @@ export default {
 .float-right {
   float: right;
 }
+.btn-desktop {
+  display:block;
+}
+.btn-mobile {
+  display: none;
+}
 @media (max-width: 1199px) and (min-width: 960px) {
 }
 @media (max-width: 768px) and (min-width: 320px) {
@@ -212,6 +237,12 @@ export default {
     display: none;
   }
   .main-card-mobile {
+    display: block;
+  }
+  .btn-desktop {
+    display: none;
+  }
+  .btn-mobile {
     display: block;
   }
 }
