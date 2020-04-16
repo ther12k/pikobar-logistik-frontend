@@ -55,7 +55,7 @@
         <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
       </v-col>
     </v-row>
-    <v-card :loading="loading" outlined>
+    <v-card outlined>
       <v-card-text>
         <span class="table-title">{{ $t('label.rdt_distribution_list_title') }}</span>
       </v-card-text>
@@ -111,7 +111,6 @@ export default {
         { value: 'asc', label: 'A-Z' },
         { value: 'desc', label: 'Z-A' }
       ],
-      loading: false,
       listQuery: {
         page: 1,
         limit: 10,
@@ -144,9 +143,7 @@ export default {
   },
   methods: {
     async getMonitoringRdtList() {
-      this.loading = true
       await this.$store.dispatch('recipient/getListRecipient', this.listQuery)
-      this.loading = false
     },
     async getMonitoringRdtSummary() {
       await this.$store.dispatch('recipient/getSummaryRecipient')
