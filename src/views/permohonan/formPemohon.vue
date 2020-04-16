@@ -65,20 +65,9 @@
 
           <v-stepper-items>
             <v-stepper-content step="1">
-              <identitas-instansi-pemohon />
-              <div class="margin-button">
-                <v-btn
-                  class="margin-positive"
-                  color="primary"
-                  @click="step = 2"
-                >{{ $t('label.next') }}</v-btn>
-                <v-btn
-                  class="margin-positive grey--text"
-                  outlined
-                  text
-                  href="#/landing-page"
-                >{{ $t('label.cancel') }}</v-btn>
-              </div>
+              <identitas-instansi-pemohon
+                :form-applicant="formApplicant"
+              />
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
@@ -146,11 +135,9 @@
           </v-stepper-header>
           <v-stepper-items>
             <v-stepper-content step="1">
-              <identitas-instansi-pemohon />
-              <div class="">
-                <v-btn class="margin-positive" color="primary" @click="step = 2">{{ $t('label.next') }}</v-btn>
-                <v-btn class="grey--text margin-positive" outlined text href="#/landing-page">{{ $t('label.cancel') }}</v-btn>
-              </div>
+              <identitas-instansi-pemohon
+                :form-applicant="formApplicant"
+              />
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
@@ -202,12 +189,23 @@
 </template>
 
 <script>
+import EventBus from '@/utils/eventBus'
+
 export default {
   name: 'FormPermohonanLogistik',
   data() {
     return {
-      step: 1
+      step: 1,
+      formApplicant: {}
     }
+  },
+  created() {
+    EventBus.$on('nextStep', (value) => {
+      this.step = value + 1
+    })
+    EventBus.$on('prevStep', (value) => {
+      this.step = value - 1
+    })
   }
 }
 </script>
@@ -240,7 +238,7 @@ export default {
   margin-top: 100px;
 }
 .background-height {
-  height: 850px;
+  height: 900px;
 }
 .stepper-margin {
   margin: -100px -10px 0px -10px;

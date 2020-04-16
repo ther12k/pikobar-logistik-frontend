@@ -1,123 +1,148 @@
 <template>
-  <div>
-    <v-card class="main-card mb-12 margin-top-100">
-      <div class="form-header">
-        <center>
-          <v-label class="title"><b>{{ $t('label.applicant_form_header') }}</b></v-label>
-        </center>
-      </div>
-      <div class="margin-input">
-        <v-row class="mx-auto">
-          <v-col cols="6">
-            <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-            <v-autocomplete outlined :items="instance" :placeholder="$t('label.autocomplete_instance_placeholder')" />
+  <v-container>
+    <ValidationObserver ref="observer">
+      <v-form
+        ref="form"
+        lazy-validation
+      >
+        <v-row>
+          <center><v-label class="title"><b>{{ $t('label.applicant_form_header') }}</b></v-label></center>
+        </v-row>
+        <v-row>
+          <v-col cols="12" sm="12" md="6">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-autocomplete
+                v-model="formApplicant.instanceType"
+                outlined
+                :error-messages="errors"
+                :items="instance"
+                :placeholder="$t('label.autocomplete_instance_placeholder')"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-autocomplete
+                v-model="formApplicant.intanceName"
+                outlined
+                :error-messages="errors"
+                :items="instanceName"
+                :placeholder="$t('label.example_instance_name')"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="isPhoneNumber"
+            >
+              <v-label class="title"><b>{{ $t('label.instance_phone_number') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-text-field
+                v-model="formApplicant.instancePhoneNumber"
+                outlined
+                :error-messages="errors"
+                :placeholder="$t('label.example_phone_number')"
+                solo-inverted
+              />
+            </ValidationProvider>
           </v-col>
-          <v-col cols="6">
-            <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-            <v-autocomplete outlined :items="city" :placeholder="$t('label.autocomplete_city_placeholder')" />
+          <v-col cols="12" sm="12" md="6">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-autocomplete
+                v-model="formApplicant.cityName"
+                outlined
+                :error-messages="errors"
+                :items="city"
+                :placeholder="$t('label.autocomplete_city_placeholder')"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-autocomplete
+                v-model="formApplicant.districtName"
+                outlined
+                :error-messages="errors"
+                :items="district"
+                :placeholder="$t('label.autocomplete_capital_placeholder')"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-autocomplete
+                v-model="formApplicant.villageName"
+                outlined
+                :error-messages="errors"
+                :items="village"
+                :placeholder="$t('label.autocomplete_capital_placeholder')"
+              />
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+            >
+              <v-label class="title"><b>{{ $t('label.full_address') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+              <v-textarea
+                v-model="formApplicant.fullAddress"
+                outlined
+                :height="100"
+                :no-resize="true"
+                :error-messages="errors"
+                :items="village"
+                :placeholder="$t('label.example_full_address')"
+                solo-inverted
+              />
+            </ValidationProvider>
           </v-col>
         </v-row>
-        <v-row class="mx-auto margin-negative">
-          <v-col cols="6">
-            <v-label><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-            <v-autocomplete outlined :items="instanceName" :placeholder="$t('label.example_instance_name')" />
+        <v-container fluid>
+          <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-btn
+              class="margin-positive"
+              color="primary"
+              @click="onNext()"
+            >{{ $t('label.next') }}</v-btn>
+            <v-btn
+              class="margin-positive"
+              outlined
+              text
+              href="#/landing-page"
+            >{{ $t('label.cancel') }}</v-btn>
           </v-col>
-          <v-col cols="6">
-            <v-label><b>{{ $t('label.district_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-            <v-autocomplete outlined :items="district" :placeholder="$t('label.autocomplete_capital_placeholder')" />
-          </v-col>
-        </v-row>
-        <v-row class="mx-auto margin-negative">
-          <v-col cols="6">
-            <v-label><b>{{ $t('label.instance_phone_number') }}</b></v-label>
-            <v-text-field outlined :error-messages="errors" :placeholder="$t('label.example_phone_number')" solo-inverted />
-          </v-col>
-          <v-col cols="6">
-            <v-label><b>{{ $t('label.village_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-            <v-autocomplete outlined :items="village" :placeholder="$t('label.autocomplete_capital_placeholder')" />
-          </v-col>
-        </v-row>
-        <v-row class="mx-auto margin-negative">
-          <v-col cols="6" offset="6">
-            <v-label><b>{{ $t('label.full_address') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-            <v-textarea outlined :height="100" :no-resize="true" :error-messages="errors" :placeholder="$t('label.example_full_address')" solo-inverted />
-          </v-col>
-        </v-row>
-      </div>
-    </v-card>
-
-    <v-card class="main-card-mobile">
-      <v-row>
-        <div class="margin-header-mobile">
-          <center>
-            <v-label class="title"><b>{{ $t('label.applicant_form_header') }}</b></v-label>
-          </center>
-        </div>
-      </v-row>
-      <div class="margin-top-80">
-        <div>
-          <v-col cols="12" sm="12">
-            <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-          </v-col>
-          <v-col class="margin-text-mobile-10" cols="12" sm="12">
-            <v-autocomplete outlined :items="instance" :placeholder="$t('label.autocomplete_instance_placeholder')" />
-          </v-col>
-        </div>
-        <div class="margin-top-30">
-          <v-col cols="12" sm="12">
-            <v-label><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-          </v-col>
-          <v-col class="margin-text-mobile-10" cols="12" sm="12">
-            <v-autocomplete outlined :items="instanceName" :placeholder="$t('label.example_instance_name')" />
-          </v-col>
-        </div>
-        <div class="margin-top-30">
-          <v-col cols="12" sm="12">
-            <v-label><b>{{ $t('label.instance_phone_number') }}</b></v-label>
-          </v-col>
-          <v-col class="margin-text-mobile-10" cols="12" sm="12">
-            <v-text-field outlined :error-messages="errors" :placeholder="$t('label.example_phone_number')" solo-inverted />
-          </v-col>
-        </div>
-        <div class="margin-top-30">
-          <v-col cols="12" sm="12">
-            <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-          </v-col>
-          <v-col class="margin-text-mobile-10" cols="12" sm="12">
-            <v-autocomplete outlined :items="city" :placeholder="$t('label.autocomplete_city_placeholder')" />
-          </v-col>
-        </div>
-        <div class="margin-top-30">
-          <v-col cols="12" sm="12">
-            <v-label><b>{{ $t('label.district_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-          </v-col>
-          <v-col class="margin-text-mobile-10" cols="12" sm="12">
-            <v-autocomplete outlined :items="district" :placeholder="$t('label.autocomplete_capital_placeholder')" />
-          </v-col>
-        </div>
-        <div class="margin-top-30">
-          <v-col cols="12" sm="12">
-            <v-label><b>{{ $t('label.village_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-          </v-col>
-          <v-col class="margin-text-mobile-10" cols="12" sm="12">
-            <v-autocomplete outlined :items="village" :placeholder="$t('label.autocomplete_capital_placeholder')" />
-          </v-col>
-        </div>
-        <div class="margin-top-30">
-          <v-col cols="12" sm="12">
-            <v-label><b>{{ $t('label.full_address') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
-          </v-col>
-          <v-col class="margin-text-mobile-10" cols="12" sm="12">
-            <v-textarea outlined :height="100" :no-resize="true" :error-messages="errors" :placeholder="$t('label.example_full_address')" solo-inverted />
-          </v-col>
-        </div>
-      </div>
-    </v-card>
-  </div>
+        </v-container>
+      </v-form>
+    </ValidationObserver>
+  </v-container>
 </template>
 <script>
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import EventBus from '@/utils/eventBus'
+
 export default {
   name: 'IdentitasInstansiPemohon',
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
+  props: {
+    formApplicant: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
       // TODO: integrasi API, data yang digunakan saat ini masih data dummy
@@ -125,7 +150,17 @@ export default {
       instanceName: ['RSUD Bandung', 'RSUD Bogor'],
       city: ['Kota Bandung', 'Kab Bandung', 'Kota Bogor', 'Kab Bogor'],
       district: ['Kecamatan 1', 'Kecamatan 2'],
-      village: ['Desa 1', 'Desa 2']
+      village: ['Desa 1', 'Desa 2'],
+      step: 1
+    }
+  },
+  methods: {
+    async onNext() {
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        return
+      }
+      EventBus.$emit('nextStep', this.step)
     }
   }
 }
@@ -163,6 +198,9 @@ export default {
 .margin-input {
   margin-left: -130px;
   margin-right: -130px;
+}
+.float-right {
+  float: right;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
