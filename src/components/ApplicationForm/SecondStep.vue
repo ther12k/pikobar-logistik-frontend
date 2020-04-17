@@ -221,7 +221,7 @@ export default {
       }, { once: true })
       this.$refs.uploader.click()
     },
-    async onFileChanged(e) {
+    onFileChanged(e) {
       this.selectedFile = e.target.files[0]
       this.selectedFileName = this.selectedFile.name
       this.isUpload = true
