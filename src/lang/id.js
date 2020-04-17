@@ -140,7 +140,20 @@ export default {
     landing_page_text: 'Formulir ini berfungsi untuk mendata permohonan darurat logistik kesehatan yang dibutuhkan oleh INSTANSI KESEHATAN meliputi: rumah sakit, puskesmas, dan klinik umum dan akan kami saring sesuai dengan prioritas wilayah kedaruratan terdampak COVID-19 di Jawa Barat.',
     start: 'Mulai',
     logistic: 'Logistik',
-    medical_tools: 'Alat Kesehatan'
+    medical_tools: 'Alat Kesehatan',
+    input_full_name: 'Masukkan nama lengkap anda',
+    applicant_position: 'Jabatan Pemohon di instansi kesehatan/faskes',
+    applicant_position_placeholder: 'Contoh: Dokter',
+    applicant_email: 'Email Pemohon',
+    applicant_email_placeholder: 'Masukkan email yang dimiliki',
+    applicant_phone_number: 'No. HP /Whatsapp Pemohon',
+    applicant_phone_number_placeholder: 'Masukkan No. HP/Whatsapp',
+    other_applicant_phone_number: 'No. HP /Whatsapp Pemohon lainnya sebagai opsi ke 2',
+    upload_applicant_ktp: 'Upload Foto E-KTP/ Kartu Pegawai/Surat Tugas',
+    not_yet_upload_file: 'Belum ada file yang diupload',
+    upload: 'Upload',
+    reupload: 'Upload Ulang',
+    upload_error_message: 'Mohon Upload File'
   },
   success: {
     login_success: 'Login Berhasil',

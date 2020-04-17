@@ -50,7 +50,7 @@
               <center>{{ $t('label.step_title_1') }}</center>
             </v-stepper-step>
             <v-divider />
-            <v-stepper-step step="2">
+            <v-stepper-step :complete="step > 2" step="2">
               <center>{{ $t('label.step_title_2') }}</center>
             </v-stepper-step>
             <v-divider />
@@ -70,18 +70,10 @@
               />
             </v-stepper-content>
             <v-stepper-content step="2">
-              <v-card class="mb-12" color="grey lighten-1" height="200px" />
-              <v-btn
-                class="margin-positive"
-                color="primary"
-                @click="step = 3"
-              >{{ $t('label.next') }}</v-btn>
-              <v-btn
-                class="margin-positive"
-                outlined
-                text
-                @click="step = 1"
-              >{{ $t('label.cancel') }}</v-btn>
+              <identitas-pemohon
+                :form-identity-applicant="formIdentityApplicant"
+                :instance-type="formApplicant.instanceType"
+              />
             </v-stepper-content>
             <v-stepper-content step="3">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
@@ -140,18 +132,9 @@
               />
             </v-stepper-content>
             <v-stepper-content step="2">
-              <v-card class="mb-12" color="grey lighten-1" height="200px" />
-              <v-btn
-                class="margin-positive"
-                color="primary"
-                @click="step = 3"
-              >{{ $t('label.next') }}</v-btn>
-              <v-btn
-                class="margin-positive"
-                outlined
-                text
-                @click="step = 1"
-              >{{ $t('label.cancel') }}</v-btn>
+              <identitas-pemohon
+                :form-identity-applicant="formIdentityApplicant"
+              />
             </v-stepper-content>
             <v-stepper-content step="3">
               <v-card class="mb-12" color="grey lighten-1" height="200px" />
@@ -196,7 +179,8 @@ export default {
   data() {
     return {
       step: 1,
-      formApplicant: {}
+      formApplicant: {},
+      formIdentityApplicant: {}
     }
   },
   created() {
