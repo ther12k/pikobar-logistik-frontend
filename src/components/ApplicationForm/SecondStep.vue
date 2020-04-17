@@ -214,11 +214,9 @@ export default {
       EventBus.$emit('prevStep', this.step)
     },
     onButtonClick() {
-      window.addEventListener('focus', () => {
-        this.isSelecting = false
-        this.isUpload = true
-        this.uploadAltert = false
-      }, { once: true })
+      this.isSelecting = false
+      this.isUpload = true
+      this.uploadAltert = false
       this.$refs.uploader.click()
     },
     onFileChanged(e) {
