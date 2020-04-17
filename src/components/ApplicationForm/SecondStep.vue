@@ -87,7 +87,7 @@
                   {{ $t('label.reupload') }}
                 </v-btn>
                 <v-alert
-                  v-if="uploadAltert"
+                  v-if="uploadAlert"
                   type="error"
                 >
                   {{ $t('label.upload_error_message') }}
@@ -198,14 +198,14 @@ export default {
       selectedFile: null,
       selectedFileName: '',
       isUpload: false,
-      uploadAltert: false
+      uploadAlert: false
     }
   },
   methods: {
     async onNext() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
-        this.uploadAltert = true
+        this.uploadAlert = true
         return
       }
       EventBus.$emit('nextStep', this.step)
@@ -216,7 +216,7 @@ export default {
     onButtonClick() {
       this.isSelecting = false
       this.isUpload = true
-      this.uploadAltert = false
+      this.uploadAlert = false
       this.$refs.uploader.click()
     },
     onFileChanged(e) {
