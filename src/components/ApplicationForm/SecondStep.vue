@@ -213,7 +213,7 @@ export default {
     onPrev() {
       EventBus.$emit('prevStep', this.step)
     },
-    async onButtonClick() {
+    onButtonClick() {
       window.addEventListener('focus', () => {
         this.isSelecting = false
         this.isUpload = true
