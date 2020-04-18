@@ -4,5 +4,8 @@ export default {
   },
   totalList: (state, getters) => {
     return state.totalList
+  },
+  faskesDetail: (state, getters) => {
+    return state.detailFaskes
   }
 }

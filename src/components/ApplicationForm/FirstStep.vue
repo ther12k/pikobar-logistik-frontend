@@ -22,8 +22,8 @@
                 item-value="id"
                 item-text="name"
                 :items="faskesTypeList"
-                @change="onSelectFaskesType"
                 :placeholder="$t('label.autocomplete_instance_placeholder')"
+                @change="onSelectFaskesType"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -37,7 +37,7 @@
                 item-text="nama_faskes"
                 single-line
                 solo
-                :clearable="true" 
+                :clearable="true"
                 autocomplete
                 @input.native="querySearchFaskes"
                 @change="onSelectFaskes"
@@ -192,11 +192,12 @@ export default {
       'applicantListDistrict'
     ]),
     ...mapGetters('faskes', [
-      'faskesList'
+      'faskesList',
+      'faskesDetail'
     ]),
     ...mapGetters('faskesType', [
       'faskesTypeList'
-    ]),
+    ])
   },
   async created() {
     await this.getListCity()
@@ -239,12 +240,15 @@ export default {
     async getListFaskes() {
       await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
     },
-    async querySearchFaskes(event){
+    async querySearchFaskes(event) {
       this.listQueryFaskes.nama_faskes = event.target.value;
       await this.getListFaskes()
     },
-    async onSelectFaskes(row){
-      console.log(row)
+    async onSelectFaskes(id) {
+      if(id) {
+        await this.$store.dispatch('faskes/getDetailFaskes', id)
+      }
+      console.log(this.faskesDetail)
     }
   }
 }

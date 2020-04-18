@@ -4,5 +4,8 @@ export default {
   },
   SET_TOTAL_LIST_FASKES: (state, data) => {
     state.totalList = data
+  },
+  SET_DETAIL_FASKES: (state, data) => {
+    state.detailFaskes = data
   }
 }

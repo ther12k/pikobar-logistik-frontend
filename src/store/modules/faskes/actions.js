@@ -10,5 +10,14 @@ export default {
     } catch (error) {
       return error.response
     }
+  },
+  async getDetailFaskes({ commit }, faskesId) {
+    try {
+      const response = await fetchList(`/api/v1/master-faskes/${faskesId}`, 'GET')
+      commit('SET_DETAIL_FASKES', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }
