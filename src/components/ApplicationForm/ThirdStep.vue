@@ -49,7 +49,7 @@
               <v-select
                 v-model="data.apd"
                 :placeholder="$t('label.choose_apd')"
-                :items="APD"
+                :items="listAPD"
                 :error-messages="errors"
                 outlined
                 solo-inverted
@@ -212,6 +212,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'KebutuhanLogistik',
@@ -236,6 +237,18 @@ export default {
       totalLogistic: 0,
       idAPD: 0
     }
+  },
+  computed: {
+    ...mapGetters('logistics', [
+      'listAPD'
+    ])
+  },
+  async created() {
+    await this.getListAPD()
+    this.listAPD.forEach(element => {
+      element.text = element.name
+      element.value = element.id
+    })
   },
   methods: {
     onClick() {
@@ -262,6 +275,9 @@ export default {
     deleteData(index) {
       this.logisticNeeds.splice(index, 1)
       this.setTotalAPD()
+    },
+    async getListAPD() {
+      await this.$store.dispatch('logistics/getListAPD')
     },
     async onNext() {
       const valid = await this.$refs.observer.validate()
