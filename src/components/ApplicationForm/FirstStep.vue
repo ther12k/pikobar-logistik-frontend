@@ -29,7 +29,7 @@
             >
               <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
-                v-model="formApplicant.intanceName"
+                v-model="formApplicant.instanceName"
                 outlined
                 :error-messages="errors"
                 :items="instanceName"
@@ -183,12 +183,18 @@ export default {
   async created() {
     await this.getListCity()
     this.applicantListCity.forEach(element => {
-      element.value = element.kemendagri_kabupaten_kode
+      element.value = {
+        id: element.kemendagri_kabupaten_kode,
+        name: element.kemendagri_kabupaten_nama
+      }
       element.text = element.kemendagri_kabupaten_nama
     })
     await this.getListDistrict()
     this.applicantListDistrict.forEach(element => {
-      element.value = element.kemendagri_kecamatan_kode
+      element.value = {
+        id: element.kemendagri_kecamatan_kode,
+        name: element.kemendagri_kecamatan_nama
+      }
       element.text = element.kemendagri_kecamatan_nama
     })
   },

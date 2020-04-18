@@ -247,7 +247,10 @@ export default {
     await this.getListAPD()
     this.listAPD.forEach(element => {
       element.text = element.name
-      element.value = element.id
+      element.value = {
+        id: element.id,
+        name: element.name
+      }
     })
   },
   methods: {
@@ -282,7 +285,6 @@ export default {
     async onNext() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
-        this.uploadAlert = true
         return
       }
       EventBus.$emit('nextStep', this.step)

@@ -45,7 +45,22 @@
               >
                 {{ $t('label.reupload') }}
               </v-btn>
+              <v-alert
+                v-if="uploadAlert"
+                type="error"
+              >
+                {{ $t('label.upload_error_message') }}
+              </v-alert>
             </center>
+            <ValidationProvider
+              rules="required"
+            >
+              <v-text-field
+                v-model="selectedFileName"
+                disabled
+                class="d-none"
+              />
+            </ValidationProvider>
           </v-col>
         </v-row>
         <v-container fluid>
@@ -87,16 +102,22 @@
   </v-container>
 </template>
 <script>
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'SuratPermohonan',
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data() {
     return {
       step: 4,
       isUpload: false,
       selectedFile: null,
-      selectedFileName: ''
+      selectedFileName: '',
+      uploadAlert: false
     }
   },
   methods: {
@@ -114,7 +135,12 @@ export default {
       formData.append('file', this.selectedFile)
     },
     async onNext() {
-      EventBus.$emit('nextStep', this.step)
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        this.uploadAlert = true
+        return
+      }
+      EventBus.$emit('confirmStep', this.step)
     },
     onPrev() {
       this.isAddAPD = false

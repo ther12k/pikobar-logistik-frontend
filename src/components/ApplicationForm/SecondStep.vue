@@ -203,7 +203,6 @@ export default {
   },
   methods: {
     async onNext() {
-      console.log(this.$refs.observer)
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         this.uploadAlert = true

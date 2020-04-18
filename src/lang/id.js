@@ -167,7 +167,19 @@ export default {
     add: 'tambah',
     logistic_total: 'Total Kebutuhan Logistik Anda',
     add_more: 'Tambah Lagi',
-    applicant_letter_title: 'Silahkan unggah surat pemohonan logistik kesehatan dari institusi kesehatan/faskes yang anda wakili, yang memiliki tanda tangan dan cap resmi dalam bentuk PDF/JPG/JPEG (maks. 10MB).'
+    applicant_letter_title: 'Silahkan unggah surat pemohonan logistik kesehatan dari institusi kesehatan/faskes yang anda wakili, yang memiliki tanda tangan dan cap resmi dalam bentuk PDF/JPG/JPEG (maks. 10MB).',
+    confirm_data: 'Konfirmasi Data',
+    instance_identity: 'Identitas Instansi',
+    number_phone: 'Nomor Telepon',
+    county_town: 'Kota/Kabupaten',
+    village: 'Keluarahan',
+    applicant_position_identity: 'Jabatan Pemohon',
+    email: 'email',
+    applicant_phone: 'No. HP Pemohon',
+    applicant_phone_sub: 'No. HP Pemohon Pengganti',
+    applicant_ktp: 'KTP/Kartu Pegawai/Surat Tugas',
+    list_logistic_need: 'Daftar Kebutuhan Logistik',
+    apd_name_spesification: 'Nama/Spesifikasi APD'
   },
   success: {
     login_success: 'Login Berhasil',
