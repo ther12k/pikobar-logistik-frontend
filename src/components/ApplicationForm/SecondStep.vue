@@ -154,14 +154,14 @@
             </v-col>
           </div>
           <div class="btn-mobile">
-            <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right">
               <v-btn
                 class="margin-positive"
                 color="primary"
                 @click="onNext"
               >{{ $t('label.next') }}</v-btn>
             </v-col>
-            <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right">
               <v-btn
                 class="margin-positive"
                 outlined
@@ -203,6 +203,7 @@ export default {
   },
   methods: {
     async onNext() {
+      console.log(this.$refs.observer)
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         this.uploadAlert = true

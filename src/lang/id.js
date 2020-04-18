@@ -153,7 +153,21 @@ export default {
     not_yet_upload_file: 'Belum ada file yang diupload',
     upload: 'Upload',
     reupload: 'Upload Ulang',
-    upload_error_message: 'Mohon Upload File'
+    upload_error_message: 'Mohon Upload File',
+    apd_name_spec: 'Nama/Spec APD',
+    brand: 'Merk',
+    total: 'Jumlah',
+    unit: 'Satuan',
+    purpose: 'Tujuan Penggunaan',
+    urgency_level: 'Tingakt Urgensi',
+    choose_apd: 'Pilih APD',
+    input_brand: 'Masukkan Merk',
+    input_purpose: 'Masukkan Tujuan',
+    input_urgency_level: 'Pilih Urgensi',
+    add: 'tambah',
+    logistic_total: 'Total Kebutuhan Logistik Anda',
+    add_more: 'Tambah Lagi',
+    applicant_letter_title: 'Silahkan unggah surat pemohonan logistik kesehatan dari institusi kesehatan/faskes yang anda wakili, yang memiliki tanda tangan dan cap resmi dalam bentuk PDF/JPG/JPEG (maks. 10MB).'
   },
   success: {
     login_success: 'Login Berhasil',
