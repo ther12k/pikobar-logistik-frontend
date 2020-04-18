@@ -194,7 +194,6 @@ export default {
   },
   methods: {
     async onNext() {
-      console.log(this.formApplicant)
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return

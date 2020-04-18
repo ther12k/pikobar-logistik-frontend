@@ -229,6 +229,7 @@ export default {
     return {
       step: 3,
       isAddAPD: false,
+      // TODO:: data yang digunakan data dummy, lakukan integrasi dengan API
       APD: ['Hand Sanitizer', 'Masker Fiber'],
       unit: ['Botol', 'Pack', 'Kg'],
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
