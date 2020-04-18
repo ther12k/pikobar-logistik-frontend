@@ -58,7 +58,7 @@
                   <v-row class="main-color">{{ $t('label.instance_name') }}</v-row>
                   <v-row>{{ formApplicant.instanceName }}</v-row>
                   <v-row class="main-color">{{ $t('label.number_phone') }}</v-row>
-                  <v-row>081220702050</v-row>
+                  <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
                 </v-col>
                 <v-col>
                   <v-row class="main-color">{{ $t('label.county_town') }}</v-row>
@@ -66,7 +66,7 @@
                   <v-row class="main-color">{{ $t('label.select_sub_district_full_name') }}</v-row>
                   <v-row>{{ formApplicant.districtNameId.name }}</v-row>
                   <v-row class="main-color">{{ $t('label.village') }}</v-row>
-                  <v-row>Sawangan Lama</v-row>
+                  <v-row>{{ formApplicant.villageNameId.name }}</v-row>
                 </v-col>
               </v-row>
             </v-col>
@@ -195,7 +195,6 @@ export default {
   },
   mounted() {
     this.url = URL.createObjectURL(this.formIdentityApplicant.dataFile)
-    console.log(this.applicantLetter)
     this.total = Math.ceil(this.logisticNeeds.length / 3)
     if (this.total === 1) {
       for (let index = 0; index < this.logisticNeeds.length; index++) {
