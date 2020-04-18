@@ -29,7 +29,7 @@
             >
               <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
-                :value="formApplicant.instanceName"
+                v-model="formApplicant.instanceName"
                 outlined
                 :error-messages="errors"
                 :items="instanceName"

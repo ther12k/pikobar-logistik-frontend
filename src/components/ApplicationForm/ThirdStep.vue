@@ -280,7 +280,7 @@ export default {
       })
     },
     async setUnit(value) {
-      this.idAlkes = value
+      this.idAlkes = value.id
       const response = await this.$store.dispatch('logistics/getListApdUnit', this.idAlkes)
       this.unit = response
     },

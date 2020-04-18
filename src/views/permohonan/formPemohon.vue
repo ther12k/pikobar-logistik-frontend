@@ -123,7 +123,9 @@
               />
             </v-stepper-content>
             <v-stepper-content step="4">
-              <surat-permohonan />
+              <surat-permohonan
+                :applicant-letter="applicantLetter"
+              />
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -135,6 +137,7 @@
       :form-applicant="formApplicant"
       :form-identity-applicant="formIdentityApplicant"
       :logistic-needs="logisticNeeds"
+      :applicant-letter="applicantLetter"
     />
   </div>
 </template>
@@ -150,6 +153,7 @@ export default {
       formApplicant: {},
       formIdentityApplicant: {},
       logisticNeeds: [],
+      applicantLetter: null,
       isConfirm: false
     }
   },
