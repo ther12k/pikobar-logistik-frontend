@@ -112,7 +112,7 @@
                 outlined
                 solo-inverted
                 :error-messages="errors"
-                item-value="id"
+                item-value="unit"
                 item-text="unit"
               />
             </ValidationProvider>

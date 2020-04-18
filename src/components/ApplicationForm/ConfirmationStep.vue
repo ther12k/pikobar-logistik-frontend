@@ -58,7 +58,7 @@
                   <v-row class="main-color">{{ $t('label.instance_name') }}</v-row>
                   <v-row>{{ formApplicant.instanceName }}</v-row>
                   <v-row class="main-color">{{ $t('label.number_phone') }}</v-row>
-                  <v-row>081220702050</v-row>
+                  <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
                 </v-col>
                 <v-col>
                   <v-row class="main-color">{{ $t('label.county_town') }}</v-row>
@@ -66,7 +66,7 @@
                   <v-row class="main-color">{{ $t('label.select_sub_district_full_name') }}</v-row>
                   <v-row>{{ formApplicant.districtNameId.name }}</v-row>
                   <v-row class="main-color">{{ $t('label.village') }}</v-row>
-                  <v-row>Sawangan Lama</v-row>
+                  <v-row>{{ formApplicant.villageNameId.name }}</v-row>
                 </v-col>
               </v-row>
             </v-col>
@@ -151,7 +151,7 @@
         <hr>
         <v-row justify="end">
           <v-btn class="ml-5 white--text" min-width="140px" color="success" outlined @click="onPrev()">{{ $t('label.back') }}</v-btn>
-          <v-btn class="ml-5 white--text" min-width="140px" color="success">{{ $t('label.save') }}</v-btn>
+          <v-btn class="ml-5 white--text" min-width="140px" color="success" @click="submitData">{{ $t('label.save') }}</v-btn>
         </v-row>
       </v-card>
     </div>
@@ -195,7 +195,6 @@ export default {
   },
   mounted() {
     this.url = URL.createObjectURL(this.formIdentityApplicant.dataFile)
-    console.log(this.applicantLetter)
     this.total = Math.ceil(this.logisticNeeds.length / 3)
     if (this.total === 1) {
       for (let index = 0; index < this.logisticNeeds.length; index++) {
@@ -224,6 +223,42 @@ export default {
     },
     onPrev() {
       EventBus.$emit('prevStep', this.step)
+    },
+    submitData() {
+      const dataLogistics = []
+      this.logisticNeeds.forEach(element => {
+        dataLogistics.push({
+          usage: element.purpose,
+          priority: element.urgency,
+          product_id: element.apd.id,
+          brand: element.brand,
+          quantity: element.total,
+          unit: element.unit
+        })
+      })
+      console.log(dataLogistics)
+      const formData = new FormData()
+      formData.append('file', this.formIdentityApplicant.dataFile)
+      const dataSubmit = {
+        master_faskes_id: this.formApplicant.instanceType,
+        logistic_request: dataLogistics,
+        agency_type: this.formApplicant.instance,
+        agency_name: '',
+        phone_number: this.formApplicant.instancePhoneNumber,
+        location_district_code: this.formApplicant.cityNameId.id,
+        location_subdistrict_code: this.formApplicant.districtNameId.id,
+        location_village_code: this.formApplicant.villageNameId.id,
+        location_address: this.formApplicant.fullAddress,
+        applicant_name: this.formIdentityApplicant.applicantName,
+        applicants_office: this.formIdentityApplicant.applicantPosition,
+        email: this.formIdentityApplicant.applicantEmail,
+        primary_phone_number: this.formIdentityApplicant.applicantPhoneNumber,
+        secondary_phone_number: this.formIdentityApplicant.applicantPhoneNumber2,
+        letter_file: '',
+        applicant_file: formData
+      }
+      console.log(dataSubmit)
+      // lanjutkan submit form
     }
   }
 }

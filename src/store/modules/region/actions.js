@@ -60,5 +60,14 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async getApplicantFormListVillage({ commit }) {
+    try {
+      const response = await fetchList('/api/v1/landing-page-registration/areas/villages', 'GET')
+      commit('SET_APPLICANT_LIST_VILLAGE', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }

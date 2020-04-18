@@ -10,5 +10,8 @@ export default {
   },
   applicantListDistrict: (state, getters) => {
     return state.applicantDistrict
+  },
+  applicantListVillage: (state, getters) => {
+    return state.applicantVillage
   }
 }
