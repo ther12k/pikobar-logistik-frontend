@@ -44,6 +44,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/data-confirmation',
+    component: () => import('@/views/landingPage/dataConfirmation'),
+    hidden: true
+  },
+  {
     path: '/change-password',
     component: Layout,
     hidden: true,

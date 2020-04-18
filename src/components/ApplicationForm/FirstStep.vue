@@ -130,15 +130,15 @@
                 class="margin-positive"
                 color="primary"
                 @click="onNext()"
-                >{{ $t('label.next') }}</v-btn>
-              </v-col>
-              <v-col cols="6" sm="6" md="6" class="float-right">
-                <v-btn
-                  class="margin-positive"
-                  outlined
-                  text
-                  href="#/landing-page"
-                >{{ $t('label.cancel') }}</v-btn>
+              >{{ $t('label.next') }}</v-btn>
+            </v-col>
+            <v-col cols="6" sm="6" md="6" class="float-right">
+              <v-btn
+                class="margin-positive"
+                outlined
+                text
+                href="#/landing-page"
+              >{{ $t('label.cancel') }}</v-btn>
             </v-col>
           </div>
         </v-container>
