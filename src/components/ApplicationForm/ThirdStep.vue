@@ -53,6 +53,7 @@
                 :error-messages="errors"
                 outlined
                 solo-inverted
+                @change="setUnit"
               />
             </ValidationProvider>
           </v-col>
@@ -111,6 +112,8 @@
                 outlined
                 solo-inverted
                 :error-messages="errors"
+                item-value="id"
+                item-text="unit"
               />
             </ValidationProvider>
           </v-col>
@@ -235,12 +238,13 @@ export default {
       unit: ['Botol', 'Pack', 'Kg'],
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
       totalLogistic: 0,
-      idAPD: 0
+      idAPD: 0,
+      idAlkes: 0
     }
   },
   computed: {
     ...mapGetters('logistics', [
-      'listAPD'
+      'listAPD', 'listApdUnit'
     ])
   },
   async created() {
@@ -271,6 +275,11 @@ export default {
       this.logisticNeeds.forEach(element => {
         this.totalLogistic = this.totalLogistic + parseInt(element.total)
       })
+    },
+    async setUnit(value) {
+      this.idAlkes = value
+      const response = await this.$store.dispatch('logistics/getListApdUnit', this.idAlkes)
+      this.unit = response
     },
     deleteData(index) {
       this.logisticNeeds.splice(index, 1)
