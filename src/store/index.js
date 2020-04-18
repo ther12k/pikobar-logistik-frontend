@@ -10,6 +10,8 @@ import region from './modules/region'
 import constants from './modules/constants'
 import general from './modules/general'
 import logistics from './modules/logistics'
+import faskes from './modules/faskes'
+import faskesType from './modules/faskesType'
 
 Vue.use(Vuex)
 
@@ -24,7 +26,9 @@ const store = new Vuex.Store({
     region,
     constants,
     general,
-    logistics
+    logistics,
+    faskes,
+    faskesType
   }
 })
 
