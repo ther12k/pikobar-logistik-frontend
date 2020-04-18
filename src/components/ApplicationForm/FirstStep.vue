@@ -241,7 +241,7 @@ export default {
       await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
     },
     async querySearchFaskes(event) {
-      this.listQueryFaskes.nama_faskes = event.target.value;
+      this.listQueryFaskes.nama_faskes = event.target.value
       await this.getListFaskes()
     },
     async onSelectFaskes(id) {
