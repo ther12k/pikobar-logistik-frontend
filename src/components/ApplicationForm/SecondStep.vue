@@ -225,6 +225,7 @@ export default {
       this.isUpload = true
       const formData = new FormData()
       formData.append('file', this.selectedFile)
+      this.formIdentityApplicant.dataFile = this.selectedFile
     },
     deleteFile() {
       this.selectedFileName = ''

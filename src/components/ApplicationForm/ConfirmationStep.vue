@@ -100,6 +100,9 @@
             </v-col>
             <v-col>
               <v-row class="main-color">{{ $t('label.applicant_ktp') }}</v-row>
+              <v-row>
+                <img style="max-width: 100%; max-height: 500px;" :src="url">
+              </v-row>
             </v-col>
           </v-row>
         </div>
@@ -171,6 +174,10 @@ export default {
     logisticNeeds: {
       type: Array,
       default: null
+    },
+    applicantLetter: {
+      type: File,
+      default: null
     }
   },
   data() {
@@ -181,10 +188,14 @@ export default {
         page: 1,
         limit: 3
       },
-      total: 0
+      total: 0,
+      url: null,
+      urlLetter: null
     }
   },
   mounted() {
+    this.url = URL.createObjectURL(this.formIdentityApplicant.dataFile)
+    console.log(this.applicantLetter)
     this.total = Math.ceil(this.logisticNeeds.length / 3)
     if (this.total === 1) {
       for (let index = 0; index < this.logisticNeeds.length; index++) {
