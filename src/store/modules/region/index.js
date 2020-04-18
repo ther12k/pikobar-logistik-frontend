@@ -6,7 +6,8 @@ const state = {
   districtCity: [],
   hospitalList: [],
   applicantCity: [],
-  applicantDistrict: []
+  applicantDistrict: [],
+  applicantVillage: []
 }
 
 export default {

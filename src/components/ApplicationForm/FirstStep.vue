@@ -93,7 +93,7 @@
                 v-model="formApplicant.villageNameId"
                 outlined
                 :error-messages="errors"
-                :items="village"
+                :items="applicantListVillage"
                 :placeholder="$t('label.autocomplete_capital_placeholder')"
               />
             </ValidationProvider>
@@ -189,7 +189,8 @@ export default {
   computed: {
     ...mapGetters('region', [
       'applicantListCity',
-      'applicantListDistrict'
+      'applicantListDistrict',
+      'applicantListVillage'
     ]),
     ...mapGetters('faskes', [
       'faskesList',
@@ -216,6 +217,14 @@ export default {
       }
       element.text = element.kemendagri_kecamatan_nama
     })
+    await this.getListVillage()
+    this.applicantListVillage.forEach(element => {
+      element.value = {
+        id: element.kemendagri_desa_kode,
+        name: element.kemendagri_desa_nama
+      }
+      element.text = element.kemendagri_desa_nama
+    })
     await this.$store.dispatch('faskesType/getListFaskesType')
     await this.getListFaskes()
   },
@@ -233,6 +242,9 @@ export default {
     async getListDistrict() {
       await this.$store.dispatch('region/getApplicantFormListDistrict')
     },
+    async getListVillage() {
+      await this.$store.dispatch('region/getApplicantFormListVillage')
+    },
     async onSelectFaskesType(id) {
       this.listQueryFaskes.id_tipe_faskes = id
       await this.getListFaskes()
@@ -241,11 +253,11 @@ export default {
       await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
     },
     async querySearchFaskes(event) {
-      this.listQueryFaskes.nama_faskes = event.target.value;
+      this.listQueryFaskes.nama_faskes = event.target.value
       await this.getListFaskes()
     },
     async onSelectFaskes(id) {
-      if(id) {
+      if (id) {
         await this.$store.dispatch('faskes/getDetailFaskes', id)
       }
       console.log(this.faskesDetail)
