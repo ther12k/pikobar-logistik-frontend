@@ -139,13 +139,10 @@ export default {
       this.isUpload = true
       const formData = new FormData()
       formData.append('file', this.selectedFile)
-      // this.applicantLetter = { data: this.selectedFile, dataName: this.selectedFileName }
       this.applicantLetter = this.selectedFile
       console.log(this.applicantLetter)
-      // console.log(this.applicantLetter)
     },
     async onNext() {
-      console.log(this.applicantLetter)
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         this.uploadAlert = true

@@ -255,6 +255,8 @@ export default {
     async querySearchFaskes(event) {
       this.listQueryFaskes.nama_faskes = event.target.value
       await this.getListFaskes()
+      console.log(this.faskesList)
+      // disini buat dapetin text value
     },
     async onSelectFaskes(id) {
       if (id) {
