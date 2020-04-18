@@ -37,8 +37,10 @@
                 item-text="nama_faskes"
                 single-line
                 solo
+                outlined
                 :clearable="true"
                 autocomplete
+                :placeholder="$t('label.example_instance_name')"
                 @input.native="querySearchFaskes"
                 @change="onSelectFaskes"
               />
@@ -202,34 +204,19 @@ export default {
   },
   async created() {
     await this.getListCity()
-    this.applicantListCity.forEach(element => {
-      element.value = {
-        id: element.kemendagri_kabupaten_kode,
-        name: element.kemendagri_kabupaten_nama
-      }
-      element.text = element.kemendagri_kabupaten_nama
-    })
     await this.getListDistrict()
-    this.applicantListDistrict.forEach(element => {
-      element.value = {
-        id: element.kemendagri_kecamatan_kode,
-        name: element.kemendagri_kecamatan_nama
-      }
-      element.text = element.kemendagri_kecamatan_nama
-    })
     await this.getListVillage()
-    this.applicantListVillage.forEach(element => {
-      element.value = {
-        id: element.kemendagri_desa_kode,
-        name: element.kemendagri_desa_nama
-      }
-      element.text = element.kemendagri_desa_nama
-    })
     await this.$store.dispatch('faskesType/getListFaskesType')
     await this.getListFaskes()
   },
   methods: {
     async onNext() {
+      this.faskesList.forEach(element => {
+        if (element.id === this.formApplicant.instance) {
+          this.formApplicant.instanceName = element.nama_faskes
+          return
+        }
+      })
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
@@ -238,12 +225,33 @@ export default {
     },
     async getListCity() {
       await this.$store.dispatch('region/getApplicantFormListCity')
+      this.applicantListCity.forEach(element => {
+        element.value = {
+          id: element.kemendagri_kabupaten_kode,
+          name: element.kemendagri_kabupaten_nama
+        }
+        element.text = element.kemendagri_kabupaten_nama
+      })
     },
     async getListDistrict() {
       await this.$store.dispatch('region/getApplicantFormListDistrict')
+      this.applicantListDistrict.forEach(element => {
+        element.value = {
+          id: element.kemendagri_kecamatan_kode,
+          name: element.kemendagri_kecamatan_nama
+        }
+        element.text = element.kemendagri_kecamatan_nama
+      })
     },
     async getListVillage() {
       await this.$store.dispatch('region/getApplicantFormListVillage')
+      this.applicantListVillage.forEach(element => {
+        element.value = {
+          id: element.kemendagri_desa_kode,
+          name: element.kemendagri_desa_nama
+        }
+        element.text = element.kemendagri_desa_nama
+      })
     },
     async onSelectFaskesType(id) {
       this.listQueryFaskes.id_tipe_faskes = id

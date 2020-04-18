@@ -243,7 +243,7 @@ export default {
         master_faskes_id: this.formApplicant.instanceType,
         logistic_request: dataLogistics,
         agency_type: this.formApplicant.instance,
-        agency_name: '',
+        agency_name: this.formApplicant.instanceName,
         phone_number: this.formApplicant.instancePhoneNumber,
         location_district_code: this.formApplicant.cityNameId.id,
         location_subdistrict_code: this.formApplicant.districtNameId.id,
