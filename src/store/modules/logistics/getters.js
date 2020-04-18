@@ -4,5 +4,8 @@ export default {
   },
   listApdUnit: (state, getters) => {
     return state.dataListApdUnit
+  },
+  listInstanceType: (state, getters) => {
+    return state.dataInstanceType
   }
 }

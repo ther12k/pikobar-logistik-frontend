@@ -4,7 +4,8 @@ import getters from './getters'
 
 const state = {
   dataListAPD: [],
-  dataListApdUnit: []
+  dataListApdUnit: [],
+  dataInstanceType: []
 }
 
 export default {
