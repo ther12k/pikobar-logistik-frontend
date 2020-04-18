@@ -34,6 +34,7 @@
             md="1"
           >
             <center><v-label class="title"><b>{{ index + 1 }}</b></v-label></center>
+            <center><v-icon style="padding: 10px" color="red" size="25" @click="deleteData(index)">mdi-delete</v-icon></center>
           </v-col>
           <v-col
             cols="12"
@@ -228,11 +229,12 @@ export default {
     return {
       step: 3,
       isAddAPD: false,
+      // TODO:: data yang digunakan data dummy, lakukan integrasi dengan API
       APD: ['Hand Sanitizer', 'Masker Fiber'],
       unit: ['Botol', 'Pack', 'Kg'],
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
-      totalAPD: 0,
-      totalLogistic: 0
+      totalLogistic: 0,
+      idAPD: 0
     }
   },
   methods: {
@@ -240,9 +242,9 @@ export default {
       this.isAddAPD = true
     },
     addLogistic() {
-      this.totalAPD = this.totalAPD + 1
+      this.idAPD = this.idAPD + 1
       this.logisticNeeds.push({
-        id: this.totalAPD,
+        id: this.idAPD,
         apd: '',
         brand: '',
         total: 0,
@@ -253,9 +255,13 @@ export default {
     },
     setTotalAPD() {
       this.totalLogistic = 0
-      for (let index = 0; index < this.totalAPD; index++) {
-        this.totalLogistic = parseInt(this.logisticNeeds[index].total) + this.totalLogistic
-      }
+      this.logisticNeeds.forEach(element => {
+        this.totalLogistic = this.totalLogistic + parseInt(element.total)
+      })
+    },
+    deleteData(index) {
+      this.logisticNeeds.splice(index, 1)
+      this.setTotalAPD()
     },
     async onNext() {
       const valid = await this.$refs.observer.validate()

@@ -62,7 +62,6 @@
                 :error-messages="errors"
                 :items="applicantListCity"
                 :placeholder="$t('label.autocomplete_city_placeholder')"
-                @change="getDistrictFromCity"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -187,10 +186,14 @@ export default {
       element.value = element.kemendagri_kabupaten_kode
       element.text = element.kemendagri_kabupaten_nama
     })
+    await this.getListDistrict()
+    this.applicantListDistrict.forEach(element => {
+      element.value = element.kemendagri_kecamatan_kode
+      element.text = element.kemendagri_kecamatan_nama
+    })
   },
   methods: {
     async onNext() {
-      console.log(this.formApplicant)
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
@@ -201,16 +204,7 @@ export default {
       await this.$store.dispatch('region/getApplicantFormListCity')
     },
     async getListDistrict() {
-      await this.$store.dispatch('region/getApplicantFormListDistrict', { kemendagri_kabupaten_kode: this.formApplicant.cityNameId })
-    },
-    async getDistrictFromCity() {
-      await this.getListDistrict()
-      console.log('district')
-      this.applicantListDistrict.forEach(element => {
-        element.value = element.kemendagri_kecamatan_kode
-        element.text = element.kemendagri_kecamatan_nama
-      })
-      console.log(this.applicantListDistrict)
+      await this.$store.dispatch('region/getApplicantFormListDistrict')
     }
   }
 }

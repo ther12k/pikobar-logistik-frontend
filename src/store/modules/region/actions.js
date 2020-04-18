@@ -52,9 +52,9 @@ export default {
       return e
     }
   },
-  async getApplicantFormListDistrict({ commit }, codeCity) {
+  async getApplicantFormListDistrict({ commit }) {
     try {
-      const response = await fetchList('/api/v1/landing-page-registration/areas/subdistricts', 'GET', codeCity)
+      const response = await fetchList('/api/v1/landing-page-registration/areas/subdistricts', 'GET')
       commit('SET_APPLICANT_LIST_DISTRICT', response.data)
       return response
     } catch (e) {
