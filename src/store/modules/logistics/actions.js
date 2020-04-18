@@ -9,5 +9,24 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async getListInstanceType({ commit }) {
+    try {
+      const response = await fetchList('/api/v1/master-faskes-type', 'GET')
+      commit('SET_LIST_INSTANCE_TYPE', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async getListInstanceName({ commit }, param) {
+    try {
+      const response = await fetchList('/api/v1/master-faskes', 'GET', param)
+      // commit('SET_LIST_INSTANCE_TYPE', response.data)
+      console.log(response)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }

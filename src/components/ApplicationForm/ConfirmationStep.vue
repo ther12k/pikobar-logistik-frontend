@@ -203,7 +203,7 @@ export default {
     onNext() {
       this.dataShow = []
       const x = (this.listQuery.page - 1) * 3
-      for (let index = x ; index < this.logisticNeeds.length; index++) {
+      for (let index = x; index < this.logisticNeeds.length; index++) {
         if (this.dataShow.length > 2) {
           return
         } else {
