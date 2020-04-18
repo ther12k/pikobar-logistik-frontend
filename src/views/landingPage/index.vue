@@ -27,7 +27,7 @@
                 <img height="40" src="../../static/logistik_logo_lingkar.svg">
               </v-col>
               <v-col cols="6">
-                <div class="title-page-landing-page-mobile">
+                <div class="title-page-landing-page-mobile margin-left-title-mobile-landing-page">
                   {{ $t('label.logistic') }} <br>
                   {{ $t('label.medical_tools') }}
                 </div>
@@ -36,8 +36,8 @@
           </v-col>
           <v-col cols="4">
             <v-row class="float-right-landing-page">
-              <v-icon class="margin-20" color="white" size="30">{{ $t('label.icon_talk') }}</v-icon>
-              <v-icon color="white" size="30">{{ $t('label.icon_help') }}</v-icon>
+              <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_talk') }}</v-icon>
+              <v-icon class="margin-icon-help-mobile-landing-page" color="white" size="30">{{ $t('label.icon_help') }}</v-icon>
             </v-row>
           </v-col>
         </v-row>
