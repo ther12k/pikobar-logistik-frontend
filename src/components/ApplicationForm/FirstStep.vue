@@ -57,11 +57,12 @@
             >
               <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
-                v-model="formApplicant.cityName"
+                v-model="formApplicant.cityNameId"
                 outlined
                 :error-messages="errors"
-                :items="city"
+                :items="applicantListCity"
                 :placeholder="$t('label.autocomplete_city_placeholder')"
+                @change="getDistrictFromCity"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -70,10 +71,10 @@
             >
               <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
-                v-model="formApplicant.districtName"
+                v-model="formApplicant.districtNameId"
                 outlined
                 :error-messages="errors"
-                :items="district"
+                :items="applicantListDistrict"
                 :placeholder="$t('label.autocomplete_capital_placeholder')"
               />
             </ValidationProvider>
@@ -83,7 +84,7 @@
             >
               <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
-                v-model="formApplicant.villageName"
+                v-model="formApplicant.villageNameId"
                 outlined
                 :error-messages="errors"
                 :items="village"
@@ -125,14 +126,14 @@
             </v-col>
           </div>
           <div class="btn-mobile">
-            <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right">
               <v-btn
                 class="margin-positive"
                 color="primary"
                 @click="onNext()"
               >{{ $t('label.next') }}</v-btn>
             </v-col>
-            <v-col cols="6" sm="6" md="6" class="float-right">
+            <v-col cols="12" sm="12" md="6" class="float-right">
               <v-btn
                 class="margin-positive"
                 outlined
@@ -149,6 +150,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'IdentitasInstansiPemohon',
@@ -167,19 +169,48 @@ export default {
       // TODO: integrasi API, data yang digunakan saat ini masih data dummy
       instance: ['Puskesmas', 'Rumah Sakit'],
       instanceName: ['RSUD Bandung', 'RSUD Bogor'],
-      city: ['Kota Bandung', 'Kab Bandung', 'Kota Bogor', 'Kab Bogor'],
+      city: [{ text: 'kota bandung', value: 1 }, { text: 'kota bogor', value: 2 }],
       district: ['Kecamatan 1', 'Kecamatan 2'],
       village: ['Desa 1', 'Desa 2'],
       step: 1
     }
   },
+  computed: {
+    ...mapGetters('region', [
+      'applicantListCity',
+      'applicantListDistrict'
+    ])
+  },
+  async created() {
+    await this.getListCity()
+    this.applicantListCity.forEach(element => {
+      element.value = element.kemendagri_kabupaten_kode
+      element.text = element.kemendagri_kabupaten_nama
+    })
+  },
   methods: {
     async onNext() {
+      console.log(this.formApplicant)
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         return
       }
       EventBus.$emit('nextStep', this.step)
+    },
+    async getListCity() {
+      await this.$store.dispatch('region/getApplicantFormListCity')
+    },
+    async getListDistrict() {
+      await this.$store.dispatch('region/getApplicantFormListDistrict', { kemendagri_kabupaten_kode: this.formApplicant.cityNameId })
+    },
+    async getDistrictFromCity() {
+      await this.getListDistrict()
+      console.log('district')
+      this.applicantListDistrict.forEach(element => {
+        element.value = element.kemendagri_kecamatan_kode
+        element.text = element.kemendagri_kecamatan_nama
+      })
+      console.log(this.applicantListDistrict)
     }
   }
 }

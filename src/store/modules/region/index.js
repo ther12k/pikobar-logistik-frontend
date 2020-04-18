@@ -4,7 +4,9 @@ import getters from './getters'
 
 const state = {
   districtCity: [],
-  hospitalList: []
+  hospitalList: [],
+  applicantCity: [],
+  applicantDistrict: []
 }
 
 export default {

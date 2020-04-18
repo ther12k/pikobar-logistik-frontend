@@ -42,5 +42,23 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async getApplicantFormListCity({ commit }) {
+    try {
+      const response = await fetchList('/api/v1/landing-page-registration/areas/cities', 'GET')
+      commit('SET_APPLICANT_LIST_CITY', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async getApplicantFormListDistrict({ commit }, codeCity) {
+    try {
+      const response = await fetchList('/api/v1/landing-page-registration/areas/subdistricts', 'GET', codeCity)
+      commit('SET_APPLICANT_LIST_DISTRICT', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }
