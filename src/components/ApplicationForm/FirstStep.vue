@@ -19,26 +19,28 @@
                 v-model="formApplicant.instanceType"
                 outlined
                 :error-messages="errors"
-                :items="listInstanceType"
+                item-value="id"
+                item-text="name"
+                :items="faskesTypeList"
+                @change="onSelectFaskesType"
                 :placeholder="$t('label.autocomplete_instance_placeholder')"
               />
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
               rules="required"
             >
               <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
-                :value="formApplicant.instanceName"
-                outlined
-                :error-messages="errors"
-                :items="instanceName"
-                :disabled="false"
-                :return-object="true"
-                :placeholder="$t('label.example_instance_name')"
+                v-model="formApplicant.instance"
+                :items="faskesList"
+                item-value="id"
+                item-text="nama_faskes"
+                single-line
+                solo
+                :clearable="true" 
                 autocomplete
-                @click="getListInstanceName"
-                @change="getListInstanceName"
+                @input.native="querySearchFaskes"
+                @change="onSelectFaskes"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -176,7 +178,12 @@ export default {
       city: [{ text: 'kota bandung', value: 1 }, { text: 'kota bogor', value: 2 }],
       district: ['Kecamatan 1', 'Kecamatan 2'],
       village: ['Desa 1', 'Desa 2'],
-      step: 1
+      step: 1,
+      nameFaskes: '',
+      listQueryFaskes: {
+        nama_faskes: null,
+        id_tipe_faskes: null
+      }
     }
   },
   computed: {
@@ -184,19 +191,14 @@ export default {
       'applicantListCity',
       'applicantListDistrict'
     ]),
-    ...mapGetters('logistics', [
-      'listInstanceType'
-    ])
+    ...mapGetters('faskes', [
+      'faskesList'
+    ]),
+    ...mapGetters('faskesType', [
+      'faskesTypeList'
+    ]),
   },
   async created() {
-    await this.getListInstanceType()
-    this.listInstanceType.forEach(element => {
-      element.value = {
-        id: element.id,
-        name: element.name
-      }
-      element.text = element.name
-    })
     await this.getListCity()
     this.applicantListCity.forEach(element => {
       element.value = {
@@ -213,6 +215,8 @@ export default {
       }
       element.text = element.kemendagri_kecamatan_nama
     })
+    await this.$store.dispatch('faskesType/getListFaskesType')
+    await this.getListFaskes()
   },
   methods: {
     async onNext() {
@@ -222,19 +226,25 @@ export default {
       }
       EventBus.$emit('nextStep', this.step)
     },
-    async getListInstanceType() {
-      await this.$store.dispatch('logistics/getListInstanceType')
-    },
-    async getListInstanceName() {
-      console.log('masuk')
-      console.log(this.formApplicant)
-      // await this.$store.dispatch('logistics/getListInstanceName', {id_tipe_faskes: formApplicant.instanceType.id})
-    },
     async getListCity() {
       await this.$store.dispatch('region/getApplicantFormListCity')
     },
     async getListDistrict() {
       await this.$store.dispatch('region/getApplicantFormListDistrict')
+    },
+    async onSelectFaskesType(id) {
+      this.listQueryFaskes.id_tipe_faskes = id
+      await this.getListFaskes()
+    },
+    async getListFaskes() {
+      await this.$store.dispatch('faskes/getListFaskes', this.listQueryFaskes)
+    },
+    async querySearchFaskes(event){
+      this.listQueryFaskes.nama_faskes = event.target.value;
+      await this.getListFaskes()
+    },
+    async onSelectFaskes(row){
+      console.log(row)
     }
   }
 }
