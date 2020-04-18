@@ -10,6 +10,15 @@ export default {
       return e
     }
   },
+  async getListApdUnit({ commit }, idAlkes) {
+    try {
+      const response = await fetchList(`/api/v1/landing-page-registration/product-unit/${idAlkes}`, 'GET')
+      commit('SET_LIST_APD_UNIT', response)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
   async getListInstanceType({ commit }) {
     try {
       const response = await fetchList('/api/v1/master-faskes-type', 'GET')
