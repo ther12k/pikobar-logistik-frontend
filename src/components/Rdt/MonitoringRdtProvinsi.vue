@@ -51,7 +51,7 @@
         />
       </v-col>
       <v-col cols="12" sm="3">
-        <v-label class="title">{{ $t('label.distribution_destination') }} asdsa</v-label>
+        <v-label class="title">{{ $t('label.distribution_destination') }}</v-label>
         <select-area-district-city :on-select-district-city="onSelectDistrictCity" />
       </v-col>
     </v-row>

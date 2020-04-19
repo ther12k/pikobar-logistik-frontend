@@ -181,7 +181,7 @@ export default {
     list_logistic_need: 'Daftar Kebutuhan Logistik',
     apd_name_spesification: 'Nama/Spesifikasi APD',
     wait: 'Harap Tunggu',
-    loading_step_one: 'Saat kami sedang menyimpan data kebutuhan data Logistik Kesehatan Medis Anda.',
+    loading_step_one: 'Saat ini kami sedang menyimpan data kebutuhan data Logistik Kesehatan Medis Anda.',
     loading_step_two: 'Proses mungkin membutuhkan waktu beberapa saat.',
     save_success: 'Data Berhasil Disimpan!',
     loading_done_one: 'Pengajuan Logistik Kesehatan Anda berhasil disimpan.',

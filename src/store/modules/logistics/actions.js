@@ -40,7 +40,6 @@ export default {
   async postApplicantForm({ commit }, params) {
     try {
       const response = await doPostUpdate('/api/v1/logistic-request', 'POST', params)
-      console.log(response)
       return response
     } catch (e) {
       return e
