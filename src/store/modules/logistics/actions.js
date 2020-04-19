@@ -31,7 +31,15 @@ export default {
   async getListInstanceName({ commit }, param) {
     try {
       const response = await fetchList('/api/v1/master-faskes', 'GET', param)
-      // commit('SET_LIST_INSTANCE_TYPE', response.data)
+      commit('SET_LIST_INSTANCE_TYPE', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async postApplicantForm({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/logistic-request', 'POST', params)
       console.log(response)
       return response
     } catch (e) {

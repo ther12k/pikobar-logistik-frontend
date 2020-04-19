@@ -227,7 +227,7 @@ export default {
     onPrev() {
       EventBus.$emit('prevStep', this.step)
     },
-    submitData() {
+    async submitData() {
       const dataLogistics = []
       this.logisticNeeds.forEach(element => {
         dataLogistics.push({
@@ -239,7 +239,7 @@ export default {
           unit: element.unit
         })
       })
-      console.log(dataLogistics)
+      // console.log(dataLogistics)
       const formData = new FormData()
       formData.append('file', this.formIdentityApplicant.dataFile)
       const formDataLetter = new FormData()
@@ -262,8 +262,11 @@ export default {
         letter_file: formDataLetter,
         applicant_file: formData
       }
+      console.log('ini data sumbit')
       console.log(dataSubmit)
       // lanjutkan submit form
+      const response = await this.$store.dispatch('logistics/postApplicantForm', dataSubmit)
+      console.log(response)
     }
   }
 }
