@@ -26,7 +26,7 @@
         <v-row
           v-for="(data, index) in logisticNeeds"
           :key="data.id"
-          style="margin-bottom: -40px"
+          class="maring-btm-min-40"
         >
           <v-col
             cols="12"
@@ -34,7 +34,7 @@
             md="1"
           >
             <center><v-label class="title"><b>{{ index + 1 }}</b></v-label></center>
-            <center><v-icon style="padding: 10px" color="red" size="25" @click="deleteData(index)">mdi-delete</v-icon></center>
+            <center><v-icon class="padding-10" color="red" size="25" @click="deleteData(index)">mdi-delete</v-icon></center>
           </v-col>
           <v-col
             cols="12"
@@ -314,6 +314,12 @@ export default {
 }
 .btn-mobile {
   display: none;
+}
+.margin-btm-min-40 {
+  margin-bottom: -40px;
+}
+.padding-10 {
+  padding: 10px;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }

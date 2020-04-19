@@ -474,8 +474,7 @@ export default {
       formData.append('letter_file', this.applicantLetter)
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
 
-      const response = await this.$store.dispatch('logistics/postApplicantForm', formData)
-      console.log(response)
+      await this.$store.dispatch('logistics/postApplicantForm', formData)
       this.isDone = true
       this.isLoading = false
     },
