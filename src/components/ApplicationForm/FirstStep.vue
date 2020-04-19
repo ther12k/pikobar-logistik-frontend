@@ -211,6 +211,11 @@ export default {
   },
   methods: {
     async onNext() {
+      this.faskesTypeList.forEach(element => {
+        if (element.id === this.formApplicant.instanceType) {
+          this.formApplicant.instanceTypeName = element.name
+        }
+      })
       this.faskesList.forEach(element => {
         if (element.id === this.formApplicant.instance) {
           this.formApplicant.instanceName = element.nama_faskes

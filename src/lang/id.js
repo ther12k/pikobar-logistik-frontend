@@ -172,7 +172,7 @@ export default {
     instance_identity: 'Identitas Instansi',
     number_phone: 'Nomor Telepon',
     county_town: 'Kota/Kabupaten',
-    village: 'Keluarahan',
+    village: 'Kelurahan',
     applicant_position_identity: 'Jabatan Pemohon',
     email: 'email',
     applicant_phone: 'No. HP Pemohon',
