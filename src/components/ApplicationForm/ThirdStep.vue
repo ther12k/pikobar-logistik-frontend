@@ -108,7 +108,7 @@
               <v-label class="title"><b>{{ $t('label.unit') }}</b></v-label>
               <v-select
                 v-model="data.unit"
-                :items="unit"
+                :items="unitList"
                 outlined
                 solo-inverted
                 :error-messages="errors"
@@ -233,9 +233,8 @@ export default {
     return {
       step: 3,
       isAddAPD: false,
-      // TODO:: data yang digunakan data dummy, lakukan integrasi dengan API
-      APD: ['Hand Sanitizer', 'Masker Fiber'],
-      unit: ['Botol', 'Pack', 'Kg'],
+      APD: [],
+      unitList: [],
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
       totalLogistic: 0,
       idAPD: 0,
@@ -282,7 +281,7 @@ export default {
     async setUnit(value) {
       this.idAlkes = value.id
       const response = await this.$store.dispatch('logistics/getListApdUnit', this.idAlkes)
-      this.unit = response
+      this.unitList = response
     },
     deleteData(index) {
       this.logisticNeeds.splice(index, 1)
