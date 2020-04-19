@@ -58,9 +58,6 @@
           <v-row align="center" justify="center">
             {{ $t('label.loading_step_two') }}
           </v-row>
-          <v-row align="center" justify="center" class="margin-top-10">
-            <v-btn @click="onLoading">{{ $t('label.continue') }}</v-btn>
-          </v-row>
         </div>
         <div v-else-if="isDone" class="padding-100">
           <v-row align="center" justify="center">
@@ -79,7 +76,7 @@
             {{ $t('label.loading_done_three') }}
           </v-row>
           <v-row align="center" justify="center" class="margin-top-10">
-            <v-btn @click="onDone">{{ $t('label.back') }}</v-btn>
+            <v-btn href="/#/landing-page">{{ $t('label.back') }}</v-btn>
           </v-row>
         </div>
         <div v-else>
