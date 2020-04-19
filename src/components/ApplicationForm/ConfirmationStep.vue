@@ -282,9 +282,6 @@ export default {
         })
       })
       const formData = new FormData()
-
-      const logistics = [];
-      
       formData.append('master_faskes_id', this.formApplicant.instanceType)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
       formData.append('agency_type', this.formApplicant.instance)
