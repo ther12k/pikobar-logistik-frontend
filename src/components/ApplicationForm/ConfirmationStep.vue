@@ -244,7 +244,7 @@ export default {
 
       const logistics = [];
       dataLogistics.map(value => {
-       const data = [];
+       const data = []
        data['usage'] = value.usage
        data['priority'] = value.priority
        data['product_id'] = value.product_id
@@ -257,7 +257,7 @@ export default {
       console.log(logistics)
 
       formData.append('master_faskes_id', this.formApplicant.instanceType)
-      formData.append('logistic_request', JSON.stringify(logistics))
+      formData.append('logistic_request', JSON.stringify(dataLogistics))
       formData.append('agency_type', this.formApplicant.instance)
       formData.append('agency_name', this.formApplicant.instanceName)
       formData.append('phone_number', this.formApplicant.instancePhoneNumber)
@@ -274,7 +274,6 @@ export default {
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
 
       console.log('ini data sumbit')
-      console.log(formData.value())
       // lanjutkan submit form
       const response = await this.$store.dispatch('logistics/postApplicantForm', formData)
       console.log(response)
