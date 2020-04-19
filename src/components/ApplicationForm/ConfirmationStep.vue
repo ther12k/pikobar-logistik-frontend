@@ -101,7 +101,7 @@
             <v-col>
               <v-row class="main-color">{{ $t('label.applicant_ktp') }}</v-row>
               <v-row>
-                <img style="max-width: 100%; max-height: 500px;" :src="url">
+                <img class="image-style" :src="url">
               </v-row>
             </v-col>
           </v-row>
@@ -239,23 +239,10 @@ export default {
           unit: element.unit
         })
       })
-      // console.log(dataLogistics)
       const formData = new FormData()
 
       const logistics = [];
-      dataLogistics.map(value => {
-       const data = []
-       data['usage'] = value.usage
-       data['priority'] = value.priority
-       data['product_id'] = value.product_id
-       data['brand'] = value.brand
-       data['quantity'] = value.quantity
-       data['unit'] = value.unit
-       logistics.push(data)
-      })
-
-      console.log(logistics)
-
+      
       formData.append('master_faskes_id', this.formApplicant.instanceType)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
       formData.append('agency_type', this.formApplicant.instance)
@@ -273,8 +260,6 @@ export default {
       formData.append('letter_file', this.applicantLetter)
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
 
-      console.log('ini data sumbit')
-      // lanjutkan submit form
       const response = await this.$store.dispatch('logistics/postApplicantForm', formData)
       console.log(response)
     }
@@ -301,5 +286,9 @@ export default {
   .row {
     padding: 0px;
     margin: 0px;
+  }
+  .image-style {
+    max-width: 100%;
+    max-height: 500px;
   }
 </style>
