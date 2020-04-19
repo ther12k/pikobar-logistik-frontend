@@ -45,114 +45,153 @@
     </div>
     <div class="negative-landing-page">
       <v-card class="main-card-data-confirmation" outlined>
-        <div class="data-confirmation-text">{{ $t('label.confirm_data') }}</div>
-        <hr>
-        <div class="main-color">{{ $t('label.instance_identity') }}</div>
-        <div>
-          <v-row>
-            <v-col>
-              <v-row>
-                <v-col>
-                  <v-row class="main-color">{{ $t('label.instance_type') }}</v-row>
-                  <v-row>{{ formApplicant.instanceType }}</v-row>
-                  <v-row class="main-color">{{ $t('label.instance_name') }}</v-row>
-                  <v-row>{{ formApplicant.instanceName }}</v-row>
-                  <v-row class="main-color">{{ $t('label.number_phone') }}</v-row>
-                  <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
-                </v-col>
-                <v-col>
-                  <v-row class="main-color">{{ $t('label.county_town') }}</v-row>
-                  <v-row>{{ formApplicant.cityNameId.name }}</v-row>
-                  <v-row class="main-color">{{ $t('label.select_sub_district_full_name') }}</v-row>
-                  <v-row>{{ formApplicant.districtNameId.name }}</v-row>
-                  <v-row class="main-color">{{ $t('label.village') }}</v-row>
-                  <v-row>{{ formApplicant.villageNameId.name }}</v-row>
-                </v-col>
-              </v-row>
-            </v-col>
-            <v-col>
-              <v-row class="main-color">{{ $t('label.full_address') }}</v-row>
-              <v-row>{{ formApplicant.fullAddress }}</v-row>
-            </v-col>
+        <div v-if="isLoading" style="padding: 100px 100px">
+          <v-row align="center" justify="center">
+            <img height="200" src="../../static/mengirim.svg">
+          </v-row>
+          <v-row align="center" justify="center" style="margin-top: 20px; font-size: 20px; font-weight: bold">
+            Harap Menunggu
+          </v-row>
+          <v-row align="center" justify="center" style="margin-top: 10px">
+            Saat kami sedang menyimpan data kebutuhan data Logistik Kesehatan Medis Anda.
+          </v-row>
+          <v-row align="center" justify="center">
+            Proses mungkin membutuhkan waktu beberapa saat.
+          </v-row>
+          <v-row align="center" justify="center" style="margin-top: 10px">
+            <v-btn @click="onLoading">Lanjutkan</v-btn>
           </v-row>
         </div>
-        <hr>
-        <div class="main-color">{{ $t('label.step_title_2') }}</div>
-        <div>
-          <v-row>
-            <v-col>
-              <v-row>
-                <v-col>
-                  <v-row class="main-color">{{ $t('label.contact_person') }}</v-row>
-                  <v-row>{{ formIdentityApplicant.applicantName }}</v-row>
-                  <v-row class="main-color">{{ $t('label.applicant_position_identity') }}</v-row>
-                  <v-row>{{ formIdentityApplicant.applicantPosition }}</v-row>
-                </v-col>
-                <v-col>
-                  <v-row class="main-color">{{ $t('label.email') }}</v-row>
-                  <v-row>{{ formIdentityApplicant.applicantEmail }}</v-row>
-                  <v-row class="main-color">{{ $t('label.applicant_phone') }}</v-row>
-                  <v-row>{{ formIdentityApplicant.applicantPhoneNumber }}</v-row>
-                  <v-row class="main-color">{{ $t('label.applicant_phone_sub') }}</v-row>
-                  <v-row>{{ formIdentityApplicant.applicantPhoneNumber2 }}</v-row>
-                </v-col>
-              </v-row>
-            </v-col>
-            <v-col>
-              <v-row class="main-color">{{ $t('label.applicant_ktp') }}</v-row>
-              <v-row>
-                <img style="max-width: 100%; max-height: 500px;" :src="url">
-              </v-row>
-            </v-col>
+        <div v-else-if="isDone" style="padding: 100px 100px">
+          <v-row align="center" justify="center">
+            <img height="200" src="../../static/berhasil.svg">
+          </v-row>
+          <v-row align="center" justify="center">
+            <div style="margin-top: 20px; font-size: 20px; font-weight: bold">Data Berhasil Disimpan!</div>
+          </v-row>
+          <v-row align="center" justify="center" style="margin-top: 10px">
+            Pengajuan Logistik Kesehatan Anda berhasil disimpan.
+          </v-row>
+          <v-row align="center" justify="center">
+            Proses verifikasi membutuhkan waktu 1x24 jam.
+          </v-row>
+          <v-row align="center" justify="center">
+            Selanjutnya Anda akan dihubungi melalui Email atau No Telp yang telah didaftarkan.
+          </v-row>
+          <v-row align="center" justify="center" style="margin-top: 10px">
+            <v-btn @click="onDone">Back</v-btn>
           </v-row>
         </div>
-        <hr>
-        <div class="main-color">{{ $t('label.list_logistic_need') }}</div>
-        <v-card outlined>
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
-                  <th class="text-left">{{ $t('label.apd_name_spesification') }}</th>
-                  <th class="text-left">{{ $t('label.brand') }}</th>
-                  <th class="text-left">{{ $t('label.total') }}</th>
-                  <th class="text-left">{{ $t('label.unit') }}</th>
-                  <th class="text-left">{{ $t('label.purpose') }}</th>
-                  <th class="text-left">{{ $t('label.urgency_level') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-if="logisticNeeds.length === 0">
-                  <td class="text-center" :colspan="7">{{ $t('label.no_data') }}</td>
-                </tr>
-                <tr v-for="(item, index) in dataShow" v-else :key="item.index">
-                  <td>{{ getTableRowNumbering(index) }}</td>
-                  <td>{{ item.apd.name }}</td>
-                  <td>{{ item.brand }}</td>
-                  <td>{{ item.total }}</td>
-                  <td>{{ item.unit }}</td>
-                  <td>{{ item.purpose }}</td>
-                  <td>{{ item.urgency }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
-        </v-card>
-        <v-pagination
-          v-model="listQuery.page"
-          :length="total"
-          :total-visible="3"
-          @input="onNext"
-        />
-        <hr>
-        <div class="main-color">{{ $t('label.step_title_4') }}</div>
-        <a :href="urlLetter" target="_blank">{{ letterName }}</a>
-        <hr>
-        <v-row justify="end">
-          <v-btn class="ml-5 white--text" min-width="140px" color="success" outlined @click="onPrev()">{{ $t('label.back') }}</v-btn>
-          <v-btn class="ml-5 white--text" min-width="140px" color="success" @click="submitData">{{ $t('label.save') }}</v-btn>
-        </v-row>
+        <div v-else>
+          <div class="data-confirmation-text">{{ $t('label.confirm_data') }}</div>
+          <hr>
+          <div class="main-color">{{ $t('label.instance_identity') }}</div>
+          <div>
+            <v-row>
+              <v-col>
+                <v-row>
+                  <v-col>
+                    <v-row class="main-color">{{ $t('label.instance_type') }}</v-row>
+                    <v-row>{{ formApplicant.instanceType }}</v-row>
+                    <v-row class="main-color">{{ $t('label.instance_name') }}</v-row>
+                    <v-row>{{ formApplicant.instanceName }}</v-row>
+                    <v-row class="main-color">{{ $t('label.number_phone') }}</v-row>
+                    <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
+                  </v-col>
+                  <v-col>
+                    <v-row class="main-color">{{ $t('label.county_town') }}</v-row>
+                    <v-row>{{ formApplicant.cityNameId.name }}</v-row>
+                    <v-row class="main-color">{{ $t('label.select_sub_district_full_name') }}</v-row>
+                    <v-row>{{ formApplicant.districtNameId.name }}</v-row>
+                    <v-row class="main-color">{{ $t('label.village') }}</v-row>
+                    <v-row>{{ formApplicant.villageNameId.name }}</v-row>
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col>
+                <v-row class="main-color">{{ $t('label.full_address') }}</v-row>
+                <v-row>{{ formApplicant.fullAddress }}</v-row>
+              </v-col>
+            </v-row>
+          </div>
+          <hr>
+          <div class="main-color">{{ $t('label.step_title_2') }}</div>
+          <div>
+            <v-row>
+              <v-col>
+                <v-row>
+                  <v-col>
+                    <v-row class="main-color">{{ $t('label.contact_person') }}</v-row>
+                    <v-row>{{ formIdentityApplicant.applicantName }}</v-row>
+                    <v-row class="main-color">{{ $t('label.applicant_position_identity') }}</v-row>
+                    <v-row>{{ formIdentityApplicant.applicantPosition }}</v-row>
+                  </v-col>
+                  <v-col>
+                    <v-row class="main-color">{{ $t('label.email') }}</v-row>
+                    <v-row>{{ formIdentityApplicant.applicantEmail }}</v-row>
+                    <v-row class="main-color">{{ $t('label.applicant_phone') }}</v-row>
+                    <v-row>{{ formIdentityApplicant.applicantPhoneNumber }}</v-row>
+                    <v-row class="main-color">{{ $t('label.applicant_phone_sub') }}</v-row>
+                    <v-row>{{ formIdentityApplicant.applicantPhoneNumber2 }}</v-row>
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col>
+                <v-row class="main-color">{{ $t('label.applicant_ktp') }}</v-row>
+                <v-row>
+                  <img style="max-width: 100%; max-height: 500px;" :src="url">
+                </v-row>
+              </v-col>
+            </v-row>
+          </div>
+          <hr>
+          <div class="main-color">{{ $t('label.list_logistic_need') }}</div>
+          <v-card outlined>
+            <v-simple-table>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
+                    <th class="text-left">{{ $t('label.apd_name_spesification') }}</th>
+                    <th class="text-left">{{ $t('label.brand') }}</th>
+                    <th class="text-left">{{ $t('label.total') }}</th>
+                    <th class="text-left">{{ $t('label.unit') }}</th>
+                    <th class="text-left">{{ $t('label.purpose') }}</th>
+                    <th class="text-left">{{ $t('label.urgency_level') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-if="logisticNeeds.length === 0">
+                    <td class="text-center" :colspan="7">{{ $t('label.no_data') }}</td>
+                  </tr>
+                  <tr v-for="(item, index) in dataShow" v-else :key="item.index">
+                    <td>{{ getTableRowNumbering(index) }}</td>
+                    <td>{{ item.apd.name }}</td>
+                    <td>{{ item.brand }}</td>
+                    <td>{{ item.total }}</td>
+                    <td>{{ item.unit }}</td>
+                    <td>{{ item.purpose }}</td>
+                    <td>{{ item.urgency }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </v-card>
+          <v-pagination
+            v-model="listQuery.page"
+            :length="total"
+            :total-visible="3"
+            @input="onNext"
+          />
+          <hr>
+          <div class="main-color">{{ $t('label.step_title_4') }}</div>
+          <a :href="urlLetter" target="_blank">{{ letterName }}</a>
+          <hr>
+          <v-row justify="end">
+            <v-btn class="ml-5 white--text" min-width="140px" color="success" outlined @click="onPrev()">{{ $t('label.back') }}</v-btn>
+            <v-btn class="ml-5 white--text" min-width="140px" color="success" @click="submitData">{{ $t('label.save') }}</v-btn>
+          </v-row>
+        </div>
       </v-card>
     </div>
   </div>
@@ -191,7 +230,9 @@ export default {
       total: 0,
       url: null,
       urlLetter: null,
-      letterName: ''
+      letterName: '',
+      isLoading: false,
+      isDone: false
     }
   },
   mounted() {
@@ -228,6 +269,7 @@ export default {
       EventBus.$emit('prevStep', this.step)
     },
     async submitData() {
+      this.isLoading = true
       const dataLogistics = []
       this.logisticNeeds.forEach(element => {
         dataLogistics.push({
@@ -267,6 +309,13 @@ export default {
       // lanjutkan submit form
       const response = await this.$store.dispatch('logistics/postApplicantForm', dataSubmit)
       console.log(response)
+    },
+    onDone() {
+      this.isDone = false
+    },
+    onLoading() {
+      this.isDone = true
+      this.isLoading = false
     }
   }
 }
