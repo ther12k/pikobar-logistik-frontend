@@ -71,6 +71,7 @@
                 <v-btn
                   v-if="isUpload"
                   outlined
+                  class="btn-delete-mobile"
                   @click="deleteFile"
                 >
                   {{ $t('label.delete') }}
@@ -297,6 +298,10 @@ export default {
   }
   .btn-mobile {
     display: block;
+  }
+  .btn-delete-mobile {
+    display: block;
+    margin: 10px;
   }
 }
 </style>
