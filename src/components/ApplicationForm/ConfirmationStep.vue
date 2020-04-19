@@ -49,36 +49,36 @@
           <v-row align="center" justify="center">
             <img height="200" src="../../static/mengirim.svg">
           </v-row>
-          <v-row align="center" justify="center" style="margin-top: 20px; font-size: 20px; font-weight: bold">
-            Harap Menunggu
+          <v-row align="center" justify="center" class="margin-wait">
+            {{ $t('label.wait') }}
           </v-row>
-          <v-row align="center" justify="center" style="margin-top: 10px">
-            Saat kami sedang menyimpan data kebutuhan data Logistik Kesehatan Medis Anda.
+          <v-row align="center" justify="center" class="margin-top-10">
+            {{ $t('label.loading_step_one') }}
           </v-row>
           <v-row align="center" justify="center">
-            Proses mungkin membutuhkan waktu beberapa saat.
+            {{ $t('label.loading_step_two') }}
           </v-row>
-          <v-row align="center" justify="center" style="margin-top: 10px">
+          <v-row align="center" justify="center" class="margin-top-10">
             <v-btn @click="onLoading">Lanjutkan</v-btn>
           </v-row>
         </div>
-        <div v-else-if="isDone" style="padding: 100px 100px">
+        <div v-else-if="isDone" class="padding-100">
           <v-row align="center" justify="center">
             <img height="200" src="../../static/berhasil.svg">
           </v-row>
           <v-row align="center" justify="center">
-            <div style="margin-top: 20px; font-size: 20px; font-weight: bold">Data Berhasil Disimpan!</div>
+            <div class="save-style">{{ $t('label.save_success') }}</div>
           </v-row>
-          <v-row align="center" justify="center" style="margin-top: 10px">
-            Pengajuan Logistik Kesehatan Anda berhasil disimpan.
-          </v-row>
-          <v-row align="center" justify="center">
-            Proses verifikasi membutuhkan waktu 1x24 jam.
+          <v-row align="center" justify="center" class="margin-top-10">
+            {{ $t('label.loading_done_one') }}
           </v-row>
           <v-row align="center" justify="center">
-            Selanjutnya Anda akan dihubungi melalui Email atau No Telp yang telah didaftarkan.
+            {{ $t('label.loading_done_two') }}
           </v-row>
-          <v-row align="center" justify="center" style="margin-top: 10px">
+          <v-row align="center" justify="center">
+            {{ $t('label.loading_done_three') }}
+          </v-row>
+          <v-row align="center" justify="center" class="margin-top-10">
             <v-btn @click="onDone">Back</v-btn>
           </v-row>
         </div>
@@ -531,6 +531,22 @@ export default {
   }
   .padding-100 {
     padding: 100px 100px;
+  }
+  .margin-wait {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .margin-top-10 {
+    margin-top: 10px;
+  }
+  .padding-100 {
+    padding: 100px 100px;
+  }
+  .save-style {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
   }
 @media (max-width: 1199px) and (min-width: 960px) {
 }

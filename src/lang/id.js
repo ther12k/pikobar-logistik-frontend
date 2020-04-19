@@ -179,7 +179,14 @@ export default {
     applicant_phone_sub: 'No. HP Pemohon Pengganti',
     applicant_ktp: 'KTP/Kartu Pegawai/Surat Tugas',
     list_logistic_need: 'Daftar Kebutuhan Logistik',
-    apd_name_spesification: 'Nama/Spesifikasi APD'
+    apd_name_spesification: 'Nama/Spesifikasi APD',
+    wait: 'Harap Tunggu',
+    loading_step_one: 'Saat kami sedang menyimpan data kebutuhan data Logistik Kesehatan Medis Anda.',
+    loading_step_two: 'Proses mungkin membutuhkan waktu beberapa saat.',
+    save_success: 'Data Berhasil Disimpan!',
+    loading_done_one: 'Pengajuan Logistik Kesehatan Anda berhasil disimpan.',
+    loading_done_two: 'Proses verifikasi membutuhkan waktu 1x24 jam.',
+    loading_done_three: 'Selanjutnya Anda akan dihubungi melalui Email atau No Telp yang telah didaftarkan.'
   },
   success: {
     login_success: 'Login Berhasil',
