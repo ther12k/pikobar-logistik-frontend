@@ -283,31 +283,41 @@ export default {
       })
       // console.log(dataLogistics)
       const formData = new FormData()
-      formData.append('file', this.formIdentityApplicant.dataFile)
-      const formDataLetter = new FormData()
-      formDataLetter.append('file', this.applicantLetter)
-      const dataSubmit = {
-        master_faskes_id: this.formApplicant.instanceType,
-        logistic_request: dataLogistics,
-        agency_type: this.formApplicant.instance,
-        agency_name: this.formApplicant.instanceName,
-        phone_number: this.formApplicant.instancePhoneNumber,
-        location_district_code: this.formApplicant.cityNameId.id,
-        location_subdistrict_code: this.formApplicant.districtNameId.id,
-        location_village_code: this.formApplicant.villageNameId.id,
-        location_address: this.formApplicant.fullAddress,
-        applicant_name: this.formIdentityApplicant.applicantName,
-        applicants_office: this.formIdentityApplicant.applicantPosition,
-        email: this.formIdentityApplicant.applicantEmail,
-        primary_phone_number: this.formIdentityApplicant.applicantPhoneNumber,
-        secondary_phone_number: this.formIdentityApplicant.applicantPhoneNumber2,
-        letter_file: formDataLetter,
-        applicant_file: formData
-      }
+
+      const logistics = [];
+      dataLogistics.map(value => {
+       const data = []
+       data['usage'] = value.usage
+       data['priority'] = value.priority
+       data['product_id'] = value.product_id
+       data['brand'] = value.brand
+       data['quantity'] = value.quantity
+       data['unit'] = value.unit
+       logistics.push(data)
+      })
+
+      console.log(logistics)
+
+      formData.append('master_faskes_id', this.formApplicant.instanceType)
+      formData.append('logistic_request', JSON.stringify(dataLogistics))
+      formData.append('agency_type', this.formApplicant.instance)
+      formData.append('agency_name', this.formApplicant.instanceName)
+      formData.append('phone_number', this.formApplicant.instancePhoneNumber)
+      formData.append('location_district_code', this.formApplicant.cityNameId.id)
+      formData.append('location_subdistrict_code', this.formApplicant.districtNameId.id)
+      formData.append('location_village_code', this.formApplicant.villageNameId.id)
+      formData.append('location_address', this.formApplicant.fullAddress)
+      formData.append('applicant_name', this.formIdentityApplicant.applicantName)
+      formData.append('applicants_office', this.formIdentityApplicant.applicantPosition)
+      formData.append('email', this.formIdentityApplicant.applicantEmail)
+      formData.append('primary_phone_number', this.formIdentityApplicant.applicantPhoneNumber)
+      formData.append('secondary_phone_number', this.formIdentityApplicant.applicantPhoneNumber2)
+      formData.append('letter_file', this.applicantLetter)
+      formData.append('applicant_file', this.formIdentityApplicant.dataFile)
+
       console.log('ini data sumbit')
-      console.log(dataSubmit)
       // lanjutkan submit form
-      const response = await this.$store.dispatch('logistics/postApplicantForm', dataSubmit)
+      const response = await this.$store.dispatch('logistics/postApplicantForm', formData)
       console.log(response)
     },
     onDone() {
