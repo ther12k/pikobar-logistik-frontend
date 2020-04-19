@@ -167,7 +167,7 @@ export default {
     add: 'tambah',
     logistic_total: 'Total Kebutuhan Logistik Anda',
     add_more: 'Tambah Lagi',
-    applicant_letter_title: 'Silahkan unggah surat pemohonan logistik kesehatan dari institusi kesehatan/faskes yang anda wakili, yang memiliki tanda tangan dan cap resmi dalam bentuk PDF/JPG/JPEG (maks. 10MB).',
+    applicant_letter_title: 'Silahkan unggah surat pemohonan logistik kesehatan dari institusi kesehatan/faskes yang anda wakili, yang memiliki tanda tangan dan cap resmi dalam bentuk PDF/JPG/JPEG/PNG (maks. 10MB).',
     confirm_data: 'Konfirmasi Data',
     instance_identity: 'Identitas Instansi',
     number_phone: 'Nomor Telepon',

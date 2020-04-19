@@ -147,7 +147,7 @@
         />
         <hr>
         <div class="main-color">{{ $t('label.step_title_4') }}</div>
-        <a href="">Surat Permohonan yang ke sekian.pdf</a>
+        <a :href="urlLetter" target="_blank">{{ letterName }}</a>
         <hr>
         <v-row justify="end">
           <v-btn class="ml-5 white--text" min-width="140px" color="success" outlined @click="onPrev()">{{ $t('label.back') }}</v-btn>
@@ -190,11 +190,14 @@ export default {
       },
       total: 0,
       url: null,
-      urlLetter: null
+      urlLetter: null,
+      letterName: ''
     }
   },
   mounted() {
+    this.letterName = this.applicantLetter.name
     this.url = URL.createObjectURL(this.formIdentityApplicant.dataFile)
+    this.urlLetter = URL.createObjectURL(this.applicantLetter)
     this.total = Math.ceil(this.logisticNeeds.length / 3)
     if (this.total === 1) {
       for (let index = 0; index < this.logisticNeeds.length; index++) {
@@ -239,6 +242,8 @@ export default {
       console.log(dataLogistics)
       const formData = new FormData()
       formData.append('file', this.formIdentityApplicant.dataFile)
+      const formDataLetter = new FormData()
+      formDataLetter.append('file', this.applicantLetter)
       const dataSubmit = {
         master_faskes_id: this.formApplicant.instanceType,
         logistic_request: dataLogistics,
@@ -254,7 +259,7 @@ export default {
         email: this.formIdentityApplicant.applicantEmail,
         primary_phone_number: this.formIdentityApplicant.applicantPhoneNumber,
         secondary_phone_number: this.formIdentityApplicant.applicantPhoneNumber2,
-        letter_file: '',
+        letter_file: formDataLetter,
         applicant_file: formData
       }
       console.log(dataSubmit)

@@ -22,7 +22,7 @@
               ref="uploader"
               type="file"
               class="d-none"
-              accept=".pdf, .jpg, .jpeg"
+              accept=".pdf, .jpg, .jpeg, .png"
               @change="onFileChanged"
             >
             <center>
@@ -140,7 +140,7 @@ export default {
       const formData = new FormData()
       formData.append('file', this.selectedFile)
       this.applicantLetter = this.selectedFile
-      console.log(this.applicantLetter)
+      return this.applicantLetter
     },
     async onNext() {
       const valid = await this.$refs.observer.validate()
@@ -148,7 +148,7 @@ export default {
         this.uploadAlert = true
         return
       }
-      EventBus.$emit('confirmStep', this.step)
+      EventBus.$emit('confirmStep', this.applicantLetter)
     },
     onPrev() {
       this.isAddAPD = false
