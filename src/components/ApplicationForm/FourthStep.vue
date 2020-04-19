@@ -137,9 +137,7 @@ export default {
       this.selectedFile = e.target.files[0]
       this.selectedFileName = this.selectedFile.name
       this.isUpload = true
-      const formData = new FormData()
-      formData.append('file', this.selectedFile)
-      this.applicantLetter = this.selectedFile
+      this.applicantLetter = e.target.files[0]
       return this.applicantLetter
     },
     async onNext() {

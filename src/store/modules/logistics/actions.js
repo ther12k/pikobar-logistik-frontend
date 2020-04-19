@@ -1,4 +1,4 @@
-import { fetchList } from '@/api'
+import { fetchList, doPostUpdate } from '@/api'
 
 export default {
   async getListAPD({ commit }) {
@@ -39,7 +39,7 @@ export default {
   },
   async postApplicantForm({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/logistic-request', 'POST', params)
+      const response = await doPostUpdate('/api/v1/logistic-request', 'POST', params)
       console.log(response)
       return response
     } catch (e) {
