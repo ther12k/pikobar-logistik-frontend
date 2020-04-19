@@ -75,9 +75,6 @@
           <v-row align="center" justify="center">
             {{ $t('label.loading_done_three') }}
           </v-row>
-          <v-row align="center" justify="center" class="margin-top-10">
-            <v-btn href="/#/landing-page">{{ $t('label.back') }}</v-btn>
-          </v-row>
         </div>
         <div v-else>
           <div class="data-confirmation-text">{{ $t('label.confirm_data') }}</div>
