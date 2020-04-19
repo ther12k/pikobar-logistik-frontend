@@ -71,6 +71,7 @@
                 :error-messages="errors"
                 :items="applicantListCity"
                 :placeholder="$t('label.autocomplete_city_placeholder')"
+                @change="getListDistrict"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -84,6 +85,7 @@
                 :error-messages="errors"
                 :items="applicantListDistrict"
                 :placeholder="$t('label.autocomplete_capital_placeholder')"
+                @change="getListVillage"
               />
             </ValidationProvider>
             <ValidationProvider
@@ -204,8 +206,6 @@ export default {
   },
   async created() {
     await this.getListCity()
-    await this.getListDistrict()
-    await this.getListVillage()
     await this.$store.dispatch('faskesType/getListFaskesType')
     await this.getListFaskes()
   },
@@ -234,7 +234,7 @@ export default {
       })
     },
     async getListDistrict() {
-      await this.$store.dispatch('region/getApplicantFormListDistrict')
+      await this.$store.dispatch('region/getApplicantFormListDistrict', { city_code: this.formApplicant.cityNameId.id })
       this.applicantListDistrict.forEach(element => {
         element.value = {
           id: element.kemendagri_kecamatan_kode,
@@ -244,7 +244,7 @@ export default {
       })
     },
     async getListVillage() {
-      await this.$store.dispatch('region/getApplicantFormListVillage')
+      await this.$store.dispatch('region/getApplicantFormListVillage', { subdistrict_code: this.formApplicant.districtNameId.id })
       this.applicantListVillage.forEach(element => {
         element.value = {
           id: element.kemendagri_desa_kode,
@@ -263,14 +263,11 @@ export default {
     async querySearchFaskes(event) {
       this.listQueryFaskes.nama_faskes = event.target.value
       await this.getListFaskes()
-      console.log(this.faskesList)
-      // disini buat dapetin text value
     },
     async onSelectFaskes(id) {
       if (id) {
         await this.$store.dispatch('faskes/getDetailFaskes', id)
       }
-      console.log(this.faskesDetail)
     }
   }
 }

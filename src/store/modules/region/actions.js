@@ -52,18 +52,18 @@ export default {
       return e
     }
   },
-  async getApplicantFormListDistrict({ commit }) {
+  async getApplicantFormListDistrict({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/landing-page-registration/areas/subdistricts', 'GET')
+      const response = await fetchList('/api/v1/landing-page-registration/areas/subdistricts', 'GET', params)
       commit('SET_APPLICANT_LIST_DISTRICT', response.data)
       return response
     } catch (e) {
       return e
     }
   },
-  async getApplicantFormListVillage({ commit }) {
+  async getApplicantFormListVillage({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/landing-page-registration/areas/villages', 'GET')
+      const response = await fetchList('/api/v1/landing-page-registration/areas/villages', 'GET', params)
       commit('SET_APPLICANT_LIST_VILLAGE', response.data)
       return response
     } catch (e) {
