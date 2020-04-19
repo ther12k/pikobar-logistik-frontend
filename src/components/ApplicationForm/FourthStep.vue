@@ -22,7 +22,7 @@
               ref="uploader"
               type="file"
               class="d-none"
-              accept=".pdf, .jpg, .jpeg"
+              accept=".pdf, .jpg, .jpeg, .png"
               @change="onFileChanged"
             >
             <center>
@@ -45,7 +45,22 @@
               >
                 {{ $t('label.reupload') }}
               </v-btn>
+              <v-alert
+                v-if="uploadAlert"
+                type="error"
+              >
+                {{ $t('label.upload_error_message') }}
+              </v-alert>
             </center>
+            <ValidationProvider
+              rules="required"
+            >
+              <v-text-field
+                v-model="selectedFileName"
+                disabled
+                class="d-none"
+              />
+            </ValidationProvider>
           </v-col>
         </v-row>
         <v-container fluid>
@@ -87,16 +102,28 @@
   </v-container>
 </template>
 <script>
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
 
 export default {
   name: 'SuratPermohonan',
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
+  props: {
+    applicantLetter: {
+      type: File,
+      default: null
+    }
+  },
   data() {
     return {
       step: 4,
       isUpload: false,
       selectedFile: null,
-      selectedFileName: ''
+      selectedFileName: '',
+      uploadAlert: false
     }
   },
   methods: {
@@ -110,11 +137,16 @@ export default {
       this.selectedFile = e.target.files[0]
       this.selectedFileName = this.selectedFile.name
       this.isUpload = true
-      const formData = new FormData()
-      formData.append('file', this.selectedFile)
+      this.applicantLetter = e.target.files[0]
+      return this.applicantLetter
     },
     async onNext() {
-      EventBus.$emit('nextStep', this.step)
+      const valid = await this.$refs.observer.validate()
+      if (!valid) {
+        this.uploadAlert = true
+        return
+      }
+      EventBus.$emit('confirmStep', this.applicantLetter)
     },
     onPrev() {
       this.isAddAPD = false

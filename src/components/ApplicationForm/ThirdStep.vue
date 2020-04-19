@@ -26,7 +26,7 @@
         <v-row
           v-for="(data, index) in logisticNeeds"
           :key="data.id"
-          style="margin-bottom: -40px"
+          class="maring-btm-min-40"
         >
           <v-col
             cols="12"
@@ -34,7 +34,7 @@
             md="1"
           >
             <center><v-label class="title"><b>{{ index + 1 }}</b></v-label></center>
-            <center><v-icon style="padding: 10px" color="red" size="25" @click="deleteData(index)">mdi-delete</v-icon></center>
+            <center><v-icon class="padding-10" color="red" size="25" @click="deleteData(index)">mdi-delete</v-icon></center>
           </v-col>
           <v-col
             cols="12"
@@ -49,10 +49,11 @@
               <v-select
                 v-model="data.apd"
                 :placeholder="$t('label.choose_apd')"
-                :items="APD"
+                :items="listAPD"
                 :error-messages="errors"
                 outlined
                 solo-inverted
+                @change="setUnit"
               />
             </ValidationProvider>
           </v-col>
@@ -107,10 +108,12 @@
               <v-label class="title"><b>{{ $t('label.unit') }}</b></v-label>
               <v-select
                 v-model="data.unit"
-                :items="unit"
+                :items="unitList"
                 outlined
                 solo-inverted
                 :error-messages="errors"
+                item-value="unit"
+                item-text="unit"
               />
             </ValidationProvider>
           </v-col>
@@ -212,6 +215,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import EventBus from '@/utils/eventBus'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'KebutuhanLogistik',
@@ -229,13 +233,28 @@ export default {
     return {
       step: 3,
       isAddAPD: false,
-      // TODO:: data yang digunakan data dummy, lakukan integrasi dengan API
-      APD: ['Hand Sanitizer', 'Masker Fiber'],
-      unit: ['Botol', 'Pack', 'Kg'],
+      APD: [],
+      unitList: [],
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
       totalLogistic: 0,
-      idAPD: 0
+      idAPD: 0,
+      idAlkes: 0
     }
+  },
+  computed: {
+    ...mapGetters('logistics', [
+      'listAPD', 'listApdUnit'
+    ])
+  },
+  async created() {
+    await this.getListAPD()
+    this.listAPD.forEach(element => {
+      element.text = element.name
+      element.value = {
+        id: element.id,
+        name: element.name
+      }
+    })
   },
   methods: {
     onClick() {
@@ -259,14 +278,21 @@ export default {
         this.totalLogistic = this.totalLogistic + parseInt(element.total)
       })
     },
+    async setUnit(value) {
+      this.idAlkes = value.id
+      const response = await this.$store.dispatch('logistics/getListApdUnit', this.idAlkes)
+      this.unitList = response
+    },
     deleteData(index) {
       this.logisticNeeds.splice(index, 1)
       this.setTotalAPD()
     },
+    async getListAPD() {
+      await this.$store.dispatch('logistics/getListAPD')
+    },
     async onNext() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
-        this.uploadAlert = true
         return
       }
       EventBus.$emit('nextStep', this.step)
@@ -288,6 +314,12 @@ export default {
 }
 .btn-mobile {
   display: none;
+}
+.margin-btm-min-40 {
+  margin-bottom: -40px;
+}
+.padding-10 {
+  padding: 10px;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }

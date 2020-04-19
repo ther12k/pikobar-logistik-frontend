@@ -3,11 +3,9 @@ import mutations from './mutations'
 import getters from './getters'
 
 const state = {
-  districtCity: [],
-  hospitalList: [],
-  applicantCity: [],
-  applicantDistrict: [],
-  applicantVillage: []
+  dataListAPD: [],
+  dataListApdUnit: [],
+  dataInstanceType: []
 }
 
 export default {

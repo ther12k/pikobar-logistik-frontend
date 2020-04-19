@@ -10,5 +10,8 @@ export default {
   },
   SET_APPLICANT_LIST_DISTRICT: (state, data) => {
     state.applicantDistrict = data
+  },
+  SET_APPLICANT_LIST_VILLAGE: (state, data) => {
+    state.applicantVillage = data
   }
 }

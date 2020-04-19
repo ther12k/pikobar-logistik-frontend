@@ -1,10 +1,11 @@
 <template>
-  <div class="background-landing-page background-height">
+  <div v-if="!isConfirm" class="background-landing-page background-height">
     <div class="full-landing-page">
       <div class="header-landing-page">
         <v-row justify="space-between" align="center">
           <v-col cols="12" md="8" xs="12">
             <v-row>
+              <img height="40" src="../../static/logistik_logo_lingkar.svg">
               <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
             </v-row>
           </v-col>
@@ -58,7 +59,7 @@
               <center>{{ $t('label.step_title_3') }}</center>
             </v-stepper-step>
             <v-divider />
-            <v-stepper-step class="right-margin" step="4">
+            <v-stepper-step :complete="step > 4" class="right-margin" step="4">
               <center>{{ $t('label.step_title_4') }}</center>
             </v-stepper-step>
           </v-stepper-header>
@@ -97,11 +98,11 @@
               <center>{{ $t('label.step_title_2') }}</center>
             </v-stepper-step>
             <v-divider />
-            <v-stepper-step step="3">
+            <v-stepper-step :complete="step > 3" step="3">
               <center>{{ $t('label.step_title_3') }}</center>
             </v-stepper-step>
             <v-divider />
-            <v-stepper-step step="4">
+            <v-stepper-step :complete="step > 4" step="4">
               <center>{{ $t('label.step_title_4') }}</center>
             </v-stepper-step>
           </v-stepper-header>
@@ -122,12 +123,22 @@
               />
             </v-stepper-content>
             <v-stepper-content step="4">
-              <surat-permohonan />
+              <surat-permohonan
+                :applicant-letter="applicantLetter"
+              />
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
       </v-card>
     </div>
+  </div>
+  <div v-else>
+    <tahap-konfirmasi
+      :form-applicant="formApplicant"
+      :form-identity-applicant="formIdentityApplicant"
+      :logistic-needs="logisticNeeds"
+      :applicant-letter="applicantLetter"
+    />
   </div>
 </template>
 
@@ -141,7 +152,9 @@ export default {
       step: 1,
       formApplicant: {},
       formIdentityApplicant: {},
-      logisticNeeds: []
+      logisticNeeds: [],
+      applicantLetter: null,
+      isConfirm: false
     }
   },
   created() {
@@ -149,7 +162,13 @@ export default {
       this.step = value + 1
     })
     EventBus.$on('prevStep', (value) => {
+      this.isConfirm = false
       this.step = value - 1
+    })
+    EventBus.$on('confirmStep', (value) => {
+      this.applicantLetter = value
+      this.isConfirm = true
+      this.step = 5
     })
   }
 }

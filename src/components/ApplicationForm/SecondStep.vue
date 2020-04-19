@@ -71,6 +71,7 @@
                 <v-btn
                   v-if="isUpload"
                   outlined
+                  class="btn-delete-mobile"
                   @click="deleteFile"
                 >
                   {{ $t('label.delete') }}
@@ -203,7 +204,6 @@ export default {
   },
   methods: {
     async onNext() {
-      console.log(this.$refs.observer)
       const valid = await this.$refs.observer.validate()
       if (!valid) {
         this.uploadAlert = true
@@ -226,6 +226,7 @@ export default {
       this.isUpload = true
       const formData = new FormData()
       formData.append('file', this.selectedFile)
+      this.formIdentityApplicant.dataFile = this.selectedFile
     },
     deleteFile() {
       this.selectedFileName = ''
@@ -297,6 +298,10 @@ export default {
   }
   .btn-mobile {
     display: block;
+  }
+  .btn-delete-mobile {
+    display: block;
+    margin: 10px;
   }
 }
 </style>
