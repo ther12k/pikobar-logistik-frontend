@@ -476,6 +476,8 @@ export default {
 
       const response = await this.$store.dispatch('logistics/postApplicantForm', formData)
       console.log(response)
+      this.isDone = true
+      this.isLoading = false
     },
     onDone() {
       this.isDone = false
