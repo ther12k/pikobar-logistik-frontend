@@ -9,6 +9,31 @@ extend('required', {
   message: (_, values) => i18n.t('errors.field_must_be_filled', values)
 })
 
+extend('requiredInstanceType', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_instance_type', values)
+})
+
+extend('requiredInstanceName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_instance_name', values)
+})
+
+extend('requiredCityName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_city_name', values)
+})
+
+extend('requiredDistrictName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_district_name', values)
+})
+
+extend('requiredVillageName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_village_name', values)
+})
+
 extend('max', {
   ...max,
   message: 'This field must be {length} characters or less'
