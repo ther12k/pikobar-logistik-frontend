@@ -1,10 +1,10 @@
 import { fetchList, doPostUpdate } from '@/api'
 
 export default {
-  async getListAPD({ commit }) {
+  async getListAPD({ commit }, params) {
     try {
-      const response = await fetchList('/api/v1/landing-page-registration/products', 'GET')
-      commit('SET_LIST_APD', response.data.data)
+      const response = await fetchList('/api/v1/landing-page-registration/products', 'GET', params)
+      commit('SET_LIST_APD', response.data)
       return response
     } catch (e) {
       return e

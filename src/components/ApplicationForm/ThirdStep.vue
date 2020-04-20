@@ -61,14 +61,17 @@
               rules="requiredAPDName"
             >
               <v-label class="title"><b>{{ $t('label.apd_name_spec') }}</b></v-label>
-              <v-select
+              <v-autocomplete
                 v-model="data.apd"
                 :placeholder="$t('label.choose_apd')"
                 :items="listAPD"
+                item-text="name"
+                item-value="id"
                 :error-messages="errors"
                 outlined
                 solo-inverted
-                @change="setUnit"
+                @input.native="querySearchAPD"
+                @change="setUnit(data)"
               />
             </ValidationProvider>
           </v-col>
@@ -122,13 +125,14 @@
             >
               <v-label class="title"><b>{{ $t('label.unit') }}</b></v-label>
               <v-select
-                v-model="data.unit"
-                :items="unitList"
+                v-model="data.unitId"
+                :items="data.unitList"
                 outlined
                 solo-inverted
                 :error-messages="errors"
-                item-value="unit"
+                item-value="unit_id"
                 item-text="unit"
+                @change="setUnitName(data)"
               />
             </ValidationProvider>
           </v-col>
@@ -262,7 +266,11 @@ export default {
       idAPD: 0,
       idAlkes: 0,
       isValid: false,
-      showAlert: false
+      showAlert: false,
+      listQueryAPD: {
+        limit: 10,
+        name: ''
+      }
     }
   },
   computed: {
@@ -272,13 +280,6 @@ export default {
   },
   async created() {
     await this.getListAPD()
-    this.listAPD.forEach(element => {
-      element.text = element.name
-      element.value = {
-        id: element.id,
-        name: element.name
-      }
-    })
   },
   methods: {
     onClick() {
@@ -291,9 +292,11 @@ export default {
       this.logisticNeeds.push({
         id: this.idAPD,
         apd: '',
+        apdName: '',
         brand: '',
         total: 0,
-        unit: '',
+        unitId: '',
+        unitName: '',
         purpose: '',
         urgency: ''
       })
@@ -305,9 +308,23 @@ export default {
       })
     },
     async setUnit(value) {
-      this.idAlkes = value.id
-      const response = await this.$store.dispatch('logistics/getListApdUnit', this.idAlkes)
-      this.unitList = response
+      value.unitId = ''
+      value.unitName = ''
+      value.unitList = await this.$store.dispatch('logistics/getListApdUnit', value.apd)
+      this.listAPD.forEach(element => {
+        if (element.id === value.apd) {
+          value.apdName = element.name
+          return
+        }
+      })
+    },
+    setUnitName(value) {
+      value.unitList.forEach(element => {
+        if (value.unitId == element.unit_id) {
+          value.unitName = element.unit
+          return
+        }
+      })
     },
     deleteData(index) {
       this.logisticNeeds.splice(index, 1)
@@ -316,11 +333,24 @@ export default {
         this.isValid = false
       }
     },
+    async querySearchAPD(event) {
+      this.listQueryAPD.name = event.target.value
+      this.getListAPD()
+    },
     async getListAPD() {
-      await this.$store.dispatch('logistics/getListAPD')
+      await this.$store.dispatch('logistics/getListAPD', this.listQueryAPD)
+      this.listAPD.forEach(element => {
+        element.value = {
+          id: element.id,
+          name: element.name
+        }
+      })
     },
     async onNext() {
       const valid = await this.$refs.observer.validate()
+      if (this.logisticNeeds.length > 0) {
+        this.isValid = true
+      }
       if (!valid) {
         return
       } else if (!this.isValid) {
