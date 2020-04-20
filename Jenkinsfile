@@ -60,7 +60,9 @@ pipeline {
                         // ssh block
                        sh 'ssh -o StrictHostKeyChecking=no $STAGING_USER@$PRODUCTION_HOST_LOGISTIK "cd /data/app/pikobar-logistik-frontend && $SSH_COMMAND  \
                                                                                         && docker-compose -f docker-compose-production.yml down \
-                                                                                        && docker-compose -f docker-compose-production.yml up --build -d"'
+                                                                                        && docker-compose -f docker-compose-production.yml build --no-cache \
+                                                                                        && docker-compose -f docker-compose-production.yml up -d"'
+                                                                                        
                     }
             }  
         }
