@@ -159,7 +159,7 @@ export default {
     total: 'Jumlah',
     unit: 'Satuan',
     purpose: 'Tujuan Penggunaan',
-    urgency_level: 'Tingakt Urgensi',
+    urgency_level: 'Tingkat Urgensi',
     choose_apd: 'Pilih APD',
     input_brand: 'Masukkan Merk',
     input_purpose: 'Masukkan Tujuan',
