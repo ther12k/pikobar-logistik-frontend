@@ -166,7 +166,6 @@
           <v-col cols="12" sm="12" md="2" offset-md="1">
             <center>
               <v-btn
-                class="btn-mobile"
                 color="#2E7D32"
                 outlined
                 @click="addLogistic"
