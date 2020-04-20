@@ -34,6 +34,31 @@ extend('requiredVillageName', {
   message: (_, values) => i18n.t('errors.field_must_be_filled_village_name', values)
 })
 
+extend('requiredFullAddress', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_full_address', values)
+})
+
+extend('requiredApplicantName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_name', values)
+})
+
+extend('requiredApplicantPosition', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_position', values)
+})
+
+extend('requiredApplicantEmail', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_email', values)
+})
+
+extend('requiredApplicantPhoneNumber', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_phone_number', values)
+})
+
 extend('max', {
   ...max,
   message: 'This field must be {length} characters or less'
