@@ -187,7 +187,8 @@ export default {
     loading_done_one: 'Pengajuan Logistik Kesehatan Anda berhasil disimpan,',
     loading_done_two: 'Proses verifikasi membutuhkan waktu 1x24 jam.',
     loading_done_three: 'Selanjutnya Anda akan dihubungi melalui Email atau No Telp yang telah didaftarkan.',
-    add_logistics_label: 'Silahkan menambahkan apa saja Alat Pelindung Diri yang anda butuhkan dengan mengklik tombol dibawah ini.'
+    add_logistics_label: 'Silahkan menambahkan apa saja Alat Pelindung Diri yang anda butuhkan dengan mengklik tombol dibawah ini.',
+    alert_logistic_needs: 'Belum ada data logistik'
   },
   success: {
     login_success: 'Login Berhasil',

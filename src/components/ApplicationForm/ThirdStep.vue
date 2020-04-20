@@ -23,6 +23,14 @@
           {{ $t('label.add') }}
         </v-btn>
       </center>
+      <v-col cols="12" sm="12" md="4" offset-md="4">
+        <v-alert
+          v-if="showAlert"
+          type="error"
+        >
+          {{ $t('label.alert_logistic_needs') }}
+        </v-alert>
+      </v-col>
     </div>
     <ValidationObserver ref="observer">
       <v-form
@@ -179,6 +187,14 @@
               >{{ $t('label.add_more') }}</v-btn>
             </center>
           </v-col>
+          <v-col cols="12" sm="12" md="3" offset-md="1">
+            <v-alert
+              v-if="showAlert"
+              type="error"
+            >
+              {{ $t('label.alert_logistic_needs') }}
+            </v-alert>
+          </v-col>
         </v-row>
       </v-form>
       <v-container fluid>
@@ -244,7 +260,9 @@ export default {
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
       totalLogistic: 0,
       idAPD: 0,
-      idAlkes: 0
+      idAlkes: 0,
+      isValid: false,
+      showAlert: false
     }
   },
   computed: {
@@ -267,6 +285,8 @@ export default {
       this.isAddAPD = true
     },
     addLogistic() {
+      this.isValid = true
+      this.showAlert = false
       this.idAPD = this.idAPD + 1
       this.logisticNeeds.push({
         id: this.idAPD,
@@ -292,6 +312,9 @@ export default {
     deleteData(index) {
       this.logisticNeeds.splice(index, 1)
       this.setTotalAPD()
+      if (this.logisticNeeds.length === 0) {
+        this.isValid = false
+      }
     },
     async getListAPD() {
       await this.$store.dispatch('logistics/getListAPD')
@@ -299,6 +322,9 @@ export default {
     async onNext() {
       const valid = await this.$refs.observer.validate()
       if (!valid) {
+        return
+      } else if (!this.isValid) {
+        this.showAlert = true
         return
       }
       EventBus.$emit('nextStep', this.step)
