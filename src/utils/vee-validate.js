@@ -59,6 +59,36 @@ extend('requiredApplicantPhoneNumber', {
   message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_phone_number', values)
 })
 
+extend('requiredAPDName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_apd_name', values)
+})
+
+extend('requiredBrand', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_brand', values)
+})
+
+extend('requiredTotal', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_total', values)
+})
+
+extend('requiredUnit', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_unit', values)
+})
+
+extend('requiredPurpose', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_purpose', values)
+})
+
+extend('requiredUrgencyLevel', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_urgency_level', values)
+})
+
 extend('max', {
   ...max,
   message: 'This field must be {length} characters or less'
