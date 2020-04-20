@@ -36,7 +36,10 @@ pipeline {
                         // ssh block
                        sh 'ssh -o StrictHostKeyChecking=no $STAGING_USER@$STAGING_HOST_LOGISTIK "cd /home/ubuntu/app/pikobar-logistik-frontend && $SSH_COMMAND  \
                                                                                         && docker-compose -f docker-compose-development.yml down \
-                                                                                        && docker-compose -f docker-compose-development.yml up --build -d"'
+                                                                                        && docker-compose -f docker-compose-development.yml build --no-cache  \
+                                                                                        && docker-compose -f docker-compose-development.yml up -d"'
+                                                                                        
+                                                                                        
                     }
             }     
         }
