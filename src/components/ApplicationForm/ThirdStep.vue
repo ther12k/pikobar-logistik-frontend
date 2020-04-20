@@ -3,10 +3,17 @@
     <div
       v-if="!isAddAPD"
     >
-      <v-img
-        src="../../static/apd.svg"
-        :aspect-ratio="2"
-      />
+      <center>
+        <v-img
+          src="../../static/apd.svg"
+          :aspect-ratio="1"
+          max-width="250px"
+          max-height="250px"
+        />
+      </center>
+      <v-col md="6" offset-md="3">
+        <center><v-label>{{ $t('label.add_logistics_label') }}</v-label></center>
+      </v-col>
       <center>
         <v-btn
           color="#2E7D32"
