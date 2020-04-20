@@ -320,7 +320,7 @@ export default {
     },
     setUnitName(value) {
       value.unitList.forEach(element => {
-        if (value.unitId == element.unit_id) {
+        if (value.unitId === element.unit_id) {
           value.unitName = element.unit
           return
         }

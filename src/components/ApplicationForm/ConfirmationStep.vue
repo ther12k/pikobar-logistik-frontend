@@ -160,10 +160,10 @@
                   </tr>
                   <tr v-for="(item, index) in dataShow" v-else :key="item.index">
                     <td>{{ getTableRowNumbering(index) }}</td>
-                    <td>{{ item.apd.name }}</td>
+                    <td>{{ item.apdName }}</td>
                     <td>{{ item.brand }}</td>
                     <td>{{ item.total }}</td>
-                    <td>{{ item.unit }}</td>
+                    <td>{{ item.unitName }}</td>
                     <td>{{ item.purpose }}</td>
                     <td>{{ item.urgency }}</td>
                   </tr>
@@ -335,7 +335,7 @@
                   </tr>
                   <tr v-for="(item, index) in dataShow" v-else :key="item.index">
                     <td>{{ getTableRowNumbering(index) }}</td>
-                    <td>{{ item.apd.name }}</td>
+                    <td>{{ item.apdName }}</td>
                     <td>{{ item.brand }}</td>
                   </tr>
                 </tbody>
@@ -444,10 +444,10 @@ export default {
         dataLogistics.push({
           usage: element.purpose,
           priority: element.urgency,
-          product_id: element.apd.id,
+          product_id: element.apd,
           brand: element.brand,
           quantity: element.total,
-          unit: element.unit
+          unit: element.unitId
         })
       })
       const formData = new FormData()
