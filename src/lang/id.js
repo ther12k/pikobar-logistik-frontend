@@ -213,7 +213,7 @@ export default {
     field_must_be_filled_applicant_name: 'Nama pemohon tidak boleh kosong',
     field_must_be_filled_applicant_position: 'Jabatan Pemohon tidak boleh kosong',
     field_must_be_filled_applicant_email: 'Email pemohon tidak boleh kosong',
-    field_must_be_filled_applicant_phone_number: 'No. Hp/Whatsapp pemohon tidak boleh kosong',
+    field_must_be_filled_applicant_phone_number: 'No. HP/Whatsapp pemohon tidak boleh kosong',
     field_must_be_filled_apd_name: 'Nama/Spek APD tidak boleh kosong',
     field_must_be_filled_brand: 'Merk tidak boleh kosong',
     field_must_be_filled_total: 'Jumlah tidak boleh kosong',
