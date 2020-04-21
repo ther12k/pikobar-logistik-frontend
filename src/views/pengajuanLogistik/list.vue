@@ -38,10 +38,14 @@
           outlined
           class="card-search"
         >
-          <search
-            :handle-search="handleSearch"
-            :list-query="listQuery"
-            solo
+          <v-text-field
+            v-model="listQuery.agency_name"
+            solo-inverted
+            flat
+            hide-details
+            :placeholder="$t('label.search_data')"
+            prepend-inner-icon="search"
+            @change="handleSearch"
           />
         </v-card>
       </v-col>
@@ -74,7 +78,7 @@
                   <td>{{ data.agency_name }}</td>
                   <td>{{ data.city.kemendagri_kabupaten_nama }}</td>
                   <td>{{ data.applicant.applicant_name }}</td>
-                  <td>{{ data.created_at }}</td>
+                  <td>{{ data.created_at === null ? $t('label.stripe') : $moment(data.created_at).format('DD MMMM YYYY') }}</td>
                   <td>{{ data.applicant.verification_status }}</td>
                   <td><v-btn text small color="info">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
@@ -134,20 +138,8 @@ export default {
       'totalListLogisticRequest'
     ])
   },
-  watch: {
-    'listQuery.city_code': {
-      handler: function(value) {
-        if (value.length >= 3 || value.length === 0) {
-          this.listQuery.page = 1
-          this.handleSearch()
-        }
-      },
-      immediate: true
-    }
-  },
   created() {
     this.getLogisticRequestList()
-    // TODO: fitur search
   },
   methods: {
     changeDate(value) {

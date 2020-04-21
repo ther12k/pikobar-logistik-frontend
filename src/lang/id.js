@@ -197,7 +197,8 @@ export default {
     request_date: 'Tanggal Pengajuan',
     date_placeholder: 'Tanggal/Bulan/Tahun',
     list_request_logistic_medic: 'Daftar Pengajuan Logistik Medis',
-    created_date: 'Tanggal Dibuat'
+    created_date: 'Tanggal Dibuat',
+    search_data: 'Cari Data'
   },
   success: {
     login_success: 'Login Berhasil',
