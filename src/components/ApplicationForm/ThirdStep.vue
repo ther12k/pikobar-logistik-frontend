@@ -259,8 +259,6 @@ export default {
     return {
       step: 3,
       isAddAPD: false,
-      APD: [],
-      unitList: [],
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
       totalLogistic: 0,
       idAPD: 0,

@@ -178,12 +178,6 @@ export default {
   },
   data() {
     return {
-      // TODO: integrasi API, data yang digunakan saat ini masih data dummy
-      instance: ['Puskesmas', 'Rumah Sakit'],
-      instanceName: ['RSUD Bandung', 'RSUD Bogor'],
-      city: [{ text: 'kota bandung', value: 1 }, { text: 'kota bogor', value: 2 }],
-      district: ['Kecamatan 1', 'Kecamatan 2'],
-      village: ['Desa 1', 'Desa 2'],
       step: 1,
       nameFaskes: '',
       listQueryFaskes: {
