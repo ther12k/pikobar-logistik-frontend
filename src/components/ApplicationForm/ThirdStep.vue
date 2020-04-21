@@ -333,7 +333,7 @@ export default {
         this.isValid = false
       }
     },
-    async querySearchAPD(event) {
+    querySearchAPD(event) {
       this.listQueryAPD.name = event.target.value
       this.getListAPD()
     },
