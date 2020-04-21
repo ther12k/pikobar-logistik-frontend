@@ -41,6 +41,7 @@
             >
               <v-label class="title"><b>{{ $t('label.upload_applicant_ktp') }}</b></v-label>
               <br>
+              <v-label><i class="text-small">({{ $t('label.max_file_title') }})</i></v-label>
               <div>
                 <v-label v-if="!isUpload">{{ $t('label.not_yet_upload_file') }}</v-label>
                 <v-label v-else>{{ selectedFileName }}</v-label>
@@ -49,7 +50,7 @@
                   ref="uploader"
                   type="file"
                   class="d-none"
-                  accept=".pdf, .jpg, .jpeg, .png"
+                  accept=".jpg, .jpeg, .png"
                   @change="onFileChanged"
                 >
                 <v-text-field
@@ -199,13 +200,14 @@ export default {
       selectedFile: null,
       selectedFileName: '',
       isUpload: false,
-      uploadAlert: false
+      uploadAlert: false,
+      isFileValid: false
     }
   },
   methods: {
     async onNext() {
       const valid = await this.$refs.observer.validate()
-      if (!valid) {
+      if (!valid || !this.isFileValid) {
         this.uploadAlert = true
         return
       }
@@ -222,6 +224,17 @@ export default {
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0]
+      if (this.selectedFile.type === 'image/jpeg' || this.selectedFile.type === 'image/png') {
+        if (this.selectedFile.size < 10000000) {
+          this.isFileValid = true
+        } else {
+          this.isFileValid = false
+          return
+        }
+      } else {
+        this.isFileValid = false
+        return
+      }
       this.selectedFileName = this.selectedFile.name
       this.isUpload = true
       const formData = new FormData()

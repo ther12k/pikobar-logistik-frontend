@@ -133,8 +133,7 @@
               <v-col>
                 <v-row class="main-color">{{ $t('label.applicant_ktp') }}</v-row>
                 <v-row>
-                  <img v-if="!isPdf" class="image-style" :src="url">
-                  <a v-else :href="url" target="_blank">{{ formIdentityApplicant.dataFile.name }}</a>
+                  <img class="image-style" :src="url">
                 </v-row>
               </v-col>
             </v-row>
@@ -402,8 +401,7 @@ export default {
       urlLetter: null,
       letterName: '',
       isLoading: false,
-      isDone: false,
-      isPdf: false
+      isDone: false
     }
   },
   mounted() {
@@ -411,9 +409,6 @@ export default {
     this.url = URL.createObjectURL(this.formIdentityApplicant.dataFile)
     this.urlLetter = URL.createObjectURL(this.applicantLetter)
     this.total = Math.ceil(this.logisticNeeds.length / 3)
-    if (this.formIdentityApplicant.dataFile.type === 'application/pdf') {
-      this.isPdf = true
-    }
     if (this.total === 1) {
       for (let index = 0; index < this.logisticNeeds.length; index++) {
         this.dataShow.push(this.logisticNeeds[index])

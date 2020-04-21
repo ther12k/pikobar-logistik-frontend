@@ -153,7 +153,7 @@ export default {
     not_yet_upload_file: 'Belum ada file yang diupload',
     upload: 'Upload',
     reupload: 'Upload Ulang',
-    upload_error_message: 'Mohon Upload File',
+    upload_error_message: 'Mohon Upload File dengan benar',
     apd_name_spec: 'Nama/Spek APD',
     brand: 'Merk',
     total: 'Jumlah',
@@ -188,7 +188,8 @@ export default {
     loading_done_two: 'Proses verifikasi membutuhkan waktu 1x24 jam.',
     loading_done_three: 'Selanjutnya Anda akan dihubungi melalui Email atau No Telp yang telah didaftarkan.',
     add_logistics_label: 'Silahkan menambahkan apa saja Alat Pelindung Diri yang anda butuhkan dengan mengklik tombol dibawah ini.',
-    alert_logistic_needs: 'Belum ada data logistik'
+    alert_logistic_needs: 'Belum ada data logistik',
+    max_file_title: 'File dalam bentuk JPG/JPEG/PNG (ukuran maks. 10 MB)'
   },
   success: {
     login_success: 'Login Berhasil',
