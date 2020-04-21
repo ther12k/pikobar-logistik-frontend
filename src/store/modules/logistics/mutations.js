@@ -7,5 +7,11 @@ export default {
   },
   SET_LIST_INSTANCE_TYPE: (state, data) => {
     state.dataInstanceType = data
+  },
+  SET_LIST_LOGISTIC_REQUEST: (state, data) => {
+    state.dataListLogisticRequest = data
+  },
+  SET_TOTAL_LIST_LOGISTIC_REQUEST: (state, data) => {
+    state.totalListLogisticRequest = data
   }
 }
