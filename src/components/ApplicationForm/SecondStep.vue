@@ -50,7 +50,7 @@
                   ref="uploader"
                   type="file"
                   class="d-none"
-                  accept=".pdf, .jpg, .jpeg, .png"
+                  accept=".jpg, .jpeg, .png"
                   @change="onFileChanged"
                 >
                 <v-text-field
@@ -224,7 +224,7 @@ export default {
     },
     onFileChanged(e) {
       this.selectedFile = e.target.files[0]
-      if (this.selectedFile.type === 'image/jpeg' || this.selectedFile.type === 'image/png' || this.selectedFile.type === 'application/pdf') {
+      if (this.selectedFile.type === 'image/jpeg' || this.selectedFile.type === 'image/png') {
         if (this.selectedFile.size < 10000000) {
           this.isFileValid = true
         } else {
