@@ -12,7 +12,7 @@
           <v-col cols="12" sm="12" md="6">
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredInstanceType"
             >
               <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
@@ -27,7 +27,8 @@
               />
             </ValidationProvider>
             <ValidationProvider
-              rules="required"
+              v-slot="{ errors }"
+              rules="requiredInstanceName"
             >
               <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
@@ -40,6 +41,7 @@
                 outlined
                 :clearable="true"
                 autocomplete
+                :error-messages="errors"
                 :placeholder="$t('label.example_instance_name')"
                 @input.native="querySearchFaskes"
                 @change="onSelectFaskes"
@@ -62,7 +64,7 @@
           <v-col cols="12" sm="12" md="6">
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredCityName"
             >
               <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
@@ -76,7 +78,7 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredDistrictName"
             >
               <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
@@ -90,7 +92,7 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredVillageName"
             >
               <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
@@ -103,7 +105,7 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredFullAddress"
             >
               <v-label class="title"><b>{{ $t('label.full_address') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-textarea

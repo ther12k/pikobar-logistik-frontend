@@ -3,10 +3,17 @@
     <div
       v-if="!isAddAPD"
     >
-      <v-img
-        src="../../static/apd.svg"
-        :aspect-ratio="2"
-      />
+      <center>
+        <v-img
+          src="../../static/apd.svg"
+          :aspect-ratio="1"
+          max-width="250px"
+          max-height="250px"
+        />
+      </center>
+      <v-col md="6" offset-md="3">
+        <center><v-label>{{ $t('label.add_logistics_label') }}</v-label></center>
+      </v-col>
       <center>
         <v-btn
           color="#2E7D32"
@@ -16,6 +23,14 @@
           {{ $t('label.add') }}
         </v-btn>
       </center>
+      <v-col cols="12" sm="12" md="4" offset-md="4">
+        <v-alert
+          v-if="showAlert"
+          type="error"
+        >
+          {{ $t('label.alert_logistic_needs') }}
+        </v-alert>
+      </v-col>
     </div>
     <ValidationObserver ref="observer">
       <v-form
@@ -43,17 +58,20 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredAPDName"
             >
               <v-label class="title"><b>{{ $t('label.apd_name_spec') }}</b></v-label>
-              <v-select
+              <v-autocomplete
                 v-model="data.apd"
                 :placeholder="$t('label.choose_apd')"
                 :items="listAPD"
+                item-text="name"
+                item-value="id"
                 :error-messages="errors"
                 outlined
                 solo-inverted
-                @change="setUnit"
+                @input.native="querySearchAPD"
+                @change="setUnit(data)"
               />
             </ValidationProvider>
           </v-col>
@@ -64,7 +82,7 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredBrand"
             >
               <v-label class="title"><b>{{ $t('label.brand') }}</b></v-label>
               <v-text-field
@@ -83,7 +101,7 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredTotal"
             >
               <v-label class="title"><b>{{ $t('label.total') }}</b></v-label>
               <v-text-field
@@ -103,17 +121,18 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredUnit"
             >
               <v-label class="title"><b>{{ $t('label.unit') }}</b></v-label>
               <v-select
-                v-model="data.unit"
-                :items="unitList"
+                v-model="data.unitId"
+                :items="data.unitList"
                 outlined
                 solo-inverted
                 :error-messages="errors"
-                item-value="unit"
+                item-value="unit_id"
                 item-text="unit"
+                @change="setUnitName(data)"
               />
             </ValidationProvider>
           </v-col>
@@ -124,7 +143,7 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredPurpose"
             >
               <v-label class="title"><b>{{ $t('label.purpose') }}</b></v-label>
               <v-text-field
@@ -143,7 +162,7 @@
           >
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredUrgencyLevel"
             >
               <v-label class="title"><b>{{ $t('label.urgency_level') }}</b></v-label>
               <v-select
@@ -171,6 +190,14 @@
                 @click="addLogistic"
               >{{ $t('label.add_more') }}</v-btn>
             </center>
+          </v-col>
+          <v-col cols="12" sm="12" md="3" offset-md="1">
+            <v-alert
+              v-if="showAlert"
+              type="error"
+            >
+              {{ $t('label.alert_logistic_needs') }}
+            </v-alert>
           </v-col>
         </v-row>
       </v-form>
@@ -237,7 +264,13 @@ export default {
       urgency: ['Rendah', 'Menengah', 'Tinggi'],
       totalLogistic: 0,
       idAPD: 0,
-      idAlkes: 0
+      idAlkes: 0,
+      isValid: false,
+      showAlert: false,
+      listQueryAPD: {
+        limit: 10,
+        name: ''
+      }
     }
   },
   computed: {
@@ -247,26 +280,23 @@ export default {
   },
   async created() {
     await this.getListAPD()
-    this.listAPD.forEach(element => {
-      element.text = element.name
-      element.value = {
-        id: element.id,
-        name: element.name
-      }
-    })
   },
   methods: {
     onClick() {
       this.isAddAPD = true
     },
     addLogistic() {
+      this.isValid = true
+      this.showAlert = false
       this.idAPD = this.idAPD + 1
       this.logisticNeeds.push({
         id: this.idAPD,
         apd: '',
+        apdName: '',
         brand: '',
         total: 0,
-        unit: '',
+        unitId: '',
+        unitName: '',
         purpose: '',
         urgency: ''
       })
@@ -278,20 +308,53 @@ export default {
       })
     },
     async setUnit(value) {
-      this.idAlkes = value.id
-      const response = await this.$store.dispatch('logistics/getListApdUnit', this.idAlkes)
-      this.unitList = response
+      value.unitId = ''
+      value.unitName = ''
+      value.unitList = await this.$store.dispatch('logistics/getListApdUnit', value.apd)
+      this.listAPD.forEach(element => {
+        if (element.id === value.apd) {
+          value.apdName = element.name
+          return
+        }
+      })
+    },
+    setUnitName(value) {
+      value.unitList.forEach(element => {
+        if (value.unitId === element.unit_id) {
+          value.unitName = element.unit
+          return
+        }
+      })
     },
     deleteData(index) {
       this.logisticNeeds.splice(index, 1)
       this.setTotalAPD()
+      if (this.logisticNeeds.length === 0) {
+        this.isValid = false
+      }
+    },
+    querySearchAPD(event) {
+      this.listQueryAPD.name = event.target.value
+      this.getListAPD()
     },
     async getListAPD() {
-      await this.$store.dispatch('logistics/getListAPD')
+      await this.$store.dispatch('logistics/getListAPD', this.listQueryAPD)
+      this.listAPD.forEach(element => {
+        element.value = {
+          id: element.id,
+          name: element.name
+        }
+      })
     },
     async onNext() {
       const valid = await this.$refs.observer.validate()
+      if (this.logisticNeeds.length > 0) {
+        this.isValid = true
+      }
       if (!valid) {
+        return
+      } else if (!this.isValid) {
+        this.showAlert = true
         return
       }
       EventBus.$emit('nextStep', this.step)

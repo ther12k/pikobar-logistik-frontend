@@ -12,7 +12,7 @@
           <v-col cols="12" sm="12" md="6">
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredApplicantName"
             >
               <v-label class="title"><b>{{ $t('label.contact_person') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
@@ -25,7 +25,7 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required"
+              rules="requiredApplicantPosition"
             >
               <v-label class="title"><b>{{ $t('label.applicant_position') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
@@ -99,7 +99,7 @@
           <v-col cols="12" sm="12" md="6">
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|email"
+              rules="requiredApplicantEmail|email"
             >
               <v-label class="title"><b>{{ $t('label.applicant_email') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
@@ -112,7 +112,7 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|isPhoneNumber"
+              rules="requiredApplicantPhoneNumber|isPhoneNumber"
             >
               <v-label class="title"><b>{{ $t('label.applicant_phone_number') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field
@@ -125,7 +125,7 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|isPhoneNumber"
+              rules="requiredApplicantPhoneNumber|isPhoneNumber"
             >
               <v-label class="title"><b>{{ $t('label.other_applicant_phone_number') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-text-field

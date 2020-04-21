@@ -9,6 +9,86 @@ extend('required', {
   message: (_, values) => i18n.t('errors.field_must_be_filled', values)
 })
 
+extend('requiredInstanceType', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_instance_type', values)
+})
+
+extend('requiredInstanceName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_instance_name', values)
+})
+
+extend('requiredCityName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_city_name', values)
+})
+
+extend('requiredDistrictName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_district_name', values)
+})
+
+extend('requiredVillageName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_village_name', values)
+})
+
+extend('requiredFullAddress', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_full_address', values)
+})
+
+extend('requiredApplicantName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_name', values)
+})
+
+extend('requiredApplicantPosition', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_position', values)
+})
+
+extend('requiredApplicantEmail', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_email', values)
+})
+
+extend('requiredApplicantPhoneNumber', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_applicant_phone_number', values)
+})
+
+extend('requiredAPDName', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_apd_name', values)
+})
+
+extend('requiredBrand', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_brand', values)
+})
+
+extend('requiredTotal', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_total', values)
+})
+
+extend('requiredUnit', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_unit', values)
+})
+
+extend('requiredPurpose', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_purpose', values)
+})
+
+extend('requiredUrgencyLevel', {
+  ...required,
+  message: (_, values) => i18n.t('errors.field_must_be_filled_urgency_level', values)
+})
+
 extend('max', {
   ...max,
   message: 'This field must be {length} characters or less'
