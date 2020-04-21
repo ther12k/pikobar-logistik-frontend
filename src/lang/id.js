@@ -6,6 +6,8 @@ export default {
     laporan_title: 'Laporan Kasus',
     distribusi_title: 'Distribusi RDT Kit',
     monitoring_rdt_title: 'Monitoring RDT Kit',
+    logistic_request_title: 'Pengajuan Logisitk',
+    medical_tools_title: 'Alat Kesehatan',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
     list_rdt: 'List hasil test',
@@ -189,7 +191,13 @@ export default {
     loading_done_three: 'Selanjutnya Anda akan dihubungi melalui Email atau No Telp yang telah didaftarkan.',
     add_logistics_label: 'Silahkan menambahkan apa saja Alat Pelindung Diri yang anda butuhkan dengan mengklik tombol dibawah ini.',
     alert_logistic_needs: 'Belum ada data logistik',
-    max_file_title: 'File dalam bentuk JPG/JPEG/PNG (ukuran maks. 10 MB)'
+    max_file_title: 'File dalam bentuk JPG/JPEG/PNG (ukuran maks. 10 MB)',
+    status: 'Status',
+    select_status: 'Pilih Status',
+    request_date: 'Tanggal Pengajuan',
+    date_placeholder: 'Tanggal/Bulan/Tahun',
+    list_request_logistic_medic: 'Daftar Pengajuan Logistik Medis',
+    created_date: 'Tanggal Dibuat'
   },
   success: {
     login_success: 'Login Berhasil',

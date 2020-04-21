@@ -7,5 +7,11 @@ export default {
   },
   listInstanceType: (state, getters) => {
     return state.dataInstanceType
+  },
+  listLogisticRequest: (state, getters) => {
+    return state.dataListLogisticRequest
+  },
+  totalListLogisticRequest: (state, getters) => {
+    return state.totalListLogisticRequest
   }
 }

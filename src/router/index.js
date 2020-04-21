@@ -10,6 +10,7 @@ import Layout from '@/layout'
 import dashboardRouter from './modules/dashboard'
 import distribusiRdt from './modules/distribusiRdt'
 import monitoringRdtRouter from './modules/monitoringRdt'
+import pengajuanLogistik from './modules/pengajuanLogistik'
 
 /**
  * constantRoutes
@@ -73,6 +74,7 @@ export const asyncRoutes = [
   dashboardRouter,
   distribusiRdt,
   monitoringRdtRouter,
+  pengajuanLogistik,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
 ]

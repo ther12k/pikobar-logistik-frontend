@@ -18,6 +18,8 @@
           hint="dd/mm/yyyy"
           persistent-hint
           clearable
+          solo
+          :placeholder="$t('label.date_placeholder')"
           prepend-icon="event"
           :error-messages="errors"
           v-on="on"
