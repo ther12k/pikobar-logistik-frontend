@@ -121,7 +121,7 @@ extend('isPhoneNumber', {
 extend('notMinus', {
   message: (_, values) => i18n.t('errors.not_minus', values),
   validate: value => {
-    if (value > 0) {
+    if (value >= 0) {
       return true
     } else {
       return false
