@@ -134,7 +134,7 @@
                 <v-row class="main-color">{{ $t('label.applicant_ktp') }}</v-row>
                 <v-row>
                   <img v-if="!isPdf" class="image-style" :src="url">
-                  <a v-else :href="url" target="_blank">{{ this.formIdentityApplicant.dataFile.name }}</a>
+                  <a v-else :href="url" target="_blank">{{ formIdentityApplicant.dataFile.name }}</a>
                 </v-row>
               </v-col>
             </v-row>
@@ -456,9 +456,9 @@ export default {
         })
       })
       const formData = new FormData()
-      formData.append('master_faskes_id', this.formApplicant.instanceType)
+      formData.append('master_faskes_id', this.formApplicant.instance)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
-      formData.append('agency_type', this.formApplicant.instance)
+      formData.append('agency_type', this.formApplicant.instanceType)
       formData.append('agency_name', this.formApplicant.instanceName)
       formData.append('phone_number', this.formApplicant.instancePhoneNumber)
       formData.append('location_district_code', this.formApplicant.cityNameId.id)
@@ -472,8 +472,7 @@ export default {
       formData.append('secondary_phone_number', this.formIdentityApplicant.applicantPhoneNumber2)
       formData.append('letter_file', this.applicantLetter)
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
-      console.log(formData)
-      // await this.$store.dispatch('logistics/postApplicantForm', formData)
+      await this.$store.dispatch('logistics/postApplicantForm', formData)
       this.isDone = true
       this.isLoading = false
     },
