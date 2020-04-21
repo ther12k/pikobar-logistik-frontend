@@ -133,7 +133,8 @@
               <v-col>
                 <v-row class="main-color">{{ $t('label.applicant_ktp') }}</v-row>
                 <v-row>
-                  <img class="image-style" :src="url">
+                  <img v-if="!isPdf" class="image-style" :src="url">
+                  <a v-else :href="url" target="_blank">{{ this.formIdentityApplicant.dataFile.name }}</a>
                 </v-row>
               </v-col>
             </v-row>
@@ -401,7 +402,8 @@ export default {
       urlLetter: null,
       letterName: '',
       isLoading: false,
-      isDone: false
+      isDone: false,
+      isPdf: false
     }
   },
   mounted() {
@@ -409,6 +411,9 @@ export default {
     this.url = URL.createObjectURL(this.formIdentityApplicant.dataFile)
     this.urlLetter = URL.createObjectURL(this.applicantLetter)
     this.total = Math.ceil(this.logisticNeeds.length / 3)
+    if (this.formIdentityApplicant.dataFile.type === 'application/pdf') {
+      this.isPdf = true
+    }
     if (this.total === 1) {
       for (let index = 0; index < this.logisticNeeds.length; index++) {
         this.dataShow.push(this.logisticNeeds[index])
@@ -467,8 +472,8 @@ export default {
       formData.append('secondary_phone_number', this.formIdentityApplicant.applicantPhoneNumber2)
       formData.append('letter_file', this.applicantLetter)
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
-
-      await this.$store.dispatch('logistics/postApplicantForm', formData)
+      console.log(formData)
+      // await this.$store.dispatch('logistics/postApplicantForm', formData)
       this.isDone = true
       this.isLoading = false
     },
