@@ -189,7 +189,7 @@ export default {
     loading_done_three: 'Selanjutnya Anda akan dihubungi melalui Email atau No Telp yang telah didaftarkan.',
     add_logistics_label: 'Silahkan menambahkan apa saja Alat Pelindung Diri yang anda butuhkan dengan mengklik tombol dibawah ini.',
     alert_logistic_needs: 'Belum ada data logistik',
-    max_file_title: 'File dalam bentuk JPG/JPEG/PNG (ukuran maks. 10 MB)'
+    max_file_title: 'File dalam bentuk JPG/JPEG/PNG/PDF (ukuran maks. 10 MB)'
   },
   success: {
     login_success: 'Login Berhasil',
