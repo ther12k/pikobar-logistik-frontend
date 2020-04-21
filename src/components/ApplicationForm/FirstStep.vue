@@ -114,7 +114,6 @@
                 :height="100"
                 :no-resize="true"
                 :error-messages="errors"
-                :items="village"
                 :placeholder="$t('label.example_full_address')"
                 solo-inverted
               />

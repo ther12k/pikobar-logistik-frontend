@@ -222,6 +222,7 @@ export default {
     field_must_be_filled_purpose: 'Tujuan penggunaan tidak boleh kosong',
     field_must_be_filled_urgency_level: 'Tingkat urgensi tidak boleh kosong',
     field_unauthorized_characters: 'Bidang mengandung karakter yang tidak diizinkan.',
+    not_minus: 'Nilai tidak boleh 0 atau kurang',
     field_phone_number_not_valid: 'Nomor telepon tidak valid',
     server_error_occurred: 'Terjadi kesalahan pada server',
     feature_under_development: 'Fitur dalam pengembangan',
