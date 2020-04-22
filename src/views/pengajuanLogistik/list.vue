@@ -126,7 +126,7 @@ export default {
           value: 'verified'
         },
         {
-          text: 'Belum Tervirifikasi',
+          text: 'Belum Terverifikasi',
           value: 'not_verified'
         }
       ],
