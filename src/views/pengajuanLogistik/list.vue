@@ -26,6 +26,7 @@
           solo
           :placeholder="$t('label.select_status')"
           :items="status"
+          @change="handleSearch"
         />
       </v-col>
       <v-col cols="12" sm="3">
