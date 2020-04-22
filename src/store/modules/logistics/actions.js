@@ -53,5 +53,31 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async getListDetailLogisticRequest({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/logistic-request/' + params, 'GET')
+      commit('SET_DETAIL_LOGISTIC_REQUEST', response.data)
+      return response
+    } catch (e) {
+      return e
+    }
+  },
+  async getListDetailLogisticNeeds({ commit }, params) {
+    try {
+      const response = await fetchList('/api/v1/logistic-request/need/list', 'GET', params)
+      commit('SET_LIST_DETAIL_LOGISTIC_NEEDS', response.data.data)
+      commit('SET_TOTAL_DETAIL_LOGISTIC_NEEDS', response.data.last_page)
+    } catch (e) {
+      return e
+    }
+  },
+  async postVerificationStatus({ commit }, params) {
+    try {
+      const response = await doPostUpdate('/api/v1/logistic-request/verification', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }

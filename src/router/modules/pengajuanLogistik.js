@@ -20,6 +20,17 @@ const pengajuanLogistik = {
         noCache: true,
         roles: ['superadmin', 'dinkesprov']
       }
+    },
+    {
+      path: 'alat-kesehatan/detail/:id',
+      component: () => import('@/views/pengajuanLogistik/detail'),
+      hidden: true,
+      meta: {
+        title: 'medical_tools_title',
+        icon: 'library_books',
+        noCache: true,
+        roles: ['superadmin', 'dinkesprov']
+      }
     }
   ]
 }
