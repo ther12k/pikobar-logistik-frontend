@@ -5,13 +5,17 @@ export default {
   totalList: (state, getters) => {
     return state.totalList
   },
-  firstStock: (state, getters) => {
-    return state.firstStock
+  usedStock: (state, getters) => {
+    return state.usedStock
   },
   distributedStock: (state, getters) => {
     return state.distributedStock
   },
-  remainingStock: (state, getters) => {
-    return state.remainingStock
+  availableStock: (state, getters) => {
+    return state.availableStock
+  },
+  rdtDistributionForm: (state, getters, rootState) => {
+    state.rdtDistributionForm.location_province_code = rootState.constants.westJavaLocalProvinceCode
+    return state.rdtDistributionForm
   }
 }

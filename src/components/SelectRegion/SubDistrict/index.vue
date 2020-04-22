@@ -1,26 +1,24 @@
 <template>
-  <v-col cols="12" md="4" sm="4">
-    <ValidationProvider
-      v-slot="{ errors }"
-      :rules="required ? 'required': ''"
-    >
-      <v-autocomplete
-        v-model="nameSubDistrict"
-        :items="listSubDistrict"
-        :label="$t('label.select_sub_district')"
-        :error-messages="errors"
-        :disabled="disable"
-        :return-object="true"
-        menu-props="auto"
-        item-value="kecamatan_kode"
-        item-text="kecamatan_nama"
-        single-line
-        solo
-        autocomplete
-        @change="onSelectSubDistrict"
-      />
-    </ValidationProvider>
-  </v-col>
+  <ValidationProvider
+    v-slot="{ errors }"
+    :rules="required ? rule : ''"
+  >
+    <v-autocomplete
+      v-model="nameSubDistrict"
+      :items="listSubDistrict"
+      :label="$t('label.select_sub_district')"
+      :error-messages="errors"
+      :disabled="disable"
+      :return-object="true"
+      menu-props="auto"
+      item-value="kemendagri_kecamatan_kode"
+      item-text="kemendagri_kecamatan_nama"
+      single-line
+      solo
+      autocomplete
+      @change="onSelectSubDistrict"
+    />
+  </ValidationProvider>
 </template>
 
 <script>
@@ -53,6 +51,10 @@ export default {
     codeDistrict: {
       type: String,
       default: null
+    },
+    rule: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -64,7 +66,7 @@ export default {
   },
   watch: {
     'subDistrict': function(value) {
-      if (value && value.kecamatan_kode) {
+      if (value && value.kemendagri_kecamatan_kode) {
         this.nameSubDistrict = value
       } else {
         this.nameSubDistrict = ''
@@ -81,7 +83,7 @@ export default {
     }
   },
   async created() {
-    if (this.subDistrict.kecamatan_kode) {
+    if (this.subDistrict.kemendagri_kecamatan_kode) {
       this.nameSubDistrict = this.subDistrict
     }
     if (this.disabledSelect) {

@@ -45,7 +45,13 @@ export default {
     kit_available: 'Kit Available',
     used_kit: 'Used Kit',
     label_human: 'Humans',
-    list_rdt_kit: 'RDT Kit Used List'
+    list_rdt_kit: 'RDT Kit Used List',
+    rdt_code: 'RDT Code',
+    nik: 'NIK',
+    full_name: 'Full Name',
+    category: 'Category',
+    check_date: 'Check Date',
+    test_result: 'Test Result'
   },
   success: {
     login_success: 'Login Success',

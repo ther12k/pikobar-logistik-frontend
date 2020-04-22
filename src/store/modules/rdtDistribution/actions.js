@@ -1,4 +1,4 @@
-import { fetchList, fetchPostUpdate } from '@/api'
+import { fetchList, doPostUpdate, doDetailDelete } from '@/api'
 
 export default {
   async getListRdtDistribution({ commit }, params) {
@@ -14,9 +14,9 @@ export default {
   async getSummary({ commit }, params) {
     try {
       const response = await fetchList('/api/v1/transactions/summary', 'GET', params)
-      commit('SET_FIRST_STOCK', response.data.quantity_original)
+      commit('SET_AVAILABLE_STOCK', response.data.quantity_available)
       commit('SET_DISTRIBUTED_STOCK', response.data.quantity_distributed)
-      commit('SET_REMAINING_STOCK', response.data.quantity_available)
+      commit('SET_USED_STOCK', response.data.quantity_used)
       return response
     } catch (error) {
       return error.response
@@ -24,7 +24,7 @@ export default {
   },
   async createRdtDistribution({ commit }, data) {
     try {
-      const response = await fetchPostUpdate('/api/rdt', 'POST', data)
+      const response = await doPostUpdate('/api/v1/transactions', 'POST', data)
       return response
     } catch (error) {
       return error.response
@@ -32,9 +32,20 @@ export default {
   },
   async updateRdtDistribution({ commit }, data) {
     const idCase = await data.id
-    await delete data['id']
     try {
-      const response = await fetchPostUpdate(`/api/rdt/${idCase}`, 'PUT', data.data)
+      const response = await doPostUpdate(`/api/v1/transactions/${idCase}`, 'PUT', data.data)
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  resetRdtDistributionForm({ commit }) {
+    commit('RESET_RDT_DISTRIBUTION_FORM')
+  },
+  async getDistributionItem({ commit }, idDistribution) {
+    try {
+      const response = await doDetailDelete(`/api/v1/transactions`, 'GET', idDistribution)
+      commit('SET_RDT_DISTRIBUTION_FORM', response.data)
       return response
     } catch (error) {
       return error.response

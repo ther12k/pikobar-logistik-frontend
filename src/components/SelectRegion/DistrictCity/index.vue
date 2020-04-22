@@ -1,7 +1,7 @@
 <template>
   <ValidationProvider
     v-slot="{ errors }"
-    :rules="required ? 'required': ''"
+    :rules="required ? rule : ''"
   >
     <v-autocomplete
       v-if="disabledDistrict !== true"
@@ -49,14 +49,16 @@ export default {
       default: false
     },
     districtCity: {
-      type: Array,
-      default: function() {
-        return []
-      }
+      type: Object,
+      default: null
     },
     required: {
       type: Boolean,
       default: false
+    },
+    rule: {
+      type: String,
+      default: ''
     },
     onSelectDistrictCity: {
       type: Function,

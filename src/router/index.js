@@ -10,6 +10,7 @@ import Layout from '@/layout'
 import dashboardRouter from './modules/dashboard'
 import distribusiRdt from './modules/distribusiRdt'
 import monitoringRdtRouter from './modules/monitoringRdt'
+import pengajuanLogistik from './modules/pengajuanLogistik'
 
 /**
  * constantRoutes
@@ -39,6 +40,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/landing-page',
+    component: () => import('@/views/landingPage/index'),
+    hidden: true
+  },
+  {
     path: '/change-password',
     component: Layout,
     hidden: true,
@@ -52,6 +58,11 @@ export const constantRoutes = [
         hidden: true
       }
     ]
+  },
+  {
+    path: '/form-pemohon',
+    component: () => import('@/views/permohonan/formPemohon'),
+    hidden: true
   }
 ]
 
@@ -63,6 +74,7 @@ export const asyncRoutes = [
   dashboardRouter,
   distribusiRdt,
   monitoringRdtRouter,
+  pengajuanLogistik,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/', hidden: true }
 ]

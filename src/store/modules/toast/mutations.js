@@ -9,6 +9,11 @@ export default {
     state.color = 'success'
     state.message = message
   },
+  UPDATE_TOAST: (state, message) => {
+    state.show = true
+    state.color = 'success'
+    state.message = message
+  },
   WARNING_TOAST: (state, message) => {
     state.show = true
     state.color = 'warning'

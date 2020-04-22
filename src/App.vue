@@ -3,12 +3,16 @@
     id="inspire"
   >
     <toast-notification />
+    <loading-logo
+      :loading="$store.state.general.isLoading"
+    />
     <template v-if="pageLoading">
       <!-- Loader -->
       <div class="spinwrap">
         <div class="spinner">
-          <div class="cube1" />
-          <div class="cube2" />
+          <loading-logo
+            :loading="true"
+          />
         </div>
       </div>
     </template>

@@ -4,5 +4,14 @@ export default {
   },
   SET_HOSPITAL_CITY: (state, data) => {
     state.hospitalList = data
+  },
+  SET_APPLICANT_LIST_CITY: (state, data) => {
+    state.applicantCity = data
+  },
+  SET_APPLICANT_LIST_DISTRICT: (state, data) => {
+    state.applicantDistrict = data
+  },
+  SET_APPLICANT_LIST_VILLAGE: (state, data) => {
+    state.applicantVillage = data
   }
 }
