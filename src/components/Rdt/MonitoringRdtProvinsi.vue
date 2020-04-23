@@ -38,7 +38,6 @@
         </v-card>
       </v-col>
     </v-row>
-
     <v-row>
       <v-col cols="12" sm="2">
         <v-label class="title">{{ $t('label.sort') }}</v-label>
