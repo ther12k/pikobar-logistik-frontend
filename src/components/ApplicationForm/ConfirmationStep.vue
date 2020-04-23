@@ -495,13 +495,6 @@ export default {
     font-weight: bold;
     margin-top: 20px !important;
   }
-  .col {
-    padding: 0px;
-  }
-  .row {
-    padding: 0px;
-    margin: 0px;
-  }
   .image-style {
     max-width: 100%;
     max-height: 500px;
