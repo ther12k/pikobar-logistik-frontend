@@ -1,43 +1,44 @@
 <template>
   <div>
     <v-row>
-      <v-col>
-        <v-card class="mx-auto bg-dark" outlined>
-          <v-list-item two-line>
+      <v-col cols="3">
+        <v-card
+          outlined
+        >
+          <v-list-item two-line class="bg-dark">
             <v-list-item-content>
-              <v-list-item-title class="title white--text">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
-              <v-list-item-title
-                class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_distributed | currency }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.rdt_distributed_title') }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text summary-value">{{ recipientSummary.quantity_distributed | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
       </v-col>
-      <v-col>
-        <v-card class="mx-auto bg-success" outlined>
-          <v-list-item two-line>
+      <v-col cols="3">
+        <v-card
+          outlined
+        >
+          <v-list-item two-line class="bg-success">
             <v-list-item-content>
-              <v-list-item-title class="title white--text">{{ $t('label.rdt_available_title') }}</v-list-item-title>
-              <v-list-item-title
-                class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_available | currency }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.rdt_available_title') }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text summary-value">{{ recipientSummary.quantity_available | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
       </v-col>
-      <v-col>
-        <v-card class="mx-auto bg-info" outlined>
-          <v-list-item two-line>
+      <v-col cols="3">
+        <v-card
+          outlined
+        >
+          <v-list-item two-line class="bg-info">
             <v-list-item-content>
-              <v-list-item-title class="title white--text">{{ $t('label.rdt_used_title') }}</v-list-item-title>
-              <v-list-item-title
-                class="headline mb-1 white--text"
-              >{{ recipientSummary.quantity_used | currency }}</v-list-item-title>
+              <v-list-item-title class="white--text card-title">{{ $t('label.rdt_used_title') }}</v-list-item-title>
+              <v-list-item-title class="headline mb-1 white--text summary-value">{{ recipientSummary.quantity_used | currency }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-card>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col cols="12" sm="2">
         <v-label class="title">{{ $t('label.sort') }}</v-label>
@@ -169,6 +170,9 @@ export default {
 </script>
 
 <style>
+.summary-value {
+  padding-top: 2rem
+}
 .bg-dark {
   background: linear-gradient(90deg, #4F4F4F 0%, #828282 100%);
 }
@@ -192,5 +196,8 @@ export default {
 .thin {
   margin-top: 5px;
   margin-bottom: 0px;
+}
+.card-title {
+  font-size: 12px;
 }
 </style>
