@@ -7,7 +7,9 @@ export default {
     distribusi_title: 'Distribusi RDT Kit',
     monitoring_rdt_title: 'Monitoring RDT Kit',
     logistic_request_title: 'Pengajuan Logisitk',
+    master_data_title: 'Master Data',
     medical_tools_title: 'Alat Kesehatan',
+    medical_facility_title: 'Fasilitas Kesehatan',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
     list_rdt: 'List hasil test',
@@ -201,7 +203,14 @@ export default {
     search_data: 'Cari Data',
     verif_now: 'Verifikasi Sekarang',
     capital_email: 'Email',
-    applicant_letter: 'Surat Permohonan'
+    applicant_letter: 'Surat Permohonan',
+    list_applicant_logistic_medic: 'Daftar Pengajuan Logistik Medis',
+    registration_number: 'No. Registrasi',
+    upper_name: 'Nama Atasan',
+    faskes_location: 'Lokasi Faskes',
+    verification: 'Verifikasi',
+    reject: 'Tolak',
+    link_maps_lat_long: 'https://maps.google.com/?q='
   },
   success: {
     login_success: 'Login Berhasil',
