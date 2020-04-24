@@ -12,7 +12,7 @@ import general from './modules/general'
 import logistics from './modules/logistics'
 import faskes from './modules/faskes'
 import faskesType from './modules/faskesType'
-
+import masterData from './modules/masterData'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -28,7 +28,8 @@ const store = new Vuex.Store({
     general,
     logistics,
     faskes,
-    faskesType
+    faskesType,
+    masterData
   }
 })
 
