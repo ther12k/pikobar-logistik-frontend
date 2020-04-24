@@ -16,7 +16,7 @@
           >
             <v-label class="title"><b>{{ $t('label.regis_number') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
-              v-model="listQuery.no_regis"
+              v-model="listQuery.nomor_registrasi"
               :placeholder="$t('label.regis_number_placeholder')"
               :error-messages="errors"
               outlined
@@ -28,7 +28,7 @@
           >
             <v-label class="title"><b>{{ $t('label.faskes_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
-              v-model="listQuery.faskes_name"
+              v-model="listQuery.nama_faskes"
               :placeholder="$t('label.input_faskes_name')"
               outlined
               :error-messages="errors"
@@ -40,7 +40,7 @@
           >
             <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
             <v-select
-              v-model="listQuery.faskes_type"
+              v-model="listQuery.id_tipe_faskes"
               :placeholder="$t('label.autocomplete_instance_placeholder')"
               outlined
               :items="faskesTypeList"
@@ -55,7 +55,7 @@
           >
             <v-label class="title"><b>{{ $t('label.upper_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
-              v-model="listQuery.upper_name"
+              v-model="listQuery.nama_atasan"
               :placeholder="$t('label.input_upper_name')"
               outlined
               :error-messages="errors"
