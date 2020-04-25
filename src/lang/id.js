@@ -219,7 +219,9 @@ export default {
     instance_not_found_title: 'Tidak menemukan nama instansi anda?',
     adding: 'Tambahkan',
     add_instance_not_found_notif: 'Fasilitas kesehatan yang didaftarkan akan diverifikasi terlebih dahulu dalam 2x24 Jam.',
-    input_faskes_name: 'Masukkan Nama Faskes'
+    input_faskes_name: 'Masukkan Nama Faskes',
+    tutorial: 'Panduan',
+    link_tutorial: 'https://drive.google.com/file/d/1UhAvK9lyWDXq2OgBrKPWcX9VaWeZkc7o/view'
   },
   success: {
     login_success: 'Login Berhasil',

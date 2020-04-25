@@ -11,10 +11,8 @@
           </v-col>
           <v-col cols="12" md="4" xs="12">
             <v-row class="float-right-landing-page">
-              <v-icon color="white" size="17">{{ $t('label.icon_talk') }}</v-icon>
-              <div class="call-center-landing-page">{{ $t('label.call_center') }}</div>
-              <v-icon color="white" size="17">{{ $t('label.icon_help') }}</v-icon>
-              <div class="pusat-bantuan-landing-page">{{ $t('label.help_center') }}</div>
+              <a :href="$t('label.link_tutorial')" target="_blank"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
+              <a :href="$t('label.link_tutorial')" target="_blank"><div class="tutorial-class pusat-bantuan-landing-page">{{ $t('label.help_center') }}</div></a>
             </v-row>
           </v-col>
         </v-row>
@@ -206,6 +204,13 @@ export default {
 }
 .stepper-margin {
   margin: -100px -10px 0px -10px;
+}
+.tutorial-class {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
