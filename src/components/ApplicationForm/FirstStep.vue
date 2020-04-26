@@ -59,20 +59,6 @@
                 {{ $t('label.adding') }}
               </v-btn>
               <form-add-instance :show="showForm" />
-              <!-- <v-row>
-                <v-col cols="10" sm="10" md="8">
-                  <v-label class="title"><b>{{ $t('label.instance_not_found_title') }}</b></v-label>
-                </v-col>
-                <v-col cols="2" sm="2" md="2">
-                  <v-btn
-                    outlined
-                    color="#2E7D32"
-                    large
-                  >
-                    {{ $t('label.adding') }}
-                  </v-btn>
-                </v-col>
-              </v-row> -->
             </div>
             <ValidationProvider
               v-slot="{ errors }"
