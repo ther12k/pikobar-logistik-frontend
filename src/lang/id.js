@@ -211,7 +211,7 @@ export default {
     upper_name: 'Nama Atasan',
     input_upper_name: 'Masukkan Nama Atasan',
     faskes_location: 'Lokasi Faskes',
-    input_faskes_location: 'Masukkan link kordinat lokasi dari google maps',
+    input_faskes_location: 'Masukkan link koordinat lokasi dari google maps',
     verification: 'Verifikasi',
     reject: 'Tolak',
     link_maps_lat_long: 'https://maps.google.com/?q=',
