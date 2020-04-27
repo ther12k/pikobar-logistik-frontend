@@ -47,6 +47,19 @@
                 @change="onSelectFaskes"
               />
             </ValidationProvider>
+            <div>
+              <v-label class="title"><b>{{ $t('label.instance_not_found_title') }}</b></v-label>
+              <v-btn
+                outlined
+                color="#2E7D32"
+                large
+                style="margin-left: 30px"
+                @click.stop="showForm = true"
+              >
+                {{ $t('label.adding') }}
+              </v-btn>
+              <form-add-instance :show="showForm" />
+            </div>
             <ValidationProvider
               v-slot="{ errors }"
               rules="isPhoneNumber"
@@ -182,7 +195,8 @@ export default {
       listQueryFaskes: {
         nama_faskes: null,
         id_tipe_faskes: null
-      }
+      },
+      showForm: false
     }
   },
   computed: {
@@ -203,6 +217,9 @@ export default {
     await this.getListCity()
     await this.$store.dispatch('faskesType/getListFaskesType')
     await this.getListFaskes()
+    EventBus.$on('dialogHide', (value) => {
+      this.showForm = value
+    })
   },
   methods: {
     async onNext() {
@@ -268,6 +285,9 @@ export default {
       if (id) {
         await this.$store.dispatch('faskes/getDetailFaskes', id)
       }
+    },
+    hideDialog(value) {
+
     }
   }
 }

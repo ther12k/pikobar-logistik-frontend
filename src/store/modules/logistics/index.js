@@ -7,7 +7,10 @@ const state = {
   dataListApdUnit: [],
   dataInstanceType: [],
   dataListLogisticRequest: [],
-  totalListLogisticRequest: 0
+  totalListLogisticRequest: 0,
+  dataDetailLogisticRequest: {},
+  totalDetailLogisticNeeds: 0,
+  dataListDetailLogisticNeeds: []
 }
 
 export default {

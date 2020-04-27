@@ -5,16 +5,18 @@
         <v-row justify="space-between" align="center">
           <v-col cols="12" md="8" xs="12">
             <v-row>
-              <img height="40" src="../../static/logistik_logo_lingkar.svg">
-              <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
+              <router-link to="/landing-page">
+                <v-img :max-width="40" src="../../static/logistik_logo_lingkar.svg" />
+              </router-link>
+              <router-link to="/landing-page">
+                <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
+              </router-link>
             </v-row>
           </v-col>
           <v-col cols="12" md="4" xs="12">
             <v-row class="float-right-landing-page">
-              <v-icon color="white" size="17">{{ $t('label.icon_talk') }}</v-icon>
-              <div class="call-center-landing-page">{{ $t('label.call_center') }}</div>
-              <v-icon color="white" size="17">{{ $t('label.icon_help') }}</v-icon>
-              <div class="pusat-bantuan-landing-page">{{ $t('label.help_center') }}</div>
+              <a :href="$t('label.link_tutorial')" target="_blank"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
+              <a :href="$t('label.link_tutorial')" target="_blank"><div class="tutorial-class pusat-bantuan-landing-page">{{ $t('label.tutorial') }}</div></a>
             </v-row>
           </v-col>
         </v-row>
@@ -36,8 +38,7 @@
           </v-col>
           <v-col cols="4">
             <v-row class="float-right-landing-page">
-              <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_talk') }}</v-icon>
-              <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_help') }}</v-icon>
+              <a :href="$t('label.link_tutorial')" target="_blank" class="margin-icon-talk-mobile-landing-page"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
             </v-row>
           </v-col>
         </v-row>
@@ -206,6 +207,13 @@ export default {
 }
 .stepper-margin {
   margin: -100px -10px 0px -10px;
+}
+.tutorial-class {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
 }

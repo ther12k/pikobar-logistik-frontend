@@ -26,6 +26,7 @@
           solo
           :placeholder="$t('label.select_status')"
           :items="status"
+          @change="handleSearch"
         />
       </v-col>
       <v-col cols="12" sm="3">
@@ -80,7 +81,7 @@
                   <td>{{ data.applicant.applicant_name }}</td>
                   <td>{{ data.created_at === null ? $t('label.stripe') : $moment(data.created_at).format('DD MMMM YYYY') }}</td>
                   <td>{{ data.applicant.verification_status }}</td>
-                  <td><v-btn text small color="info">{{ $t('label.detail') }}</v-btn></td>
+                  <td><v-btn text small color="info" @click="toDetail(data)">{{ $t('label.detail') }}</v-btn></td>
                 </tr>
                 <tr v-if="listLogisticRequest.length === 0">
                   <td colspan="6" class="text-center">{{ $t('label.no_data') }}</td>
@@ -125,7 +126,7 @@ export default {
           value: 'verified'
         },
         {
-          text: 'Belum Tervirifikasi',
+          text: 'Belum Terverifikasi',
           value: 'not_verified'
         }
       ],
@@ -142,8 +143,9 @@ export default {
     this.getLogisticRequestList()
   },
   methods: {
-    changeDate(value) {
+    async changeDate(value) {
       this.listQuery.date = value
+      await this.getLogisticRequestList()
     },
     async getLogisticRequestList() {
       await this.$store.dispatch('logistics/getListLogisticRequest', this.listQuery)
@@ -160,6 +162,9 @@ export default {
     onSelectDistrictCity(value) {
       this.listQuery.city_code = value ? value.kemendagri_kabupaten_kode : ''
       this.handleSearch()
+    },
+    toDetail(data) {
+      this.$router.push(`alat-kesehatan/detail/${data.id}`)
     }
   }
 }

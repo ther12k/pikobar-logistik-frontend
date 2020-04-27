@@ -5,8 +5,12 @@
         <v-row justify="space-between" align="center">
           <v-col cols="12" md="8" xs="12">
             <v-row>
-              <img height="40" src="../../static/logistik_logo_lingkar.svg">
-              <div class="title-page-landing-page">{{ $t('label.logistics_medical_device') }}</div>
+              <router-link to="/landing-page">
+                <v-img :max-width="40" src="../../static/logistik_logo_lingkar.svg" />
+              </router-link>
+              <router-link to="/landing-page">
+                <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
+              </router-link>
             </v-row>
           </v-col>
           <v-col cols="12" md="4" xs="12">
@@ -74,6 +78,10 @@
           </v-row>
           <v-row align="center" justify="center">
             {{ $t('label.loading_done_three') }}
+          </v-row>
+          <br>
+          <v-row align="center" justify="center">
+            <v-btn @click="refreshPage">{{ $t('label.back') }}</v-btn>
           </v-row>
         </div>
         <div v-else>
@@ -450,6 +458,11 @@ export default {
           unit: element.unitId
         })
       })
+
+      if (this.formApplicant.instancePhoneNumber === null) {
+        this.formApplicant.instancePhoneNumber = ''
+      }
+
       const formData = new FormData()
       formData.append('master_faskes_id', this.formApplicant.instance)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
@@ -477,6 +490,9 @@ export default {
     onLoading() {
       this.isDone = true
       this.isLoading = false
+    },
+    refreshPage() {
+      window.location.reload()
     }
   }
 }
@@ -494,13 +510,6 @@ export default {
     color: #27ae60;
     font-weight: bold;
     margin-top: 20px !important;
-  }
-  .col {
-    padding: 0px;
-  }
-  .row {
-    padding: 0px;
-    margin: 0px;
   }
   .image-style {
     max-width: 100%;
