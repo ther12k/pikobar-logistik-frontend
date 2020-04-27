@@ -81,7 +81,7 @@
           </v-row>
           <br>
           <v-row align="center" justify="center">
-            <v-btn href="#/landing-page">{{ $t('label.back') }}</v-btn>
+            <v-btn @click="refreshPage">{{ $t('label.back') }}</v-btn>
           </v-row>
         </div>
         <div v-else>
@@ -488,6 +488,9 @@ export default {
     onLoading() {
       this.isDone = true
       this.isLoading = false
+    },
+    refreshPage() {
+      window.location.reload()
     }
   }
 }
