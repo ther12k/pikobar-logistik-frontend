@@ -5,8 +5,12 @@
         <v-row justify="space-between" align="center">
           <v-col cols="12" md="8" xs="12">
             <v-row>
-              <img height="40" src="../../static/logistik_logo_lingkar.svg">
-              <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
+              <router-link to="/landing-page">
+                <v-img :max-width="40" src="../../static/logistik_logo_lingkar.svg" />
+              </router-link>
+              <router-link to="/landing-page">
+                <div class="title-page">{{ $t('label.applicant_form_title') }}</div>
+              </router-link>
             </v-row>
           </v-col>
           <v-col cols="12" md="4" xs="12">
