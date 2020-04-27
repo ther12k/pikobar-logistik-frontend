@@ -34,8 +34,7 @@
           </v-col>
           <v-col cols="4">
             <v-row class="float-right-landing-page">
-              <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_talk') }}</v-icon>
-              <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_help') }}</v-icon>
+              <a :href="$t('label.link_tutorial')" target="_blank" class="margin-icon-talk-mobile-landing-page"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
             </v-row>
           </v-col>
         </v-row>
