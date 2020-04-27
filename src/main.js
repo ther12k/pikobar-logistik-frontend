@@ -10,6 +10,7 @@ import moment from 'moment'
 import infiniteScroll from 'vue-infinite-scroll'
 import FlagIcon from 'vue-flag-icon'
 import VueCurrencyFilter from 'vue-currency-filter'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 moment.locale('id')
 
@@ -41,6 +42,13 @@ Vue.use(VueMoment, {
 
 Vue.use(VeeValidate, {
   i18n
+})
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyA7fLMZEL1CdQp5h04_QaphO-R6UE5M7Yw',
+    libraries: 'AIzaSyA7fLMZEL1CdQp5h04_QaphO-R6UE5M7Yw' // necessary for places input
+  }
 })
 
 Vue.use(VueCurrencyFilter, {
