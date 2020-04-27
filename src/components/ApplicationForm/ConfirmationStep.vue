@@ -458,9 +458,11 @@ export default {
           unit: element.unitId
         })
       })
-      if (this.formApplicant.instancePhoneNumber == null) {
+
+      if (this.formApplicant.instancePhoneNumber === null) {
         this.formApplicant.instancePhoneNumber = ''
       }
+
       const formData = new FormData()
       formData.append('master_faskes_id', this.formApplicant.instance)
       formData.append('logistic_request', JSON.stringify(dataLogistics))
