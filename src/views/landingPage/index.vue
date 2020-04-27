@@ -12,7 +12,7 @@
           <v-col cols="12" md="4" xs="12">
             <v-row class="float-right-landing-page">
               <a :href="$t('label.link_tutorial')" target="_blank"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
-              <a :href="$t('label.link_tutorial')" target="_blank"><div class="tutorial-class pusat-bantuan-landing-page">{{ $t('label.help_center') }}</div></a>
+              <a :href="$t('label.link_tutorial')" target="_blank"><div class="tutorial-class pusat-bantuan-landing-page">{{ $t('label.tutorial') }}</div></a>
             </v-row>
           </v-col>
         </v-row>
@@ -34,8 +34,6 @@
           </v-col>
           <v-col cols="4">
             <v-row class="float-right-landing-page">
-              <!-- <v-icon class="margin-icon-talk-mobile-landing-page" color="white" size="30">{{ $t('label.icon_talk') }}</v-icon>
-              <v-icon class="margin-icon-help-mobile-landing-page" color="white" size="30">{{ $t('label.icon_help') }}</v-icon> -->
               <a :href="$t('label.link_tutorial')" target="_blank" class="margin-icon-help-mobile-landing-page"><v-icon color="white" size="25">{{ $t('label.icon_help') }}</v-icon></a>
             </v-row>
           </v-col>
