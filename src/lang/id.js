@@ -10,6 +10,8 @@ export default {
     master_data_title: 'Master Data',
     medical_tools_title: 'Alat Kesehatan',
     medical_facility_title: 'Fasilitas Kesehatan',
+    not_registered_title: 'Belum Terdaftar',
+    registered_title: 'Terdaftar',
     rdt: 'Test Masif',
     create_rdt: 'Input hasil test',
     list_rdt: 'List hasil test',
