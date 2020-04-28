@@ -122,6 +122,10 @@ export default {
       if (!valid) {
         return
       }
+      const response = await this.$store.dispatch('logistics/postAddFaskes', this.listQuery)
+      if (response) {
+        window.location.reload()
+      }
     },
     hideDialog() {
       EventBus.$emit('dialogHide', false)

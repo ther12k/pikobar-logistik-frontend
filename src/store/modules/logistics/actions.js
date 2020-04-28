@@ -79,5 +79,13 @@ export default {
     } catch (e) {
       return e
     }
+  },
+  async postAddFaskes({ commit }, params) {
+    try {
+      const response = await doPostUpdate('/api/v1/master-faskes', 'POST', params)
+      return response
+    } catch (e) {
+      return e
+    }
   }
 }
