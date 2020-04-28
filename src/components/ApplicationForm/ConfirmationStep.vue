@@ -81,7 +81,7 @@
           </v-row>
           <br>
           <v-row align="center" justify="center">
-            <v-btn @click="refreshPage">{{ $t('label.back') }}</v-btn>
+            <v-btn href="/#/landing-page">{{ $t('label.back') }}</v-btn>
           </v-row>
         </div>
         <div v-else>
@@ -254,7 +254,7 @@
         </v-row>
         <br>
         <v-row align="center" justify="center">
-          <v-btn @click="refreshPage">{{ $t('label.back') }}</v-btn>
+          <v-btn href="/#/landing-page">{{ $t('label.back') }}</v-btn>
         </v-row>
       </div>
       <div v-else>
@@ -515,7 +515,7 @@ export default {
       formData.append('secondary_phone_number', this.formIdentityApplicant.applicantPhoneNumber2)
       formData.append('letter_file', this.applicantLetter)
       formData.append('applicant_file', this.formIdentityApplicant.dataFile)
-      await this.$store.dispatch('logistics/postApplicantForm', formData)
+      // await this.$store.dispatch('logistics/postApplicantForm', formData)
       this.isDone = true
       this.isLoading = false
     },
