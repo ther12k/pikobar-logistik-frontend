@@ -226,13 +226,13 @@
         <v-row align="center" justify="center">
           <img height="200" src="../../static/mengirim.svg">
         </v-row>
-        <v-row align="center" justify="center" class="margin-wait">
+        <v-row align="center" justify="center" class="margin-wait text-center">
           {{ $t('label.wait') }}
         </v-row>
-        <v-row align="center" justify="center" class="margin-top-10">
+        <v-row align="center" justify="center" class="margin-top-10 text-center">
           {{ $t('label.loading_step_one') }}
         </v-row>
-        <v-row align="center" justify="center">
+        <v-row align="center" justify="center" class="text-center">
           {{ $t('label.loading_step_two') }}
         </v-row>
       </div>
@@ -241,15 +241,15 @@
           <img height="200" src="../../static/berhasil.svg">
         </v-row>
         <v-row align="center" justify="center">
-          <div class="save-style">{{ $t('label.save_success') }}</div>
+          <div class="save-style text-center">{{ $t('label.save_success') }}</div>
         </v-row>
-        <v-row align="center" justify="center" class="margin-top-10">
+        <v-row align="center" justify="center" class="margin-top-10 text-center">
           {{ $t('label.loading_done_one') }}
         </v-row>
-        <v-row align="center" justify="center">
+        <v-row align="center" justify="center" class="text-center">
           {{ $t('label.loading_done_two') }}
         </v-row>
-        <v-row align="center" justify="center">
+        <v-row align="center" justify="center" class="text-center">
           {{ $t('label.loading_done_three') }}
         </v-row>
         <br>
@@ -583,6 +583,9 @@ export default {
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
+  }
+  .text-center {
+    text-align: center;
   }
 @media (max-width: 1199px) and (min-width: 960px) {
 }
