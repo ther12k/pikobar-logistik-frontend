@@ -81,7 +81,7 @@
           </v-row>
           <br>
           <v-row align="center" justify="center">
-            <v-btn @click="refreshPage">{{ $t('label.back') }}</v-btn>
+            <v-btn href="/#/landing-page">{{ $t('label.back') }}</v-btn>
           </v-row>
         </div>
         <div v-else>
@@ -254,7 +254,7 @@
         </v-row>
         <br>
         <v-row align="center" justify="center">
-          <v-btn @click="refreshPage">{{ $t('label.back') }}</v-btn>
+          <v-btn href="/#/landing-page">{{ $t('label.back') }}</v-btn>
         </v-row>
       </div>
       <div v-else>
