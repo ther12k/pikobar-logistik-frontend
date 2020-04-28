@@ -101,7 +101,7 @@
                     <v-row>{{ formApplicant.instancePhoneNumber }}</v-row>
                   </v-col>
                   <v-col>
-                    <v-row class="main-color">{{ $t('label.county_town') }}</v-row>
+                    <v-row class="main-color">{{ $t('label.city_district') }}</v-row>
                     <v-row>{{ formApplicant.cityNameId.name }}</v-row>
                     <v-row class="main-color">{{ $t('label.select_sub_district_full_name') }}</v-row>
                     <v-row>{{ formApplicant.districtNameId.name }}</v-row>
@@ -154,7 +154,7 @@
                 <thead>
                   <tr>
                     <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
-                    <th class="text-left">{{ $t('label.apd_name_spesification') }}</th>
+                    <th class="text-left">{{ $t('label.apd_name_specification') }}</th>
                     <th class="text-left">{{ $t('label.brand') }}</th>
                     <th class="text-left">{{ $t('label.total') }}</th>
                     <th class="text-left">{{ $t('label.unit') }}</th>
@@ -276,7 +276,7 @@
             <v-label>{{ formApplicant.instanceTypeName }}</v-label>
           </v-col>
           <v-col class="" cols="6" sm="6">
-            <v-label class="title" color="#2E7D32"><b>{{ $t('label.county_town') }}</b></v-label>
+            <v-label class="title" color="#2E7D32"><b>{{ $t('label.city_district') }}</b></v-label>
             <br>
             <v-label>{{ formApplicant.cityNameId.name }}</v-label>
           </v-col>
@@ -369,7 +369,7 @@
                   <thead>
                     <tr>
                       <th class="text-left">{{ $t('label.number').toUpperCase() }}</th>
-                      <th class="text-left">{{ $t('label.apd_name_spesification') }}</th>
+                      <th class="text-left">{{ $t('label.apd_name_specification') }}</th>
                       <th class="text-left">{{ $t('label.brand') }}</th>
                     </tr>
                   </thead>
