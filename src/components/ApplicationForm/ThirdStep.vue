@@ -70,7 +70,6 @@
                 :error-messages="errors"
                 outlined
                 solo-inverted
-                @input.native="querySearchAPD"
                 @change="setUnit(data)"
               />
             </ValidationProvider>
@@ -330,10 +329,6 @@ export default {
       if (this.logisticNeeds.length === 0) {
         this.isValid = false
       }
-    },
-    querySearchAPD(event) {
-      this.listQueryAPD.name = event.target.value
-      this.getListAPD()
     },
     async getListAPD() {
       await this.$store.dispatch('logistics/getListAPD', this.listQueryAPD)
