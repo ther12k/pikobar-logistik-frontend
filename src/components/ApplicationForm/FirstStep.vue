@@ -39,7 +39,6 @@
                 single-line
                 solo
                 outlined
-                :clearable="true"
                 autocomplete
                 :error-messages="errors"
                 :placeholder="$t('label.example_instance_name')"
