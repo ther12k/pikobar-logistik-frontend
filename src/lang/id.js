@@ -227,7 +227,8 @@ export default {
     success_text_dialog: 'Data yang anda masukkan sudah disimpan.',
     fail_dialog: 'GAGAL!',
     fail_text_dialog: 'Maaf, terdapat sedikit gangguan',
-    fail_text_dialog_2: 'sehingga, data yang anda masukkan gagal disimpan.'
+    fail_text_dialog_2: 'sehingga, data yang anda masukkan gagal disimpan.',
+    repeat: 'Ulangi!'
   },
   success: {
     login_success: 'Login Berhasil',

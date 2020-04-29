@@ -101,7 +101,7 @@
         <v-row>
           <v-col>
             <center>
-              <v-btn color="primary" href="/#/landing-page" class="white--text">
+              <v-btn color="primary" to="/landing-page" class="white--text">
                 {{ $t('label.ok') }}
               </v-btn>
             </center>
@@ -131,8 +131,8 @@
         <v-row>
           <v-col>
             <center>
-              <v-btn color="primary" href="/#/landing-page" class="white--text">
-                {{ $t('label.ok') }}
+              <v-btn color="primary" to="/landing-page" class="white--text">
+                {{ $t('label.repeat') }}
               </v-btn>
             </center>
           </v-col>
