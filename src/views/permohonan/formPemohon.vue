@@ -162,6 +162,16 @@ export default {
   font-size: 18px;
   line-height: 22px;
 }
+.btn-margin-positive {
+  margin: 10px;
+  float: right;
+}
+.btn-desktop {
+  display:block;
+}
+.btn-mobile {
+  display: none;
+}
 @media (max-width: 1199px) and (min-width: 960px) {
 }
 @media (max-width: 768px) and (min-width: 320px) {
@@ -179,6 +189,12 @@ export default {
   }
   .stepper-margin-form-pemohon {
     margin: -200px -10px 0px -10px;
+  }
+  .btn-desktop {
+    display: none;
+  }
+  .btn-mobile {
+    display: block;
   }
 }
 </style>
