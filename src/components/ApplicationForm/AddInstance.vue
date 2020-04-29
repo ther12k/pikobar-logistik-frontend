@@ -7,14 +7,14 @@
     <v-card>
       <ValidationObserver ref="observer">
         <v-col>
-          <span class="title-dialog">{{ $t('label.add_medical_facility') }}</span>
+          <span class="title-dialog-add-instance">{{ $t('label.add_medical_facility') }}</span>
           <br>
           <br>
           <ValidationProvider
             v-slot="{ errors }"
             rules="requiredRegistrationNumber"
           >
-            <v-label class="title"><b>{{ $t('label.regis_number') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+            <v-label class="title"><b>{{ $t('label.regis_number') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
               v-model="listQuery.nomor_registrasi"
               :placeholder="$t('label.regis_number_placeholder')"
@@ -26,7 +26,7 @@
             v-slot="{ errors }"
             rules="requiredFaskesName"
           >
-            <v-label class="title"><b>{{ $t('label.faskes_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+            <v-label class="title"><b>{{ $t('label.faskes_name') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
               v-model="listQuery.nama_faskes"
               :placeholder="$t('label.input_faskes_name')"
@@ -38,7 +38,7 @@
             v-slot="{ errors }"
             rules="requiredInstanceType"
           >
-            <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+            <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
             <v-select
               v-model="listQuery.id_tipe_faskes"
               :placeholder="$t('label.autocomplete_instance_placeholder')"
@@ -53,7 +53,7 @@
             v-slot="{ errors }"
             rules="requiredUpperName"
           >
-            <v-label class="title"><b>{{ $t('label.upper_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+            <v-label class="title"><b>{{ $t('label.upper_name') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
               v-model="listQuery.nama_atasan"
               :placeholder="$t('label.input_upper_name')"
@@ -65,7 +65,7 @@
             v-slot="{ errors }"
             rules="requiredFaskesLocation"
           >
-            <v-label class="title"><b>{{ $t('label.faskes_location') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
+            <v-label class="title"><b>{{ $t('label.faskes_location') }}</b> <i class="text-small-add-instance">{{ $t('label.must_fill') }}</i></v-label>
             <v-text-field
               v-model="listQuery.faskes_location"
               :placeholder="$t('label.input_faskes_location')"
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style>
-.title-dialog {
+.title-dialog-add-instance {
   margin-top: 20px;
   color: #219653 !important;
   font-family: "Product Sans";
@@ -143,10 +143,7 @@ export default {
   font-weight: bold;
   font-size: 16px;
 }
-.text-small {
+.text-small-add-instance {
   font-size: 13px;
-}
-.margin-10 {
-  margin: 10px
 }
 </style>
