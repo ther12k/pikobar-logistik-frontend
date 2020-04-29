@@ -88,49 +88,6 @@
           </v-stepper-items>
         </v-stepper>
       </v-card>
-      <v-card class="main-card-mobile" outlined>
-        <v-stepper v-model="step" class="stepper-margin" :alt-labels="true">
-          <v-stepper-header>
-            <v-stepper-step :complete="step > 1" step="1">
-              <center>{{ $t('label.step_title_1') }}</center>
-            </v-stepper-step>
-            <v-divider />
-            <v-stepper-step :complete="step > 2" step="2">
-              <center>{{ $t('label.step_title_2') }}</center>
-            </v-stepper-step>
-            <v-divider />
-            <v-stepper-step :complete="step > 3" step="3">
-              <center>{{ $t('label.step_title_3') }}</center>
-            </v-stepper-step>
-            <v-divider />
-            <v-stepper-step :complete="step > 4" step="4">
-              <center>{{ $t('label.step_title_4') }}</center>
-            </v-stepper-step>
-          </v-stepper-header>
-          <v-stepper-items>
-            <v-stepper-content step="1">
-              <identitas-instansi-pemohon
-                :form-applicant="formApplicant"
-              />
-            </v-stepper-content>
-            <v-stepper-content step="2">
-              <identitas-pemohon
-                :form-identity-applicant="formIdentityApplicant"
-              />
-            </v-stepper-content>
-            <v-stepper-content step="3">
-              <kebutuhan-logistik
-                :logistic-needs="logisticNeeds"
-              />
-            </v-stepper-content>
-            <v-stepper-content step="4">
-              <surat-permohonan
-                :applicant-letter="applicantLetter"
-              />
-            </v-stepper-content>
-          </v-stepper-items>
-        </v-stepper>
-      </v-card>
     </div>
   </div>
   <div v-else>
@@ -222,11 +179,16 @@ export default {
 
 @media (max-width: 588px) and (min-width: 320px) {
   .main-card {
-    display: none;
-  }
-  .main-card-mobile {
-    display: block;
     margin: 150px 0px -30px 0px;
+  }
+  .left-margin {
+    margin-left: 0px;
+  }
+  .right-margin {
+    margin-right: 0px;
+  }
+  .stepper-margin {
+    margin: -200px -10px 0px -10px;
   }
 }
 </style>
