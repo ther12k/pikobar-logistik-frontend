@@ -109,6 +109,36 @@
         </v-row>
       </div>
     </v-card>
+    <v-card v-else-if="isFail">
+      <div>
+        <v-row>
+          <v-img :max-width="100" src="../../static/fail_icon.svg" class="img-icon-add-instance" />
+        </v-row>
+        <v-row>
+          <v-col>
+            <center><span class="title-dialog-success-add-instance">{{ $t('label.fail_dialog') }}</span></center>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <center>
+              <span class="text-dialog-success-add-instance">{{ $t('label.fail_text_dialog') }}</span>
+              <br>
+              <span class="text-dialog-success-add-instance">{{ $t('label.fail_text_dialog_2') }}</span>
+            </center>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <center>
+              <v-btn color="primary" href="/#/landing-page" class="white--text">
+                {{ $t('label.ok') }}
+              </v-btn>
+            </center>
+          </v-col>
+        </v-row>
+      </div>
+    </v-card>
   </v-dialog>
 </template>
 
@@ -153,6 +183,8 @@ export default {
       const response = await this.$store.dispatch('logistics/postAddFaskes', this.listQuery)
       if (response) {
         this.isSuccess = true
+      } else {
+        this.isFail = true
       }
     },
     hideDialog() {

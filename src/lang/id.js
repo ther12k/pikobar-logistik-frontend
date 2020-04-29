@@ -224,7 +224,10 @@ export default {
     tutorial: 'Panduan',
     link_tutorial: 'https://drive.google.com/file/d/1UhAvK9lyWDXq2OgBrKPWcX9VaWeZkc7o/view',
     success_dialog: 'BERHASIL!',
-    success_text_dialog: 'Data yang anda masukkan sudah disimpan.'
+    success_text_dialog: 'Data yang anda masukkan sudah disimpan.',
+    fail_dialog: 'GAGAL!',
+    fail_text_dialog: 'Maaf, terdapat sedikit gangguan',
+    fail_text_dialog_2: 'sehingga, data yang anda masukkan gagal disimpan.'
   },
   success: {
     login_success: 'Login Berhasil',
