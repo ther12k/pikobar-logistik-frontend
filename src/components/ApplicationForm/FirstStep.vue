@@ -306,11 +306,5 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .btn-desktop {
-    display: none;
-  }
-  .btn-mobile {
-    display: block;
-  }
 }
 </style>

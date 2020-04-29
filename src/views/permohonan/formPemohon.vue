@@ -172,6 +172,9 @@ export default {
 .btn-mobile {
   display: none;
 }
+.margin-10 {
+  margin: 10px;
+}
 @media (max-width: 1199px) and (min-width: 960px) {
 }
 @media (max-width: 768px) and (min-width: 320px) {
