@@ -294,13 +294,6 @@ export default {
 }
 </script>
 <style>
-.main-card {
-  margin-left: -50px;
-  display: block;
-}
-.main-card-mobile {
-  display: none;
-}
 .margin-negative {
   margin-top: -30px !important;
 }
@@ -342,12 +335,6 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .main-card {
-    display: none;
-  }
-  .main-card-mobile {
-    display: block;
-  }
   .btn-desktop {
     display: none;
   }

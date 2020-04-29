@@ -137,9 +137,6 @@ export default {
   height: 500px;
   padding: 100px 10px;
 }
-.main-card-mobile {
-  display: none;
-}
 .title-page {
   padding: 5px 20px;
   font-size: 22px;

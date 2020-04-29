@@ -382,12 +382,6 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .main-card {
-    display: none;
-  }
-  .main-card-mobile {
-    display: block;
-  }
   .btn-desktop {
     display: none;
   }
