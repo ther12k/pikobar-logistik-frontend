@@ -6,7 +6,7 @@
         lazy-validation
       >
         <v-row>
-          <center><v-label class="title"><b>{{ $t('label.applicant_form_header') }}</b></v-label></center>
+          <center><v-label class="title"><b>{{ $t('label.applicant_form_header_step_2') }}</b></v-label></center>
         </v-row>
         <v-row>
           <v-col cols="12" sm="12" md="6">
