@@ -14,7 +14,7 @@
               v-slot="{ errors }"
               rules="requiredInstanceType"
             >
-              <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.instance_type') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.instanceType"
                 outlined
@@ -30,7 +30,7 @@
               v-slot="{ errors }"
               rules="requiredInstanceName"
             >
-              <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.instance_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.instance"
                 :items="faskesList"
@@ -80,7 +80,7 @@
               v-slot="{ errors }"
               rules="requiredCityName"
             >
-              <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.city_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.cityNameId"
                 outlined
@@ -94,7 +94,7 @@
               v-slot="{ errors }"
               rules="requiredDistrictName"
             >
-              <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.district_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.districtNameId"
                 outlined
@@ -108,7 +108,7 @@
               v-slot="{ errors }"
               rules="requiredVillageName"
             >
-              <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.village_name') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-autocomplete
                 v-model="formApplicant.villageNameId"
                 outlined
@@ -121,7 +121,7 @@
               v-slot="{ errors }"
               rules="requiredFullAddress"
             >
-              <v-label class="title"><b>{{ $t('label.full_address') }}</b> <i class="text-small-first-step">{{ $t('label.must_fill') }}</i></v-label>
+              <v-label class="title"><b>{{ $t('label.full_address') }}</b> <i class="text-small">{{ $t('label.must_fill') }}</i></v-label>
               <v-textarea
                 v-model="formApplicant.fullAddress"
                 outlined
@@ -135,8 +135,8 @@
           </v-col>
         </v-row>
         <v-container fluid>
-          <div class="btn-desktop-first-step">
-            <v-col cols="6" sm="6" md="6" class="float-right-first-step">
+          <div class="btn-desktop">
+            <v-col cols="6" sm="6" md="6" class="float-right">
               <v-btn
                 class="margin-positive"
                 color="primary"
@@ -150,15 +150,15 @@
               >{{ $t('label.cancel') }}</v-btn>
             </v-col>
           </div>
-          <div class="btn-mobile-first-step">
-            <v-col cols="12" sm="12" md="6" class="float-right-first-step">
+          <div class="btn-mobile">
+            <v-col cols="12" sm="12" md="6" class="float-right">
               <v-btn
                 class="margin-positive"
                 color="primary"
                 @click="onNext()"
               >{{ $t('label.next') }}</v-btn>
             </v-col>
-            <v-col cols="12" sm="12" md="6" class="float-right-first-step">
+            <v-col cols="12" sm="12" md="6" class="float-right">
               <v-btn
                 class="margin-positive"
                 outlined
@@ -294,16 +294,39 @@ export default {
 }
 </script>
 <style>
-.text-small-first-step {
+.margin-negative {
+  margin-top: -30px !important;
+}
+.text-small {
   font-size: 13px;
 }
-.float-right-first-step {
+.margin-header-mobile {
+  margin-top: -150px;
+}
+.margin-text-mobile-10 {
+  margin-top: -10px;
+  padding: 10px;
+}
+.margin-top-100 {
+  margin-top: -100px !important;
+}
+.margin-top-80 {
+  margin-top: -80px;
+}
+.margin-top-30 {
+  margin-top: -30px;
+}
+.margin-input {
+  margin-left: -130px;
+  margin-right: -130px;
+}
+.float-right {
   float: right;
 }
-.btn-desktop-first-step {
+.btn-desktop {
   display:block;
 }
-.btn-mobile-first-step {
+.btn-mobile {
   display: none;
 }
 @media (max-width: 1199px) and (min-width: 960px) {
@@ -312,10 +335,10 @@ export default {
 }
 
 @media (max-width: 588px) and (min-width: 320px) {
-  .btn-desktop-first-step {
+  .btn-desktop {
     display: none;
   }
-  .btn-mobile-first-step {
+  .btn-mobile {
     display: block;
   }
 }
