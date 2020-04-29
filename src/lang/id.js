@@ -222,7 +222,13 @@ export default {
     add_instance_not_found_notif: 'Fasilitas kesehatan yang didaftarkan akan diverifikasi terlebih dahulu dalam 2x24 Jam.',
     input_faskes_name: 'Masukkan Nama Faskes',
     tutorial: 'Panduan',
-    link_tutorial: 'https://drive.google.com/file/d/1UhAvK9lyWDXq2OgBrKPWcX9VaWeZkc7o/view'
+    link_tutorial: 'https://drive.google.com/file/d/1UhAvK9lyWDXq2OgBrKPWcX9VaWeZkc7o/view',
+    success_dialog: 'BERHASIL!',
+    success_text_dialog: 'Data yang anda masukkan sudah disimpan.',
+    fail_dialog: 'GAGAL!',
+    fail_text_dialog: 'Maaf, terdapat sedikit gangguan',
+    fail_text_dialog_2: 'sehingga, data yang anda masukkan gagal disimpan.',
+    repeat: 'Ulangi!'
   },
   success: {
     login_success: 'Login Berhasil',
